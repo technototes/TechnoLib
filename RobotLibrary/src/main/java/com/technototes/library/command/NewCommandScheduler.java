@@ -14,12 +14,7 @@ public class NewCommandScheduler implements Runnable {
     private Map<Subsystem<?>, Map<Command, BooleanSupplier>> requirementCommands;
     private Map<Subsystem<?>, Command> runningRequirementCommands;
     private Map<Command, BooleanSupplier> commandsWithoutRequirements;
-    private static final Subsystem<HardwareDevice<?>> NULL = new Subsystem<HardwareDevice<?>>() {
-        @Override
-        public HardwareDevice<?>[] getDevices() {
-            return null;
-        }
-    };
+
 
     private static NewCommandScheduler instance;
     public static synchronized NewCommandScheduler getInstance(){
@@ -33,7 +28,6 @@ public class NewCommandScheduler implements Runnable {
         commandsWithoutRequirements = new HashMap<>();
         requirementCommands = new HashMap<>();
         runningRequirementCommands = new HashMap<>();
-        requirementCommands.put(NULL, new HashMap<>());
     }
 
     public NewCommandScheduler schedule(Command command, BooleanSupplier supplier){
