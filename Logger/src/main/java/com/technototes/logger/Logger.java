@@ -1,5 +1,6 @@
 package com.technototes.logger;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.technototes.logger.entry.BooleanEntry;
 import com.technototes.logger.entry.Entry;
 import com.technototes.logger.entry.NumberBarEntry;
@@ -7,7 +8,6 @@ import com.technototes.logger.entry.NumberEntry;
 import com.technototes.logger.entry.NumberSliderEntry;
 import com.technototes.logger.entry.StringEntry;
 
-import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import java.lang.annotation.Annotation;
@@ -16,108 +16,148 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
-/** The class to manage logging
+/**
+ * The class to manage logging
+ *
  * @author Alex Stedman
  */
 public class Logger {
 
-    private Entry[] entries;
-    private ArrayList<Entry> unindexedEntries;
+    private Entry<?>[] runEntries, initEntries;
+    private Set<Entry<?>> unindexedRunEntries, unindexedInitEntries;
     private Telemetry telemetry;
-    private Object root;
-    private int total = 0, max = -1;
-    /** The divider between the tag and the entry for telemetry (default ':')
-     *
+    private OpMode opMode;
+    /**
+     * The divider between the tag and the entry for telemetry (default ':')
      */
     public char captionDivider = ':';
 
-    /** Instantiate the logger
+    /**
+     * Instantiate the logger
      *
-     * @param tel The Telemetry object the robot uses
-     * @param r The Object of the OpMode (pass "this" as this parameter)
+     * @param op The OpMode class
      */
-    public Logger(Telemetry tel, Object r) {
-        root = r;
-        telemetry = tel;
-        tel.setDisplayFormat(Telemetry.DisplayFormat.HTML);
-        entries = new Entry[30];
-        unindexedEntries = new ArrayList<>();
-        configure(r);
+    public Logger(OpMode op) {
+        opMode = op;
+        telemetry = op.telemetry;
+        //telemetry.setDisplayFormat(Telemetry.DisplayFormat.HTML);
 
-        mergeEntries();
+        unindexedRunEntries = new LinkedHashSet<>();
+        unindexedInitEntries = new LinkedHashSet<>();
+        configure(op);
+        runEntries = generate(unindexedRunEntries);
+        initEntries = generate(unindexedInitEntries);
 
-    }
-
-    private void mergeEntries() {
-        for(int i = 0; unindexedEntries.size() > 0; i++){
-            if(entries[i] == null) {
-                entries[i] = unindexedEntries.remove(0).setIndex(i);
-            }
-        }
-        entries = Arrays.copyOfRange(entries, 0, Math.max(total, max+1));
-
-    }
-
-    /** Update the logged items in temeletry
-     *
-     */
-    public void update() {
-        for(int i = 0; i < entries.length; i++){
-            telemetry.addLine((i > 9 ? i+"| " : i+" | ") + (entries[i] == null ? "" :
-                    entries[i].getTag().replace('`', captionDivider)+entries[i].toString()));
-        }
     }
 
     private void configure(Object root) {
         for (Field field : root.getClass().getDeclaredFields()) {
             try {
                 Object o = field.get(root);
-                if (o instanceof Loggable && field.isAnnotationPresent(Log.class)) {
-                    configure(o);
-                } else if (field.isAnnotationPresent(Log.class) || field.isAnnotationPresent(Log.Number.class) ||
-                        field.isAnnotationPresent(Log.NumberSlider.class) || field.isAnnotationPresent(Log.NumberBar.class)
-                || field.isAnnotationPresent(Log.Boolean.class)) {
-                    if(field.getType().isPrimitive() || o instanceof String) {
-                        set(field.getDeclaredAnnotations(), field, root);
-                    }else if(getCustom(o) != null) {
-                        set(field.getDeclaredAnnotations(), getCustom(o));
-                    }else{
-                        for (Method m : o.getClass().getDeclaredMethods()) {
-                            if (m.isAnnotationPresent(Log.class)) {
-                                set(field.getDeclaredAnnotations(), m, o);
-                            }
+                if (isFieldAllowed(field)) {
+                    if (o instanceof Loggable) {
+                        configure(o);
+                    } else if (field.isAnnotationPresent(Log.class) || field.isAnnotationPresent(Log.Number.class) ||
+                            field.isAnnotationPresent(Log.NumberSlider.class) || field.isAnnotationPresent(Log.NumberBar.class)
+                            || field.isAnnotationPresent(Log.Boolean.class)) {
+                        if (field.getType().isPrimitive() || o instanceof String) {
+                            set(field.getDeclaredAnnotations(), field, root);
+                        } else if (getCustom(o) != null) {
+                            set(field.getDeclaredAnnotations(), getCustom(o));
+                        } else {
+                            for (Method m : o.getClass().getDeclaredMethods()) {
+                                if (m.isAnnotationPresent(Log.class)) {
+                                    set(field.getDeclaredAnnotations(), m, o);
+                                }
 
+                            }
                         }
                     }
                 }
-            } catch (IllegalAccessException e) {
-                continue;
+            } catch (IllegalAccessException ignored) {
+
             }
         }
         for (Method m : root.getClass().getDeclaredMethods()) {
-
             set(m.getDeclaredAnnotations(), m, root);
         }
+    }
+
+
+    private Entry<?>[] generate(Set<Entry<?>> a) {
+        Entry<?>[] returnEntry = new Entry[a.size()];
+        List<Entry<?>> unindexed = new ArrayList<>();
+        for (Entry<?> e : a) {
+            int index = e.getIndex();
+            if (index != -1) {
+                Entry<?> other = returnEntry[index];
+                if (other == null) {
+                    returnEntry[index] = e;
+                } else {
+                    if (e.getPriority() > other.getPriority()) {
+                        unindexed.add(other);
+                        returnEntry[index] = e;
+                    } else {
+                        unindexed.add(e);
+                    }
+                }
+            } else {
+                unindexed.add(e);
+            }
+        }
+        for (int i = 0; unindexed.size() > 0; i++) {
+            if (returnEntry[i] == null) {
+                returnEntry[i] = unindexed.remove(0);
+            }
+        }
+
+        return returnEntry;
 
     }
-    private void set(Annotation[] a, Method m, Object root){
+
+
+    private void update(Entry<?>[] choice) {
+        for (int i = 0; i < choice.length; i++) {
+            telemetry.addLine((i > 9 ? i + "| " : i + " | ") + (choice[i] == null ? "" :
+                    choice[i].getTag().replace('`', captionDivider) + choice[i].toString()));
+        }
+        telemetry.update();
+    }
+
+    /**
+     * Update the logged items in temeletry
+     */
+    public void runUpdate() {
+        update(runEntries);
+    }
+
+    /**
+     * Update the logged items in temeletry
+     */
+    public void initUpdate() {
+        update(initEntries);
+    }
+
+    private void set(Annotation[] a, Method m, Object root) {
         set(a, () -> {
             try {
                 return m.invoke(root);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
             return null;
         });
     }
-    private void set(Annotation[] a, Field m, Object root){
+
+    private void set(Annotation[] a, Field m, Object root) {
         set(a, () -> {
             try {
                 return m.get(root);
@@ -127,8 +167,10 @@ public class Logger {
             return null;
         });
     }
+    @SuppressWarnings({"unchecked"})
     private void set(Annotation[] a, Supplier<?> m) {
-        Entry e = null;
+        boolean init = false, run = true;
+        Entry<?> e = null;
         for (Annotation as : a) {
             if (as instanceof Log.NumberSlider) {
                 e = new NumberSliderEntry(((Log.NumberSlider) as).name(), (Supplier<Number>) m,
@@ -136,7 +178,7 @@ public class Logger {
                         ((Log.NumberSlider) as).max(), ((Log.NumberSlider) as).scale(),
                         ((Log.NumberSlider) as).color(), ((Log.NumberSlider) as).sliderBackground(),
                         ((Log.NumberSlider) as).outline(), ((Log.NumberSlider) as).slider());
-                processEntry(e);
+                e.setPriority(((Log.NumberSlider) as).priority());
                 break;
             } else if (as instanceof Log.NumberBar) {
                 e = new NumberBarEntry(((Log.NumberBar) as).name(), (Supplier<Number>) m,
@@ -144,18 +186,18 @@ public class Logger {
                         ((Log.NumberBar) as).max(), ((Log.NumberBar) as).scale(),
                         ((Log.NumberBar) as).color(), ((Log.NumberBar) as).completeBarColor(),
                         ((Log.NumberBar) as).outline(), ((Log.NumberBar) as).incompleteBarColor());
-                processEntry(e);
+                e.setPriority(((Log.NumberBar) as).priority());
                 break;
             } else if (as instanceof Log.Number) {
                 e = new NumberEntry(((Log.Number) as).name(), (Supplier<Number>) m,
                         ((Log.Number) as).index(), ((Log.Number) as).color(),
                         ((Log.Number) as).numberColor());
-                processEntry(e);
+                e.setPriority(((Log.Number) as).priority());
                 break;
             } else if (as instanceof Log) {
                 e = new StringEntry(((Log) as).name(), (Supplier<String>) m,
                         ((Log) as).index(), ((Log) as).color(), ((Log) as).format(), ((Log) as).entryColor());
-                processEntry(e);
+                e.setPriority(((Log) as).priority());
                 break;
             } else if (as instanceof Log.Boolean) {
                 e = new BooleanEntry(((Log.Boolean) as).name(), (Supplier<Boolean>) m, ((Log.Boolean) as).index(),
@@ -163,57 +205,60 @@ public class Logger {
                         ((Log.Boolean) as).color(), ((Log.Boolean) as).trueFormat(),
                         ((Log.Boolean) as).falseFormat(), ((Log.Boolean) as).trueColor(),
                         ((Log.Boolean) as).falseColor());
-                processEntry(e);
+                e.setPriority(((Log.Boolean) as).priority());
                 break;
+            } else if (as instanceof LogConfig.Run) {
+                init = ((LogConfig.Run) as).duringInit();
+                run = ((LogConfig.Run) as).duringRun();
+            }
+
+        }
+        if (e != null) {
+            if (init) {
+                unindexedInitEntries.add(e);
+            }
+            if (run) {
+                unindexedRunEntries.add(e);
             }
         }
     }
 
-    private void processEntry(Entry e){
-        if(e.getIndex() != -1) {
-            if(entries[e.getIndex()] != null){
-                unindexedEntries.add(e);
-            }   else{
-                entries[e.getIndex()] = e;
-            }
-        }else{
-            unindexedEntries.add(e);
-        }
-        total++;
-        max = Math.max(max, e.getIndex());
-    }
-
-    /** Get an array of all logger entries
+    /**
+     * Repeat a String
      *
-     * @return The array
-     */
-    public Entry[] getEntries() {
-        return entries;
-    }
-
-    /** Repeat a String
-     *
-     * @param s The String to repeat
+     * @param s   The String to repeat
      * @param num The amount of times to repeat the String
      * @return The String s repeated num times
      */
-    public static String repeat(String s, int num){
-        return num > 0 ? repeat(s, num-1)+s : "";
+    public static String repeat(String s, int num) {
+        return num > 0 ? repeat(s, num - 1) + s : "";
     }
 
-    public static Supplier getCustom(Object o){
-        if(o instanceof Supplier){
-            return (Supplier) o;
-        } else if(o instanceof BooleanSupplier){
-            return ()->((BooleanSupplier) o).getAsBoolean();
-        }else if(o instanceof IntSupplier){
-            return ()->((IntSupplier) o).getAsInt();
-        }else if(o instanceof DoubleSupplier){
-            return ()->((DoubleSupplier) o).getAsDouble();
-        }else if(o instanceof Func){
-            return ()->((Func) o).value();
-        }else {
+    private static Supplier<?> getCustom(Object o) {
+        if (o instanceof Supplier<?>) {
+            return (Supplier<?>) o;
+        } else if (o instanceof BooleanSupplier) {
+            return ((BooleanSupplier) o)::getAsBoolean;
+        } else if (o instanceof IntSupplier) {
+            return ((IntSupplier) o)::getAsInt;
+        } else if (o instanceof DoubleSupplier) {
+            return ((DoubleSupplier) o)::getAsDouble;
+        } else {
             return null;
         }
+    }
+
+    private boolean isFieldAllowed(Field f) {
+        if (f.isAnnotationPresent(LogConfig.Whitelist.class)) {
+            if (!Arrays.asList(f.getAnnotation(LogConfig.Whitelist.class).value()).contains(opMode.getClass())) {
+                return false;
+            }
+        }
+        if (f.isAnnotationPresent(LogConfig.Blacklist.class)) {
+            if (Arrays.asList(f.getAnnotation(LogConfig.Blacklist.class).value()).contains(opMode.getClass())) {
+                return false;
+            }
+        }
+        return !f.isAnnotationPresent(LogConfig.Disabled.class);
     }
 }

@@ -17,7 +17,7 @@ public class StraferTeleOp extends CommandOpMode implements Loggable {
     public Robot robot;
 
     @Override
-    public void beginInit() {
+    public void uponInit() {
         driverGamepad = new CommandGamepad(gamepad1);
         codriverGamepad = new CommandGamepad(gamepad2);
         robot = new Robot(hardwareMap, telemetry);

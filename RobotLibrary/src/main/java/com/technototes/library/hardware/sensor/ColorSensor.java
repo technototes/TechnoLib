@@ -69,7 +69,7 @@ public class ColorSensor extends Sensor<com.qualcomm.robotcore.hardware.ColorSen
      * @return HSV
      */
     public int hsv(){
-        return (hue() << 18) | (saturation() << 8) | value();
+        return (hue() << 16) | (saturation() << 8) | value();
     }
 
     private float[] hsvAsArray(){

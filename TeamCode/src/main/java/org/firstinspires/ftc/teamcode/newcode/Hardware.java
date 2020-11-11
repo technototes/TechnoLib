@@ -10,7 +10,10 @@ import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.hardware.sensor.RangeSensor;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.logger.Log;
+import com.technototes.logger.LogConfig;
 import com.technototes.logger.Loggable;
+
+import org.firstinspires.ftc.teamcode.newcode.opmodes.TestOpMode;
 
 public class Hardware implements Loggable {
 

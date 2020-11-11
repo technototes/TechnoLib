@@ -1,5 +1,5 @@
 package com.technototes.library.measurement.unit;
-
+@Deprecated
 public class RotationUnit extends Unit<RotationUnit.RotationUnitType> {
 
     public enum RotationUnitType {

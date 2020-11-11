@@ -1,8 +1,8 @@
 package com.technototes.library;
 
-/** Root class for the Robot Library
+/** Root class for the Robot Library (I will put important stuff here)
  * @author Alex Stedman
- * I will put important stuff here
+ *
  */
 public class RobotLibrary {
     /** Get library version

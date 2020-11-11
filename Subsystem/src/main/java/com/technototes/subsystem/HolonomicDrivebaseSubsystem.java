@@ -2,30 +2,29 @@ package com.technototes.subsystem;
 
 import com.qualcomm.robotcore.util.Range;
 
-/** An interface to extend holomnic drivebases from
+/** An interface to extend holonomic drivebases from
  * @author Alex Stedman
  */
-
-public interface HolomonicDrivebaseSubsystem extends DrivebaseSubsystem {
+public interface HolonomicDrivebaseSubsystem extends DrivebaseSubsystem {
 
     /** Basic joystick drive function
      *
-     * @param x Left stick x value
-     * @param y Left stick y value
-     * @param rotation Right stick x value
+     * @param x Left/Right Motion (pass joystick left stick x usually)
+     * @param y Up/Down Motion (pass joystick left stick y usually)
+     * @param rotation Rotational Motion (pass joystick right stick x usually)
      */
     default void joystickDrive(double x, double y, double rotation){
         joystickDriveWithGyro(x, y, rotation, 0);
     }
     /** Basic joystick drive function with gyro
      *
-     * @param x Left stick x value
-     * @param y Left stick y value
-     * @param rotation Right stick x value
-     * @param gyroAngle The gyro value
+     * @param x Left/Right Motion (pass joystick left stick x usually)
+     * @param y Up/Down Motion (pass joystick left stick y usually)
+     * @param rotation Rotational Motion (pass joystick right stick x usually)
+     * @param gyroAngle The gyro value (degrees) (0 is initial robot orientation)
      */
     default void joystickDriveWithGyro(double x, double y, double rotation, double gyroAngle) {
-        double speed = Range.clip(Math.abs(Math.sqrt(x*x+y*y)), 0, 1);
+        double speed = Range.clip(Math.abs(Math.hypot(x, y)), 0, 1);
         double headingRad = Math.toRadians(gyroAngle);
         double angle = -Math.atan2(y, x) + headingRad - Math.PI/4;
         drive(speed, angle, rotation);

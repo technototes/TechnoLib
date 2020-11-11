@@ -1,3 +1,91 @@
+/* Author Alex Stedman */
+:root{
+	--background: #36393F;
+	--bodyColor: #72767D;
+	--bodyFonts: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+	--bodyFontSize: 14px;
+
+	--linkVisited: #848689;
+	--linkHovered: #FFFFFF;
+	--linkActive: #AAACAF;
+	--linkClicked: #FFFFFF;
+	
+	--codeFontSize: 14px;
+	--codeFontFamily: 'DejaVu Sans Mono', monospace;
+	--codeHeadingFontSize: 16px;
+
+	--pageHeadingSize: 20px;
+	--pageHeadingSize: 18px;
+
+	--navBarColor: #2F3136;
+	--navBarFontColor: #8E9297;
+	
+	--topNavLinkColor: #636568;
+	--topNavLinkHoverColor: #FFFFFF;
+	--topNavSelectedColor: #4A5477;
+	--topNavSelectedFontColor: #8E9297;
+
+	--subNavColor: #4A5477;
+
+	--pageTitle: #cccccc;
+	
+	--blockListHeader: #4A5477;
+	--blockListBorder: #32353B;
+	--blockListDescription: #D1D2D9;
+	--rowColor: #36393F;
+	--altColor: #32353B;
+	
+	--blockListSmallBorder: #32353B;
+
+	--tableSurround : #43474F;
+	--tableSurroundBorder: #474B54;
+	--descriptionHeading: #aaaaaa;
+}
+
+/* OLD
+	--background: #ffffff;
+	--bodyColor: #353833;
+	--bodyFonts: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+	--bodyFontSize: 14px;
+
+	--linkVisited: #4A6782;
+	--linkHovered: #bb7a2a;
+	--linkActive: #bb7a2a;
+	--linkClicked: #4A6782;
+	
+	--codeFontSize: 14px;
+	--codeFontFamily: 'DejaVu Sans Mono', monospace;
+	--codeHeadingFontSize: 16px;
+
+	--pageHeadingSize: 20px;
+	--pageHeadingSize: 18px;
+
+	--navBarColor: #4D7A97;
+	--navBarFontColor: #ffffff;
+	
+	--topNavLinkColor: #ffffff;
+	--topNavLinkHoverColor: #bb7a2a;
+	--topNavSelectedColor: #F8981D;
+	--topNavSelectedFontColor: #253441;
+
+	--subNavColor: #dee3e9;
+
+	--pageTitle: #2c4557;
+	
+	--blockListHeader: #dee3e9;
+	--blockListBorder: #d0d9e0;
+	--blockListDescription: #474747;
+	--rowColor: #EEEEEF;
+	--altColor: #FFFFFF;
+	
+	--blockListSmallBorder: #EEE;
+
+
+	--tableSurround : #f8f8f8;
+	--tableSurroundBorder: #ededed;
+	--descriptionHeading: #4E4E4E;
+*/
+
 /* Javadoc style sheet */
 /*
 Overall document style
@@ -6,72 +94,82 @@ Overall document style
 @import url('resources/fonts/dejavu.css');
 
 body {
-    background-color:#ffffff;
-    color:#353833;
-    font-family:'DejaVu Sans', Arial, Helvetica, sans-serif;
-    font-size:14px;
+    background-color: var(--background);
+    color: var(--bodyColor);
+    font-family: var(--bodyFonts);
+    font-size: var(--bodyFontSize);
     margin:0;
 }
 a:link, a:visited {
     text-decoration:none;
-    color:#4A6782;
+    color: var(--linkVisited);
 }
-a:hover, a:focus {
+a:hover {
     text-decoration:none;
-    color:#bb7a2a;
+    color: var(--linkHovered);
+}
+a:focus {
+    text-decoration:none;
+    color: var(--linkActive);
 }
 a:active {
     text-decoration:none;
-    color:#4A6782;
+    color: var(--linkClicked);
 }
 a[name] {
-    color:#353833;
+/*353833*/
+    color:#ff0000;
 }
 a[name]:hover {
     text-decoration:none;
-    color:#353833;
+/*353833*/
+    color:#ff0000;
 }
 pre {
-    font-family:'DejaVu Sans Mono', monospace;
-    font-size:14px;
+    font-family: var(--codeFontFamily);
+    font-size: var(--codeFontSize);
 }
 h1 {
-    font-size:20px;
+    font-size: var(--pageHeadingSize);
 }
 h2 {
-    font-size:18px;
+    font-size: var(--pageSubHeadingSize);
 }
 h3 {
-    font-size:16px;
+    font-size: var(--codeTitleFontSize);
     font-style:italic;
 }
+/* TODO */
 h4 {
     font-size:13px;
 }
+/* TODO */
 h5 {
     font-size:12px;
 }
+/* TODO */
 h6 {
     font-size:11px;
 }
 ul {
     list-style-type:disc;
 }
+
 code, tt {
-    font-family:'DejaVu Sans Mono', monospace;
-    font-size:14px;
+    font-family: var(--codeFontFamily);
+    font-size: var(--codeFontSize);
     padding-top:4px;
     margin-top:8px;
     line-height:1.4em;
 }
 dt code {
-    font-family:'DejaVu Sans Mono', monospace;
-    font-size:14px;
+    font-family: var(--codeFontFamily);
+    font-size: var(--codeFontSize);
     padding-top:4px;
 }
 table tr td dt code {
-    font-family:'DejaVu Sans Mono', monospace;
-    font-size:14px;
+    font-family: var(--codeFontFamily);
+    font-size: var(--codeFontSize);
     vertical-align:top;
     padding-top:4px;
 }
@@ -114,16 +212,16 @@ Document title and Copyright styles
 Navigation bar styles
 */
 .bar {
-    background-color:#4D7A97;
-    color:#FFFFFF;
+    background-color: var(--navBarColor);
+    color: var(--navBarFontColor);
     padding:.8em .5em .4em .8em;
     height:auto;/*height:1.8em;*/
     font-size:11px;
     margin:0;
 }
 .topNav {
-    background-color:#4D7A97;
-    color:#FFFFFF;
+    background-color: var(--navBarColor);
+    color: var(--navBarFontColor);
     float:left;
     padding:0;
     width:100%;
@@ -135,8 +233,8 @@ Navigation bar styles
 }
 .bottomNav {
     margin-top:10px;
-    background-color:#4D7A97;
-    color:#FFFFFF;
+    background-color: var(--navBarColor);
+    color: var(--navBarFontColor);
     float:left;
     padding:0;
     width:100%;
@@ -147,7 +245,7 @@ Navigation bar styles
     font-size:12px;
 }
 .subNav {
-    background-color:#dee3e9;
+    background-color: var(--subNavColor);
     float:left;
     width:100%;
     overflow:hidden;
@@ -175,18 +273,18 @@ ul.subNavList li{
     float:left;
 }
 .topNav a:link, .topNav a:active, .topNav a:visited, .bottomNav a:link, .bottomNav a:active, .bottomNav a:visited {
-    color:#FFFFFF;
+    color: var(--topNavLinkColor);
     text-decoration:none;
     text-transform:uppercase;
 }
 .topNav a:hover, .bottomNav a:hover {
     text-decoration:none;
-    color:#bb7a2a;
+    color: var(--topNavLinkHoverColor);
     text-transform:uppercase;
 }
 .navBarCell1Rev {
-    background-color:#F8981D;
-    color:#253441;
+    background-color: var(--topNavSelectedColor);
+    color: var(--topNavSelectedFontColor);
     margin: auto 5px;
 }
 .skipNav {
@@ -214,7 +312,7 @@ Page header and footer styles
     font-size:13px;
 }
 .title {
-    color:#2c4557;
+    color: var(--pageTitle);
     margin:10px 0;
 }
 .subTitle {
@@ -235,14 +333,14 @@ Page header and footer styles
 Heading styles
 */
 div.details ul.blockList ul.blockList ul.blockList li.blockList h4, div.details ul.blockList ul.blockList ul.blockListLast li.blockList h4 {
-    background-color:#dee3e9;
-    border:1px solid #d0d9e0;
+    background-color: var(--blockListHeader);
+    border:1px solid var(--blockListBorder);
     margin:0 0 6px -8px;
     padding:7px 5px;
 }
 ul.blockList ul.blockList ul.blockList li.blockList h3 {
-    background-color:#dee3e9;
-    border:1px solid #d0d9e0;
+    background-color: var(--blockListHeader);
+    border:1px solid var(--blockListBorder);
     margin:0 0 6px -8px;
     padding:7px 5px;
 }
@@ -282,12 +380,12 @@ Page layout container styles
     font-size:12px;
     font-weight:bold;
     margin:10px 0 0 0;
-    color:#4E4E4E;
+    color: var(--descriptionHeading);
 }
 .contentContainer .description dl dd, .contentContainer .details dl dd, .serializedFormContainer dl dd {
     margin:5px 0 10px 0px;
     font-size:14px;
-    font-family:'DejaVu Sans Mono',monospace;
+    font-family: var(--codeFontFamily);
 }
 .serializedFormContainer dl.nameValue dt {
     margin-left:1px;
@@ -331,12 +429,12 @@ ul.blockList li.blockList, ul.blockListLast li.blockList {
 }
 ul.blockList ul.blockList li.blockList, ul.blockList ul.blockListLast li.blockList {
     padding:0px 20px 5px 10px;
-    border:1px solid #ededed; 
-    background-color:#f8f8f8;
+    border:1px solid var(--tableSurroundBorder); 
+    background-color: var(--tableSurround);
 }
 ul.blockList ul.blockList ul.blockList li.blockList, ul.blockList ul.blockList ul.blockListLast li.blockList {
     padding:0 0 5px 8px;
-    background-color:#ffffff;
+    background-color: var(--altColor);
     border:none;
 }
 ul.blockList ul.blockList ul.blockList ul.blockList li.blockList {
@@ -359,9 +457,9 @@ Table styles
 */
 .overviewSummary, .memberSummary, .typeSummary, .useSummary, .constantsSummary, .deprecatedSummary {
     width:100%;
-    border-left:1px solid #EEE; 
-    border-right:1px solid #EEE; 
-    border-bottom:1px solid #EEE; 
+    border-left:1px solid var(--blockListSmallBorder); 
+    border-right:1px solid var(--blockListSmallBorder); 
+    border-bottom:1px solid var(--blockListSmallBorder); 
 }
 .overviewSummary, .memberSummary  {
     padding:0px;
@@ -371,7 +469,7 @@ Table styles
     position:relative;
     text-align:left;
     background-repeat:no-repeat;
-    color:#253441;
+    color: var(--topNavSelectedFontColor);
     font-weight:bold;
     clear:none;
     overflow:hidden;
@@ -389,7 +487,7 @@ Table styles
 .useSummary caption a:active, .constantsSummary caption a:active, .deprecatedSummary caption a:active,
 .overviewSummary caption a:visited, .memberSummary caption a:visited, .typeSummary caption a:visited,
 .useSummary caption a:visited, .constantsSummary caption a:visited, .deprecatedSummary caption a:visited {
-    color:#FFFFFF;
+    color: var(--topNavLinkColor);
 }
 .overviewSummary caption span, .memberSummary caption span, .typeSummary caption span,
 .useSummary caption span, .constantsSummary caption span, .deprecatedSummary caption span {
@@ -400,7 +498,7 @@ Table styles
     padding-bottom:7px;
     display:inline-block;
     float:left;
-    background-color:#F8981D;
+    background-color: var(--topNavSelectedColor);
     border: none;
     height:16px;
 }
@@ -412,7 +510,7 @@ Table styles
     margin-right:3px;
     display:inline-block;
     float:left;
-    background-color:#F8981D;
+    background-color: var(--topNavSelectedColor);
     height:16px;
 }
 .memberSummary caption span.tableTab span {
@@ -423,7 +521,7 @@ Table styles
     margin-right:3px;
     display:inline-block;
     float:left;
-    background-color:#4D7A97;
+    background-color:var(--navBarColor);
     height:16px;
 }
 .memberSummary caption span.tableTab, .memberSummary caption span.activeTableTab {
@@ -440,7 +538,7 @@ Table styles
     width:5px;
     position:relative;
     float:left;
-    background-color:#F8981D;
+    background-color: var(--topNavSelectedColor);
 }
 .memberSummary .activeTableTab .tabEnd {
     display:none;
@@ -448,14 +546,14 @@ Table styles
     margin-right:3px;
     position:relative; 
     float:left;
-    background-color:#F8981D;
+    background-color: var(--topNavSelectedColor)
 }
 .memberSummary .tableTab .tabEnd {
     display:none;
     width:5px;
     margin-right:3px;
     position:relative;
-    background-color:#4D7A97;
+    background-color: var(--navBarColor);
     float:left;
 
 }
@@ -472,7 +570,7 @@ td.colOne, td.colFirst, td.colLast, .useSummary td, .constantsSummary td{
     padding-bottom:3px;
 }
 th.colFirst, th.colLast, th.colOne, .constantsSummary th {
-    background:#dee3e9;
+    background: var(--subNavColor);
     text-align:left;
     padding:8px 3px 3px 7px;
 }
@@ -502,10 +600,10 @@ td.colOne a:link, td.colOne a:active, td.colOne a:visited, td.colOne a:hover, td
     background-color:#EEEEFF;
 }
 .altColor {
-    background-color:#FFFFFF;
+    background-color:var(--altColor);
 }
 .rowColor {
-    background-color:#EEEEEF;
+    background-color:var(--rowColor);
 }
 /*
 Content styles
@@ -553,7 +651,7 @@ h1.hidden {
 .block {
     display:block;
     margin:3px 10px 2px 0px;
-    color:#474747;
+    color: var(--blockListDescription);
 }
 .deprecatedLabel, .descfrmTypeLabel, .memberNameLabel, .memberNameLink,
 .overrideSpecifyLabel, .packageHierarchyLabel, .paramLabel, .returnLabel,

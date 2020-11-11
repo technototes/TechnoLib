@@ -66,7 +66,7 @@ public interface GamepadTrigger<T extends GamepadButton> extends Trigger<T> {
      * @return The instance
      */
     default T schedule(BooleanSupplier condition, Command command){
-        CommandScheduler.getRunInstance().schedule(condition, command);
+        CommandScheduler.getInstance().scheduleJoystick(command, condition);
         return getInstance();
     }
 

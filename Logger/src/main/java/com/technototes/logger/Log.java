@@ -1,10 +1,5 @@
 package com.technototes.logger;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.OpModeRegistrar;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Repeatable;
@@ -29,6 +24,12 @@ public @interface Log {
      * @return The index
      */
     int index() default -1;
+
+    /** Store priority for this log entry (to pick the most wanted entry over others with same index)
+     *
+     * @return The priority
+     */
+    int priority() default -1;
 
     /** Store the name for this annotation to be be beside
      *
@@ -73,6 +74,12 @@ public @interface Log {
          */
         int index() default -1;
 
+        /** Store priority for this log entry (to pick the most wanted entry over others with same index)
+         *
+         * @return The priority
+         */
+        int priority() default -1;
+
         /** Store the name for this annotation to be be beside
          *
          * @return The name as a string
@@ -102,6 +109,12 @@ public @interface Log {
          * @return The index
          */
         int index() default -1;
+
+        /** Store priority for this log entry (to pick the most wanted entry over others with same index)
+         *
+         * @return The priority
+         */
+        int priority() default -1;
 
         /** Store the min for the number bar to scale to
          *
@@ -156,6 +169,12 @@ public @interface Log {
          */
         int index() default -1;
 
+        /** Store priority for this log entry (to pick the most wanted entry over others with same index)
+         *
+         * @return The priority
+         */
+        int priority() default -1;
+
         /** Store the min for the number bar to scale to
          *
          * @return The min
@@ -209,6 +228,13 @@ public @interface Log {
          * @return The index
          */
         int index() default -1;
+
+        /** Store priority for this log entry (to pick the most wanted entry over others with same index)
+         *
+         * @return The priority
+         */
+        int priority() default -1;
+
         /** Store the string when the annotated method returns true
          *
          * @return The string
@@ -252,31 +278,6 @@ public @interface Log {
          * @return The color
          */
         Color color() default Color.NO_COLOR;
-
-    }
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(value={FIELD, LOCAL_VARIABLE, METHOD})
-    @interface Config{
-        boolean disabled() default false;
-
-
-    }
-
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(value={FIELD, LOCAL_VARIABLE, METHOD})
-    @interface BlackList{
-        String[] value();
-    }
-
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(value={FIELD, LOCAL_VARIABLE, METHOD})
-    @interface WhiteList{
-        String[] value();
-    }
-
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(value={FIELD, LOCAL_VARIABLE, METHOD})
-    @interface Disabled{
 
     }
 

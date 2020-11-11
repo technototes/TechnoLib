@@ -1,118 +1,95 @@
 package com.technototes.library.command;
 
-
+import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.subsystem.Subsystem;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.BooleanSupplier;
 
-/** The command scheduler for managing commands
- * @author Alex Stedman
- */
 public class CommandScheduler implements Runnable {
-    private static CommandScheduler initInstance, runInstance, endInstance;
-    private Map<Command, BooleanSupplier> commands = new LinkedHashMap<>();
-    private Map<Subsystem<?>, Command> subsystems = new LinkedHashMap<>();
-    private Map<Command, Command> cancelledCommands = new LinkedHashMap<>();
 
-    /** Get command scheduler for init period
-     *
-     * @return The instance
-     */
-    public static synchronized CommandScheduler getInitInstance() {
-        initInstance = getSelectedInstance(initInstance);
-        return initInstance;
-    }
-    /** Get command scheduler for run period
-     *
-     * @return The instance
-     */
-    public static synchronized CommandScheduler getRunInstance() {
-        runInstance = getSelectedInstance(runInstance);
-        return runInstance;
-    }
-    /** Get command scheduler for end period
-     *
-     * @return The instance
-     */
-    public static synchronized CommandScheduler getEndInstance() {
-        endInstance = getSelectedInstance(endInstance);
-        return endInstance;
-    }
+    private Map<Subsystem<?>, Map<Command, BooleanSupplier>> requirementCommands;
+    private Map<Subsystem<?>, Command> runningRequirementCommands;
+    private Map<Command, BooleanSupplier> commandsWithoutRequirements;
 
-    private static CommandScheduler getSelectedInstance(CommandScheduler c) {
-        if (c == null) {
-            c = new CommandScheduler();
-        }
-        return c;
-    }
-
-    /** Schedule command
-     *
-     * @param command The command to schedule
-     * @return this
-     */
-    public CommandScheduler schedule(Command command) {
-        return schedule(() -> true, command);
-    }
-    /** Schedule a runnable
-     *
-     * @param runnable The runnable to schedule
-     * @return this
-     */
-    public CommandScheduler schedule(Runnable runnable) {
-        return schedule(new InstantCommand(runnable));
-    }
-
-    /** Schedule a command to run when a condition is met
-     *
-     * @param condition The condition to meet
-     * @param command The command
-     * @return this
-     */
-    public CommandScheduler schedule(BooleanSupplier condition, Command command) {
-        commands.put(command, condition);
+    public CommandOpMode opMode;
+    public CommandScheduler setOpMode(CommandOpMode c){
+        opMode = c;
         return this;
     }
 
-    /** Run all commands for the last time
-     *
-     */
-    public void runLastTime() {
-        commands.forEach((command, supplier) -> {
-            if (command.commandState != Command.CommandState.RESET) {
-                command.end(true);
-                command.commandState = Command.CommandState.RESET;
-            }
-        });
+    private static CommandScheduler instance;
+    public static synchronized CommandScheduler getInstance(){
+        if(instance == null){
+            instance = new CommandScheduler();
+        }
+        return instance;
     }
 
-    /** Run the commands
-     *
-     */
+    private CommandScheduler(){
+        commandsWithoutRequirements = new HashMap<>();
+        requirementCommands = new HashMap<>();
+        runningRequirementCommands = new HashMap<>();
+    }
+
+    public CommandScheduler schedule(Command command){
+        return schedule(command, ()->true);
+    }
+    public CommandScheduler scheduleInit(Command command, BooleanSupplier supplier){
+        return scheduleForState(command, supplier, CommandOpMode.OpModeState.INIT);
+    }
+    public CommandScheduler scheduleJoystick(Command command, BooleanSupplier supplier){
+        return scheduleForState(command, supplier, CommandOpMode.OpModeState.RUN, CommandOpMode.OpModeState.END);
+    }
+    public CommandScheduler scheduleForState(Command command, BooleanSupplier supplier, CommandOpMode.OpModeState... states){
+        return schedule(command, ()->supplier.getAsBoolean() && opMode.getOpModeState().isState(states));
+    }
+
+
+    public CommandScheduler schedule(Command command, BooleanSupplier supplier){
+        if(command.getRequirements().isEmpty()){
+            commandsWithoutRequirements.put(command, supplier);
+        }else{
+            command.requirements.forEach((subsystem -> {
+                if(!requirementCommands.containsKey(subsystem)){
+                    requirementCommands.put(subsystem, new LinkedHashMap<>());
+                }
+                if(subsystem.getDefaultCommand() == command){
+                    runningRequirementCommands.put(subsystem, command);
+                }
+                requirementCommands.get(subsystem).put(command, supplier);
+            }));
+        }
+        return this;
+    }
     @Override
     public void run() {
-        commands.forEach((command, supplier) -> {
-            if (supplier.getAsBoolean()) {
-                if(command.getRequirements().stream().findFirst().isPresent()){
-                    if(!subsystems.containsKey(command.getRequirements().stream().findFirst().get())){
-                        command.run();
-                        subsystems.put(command.getRequirements().stream().findFirst().get(), command);
+        requirementCommands.forEach(((subsystem, commandMap) -> {
+            commandMap.entrySet().stream().filter((entry) -> {
+                        return entry.getKey().commandState == Command.CommandState.RESET
+                                && entry.getValue().getAsBoolean()
+                                && entry.getKey() != runningRequirementCommands.get(subsystem);
                     }
-                }else{
-                    command.run();
-                }
-            }
-        });
-        subsystems = new LinkedHashMap<>();
+            ).findFirst().ifPresent(m -> {
+                cancel(runningRequirementCommands.get(subsystem));
+                runningRequirementCommands.put(subsystem, m.getKey());
+            });
+        }));
+        runningRequirementCommands.forEach(((subsystem, command) -> run(command, requirementCommands.get(subsystem).get(command))));
+        commandsWithoutRequirements.forEach(this::run);
+    }
+    public void run(Command command, BooleanSupplier supplier){
+        if(supplier.getAsBoolean() || command.commandState != Command.CommandState.RESET){
+            command.run();
+        }
+    }
+    public void cancel(Command command){
+        if(command != null) {
+            command.end(!command.isFinished());
+            command.commandState = Command.CommandState.RESET;
+        }
     }
 
-    /** Cancel a command
-     *
-     * @param command The command to cancel
-     */
-    public void cancel(Command command){
-        command.end(true);
-    }
 }

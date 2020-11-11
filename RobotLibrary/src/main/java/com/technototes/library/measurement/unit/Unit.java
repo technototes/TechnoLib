@@ -1,5 +1,5 @@
 package com.technototes.library.measurement.unit;
-
+@Deprecated
 public abstract class Unit<D extends Enum<D>> {
     public D unitType;
     public double value;

@@ -1,18 +1,36 @@
 package com.technototes.library.subsystem.servo;
 
 import com.technototes.library.hardware.servo.Servo;
-import com.technototes.library.subsystem.PID;
 import com.technototes.library.subsystem.Subsystem;
 
-public class ServoSubsystem<T extends Servo> extends Subsystem<T> {
-    public ServoSubsystem(T... d) {
-        super(d);
+/** Class for servo subsystems
+ * @author Alex Stedman
+ */
+public class ServoSubsystem extends Subsystem<Servo> {
+    /** Create servo subsystem
+     *
+     * @param servos The servos
+     */
+    public ServoSubsystem(Servo... servos) {
+        super(servos);
     }
 
-    public void setPosition(double val) {
-        for (T m : devices) {
-            m.setPosition(val);
+    /** Set servo subsystem position
+     *
+     * @param position The position
+     */
+    public void setPosition(double position) {
+        for (Servo m : getDevices()) {
+            m.setPosition(position);
         }
+    }
+
+    /** Get subsystem servo position
+     *
+     * @return The position
+     */
+    public double getPosition(){
+        return getDevices()[0].getPosition();
     }
 
 }

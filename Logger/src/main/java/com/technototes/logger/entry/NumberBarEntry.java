@@ -1,5 +1,6 @@
 package com.technototes.logger.entry;
 
+
 import com.technototes.logger.Color;
 import com.technototes.logger.Logger;
 

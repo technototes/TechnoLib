@@ -1,5 +1,5 @@
 package com.technototes.library.measurement.unit;
-
+@Deprecated
 public class TimeUnit extends Unit<TimeUnit.TimeUnitType> {
 
     public enum TimeUnitType {

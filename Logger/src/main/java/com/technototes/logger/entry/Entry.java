@@ -1,5 +1,6 @@
 package com.technototes.logger.entry;
 
+
 import com.technototes.logger.Color;
 
 import java.util.function.Supplier;
@@ -12,6 +13,7 @@ import java.util.function.Supplier;
 public abstract class Entry<T> implements Supplier<T> {
 
     protected int x;
+    protected int priority;
     protected Supplier<T> supplier;
     protected String name;
     protected String tag;
@@ -24,7 +26,10 @@ public abstract class Entry<T> implements Supplier<T> {
         color = c;
         tag =  (name.equals("") ? " " : color.format(name)+" ` ");
     }
-
+    public Entry<T> setPriority(int p){
+        priority = p;
+        return this;
+    }
     @Override
     public T get() {
         return supplier.get();
@@ -71,6 +76,13 @@ public abstract class Entry<T> implements Supplier<T> {
     public Entry setIndex(int i){
         x = i;
         return this;
+    }
+
+    /** Get Priority for the entry
+     * @return The priority
+     */
+    public int getPriority(){
+        return priority;
     }
 
 

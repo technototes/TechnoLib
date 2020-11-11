@@ -1,5 +1,6 @@
 package com.technototes.logger.entry;
 
+
 import com.technototes.logger.Color;
 
 import java.util.function.Supplier;

@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.command.InstantCommand;
+import com.technototes.library.command.simple.TankDriveCommand;
 import com.technototes.library.hardware.motor.Motor;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.structure.CommandOpMode;
@@ -16,12 +17,11 @@ public class SimpleOpMode extends CommandOpMode {
     public SimpleTankDrivebaseSubsystem drivebaseSubsystem;
     public SimpleServoSubsystem gripperSubsystem;
     @Override
-    public void beginInit() {
+    public void uponInit() {
         drivebaseSubsystem = new SimpleTankDrivebaseSubsystem(new Motor<DcMotor>("leftMotor"), new Motor<DcMotor>("rightMotor"));;
         gripperSubsystem = new SimpleServoSubsystem(new Servo("gripper"));
         driverGamepad.a.whenActivated(new InstantCommand(() -> gripperSubsystem.setPosition(0)));
         driverGamepad.b.whenActivated(new InstantCommand(() -> gripperSubsystem.setPosition(1)));
-        CommandScheduler.getRunInstance().schedule(() -> drivebaseSubsystem.arcadeDrive(
-                driverGamepad.leftStick.yAxis.getAsDouble(), driverGamepad.leftStick.xAxis.getAsDouble()));
+        CommandScheduler.getInstance().schedule(new TankDriveCommand(drivebaseSubsystem, driverGamepad.leftStick));
     }
 }

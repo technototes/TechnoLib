@@ -16,7 +16,7 @@ public class TestOpMode extends CommandOpMode implements Loggable {
     public Robot robot;
 
     @Override
-    public void beginInit() {
+    public void uponInit() {
         robot = new Robot(hardwareMap, telemetry);
         oi = new OI(driverGamepad, codriverGamepad, robot);
         //  logger = new Logger(telemetry, this);
@@ -26,7 +26,7 @@ public class TestOpMode extends CommandOpMode implements Loggable {
 
     @Override
     public void runLoop() {
-        robot.drivebaseSubsystem.joystickDriveWithGyro(driverGamepad.leftStick.getYAxis(), driverGamepad.leftStick.getXAxis(), driverGamepad.rightStick.getYAxis(), robot.hardware.imu.gyroHeading());
+        robot.drivebaseSubsystem.joystickDriveWithGyro(driverGamepad.leftStick.getXAxis(), driverGamepad.leftStick.getYAxis(), driverGamepad.rightStick.getXAxis(), robot.hardware.imu.gyroHeading());
         //System.out.println(robot.hardware.gyroHeading2());
     }
 }

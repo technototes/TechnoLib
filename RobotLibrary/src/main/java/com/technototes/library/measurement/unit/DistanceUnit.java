@@ -1,5 +1,5 @@
 package com.technototes.library.measurement.unit;
-
+@Deprecated
 public class DistanceUnit extends Unit<DistanceUnit.DistanceUnitType> {
 
     public enum DistanceUnitType {

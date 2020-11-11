@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode.newcode.subsystems;
 
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.technototes.library.subsystem.Subsystem;
-import com.technototes.library.subsystem.sensor.SensorSubsystem;
 
-public class ColorSensorSubsystem extends Subsystem {
+import com.technototes.library.hardware.sensor.ColorSensor;
+import com.technototes.library.subsystem.Subsystem;
+
+public class ColorSensorSubsystem extends Subsystem<ColorSensor> {
     public ColorSensor sensor;
     public ColorSensorSubsystem(ColorSensor s){
         sensor = s;

@@ -3,8 +3,6 @@ package org.firstinspires.ftc.teamcode.newcode;
 import com.technototes.library.command.InstantCommand;
 import com.technototes.library.control.gamepad.CommandGamepad;
 
-import com.technototes.library.structure.OIBase;
-import com.technototes.library.subsystem.drivebase.DrivebaseSubsystem;
 import com.technototes.subsystem.DrivebaseSubsystem.DriveSpeed;
 
 import org.firstinspires.ftc.teamcode.newcode.commands.claw.ClawRotateLeftCommand;
@@ -14,19 +12,20 @@ import org.firstinspires.ftc.teamcode.newcode.commands.lift.LiftToBottomCommand;
 import org.firstinspires.ftc.teamcode.newcode.commands.lift.LiftToLastBrickHeightCommand;
 import org.firstinspires.ftc.teamcode.newcode.commands.lift.LiftUpCommand;
 
-public class OI extends OIBase {
+public class OI {
     public Robot robot;
-
+    public CommandGamepad driverGamepad, codriverGamepad;
     public OI(CommandGamepad g1, CommandGamepad g2, Robot r) {
-        super(g1, g2);
+        driverGamepad = g1;
+        codriverGamepad = g2;
         robot = r;
         setDriverControls();
         setCodriverControls();
     }
 
     public void setDriverControls() {
-        driverGamepad.dpad.down.whenToggled(new InstantCommand(() -> robot.drivebaseSubsystem.setDriveSpeed((DriveSpeed.TURBO))))
-                .whenInverseToggled(new InstantCommand(() -> robot.drivebaseSubsystem.setDriveSpeed(DriveSpeed.NORMAL)));
+        driverGamepad.dpad.down.whenToggled(new InstantCommand(() -> robot.drivebaseSubsystem.driveSpeed = DriveSpeed.TURBO))
+                .whenInverseToggled(new InstantCommand(() -> robot.drivebaseSubsystem.driveSpeed = DriveSpeed.NORMAL));
         driverGamepad.dpad.up.whenActivated(new InstantCommand(() -> robot.blockFlipperSubsystem.setPosition(0.15)))
                 .whenDeactivated(new InstantCommand(() -> robot.blockFlipperSubsystem.setPosition(0.75)));
 

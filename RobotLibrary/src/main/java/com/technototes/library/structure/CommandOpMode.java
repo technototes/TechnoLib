@@ -2,9 +2,7 @@ package com.technototes.library.structure;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.technototes.library.command.Command;
 import com.technototes.library.command.CommandScheduler;
-import com.technototes.library.command.InstantCommand;
 import com.technototes.library.control.gamepad.CommandGamepad;
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.logger.Logger;
@@ -13,91 +11,130 @@ import com.technototes.logger.Logger;
  * @author Alex Stedman
  */
 public abstract class CommandOpMode extends LinearOpMode {
-    /** Time to run commands on endInstance at end of match
+    /*** Command gamepad object
      *
      */
-    public static double commandTimeAtEnd = 5;
-    public CommandGamepad driverGamepad;
-    public CommandGamepad codriverGamepad;
-    public ElapsedTime timer = new ElapsedTime();
-    public OpModeState opModeState = OpModeState.INIT;
-    public Logger logger;
+    public CommandGamepad driverGamepad, codriverGamepad;
 
+    private ElapsedTime opModeTimer = new ElapsedTime();
+
+    private OpModeState opModeState = OpModeState.INIT;
+
+    private Logger logger;
+
+    /** Get op mode state
+     *
+     * @return Current op mode state
+     */
     public OpModeState getOpModeState() {
         return opModeState;
     }
 
+    /** Get the op mode's logger
+     *
+     * @return The logger
+     */
+    public Logger getLogger() {
+        return logger;
+    }
+
+    /** Get the opmode runtime
+     *
+     * @return Runtime in seconds
+     */
+    public double getOpModeRuntime(){
+        return opModeTimer.seconds();
+    }
+
     @Override
-    public final void runOpMode() throws InterruptedException {
+    public final void runOpMode() {
         driverGamepad = new CommandGamepad(gamepad1);
         codriverGamepad = new CommandGamepad(gamepad2);
         HardwareDevice.hardwareMap = hardwareMap;
-        beginInit();
-        logger = new Logger(telemetry, this);
+        CommandScheduler.getInstance().opMode = this;
+        opModeTimer.reset();
+        uponInit();
+        logger = new Logger(this);
         while (!isStarted()) {
-            beginLoop();
-            CommandScheduler.getInitInstance().run();
-            logger.update();
-            telemetry.update();
+            initLoop();
+            universalLoop();
+            CommandScheduler.getInstance().run();
+            logger.initUpdate();
         }
-        CommandScheduler.getInitInstance().runLastTime();
         opModeState = OpModeState.RUN;
-        runInit();
+        uponStart();
         while (opModeIsActive()) {
             runLoop();
-            CommandScheduler.getRunInstance().run();
-            logger.update();
-            telemetry.update();
+            universalLoop();
+            CommandScheduler.getInstance().run();
+            logger.runUpdate();
             driverGamepad.periodic();
             codriverGamepad.periodic();
         }
-        CommandScheduler.getRunInstance().runLastTime();
-        opModeState = OpModeState.FINISHED;
+        opModeState = OpModeState.END;
         end();
-        timer.reset();
-        CommandScheduler.getEndInstance().run();
-        CommandScheduler.getEndInstance().runLastTime();
-    }
-
-    //for registering commands to run when robot is in init
-    public void beginInit() {
+        CommandScheduler.getInstance().run();
+        opModeTimer.reset();
 
     }
 
-    //for other things to do in init
-    public void beginLoop() {
+    /** Runs once when op mode is initialized
+     *
+     */
+    public void uponInit() {
+
+    }
+    /** Runs constantly when op mode is initialized, yet not started
+     *
+     */
+    public void initLoop() {
 
     }
 
-    //to schedule commands to be run
-    public void runInit() {
+    /** Runs once when op mode is started
+     *
+     */
+    public void uponStart() {
 
     }
-
+    /** Runs constantly when op mode is started
+     *
+     */
     public void runLoop() {
 
     }
-
+    /** Runs once when op mode is ended
+     *
+     */
     public void end() {
 
     }
 
-    public enum OpModeState {
-        INIT, RUN, FINISHED
+    /** Runs constantly during all periods
+     *
+     */
+    public void universalLoop(){
+
     }
 
-    public CommandScheduler schedule(Command c){
-        switch (opModeState){
-            case INIT:
-                return CommandScheduler.getInitInstance().schedule(c);
-            case FINISHED:
-                return CommandScheduler.getEndInstance().schedule(c);
-            default:
-                return CommandScheduler.getRunInstance().schedule(c);
+    /** Enum for op mode state
+     *
+     */
+    public enum OpModeState {
+        INIT, RUN, END;
+
+        /** Check if other states are this state
+         *
+         * @param states The other states
+         * @return The above condition
+         */
+        public boolean isState(OpModeState... states){
+            for(OpModeState s : states){
+                if(this == s){
+                    return true;
+                }
+            }
+            return false;
         }
     }
-    public CommandScheduler schedule(Runnable c){
-        return schedule(new InstantCommand(c));
-    }
-
 }
