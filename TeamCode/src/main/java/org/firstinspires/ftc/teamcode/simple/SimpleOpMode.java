@@ -20,8 +20,8 @@ public class SimpleOpMode extends CommandOpMode {
     public void uponInit() {
         drivebaseSubsystem = new SimpleTankDrivebaseSubsystem(new Motor<DcMotor>("leftMotor"), new Motor<DcMotor>("rightMotor"));;
         gripperSubsystem = new SimpleServoSubsystem(new Servo("gripper"));
-        driverGamepad.a.whenActivated(new InstantCommand(() -> gripperSubsystem.setPosition(0)));
-        driverGamepad.b.whenActivated(new InstantCommand(() -> gripperSubsystem.setPosition(1)));
+        driverGamepad.a.whenPressed(new InstantCommand(() -> gripperSubsystem.setPosition(0)));
+        driverGamepad.b.whenPressed(new InstantCommand(() -> gripperSubsystem.setPosition(1)));
         CommandScheduler.getInstance().schedule(new TankDriveCommand(drivebaseSubsystem, driverGamepad.leftStick));
     }
 }

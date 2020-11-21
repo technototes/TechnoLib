@@ -4,31 +4,31 @@ import com.technototes.control.gamepad.GamepadButton;
 import com.technototes.library.command.Command;
 
 public interface Trigger<T> {
-    /** Schedule command when gamepad button is just activated
+    /** Schedule command when gamepad button is just pressed
      *
      * @param command The command
      * @return this
      */
-    T whenActivated(Command command);
-    /** Schedule command when gamepad button is just deactivated
+    T whenPressed(Command command);
+    /** Schedule command when gamepad button is just released
      *
      * @param command The command
      * @return this
      */
-    T whenDeactivated(Command command);
-    /** Schedule command when gamepad button is activated
+    T whenReleased(Command command);
+    /** Schedule command when gamepad button is pressed
      *
      * @param command The command
      * @return this
      */
-    T whileActivated(Command command);
+    T whilePressed(Command command);
 
-    /** Schedule command when gamepad button is deactivated
+    /** Schedule command when gamepad button is released
      *
      * @param command The command
      * @return this
      */
-    T whileDeactivated(Command command);
+    T whileReleased(Command command);
 
     /** Schedule command when gamepad button is just toggled
      *

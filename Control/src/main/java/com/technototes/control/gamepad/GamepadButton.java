@@ -51,28 +51,28 @@ public class GamepadButton implements BooleanSupplier, Periodic {
      *
      * @return The above condition
      */
-    public boolean isJustActivated(){
+    public boolean isJustPressed(){
         return pressed && recentAction;
     }
     /** Returns if the button is just released
      *
      * @return The above condition
      */
-    public boolean isJustDeactivated(){
+    public boolean isJustReleased(){
         return !pressed && recentAction;
     }
     /** Returns if the button is pressed
      *
      * @return The above condition
      */
-    public boolean isActivated(){
+    public boolean isPressed(){
         return pressed;
     }
     /** Returns if the button is released
      *
      * @return The above condition
      */
-    public boolean isDeactivated(){
+    public boolean isReleased(){
         return !pressed;
     }
     /** Returns if the button is just toggled
@@ -109,6 +109,6 @@ public class GamepadButton implements BooleanSupplier, Periodic {
      */
     @Override
     public boolean getAsBoolean() {
-        return isJustActivated();
+        return isJustPressed();
     }
 }

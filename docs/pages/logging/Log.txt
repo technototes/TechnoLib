@@ -1,0 +1,92 @@
+Log
+The @Log annotation is the root for all the annotations that control the content of the specified items. You can log any item on the following list with the specified Annotations and can customize the entry in the specified ways, but there also some universal parameters:
+Universal Usage:
+ - Logs a thing on an index with the choice of a caption and the color of the caption
+
+Universal Parameters:
+int index:
+ - Specifies the index in telemetry to log the entry
+int priority:
+ - priority for the log to be chosen over other conflicting entries
+
+NOTE: if two overlap and have same priority its random which one takes the specified spot and which one gets send to nearest empty space, so be aware and try to avoid that
+
+String name:
+ - The caption to log the entry besides (if is set to "" there will be no caption)
+Color color:
+ - The color of the name/caption
+
+@Log
+What it does:
+ - Adds a format string and an entry color for usage
+
+Parameters:
+String format (For more Advanced Usage):
+ - provides a format string for the logged entry
+Color entryColor:
+ - The color for the logged entry (not the name/caption)
+
+@Log.Number
+What it does:
+ - Exact same as @Log, just for only numbers
+
+Parameters:
+Color numberColor:
+ - The color for the number
+
+@Log.NumberSlider
+What it does:
+ - Logs a number value in the form of a slider
+
+Parameters:
+double min:
+ - The minimum of the threshold to be logged
+dounle max:
+ - The maximum of the threshold to be logged
+double scale:
+ - The scale, or step, for the number slider to increase a level at
+Color slider:
+ - The color for the slider slide to be at
+Color sliderBackground:
+ - The color for the background behind the slider to be
+Color outline:
+ - The color for the brackets around the slider
+
+@Log.NumberBar
+What it does:
+ - Logs a number in the form of a number bar, in a very similar way to how it is done for the slider
+
+Parameters:
+double min:
+ - The minimum of the threshold to be logged
+dounle max:
+ - The maximum of the threshold to be logged
+double scale:
+ - The scale, or step, for the number bar to increase a level at
+Color completeBarColor:
+ - The color for the complete bar
+Color incompleteBarColor:
+ - The color for the incomplete bar
+Color outline:
+ - The color for the brackets around the bar
+
+@Log.Boolean
+What it does:
+ - Logs a boolean, and if the condition is met it returns the specified string
+
+Parameters:
+String trueValue:
+ - The string to send when the condition returns true
+String trueFormat:
+ - The format for the true string
+String trueColor:
+ - the color for the true string
+String falseValue:
+ - The string to send when the condition returns false
+String falseFormat:
+ - The format for the false string
+String falseColor:
+ - the color for the false string
+
+ADVANCED USERS ONLY:
+If you want to log custom objects with @Log, you need to make sure that the custom object DOES NOT EXTEND LOGGABLE and you have @Log on a specified function in the class

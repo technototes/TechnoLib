@@ -1,5 +1,6 @@
 package com.technototes.control.gamepad;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 /** A simple class that implements AbstractGamepad
@@ -13,6 +14,5 @@ public final class SimpleGamepad extends AbstractGamepad<GamepadButton, GamepadA
     public SimpleGamepad(Gamepad g) {
         super(g, GamepadButton.class, GamepadAxis.class);
     }
-
 
 }

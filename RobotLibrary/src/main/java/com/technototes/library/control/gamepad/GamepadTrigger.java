@@ -14,23 +14,23 @@ import java.util.function.BooleanSupplier;
 public interface GamepadTrigger<T extends GamepadButton> extends Trigger<T> {
 
     @Override
-    default T whenActivated(Command command){
-        return schedule(getInstance()::isJustActivated, command);
+    default T whenPressed(Command command){
+        return schedule(getInstance()::isJustPressed, command);
     }
 
     @Override
-    default T whenDeactivated(Command command){
-        return schedule(getInstance()::isDeactivated, command);
+    default T whenReleased(Command command){
+        return schedule(getInstance()::isReleased, command);
     }
 
     @Override
-    default T whileActivated(Command command){
-        return schedule(getInstance()::isActivated, command);
+    default T whilePressed(Command command){
+        return schedule(getInstance()::isPressed, command);
     }
 
     @Override
-    default T whileDeactivated(Command command){
-        return schedule(getInstance()::isDeactivated, command);
+    default T whileReleased(Command command){
+        return schedule(getInstance()::isReleased, command);
     }
 
     @Override

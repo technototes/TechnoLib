@@ -1,0 +1,37 @@
+LogConfig
+The @LogConfig annotation is the root for all config annotations. They are as follows, and share no common parameters:
+
+Universal Usage:
+You must annotate an item that already has been annotated with an @Log annotation
+
+@LogConfig.Run
+What it does:
+ - Specify which periods you want to log the entry in
+
+Parameters:
+boolean duringInit:
+ - Does the entry log during the init period
+boolean duringRun:
+ - Does the entry log during the run period
+
+@LogConfig.WhiteList
+What it does:
+ - You can allow only certain opmode classes to log this entry
+
+Parameters:
+Class<?>[] value:
+ - The classes to allow
+
+@LogConfig.BlackList
+What it does:
+ - You can prohibit certain opmode classes to log this entry
+
+Parameters:
+Class<?>[] value:
+ - The classes to prohibit
+
+NOTE: when an annotation has only one stored parameter with the name value, you can implicitly set it without saying value= first
+
+@LogConfig.Disabled
+What it does:
+ - Completely disable an entry from being logged, no parameters

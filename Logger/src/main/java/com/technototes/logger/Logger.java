@@ -133,14 +133,14 @@ public class Logger {
     }
 
     /**
-     * Update the logged items in temeletry
+     * Update the logged run items in temeletry
      */
     public void runUpdate() {
         update(runEntries);
     }
 
     /**
-     * Update the logged items in temeletry
+     * Update the logged init items in temeletry
      */
     public void initUpdate() {
         update(initEntries);

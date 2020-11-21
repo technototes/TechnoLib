@@ -5,26 +5,16 @@ import com.technototes.logger.Color;
 import java.util.function.Supplier;
 
 public class BooleanEntry extends Entry<Boolean> {
-    private String whenTrue, whenFalse;
-    private String tFormatted, fFormatted;
-    private String trueFormat, falseFormat;
-    private Color trueColor, falseColor;
+    private StringEntry trueEntry, falseEntry;
     public BooleanEntry(String n, Supplier<Boolean> s, int index, String wt, String wf, Color c,
                         String tf, String ff, Color tc, Color fc) {
         super(n, s, index, c);
-        trueFormat = tf;
-        falseFormat = ff;
-        trueColor = tc;
-        falseColor = fc;
-        whenTrue = wt;
-        whenFalse = wf;
-        tFormatted = trueColor.format(trueFormat, whenTrue);
-        fFormatted = falseColor.format(falseFormat, whenFalse);
-
+        trueEntry = new StringEntry("", ()->wt, -1, Color.NO_COLOR, tf, tc);
+        falseEntry = new StringEntry("", ()->wf, -1, Color.NO_COLOR, ff, fc);
     }
 
     @Override
     public String toString() {
-        return (get() ? tFormatted : fFormatted);
+        return (get() ? trueEntry : falseEntry).get();
     }
 }

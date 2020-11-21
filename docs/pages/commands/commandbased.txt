@@ -1,0 +1,58 @@
+Command based programming
+Command based programming is a great way to handle control for a robot. In a nutshell, you have commands that call actions on subsystems.
+In abstract, you might have a drivebase subsystem, but if you put functions for every thing you wanted the drive subsystem to do it would be hard to read.
+With command based, you make a few basic functions to get all data from the subsystem and set the stuff you need (in this case would be a function to get current speed and angle, and a way to set the drive speed and what angle to go at).
+With those functions, you can write commands to combine those into meaningful instructions (IE robot drive forward for 1 second) without cluttering the subsystem file.
+Even better, you can connect commands together in Command Groups and have even more complex actions (IE robot drive forward for 1 second, stop, turn around, and come back to where it started).
+In code this is very simple, especially with provided subsystems like MecanumDrivebaseSubsystem to base it off of:
+public class DrivebaseSubsystem extends MecanumDrivebaseSubsystem { //drive subsystem
+    public DrivebaseSubsystem(Motor flMotor, Motor frMotor, Motor rlMotor, Motor rrMotor) {
+        super(flMotor, frMotor, rlMotor, rrMotor);
+    }
+}
+    public class DriveForwardFor1SecondCommand extends Command{ //command to driveforward 1 sec
+        public DrivebaseSubsystem subsystem;
+        public ElapsedTime time;
+        public DriveForwardFor1SecondCommand(DrivebaseSubsystem s){
+            addRequirements(s); //very useful to add, so multiple commands with same subsystem do not conflict
+            subsystem = s;
+            time = new ElapsedTime();
+        }
+
+        @Override
+        public void init() {
+            time.reset();
+        }
+
+        @Override
+        public void execute() {
+            subsystem.drive(1, 0, 0);
+        }
+
+        @Override
+        public boolean isFinished() {
+            return time.seconds() >= 1;
+        }
+    }
+    public class StopDriveCommand extends Command{ //command to stop drivebase
+        public DrivebaseSubsystem subsystem;
+        public StopDriveCommand(DrivebaseSubsystem s) {
+            addRequirements(s);
+            subsystem = s;
+        }
+
+        @Override
+        public void execute() {
+            subsystem.stop();
+        }
+    }
+    in general code:
+    DrivebaseSubsystem s; //drive subsystem
+    Command driveforwardcommand = new DriveForwardFor1SecondCommand(s); //drive for 1 sec command
+    Command stopcommand = new StopDriveCommand(s); //stop command
+    SequentialCommandGroup commandGroup = new SequentialCommandGroup(driveforwardcommand, stopcommand); //command group to perform these sequentially
+
+As you noticed, a command has an init, execute, isfinished, and an end function to it. These do as follows:
+init() runs once when command is started
+execute() runs on loop until isFinished() returns true
+end(boolean cancel) runs when command is done, and parameter specifies if the ending was forced or nor
