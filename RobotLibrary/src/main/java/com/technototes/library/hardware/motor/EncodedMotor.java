@@ -6,6 +6,7 @@ import com.technototes.library.hardware.Sensored;
 import com.technototes.library.hardware.sensor.encoder.Encoder;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
 import com.technototes.logger.Log;
+import com.technototes.logger.Stated;
 
 /** Class for encoded motors
  * @author Alex Stedman
@@ -54,7 +55,6 @@ public class EncodedMotor<T extends DcMotor> extends Motor<T> implements Sensore
     }
 
     @Override
-    @Log
     public double getSensorValue() {
         return encoder.getSensorValue();
     }
@@ -119,8 +119,13 @@ public class EncodedMotor<T extends DcMotor> extends Motor<T> implements Sensore
     /** Zero the encoder
      * @return This
      */
-    public EncodedMotor zeroEncoder(){
+    public EncodedMotor<T> zeroEncoder(){
         encoder.zeroEncoder();
         return this;
+    }
+
+    @Override
+    public Double getState() {
+        return getSensorValue();
     }
 }

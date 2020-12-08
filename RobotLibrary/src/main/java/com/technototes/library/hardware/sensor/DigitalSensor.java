@@ -23,7 +23,6 @@ public class DigitalSensor extends Sensor<DigitalChannel> {
         super(deviceName);
     }
 
-    @Log
     @Override
     public double getSensorValue() {
         return getDevice().getState() ? 1 : 0;

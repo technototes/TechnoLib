@@ -72,13 +72,8 @@ public class Logger {
                             set(field.getDeclaredAnnotations(), field, root);
                         } else if (getCustom(o) != null) {
                             set(field.getDeclaredAnnotations(), getCustom(o));
-                        } else {
-                            for (Method m : o.getClass().getDeclaredMethods()) {
-                                if (m.isAnnotationPresent(Log.class)) {
-                                    set(field.getDeclaredAnnotations(), m, o);
-                                }
-
-                            }
+                        } else if(o instanceof Stated) {
+                            set(field.getDeclaredAnnotations(), ((Stated) o)::getState);
                         }
                     }
                 }
@@ -243,6 +238,12 @@ public class Logger {
             return ((IntSupplier) o)::getAsInt;
         } else if (o instanceof DoubleSupplier) {
             return ((DoubleSupplier) o)::getAsDouble;
+        } else if(o instanceof Integer){
+            return ()-> (Integer) o;
+        } else if(o instanceof Double){
+            return ()-> (Double) o;
+        } else if(o instanceof Boolean){
+            return ()-> (Boolean) o;
         } else {
             return null;
         }

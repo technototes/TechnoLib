@@ -31,7 +31,6 @@ public class MotorEncoder extends Sensor<DcMotor> implements Encoder {
         zero = (int) getSensorValue();
     }
 
-    @Log
     @Override
     public double getSensorValue() {
         return supplier.getAsDouble();

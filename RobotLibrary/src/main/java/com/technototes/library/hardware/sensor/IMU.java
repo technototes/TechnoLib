@@ -60,7 +60,6 @@ public class IMU {
         return this;
     }
 
-    @Log
     public double getSensorValue() {
         return gyroHeading();
     }

@@ -1,13 +1,14 @@
 package com.technototes.library.hardware.motor;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.technototes.library.hardware.HardwareDeviceGroup;
 
 /** Class for a group of motors
  *
  * @param <T> The type of motors to group
  */
-public class MotorGroup<T extends Motor> extends Motor<DcMotor> implements HardwareDeviceGroup<Motor> {
+public class MotorGroup<T extends Motor> extends Motor<DcMotorSimple> implements HardwareDeviceGroup<Motor> {
     private Motor[] followers;
 
     /** Make a motor group
@@ -15,7 +16,7 @@ public class MotorGroup<T extends Motor> extends Motor<DcMotor> implements Hardw
      * @param leader The leader motor
      * @param followers The follower motors
      */
-    public MotorGroup(Motor<DcMotor> leader, Motor... followers) {
+    public MotorGroup(Motor<DcMotorSimple> leader, Motor... followers) {
         super(leader.getDevice());
         this.followers = followers;
         for (Motor s : followers) {

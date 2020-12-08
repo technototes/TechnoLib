@@ -35,9 +35,4 @@ public class EncodedMotorGroup extends EncodedMotor<DcMotor> implements Hardware
         System.arraycopy(followers, 0, m, 1, m.length - 1);
         return m;
     }
-    @Log
-    @Override
-    public double getSensorValue() {
-        return super.getSensorValue();
-    }
 }

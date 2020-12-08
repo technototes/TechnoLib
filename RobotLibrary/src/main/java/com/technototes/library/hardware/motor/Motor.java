@@ -6,12 +6,13 @@ import com.technototes.library.hardware.Followable;
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.hardware.Invertable;
 import com.technototes.logger.Log;
+import com.technototes.logger.Stated;
 
 /** Class for motors
  * @author Alex Stedman
  * @param <T> The qualcomm hardware device interface
  */
-public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements Invertable<Motor>, Followable<Motor> {
+public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements Invertable<Motor>, Followable<Motor>, Stated<Double> {
     /** Create a motor
      *
      * @param device The hardware device
@@ -40,7 +41,6 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
         return this;
     }
 
-    @Log
     public double getSpeed() {
         return getDevice().getPower();
     }
@@ -58,4 +58,8 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
         return new MotorGroup(device, this);
     }
 
+    @Override
+    public Double getState() {
+        return getSpeed();
+    }
 }

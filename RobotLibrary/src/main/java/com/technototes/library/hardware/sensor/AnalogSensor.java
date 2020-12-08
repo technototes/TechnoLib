@@ -25,7 +25,6 @@ public class AnalogSensor extends Sensor<AnalogInput> {
 
 
     @Override
-    @Log
     public double getSensorValue() {
         return getDevice().getMaxVoltage();
     }
