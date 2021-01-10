@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.technototes.library.hardware.Sensored;
 import com.technototes.library.hardware.sensor.encoder.Encoder;
+import com.technototes.library.hardware.sensor.encoder.ExternalEncoder;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
 import com.technototes.logger.Log;
 import com.technototes.logger.Stated;
@@ -12,7 +13,7 @@ import com.technototes.logger.Stated;
  * @author Alex Stedman
  * @param <T> The qualcomm motor device interface
  */
-public class EncodedMotor<T extends DcMotor> extends Motor<T> implements Sensored {
+public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements Sensored {
 
     //public PIDCoefficients coefficients;
     /** Deadzone for going to positions with encoder
@@ -29,7 +30,14 @@ public class EncodedMotor<T extends DcMotor> extends Motor<T> implements Sensore
     public EncodedMotor(T device) {
         super(device);
         //coefficients = new PIDCoefficients(0, 0, 0);
-        encoder = new MotorEncoder(device);
+        if (device instanceof DcMotor) {
+            encoder = new MotorEncoder((DcMotor) device);
+        }
+    }
+
+    public EncodedMotor<T> setEncoder(Encoder enc){
+        encoder = enc;
+        return this;
     }
 
     /** Make encoded motor
@@ -40,7 +48,10 @@ public class EncodedMotor<T extends DcMotor> extends Motor<T> implements Sensore
         super(deviceName);
         //coefficients = new PIDCoefficients(0, 0, 0);
         //controller = new PIDFController(coefficients);
-        encoder = new MotorEncoder(getDevice());
+        //coefficients = new PIDCoefficients(0, 0, 0);
+        if (getDevice() instanceof DcMotor) {
+            encoder = new MotorEncoder((DcMotor) getDevice());
+        }
     }
 
 //    public EncodedMotor setPID(double p, double i, double d){
@@ -49,7 +60,7 @@ public class EncodedMotor<T extends DcMotor> extends Motor<T> implements Sensore
 //    }
 
     @Override
-    public EncodedMotor setInverted(boolean invert) {
+    public EncodedMotor<T> setInverted(boolean invert) {
         getDevice().setDirection(invert ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);
         return this;
     }

@@ -1,9 +1,12 @@
 package com.technototes.library.hardware.sensor.encoder;
 
 import com.qualcomm.robotcore.hardware.AnalogInput;
+import com.qualcomm.robotcore.hardware.DcMotorImplEx;
 import com.technototes.library.hardware.sensor.Sensor;
-@Deprecated
+
 public class ExternalEncoder extends Sensor<AnalogInput> implements Encoder {
+    private double zero = 0;
+
     public ExternalEncoder(AnalogInput device) {
         super(device);
     }
@@ -14,11 +17,11 @@ public class ExternalEncoder extends Sensor<AnalogInput> implements Encoder {
 
     @Override
     public void zeroEncoder() {
-
+        zero = getDevice().getVoltage();
     }
 
     @Override
     public double getSensorValue() {
-        return 0;
+        return getDevice().getVoltage()-zero;
     }
 }

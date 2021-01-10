@@ -1,13 +1,14 @@
 package com.technototes.library.hardware.motor;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.technototes.library.hardware.HardwareDeviceGroup;
 import com.technototes.logger.Log;
 
 /** Class for encoded motor groups
  * @author Alex Stedman
  */
-public class EncodedMotorGroup extends EncodedMotor<DcMotor> implements HardwareDeviceGroup<Motor<?>> {
+public class EncodedMotorGroup extends EncodedMotor<DcMotorSimple> implements HardwareDeviceGroup<Motor<?>> {
     private Motor<?>[] followers;
 
     /** Create an encoded motor group
