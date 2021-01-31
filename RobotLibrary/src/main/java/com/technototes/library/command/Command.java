@@ -148,4 +148,13 @@ public class Command implements Runnable {
     public Set<Subsystem> getRequirements() {
         return requirements;
     }
+
+    /** Creates a conditional command out of this
+     *
+     * @param condition The condition to run the command under
+     * @return the conditional command
+     */
+    public ConditionalCommand asConditional(BooleanSupplier condition){
+        return new ConditionalCommand(condition, this);
+    }
 }

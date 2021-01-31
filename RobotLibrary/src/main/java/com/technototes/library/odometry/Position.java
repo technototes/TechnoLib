@@ -6,7 +6,7 @@ package com.technototes.library.odometry;
 public class Position {
     private double x;
     private double y;
-    private double rotation;;
+    private double rotation;
 
     /**
      * Create position
