@@ -12,6 +12,6 @@ public interface Odometry {
 
     double getRotation();
 
-
+    Odometry update();
 
 }

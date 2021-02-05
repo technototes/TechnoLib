@@ -79,6 +79,7 @@ public class CommandScheduler implements Runnable {
         }));
         runningRequirementCommands.forEach(((subsystem, command) -> run(command, requirementCommands.get(subsystem).get(command))));
         commandsWithoutRequirements.forEach(this::run);
+        requirementCommands.keySet().forEach(Subsystem::periodic);
     }
     public void run(Command command, BooleanSupplier supplier){
         if(supplier.getAsBoolean() || command.commandState != Command.CommandState.RESET){

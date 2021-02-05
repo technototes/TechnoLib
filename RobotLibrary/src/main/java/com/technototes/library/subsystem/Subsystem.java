@@ -51,4 +51,8 @@ public abstract class Subsystem<T extends HardwareDevice<?>> {
     public Command getDefaultCommand(){
         return defaultCommand;
     }
+
+    public void periodic(){
+
+    }
 }
