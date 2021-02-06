@@ -10,7 +10,7 @@ import java.util.function.DoubleSupplier;
  * @author Alex Stedman
  */
 public class CommandAxis extends GamepadAxis implements GamepadTrigger<CommandAxis> {
-    protected CommandAxis(){
+    public CommandAxis(){
         super();
     }
 
