@@ -16,7 +16,7 @@ public class CommandButton extends GamepadButton implements GamepadTrigger<Comma
         super(supplier);
     }
 
-    protected CommandButton(){
+    public CommandButton(){
         super();
     }
 
