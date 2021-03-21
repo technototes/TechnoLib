@@ -26,6 +26,7 @@ public class MecanumDriveCommand extends Command {
                                DoubleSupplier ySupplier, DoubleSupplier twistSupplier){
         addRequirements(subsystem);
         this.subsystem = subsystem;
+        gyro = ()->0;
         xv = xSupplier;
         yv = ySupplier;
         tv = twistSupplier;
@@ -37,7 +38,7 @@ public class MecanumDriveCommand extends Command {
      * @param stick2 The right {@link Stick} for driving
      */
     public MecanumDriveCommand(MecanumDrivebaseSubsystem subsystem, Stick stick1, Stick stick2){
-        new MecanumDriveCommand(subsystem, stick1.getXSupplier(), stick1.getYSupplier(), stick2.getXSupplier());
+        this(subsystem, stick1.getXSupplier(), stick1.getYSupplier(), stick2.getXSupplier());
     }
 
     /** Set the drive to be field centric
@@ -55,7 +56,7 @@ public class MecanumDriveCommand extends Command {
      * @return this
      */
     public MecanumDriveCommand setFieldCentric(IMU imu){
-        return setFieldCentric(() -> imu.gyroHeading());
+        return setFieldCentric(imu::gyroHeading);
     }
     /** Set the drive to be field centric
      * @param offset The offset for the gyro

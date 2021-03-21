@@ -44,7 +44,7 @@ public class GamepadButton implements BooleanSupplier, Periodic {
         recentAction = pastState != currentState;
         pastState = currentState;
         pressed = currentState;
-        toggle = (recentAction && pastState) ? !toggle : toggle;
+        toggle = (recentAction && pastState) != toggle;
     }
 
     /** Returns if the button is just pressed
@@ -104,11 +104,11 @@ public class GamepadButton implements BooleanSupplier, Periodic {
         return !toggle;
     }
 
-    /** Same as isJustActivated()
+    /** Same as isPressed()
      * @return The above condition
      */
     @Override
     public boolean getAsBoolean() {
-        return isJustPressed();
+        return isPressed();
     }
 }

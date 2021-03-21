@@ -53,8 +53,8 @@ public abstract class CommandOpMode extends LinearOpMode {
         HardwareDevice.hardwareMap = hardwareMap;
         CommandScheduler.getInstance().opMode = this;
         opModeTimer.reset();
-        uponInit();
         logger = new Logger(this);
+        uponInit();
         while (!isStarted()) {
             initLoop();
             universalLoop();

@@ -4,6 +4,7 @@ package com.technototes.library.hardware;
  * @author Alex Stedman
  * @param <T> The device class
  */
+@Deprecated
 public interface Followable<T extends HardwareDevice> {
     /** Follow function
      *

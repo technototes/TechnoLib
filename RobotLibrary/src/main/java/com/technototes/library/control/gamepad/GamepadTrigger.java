@@ -70,4 +70,13 @@ public interface GamepadTrigger<T extends GamepadButton> extends Trigger<T> {
         return getInstance();
     }
 
+    /** just schedules things
+     *
+     * @param command command
+     * @return the instance
+     */
+    default T schedule(Command command){
+        return schedule(()->true,command);
+    }
+
 }

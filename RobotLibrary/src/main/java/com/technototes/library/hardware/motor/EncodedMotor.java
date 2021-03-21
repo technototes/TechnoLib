@@ -139,4 +139,23 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     public Double getState() {
         return getSensorValue();
     }
+
+    /** Set velocity of motor in tps
+     *
+     * @param tps the speed in encoder ticks per second
+     */
+    public void setVelocity(double tps) {
+        if(getDevice() instanceof DcMotor){
+            ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            super.setSpeed(tps);
+        } else {
+            //TODO velo for non dcmotors
+        }
+    }
+
+    @Override
+    public void setSpeed(double speed) {
+        if(getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        super.setSpeed(speed);
+    }
 }

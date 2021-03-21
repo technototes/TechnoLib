@@ -3,7 +3,8 @@ package org.firstinspires.ftc.teamcode.newcode;
 import com.technototes.library.command.InstantCommand;
 import com.technototes.library.control.gamepad.CommandGamepad;
 
-import com.technototes.subsystem.DrivebaseSubsystem.DriveSpeed;
+import com.technototes.subsystem.DrivebaseSubsystem;
+import com.technototes.subsystem.DrivebaseSubsystem.SampleDriveSpeed;
 
 import org.firstinspires.ftc.teamcode.newcode.commands.claw.ClawRotateLeftCommand;
 import org.firstinspires.ftc.teamcode.newcode.commands.claw.ClawRotateRightCommand;
@@ -24,8 +25,8 @@ public class OI {
     }
 
     public void setDriverControls() {
-        driverGamepad.dpad.down.whenToggled(new InstantCommand(() -> robot.drivebaseSubsystem.driveSpeed = DriveSpeed.TURBO))
-                .whenInverseToggled(new InstantCommand(() -> robot.drivebaseSubsystem.driveSpeed = DriveSpeed.NORMAL));
+        driverGamepad.dpad.down.whenToggled(new InstantCommand(() -> robot.drivebaseSubsystem.driveSpeed = SampleDriveSpeed.TURBO))
+                .whenInverseToggled(new InstantCommand(() -> robot.drivebaseSubsystem.driveSpeed = DrivebaseSubsystem.SampleDriveSpeed.NORMAL));
         driverGamepad.dpad.up.whenPressed(new InstantCommand(() -> robot.blockFlipperSubsystem.setPosition(0.15)))
                 .whenReleased(new InstantCommand(() -> robot.blockFlipperSubsystem.setPosition(0.75)));
 

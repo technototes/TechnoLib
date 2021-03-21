@@ -79,7 +79,7 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
         getDevice().scaleRange(min, max);
         return this;
     }
-
+    @Deprecated
     @Override
     public Servo follow(Servo d) {
         return new ServoGroup(this, d);

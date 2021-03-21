@@ -33,9 +33,7 @@ public class MotorGroup<T extends Motor> extends Motor<DcMotorSimple> implements
     public Motor[] getAllDevices() {
         Motor[] m = new Motor[followers.length + 1];
         m[0] = this;
-        for (int i = 1; i < m.length; i++) {
-            m[i] = followers[i - 1];
-        }
+        System.arraycopy(followers, 0, m, 1, m.length - 1);
         return m;
     }
 

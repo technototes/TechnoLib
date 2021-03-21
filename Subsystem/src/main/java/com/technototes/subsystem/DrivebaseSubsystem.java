@@ -8,10 +8,10 @@ public interface DrivebaseSubsystem extends SpeedSubsystem {
      *
      */
     @Deprecated
-    enum DriveSpeed{
+    enum SampleDriveSpeed {
         SNAIL(0.2), NORMAL(0.5), TURBO(1);
         public double spe;
-        DriveSpeed(double s){
+        SampleDriveSpeed(double s){
             spe = s;
         }
         public double getSpeed(){
@@ -37,8 +37,8 @@ public interface DrivebaseSubsystem extends SpeedSubsystem {
      * @return The Drivespeed
      */
     @Deprecated
-    default DriveSpeed getDriveSpeed(){
-        return DriveSpeed.NORMAL;
+    default SampleDriveSpeed getSampleDriveSpeed(){
+        return SampleDriveSpeed.NORMAL;
     }
 
     /** Return DriveSpeed as a double (again, dont use built in speeds, override this method)
@@ -47,7 +47,7 @@ public interface DrivebaseSubsystem extends SpeedSubsystem {
      */
     @Override
     default double getSpeed(){
-        return getDriveSpeed().getSpeed();
+        return getSampleDriveSpeed().getSpeed();
     }
     @Override
     default void setSpeed(double speed){

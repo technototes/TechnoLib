@@ -2,7 +2,6 @@ package com.technototes.library.subsystem.drivebase;
 
 import com.technototes.library.hardware.motor.Motor;
 import com.technototes.library.subsystem.Subsystem;
-import com.technototes.subsystem.DrivebaseSubsystem.DriveSpeed;
 
 import java.util.function.DoubleSupplier;
 
@@ -17,7 +16,7 @@ public abstract class DrivebaseSubsystem<T extends Motor<?>> extends Subsystem<T
      *
      */
     @Deprecated
-    public DriveSpeed driveSpeed = DriveSpeed.NORMAL;
+    public SampleDriveSpeed driveSpeed = SampleDriveSpeed.NORMAL;
 
     /** Create a drivebase subsystem
      *

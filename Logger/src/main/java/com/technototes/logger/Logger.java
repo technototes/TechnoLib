@@ -48,7 +48,7 @@ public class Logger {
     public Logger(OpMode op) {
         opMode = op;
         telemetry = op.telemetry;
-        //telemetry.setDisplayFormat(Telemetry.DisplayFormat.HTML);
+        telemetry.setDisplayFormat(Telemetry.DisplayFormat.HTML);
 
         unindexedRunEntries = new LinkedHashSet<>();
         unindexedInitEntries = new LinkedHashSet<>();
@@ -88,7 +88,7 @@ public class Logger {
 
 
     private Entry<?>[] generate(Set<Entry<?>> a) {
-        Entry<?>[] returnEntry = new Entry[a.size()];
+        Entry<?>[] returnEntry = new Entry[20];
         List<Entry<?>> unindexed = new ArrayList<>();
         for (Entry<?> e : a) {
             int index = e.getIndex();

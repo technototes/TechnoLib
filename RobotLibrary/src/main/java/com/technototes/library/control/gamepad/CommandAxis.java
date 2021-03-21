@@ -35,4 +35,5 @@ public class CommandAxis extends GamepadAxis implements GamepadTrigger<CommandAx
     public CommandAxis getInstance() {
         return this;
     }
+
 }

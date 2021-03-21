@@ -64,4 +64,11 @@ public class GamepadAxis extends GamepadButton implements DoubleSupplier, Period
     public double getTriggerThreshold() {
         return triggerThreshold;
     }
+
+    /** Set threshold
+     * @param threshold the new threshold
+     */
+    public void setTriggerThreshold(double threshold){
+        triggerThreshold = threshold;
+    }
 }
