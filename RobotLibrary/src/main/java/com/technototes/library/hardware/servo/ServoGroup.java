@@ -17,9 +17,6 @@ public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
     public ServoGroup(Servo leader, Servo... followers) {
         super(leader.getDevice());
         this.followers = followers;
-        for (Servo s : followers) {
-            s.follow(leader);
-        }
     }
 
     @Override
@@ -31,14 +28,20 @@ public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
     public Servo[] getAllDevices() {
         Servo[] m = new Servo[followers.length + 1];
         m[0] = this;
-        for (int i = 1; i < m.length; i++) {
-            m[i] = followers[i - 1];
-        }
+        System.arraycopy(followers, 0, m, 1, m.length - 1);
         return m;
     }
-    @Log
+
     @Override
-    public double getSensorValue() {
-        return super.getSensorValue();
+    public void propogate(double value) {
+        for(Servo s : followers){
+            s.setPosition(value);
+        }
+    }
+
+    @Override
+    public void setPosition(double position) {
+        super.setPosition(position);
+        propogate(position);
     }
 }

@@ -16,4 +16,10 @@ public interface HardwareDeviceGroup<T extends HardwareDevice> {
      * @return All devices
      */
     T[] getAllDevices();
+
+    /** Propogate actions across the followers
+     *
+     * @param value the value to propogate
+     */
+    void propogate(double value);
 }

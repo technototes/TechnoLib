@@ -2,6 +2,7 @@ package com.technototes.library.hardware.servo;
 
 import com.technototes.library.hardware.*;
 import com.technototes.logger.Log;
+import com.technototes.logger.Stated;
 
 /** Class for servos
  * @author Alex Stedman

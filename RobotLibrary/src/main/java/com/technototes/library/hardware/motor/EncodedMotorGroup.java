@@ -19,9 +19,7 @@ public class EncodedMotorGroup extends EncodedMotor<DcMotorSimple> implements Ha
     public EncodedMotorGroup(EncodedMotor<?> leader, Motor<?>... followers) {
         super(leader.getDevice());
         this.followers = followers;
-        for (Motor<?> s : followers) {
-            s.follow(leader);
-        }
+
     }
 
     @Override
@@ -35,5 +33,26 @@ public class EncodedMotorGroup extends EncodedMotor<DcMotorSimple> implements Ha
         m[0] = this;
         System.arraycopy(followers, 0, m, 1, m.length - 1);
         return m;
+    }
+
+    @Override
+    public void propogate(double value) {
+        for(Motor m : followers){
+            m.setSpeed(value);
+        }
+    }
+
+
+    @Override
+    public void setVelocity(double tps) {
+        super.setVelocity(tps);
+        propogate(super.getSpeed());
+    }
+
+    @Override
+    public boolean setPosition(double ticks, double speed) {
+        boolean b = super.setPosition(ticks, speed);
+        propogate(super.getSpeed());
+        return b;
     }
 }

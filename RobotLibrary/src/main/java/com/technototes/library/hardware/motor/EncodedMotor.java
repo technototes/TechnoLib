@@ -153,6 +153,27 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
         }
     }
 
+    public double getVelocity(){
+        if(getDevice() instanceof DcMotor){
+            ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            return getDevice().getPower();
+        } else {
+            //TODO velo for non dcmotors
+            return 0;
+        }
+    }
+    @Override
+    public double getSpeed(){
+        if(getDevice() instanceof DcMotor){
+            ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            return getDevice().getPower();
+        } else {
+            //TODO velo for non dcmotors
+            return 0;
+        }
+    }
+
+
     @Override
     public void setSpeed(double speed) {
         if(getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
