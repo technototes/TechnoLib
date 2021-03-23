@@ -4,7 +4,7 @@ package com.technototes.library.command;
  * @author Alex Stedman
  */
 public class SequentialCommandGroup extends CommandGroup {
-    protected Command lastCommand;
+    protected Command lastCommand = null;
 
     /** Make sequential command group
      *
@@ -12,7 +12,6 @@ public class SequentialCommandGroup extends CommandGroup {
      */
     public SequentialCommandGroup(Command... commands) {
         super(commands);
-        lastCommand = null;
     }
 
 

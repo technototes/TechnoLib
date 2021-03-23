@@ -152,7 +152,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     public void setVelocity(double tps) {
         if(getDevice() instanceof DcMotor){
             ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            super.setSpeed(tps);
+            getDevice().setPower(tps);
         } else {
             //TODO velo for non dcmotors
         }
