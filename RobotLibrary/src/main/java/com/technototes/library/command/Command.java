@@ -74,10 +74,11 @@ public class Command implements Runnable {
      * @param command The next command
      * @return A {@link SequentialCommandGroup} for this and the added command
      */
+    @Deprecated
     public final Command andThen(Command command) {
         if (command instanceof SequentialCommandGroup) {
             SequentialCommandGroup c2 = new SequentialCommandGroup(this);
-            c2.commands.addAll(((SequentialCommandGroup) command).commands);
+            //c2.commands.addAll(((SequentialCommandGroup) command).commands);
             return c2;
         }
         return new SequentialCommandGroup(this, command);
@@ -89,6 +90,7 @@ public class Command implements Runnable {
      * @param command The command
      * @return A {@link SequentialCommandGroup} with the condition as a condition for the command
      */
+    @Deprecated
     public final Command waitUntil(BooleanSupplier condition, Command command) {
         return andThen(new ConditionalCommand(condition, command));
     }

@@ -8,7 +8,7 @@ import java.util.List;
  * @author Alex Stedman
  */
 public abstract class CommandGroup extends Command {
-    protected List<Command> commands = new LinkedList<>();
+    protected Command[] commands;
 
     /** Basic constructor
      *
@@ -21,7 +21,7 @@ public abstract class CommandGroup extends Command {
      * @param command Commands for group
      */
     public CommandGroup(Command... command) {
-        commands.addAll(Arrays.asList(command));
+        commands = command;
     }
 
     /** Add a command to the group
@@ -30,21 +30,33 @@ public abstract class CommandGroup extends Command {
      * @return this
      */
     public CommandGroup addCommand(Command command) {
-        commands.add(command);
+        Command[] n = new Command[commands.length+1];
+        for(int i = 0; i < commands.length; i++){
+            n[i]=commands[i];
+        }
+        n[n.length-1] = command;
+        commands = n;
         return this;
     }
 
     @Override
     public void run() {
         switch (commandState) {
+            case RESET:
+                commandRuntime.reset();
+                commandState = CommandState.INITIALIZED;
+            case INITIALIZED:
+                runCommands();
+                commandState = isFinished() ? CommandState.EXECUTED : CommandState.INITIALIZED;
+                if(commandState != CommandState.EXECUTED){
+                    return;
+                }
             case EXECUTED:
                 commandState = CommandState.RESET;
                 return;
-            default:
-                runCommands();
-                commandState = isFinished() ? CommandState.EXECUTED : CommandState.INITIALIZED;
         }
     }
+
 
     /** Run the commands
      *
@@ -52,8 +64,9 @@ public abstract class CommandGroup extends Command {
     public abstract void runCommands();
 
     @Override
-    /** Return if tis is finished
+    /** Return if its is finished
      *
      */
     public abstract boolean isFinished();
+
 }

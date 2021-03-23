@@ -6,9 +6,13 @@ public class GyroSensor extends Sensor<com.qualcomm.robotcore.hardware.GyroSenso
         super(device);
         device.calibrate();
     }
+    public GyroSensor(String deviceName){
+        super(deviceName);
+        getDevice().calibrate();
+    }
 
     @Override
     public double getSensorValue() {
-        return getDevice().getRotationFraction()*360;
+        return getDevice().getHeading();
     }
 }

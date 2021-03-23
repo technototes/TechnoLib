@@ -16,6 +16,6 @@ public class WaitCommand extends Command {
 
     @Override
     public boolean isFinished() {
-        return seconds > commandRuntime.seconds();
+        return seconds <= commandRuntime.seconds();
     }
 }

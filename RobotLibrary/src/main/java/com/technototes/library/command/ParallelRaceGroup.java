@@ -23,9 +23,11 @@ public class ParallelRaceGroup extends CommandGroup {
      */
     @Override
     public void runCommands() {
-        commands.forEach(command -> run());
-    }
+        for(Command c : commands){
+            c.run();
+        }
 
+    }
     /** Is this finished
      *
      * @return If one of the commands is finished
@@ -33,7 +35,7 @@ public class ParallelRaceGroup extends CommandGroup {
     @Override
     public boolean isFinished() {
         for (Command c : commands) {
-            if (c.isFinished()) {
+            if (c.commandState == CommandState.RESET) {
                 return true;
             }
         }

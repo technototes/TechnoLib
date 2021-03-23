@@ -88,7 +88,7 @@ public class CommandScheduler implements Runnable {
     }
     public void cancel(Command command){
         if(command != null) {
-            command.end(!command.isFinished());
+            command.end(true);
             command.commandState = Command.CommandState.RESET;
         }
     }

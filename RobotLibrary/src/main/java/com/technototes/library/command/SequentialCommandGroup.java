@@ -26,8 +26,7 @@ public class SequentialCommandGroup extends CommandGroup {
      */
     @Override
     public void runCommands() {
-        getCurrentCommand().run();
-
+        commands[currentCommandIndex].run();
     }
 
     /** Returns if all the commands are finished
@@ -36,18 +35,10 @@ public class SequentialCommandGroup extends CommandGroup {
      */
     @Override
     public boolean isFinished() {
-        if (getCurrentCommand().isFinished()) {
+        if (commands[currentCommandIndex].commandState == CommandState.RESET) {
             currentCommandIndex++;
         }
-        //if the command goes one above index, the 0 index will equal the 1 index
-        return currentCommandIndex == commands.size();
+        return currentCommandIndex > commands.length-1;
     }
 
-    /** Get the command being currently run
-     *
-     * @return The current command
-     */
-    public Command getCurrentCommand() {
-        return commands.get(currentCommandIndex);
-    }
 }
