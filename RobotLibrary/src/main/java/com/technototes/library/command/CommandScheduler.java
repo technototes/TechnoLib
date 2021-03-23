@@ -47,6 +47,19 @@ public class CommandScheduler implements Runnable {
         return schedule(command, ()->supplier.getAsBoolean() && opMode.getOpModeState().isState(states));
     }
 
+    public CommandScheduler scheduleAfterOther(Command dependency, Command other){
+        return schedule(other, dependency::justFinished);
+    }
+    public CommandScheduler scheduleWithOther(Command dependency, Command other){
+        return schedule(other, dependency::justStarted);
+    }
+    public CommandScheduler scheduleAfterOther(Command dependency, Command other, BooleanSupplier additionalCondition){
+        return schedule(other, ()->dependency.justFinished()&&additionalCondition.getAsBoolean());
+    }
+    public CommandScheduler scheduleWithOther(Command dependency, Command other, BooleanSupplier additionalCondition){
+        return schedule(other, ()->dependency.justStarted() && additionalCondition.getAsBoolean());
+    }
+
 
     public CommandScheduler schedule(Command command, BooleanSupplier supplier){
         if(command.getRequirements().isEmpty()){

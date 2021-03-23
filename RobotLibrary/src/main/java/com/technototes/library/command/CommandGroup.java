@@ -1,27 +1,24 @@
 package com.technototes.library.command;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /** Root class for all command groups
  * @author Alex Stedman
  */
 public abstract class CommandGroup extends Command {
-    protected Command[] commands;
+    protected Map<Command, Boolean> commandMap;
 
-    /** Basic constructor
-     *
-     */
-    public CommandGroup(){
 
-    }
     /** Create a command group with commands
      *
-     * @param command Commands for group
+     * @param commands Commands for group
      */
-    public CommandGroup(Command... command) {
-        commands = command;
+    public CommandGroup(Command... commands) {
+        commandMap = new HashMap<>();
+        for(Command c : commands){
+            addCommand(c);
+        }
     }
 
     /** Add a command to the group
@@ -29,39 +26,14 @@ public abstract class CommandGroup extends Command {
      * @param command The command
      * @return this
      */
-    public CommandGroup addCommand(Command command) {
-        Command[] n = new Command[commands.length+1];
-        for(int i = 0; i < commands.length; i++){
-            n[i]=commands[i];
-        }
-        n[n.length-1] = command;
-        commands = n;
+    public CommandGroup addCommand(Command command){
+        commandMap.put(command, false);
+        schedule(command);
         return this;
     }
 
-    @Override
-    public void run() {
-        switch (commandState) {
-            case RESET:
-                commandRuntime.reset();
-                commandState = CommandState.INITIALIZED;
-            case INITIALIZED:
-                runCommands();
-                commandState = isFinished() ? CommandState.EXECUTED : CommandState.INITIALIZED;
-                if(commandState != CommandState.EXECUTED){
-                    return;
-                }
-            case EXECUTED:
-                commandState = CommandState.RESET;
-                return;
-        }
-    }
+    public abstract void schedule(Command c);
 
-
-    /** Run the commands
-     *
-     */
-    public abstract void runCommands();
 
     @Override
     /** Return if its is finished
@@ -69,4 +41,13 @@ public abstract class CommandGroup extends Command {
      */
     public abstract boolean isFinished();
 
+    @Override
+    public void end(boolean cancel) {
+        if(cancel){
+            for (Map.Entry<Command, Boolean> entry : commandMap.entrySet()) {
+                if (!entry.getValue()) entry.getKey().end(true);
+            }
+        }
+        commandMap.replaceAll((command, bool) -> false);
+    }
 }

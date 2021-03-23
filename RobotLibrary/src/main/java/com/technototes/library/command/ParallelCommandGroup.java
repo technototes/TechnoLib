@@ -1,15 +1,11 @@
 package com.technototes.library.command;
 
+import java.util.Map;
+
 /** Command group to run commands in parallel until all finish
  * @author Alex Stedman
  */
 public class ParallelCommandGroup extends CommandGroup {
-    /** Make empty group
-     *
-     */
-    public ParallelCommandGroup(){
-        super();
-    }
 
     /** Make parallel command group
      *
@@ -19,16 +15,11 @@ public class ParallelCommandGroup extends CommandGroup {
         super(commands);
     }
 
-    /** Runs the commands in parallel
-     *
-     */
     @Override
-    public void runCommands() {
-        for(Command c : commands){
-            c.run();
-        }
-
+    public void schedule(Command c) {
+        this.with(c);
     }
+
 
     /** Is this finished
      *
@@ -36,11 +27,9 @@ public class ParallelCommandGroup extends CommandGroup {
      */
     @Override
     public boolean isFinished() {
-        for (Command c : commands) {
-            if (c.commandState != CommandState.RESET) {
-                return false;
-            }
-        }
-        return true;
-    }
+        //makes true if command just finished
+        commandMap.replaceAll((command, bool) -> command.justFinished() ? true : bool);
+    //if there is no unfinished commands its done
+        return !commandMap.containsValue(false);
+}
 }

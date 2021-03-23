@@ -1,21 +1,27 @@
 package com.technototes.library.command;
 
+import java.util.function.DoubleSupplier;
+
 /**
  * @author Alex Stedman
  * class for commands with time to run
  */
 public class WaitCommand extends Command {
     public double getSeconds() {
-        return seconds;
+        return supplier.getAsDouble();
     }
 
-    private double seconds;
+    private DoubleSupplier supplier;
     public WaitCommand(double sec){
-        seconds = sec;
+        supplier = ()->sec;
+    }
+
+    public WaitCommand(DoubleSupplier sup){
+        supplier = sup;
     }
 
     @Override
     public boolean isFinished() {
-        return seconds <= commandRuntime.seconds();
+        return supplier.getAsDouble() <= commandRuntime.seconds();
     }
 }

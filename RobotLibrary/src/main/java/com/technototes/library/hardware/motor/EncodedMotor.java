@@ -66,6 +66,11 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     }
 
     @Override
+    public EncodedMotor<T> invert() {
+        return setInverted(!getInverted());
+    }
+
+    @Override
     public double getSensorValue() {
         return encoder.getSensorValue();
     }

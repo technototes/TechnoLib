@@ -41,6 +41,11 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
         return this;
     }
 
+    @Override
+    public Motor invert() {
+        return setInverted(!getInverted());
+    }
+
     public double getSpeed() {
         return getDevice().getPower();
     }

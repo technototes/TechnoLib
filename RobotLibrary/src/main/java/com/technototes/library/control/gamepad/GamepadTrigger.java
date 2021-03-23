@@ -20,7 +20,7 @@ public interface GamepadTrigger<T extends GamepadButton> extends Trigger<T> {
 
     @Override
     default T whenReleased(Command command){
-        return schedule(getInstance()::isReleased, command);
+        return schedule(getInstance()::isJustReleased, command);
     }
 
     @Override

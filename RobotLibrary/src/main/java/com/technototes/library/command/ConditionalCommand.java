@@ -7,7 +7,11 @@ import java.util.function.BooleanSupplier;
  */
 public class ConditionalCommand extends Command {
     private BooleanSupplier supplier;
-    private Command ifTrue, ifFalse, currentChoice;
+
+    public ConditionalCommand(BooleanSupplier condition){
+        supplier = condition;
+    }
+
 
     /** Make a conditional command
      *
@@ -15,7 +19,9 @@ public class ConditionalCommand extends Command {
      * @param command The command to run when the condition is true.
      */
     public ConditionalCommand(BooleanSupplier condition, Command command) {
-        this(condition, command, null);
+        supplier = condition;
+        CommandScheduler.getInstance().scheduleWithOther(this, command, condition);
+
     }
 
     /** Make a conditional command
@@ -26,28 +32,9 @@ public class ConditionalCommand extends Command {
      */
     public ConditionalCommand(BooleanSupplier condition, Command trueCommand, Command falseCommand) {
         supplier = condition;
-        ifTrue = trueCommand;
-        ifFalse = falseCommand;
+        CommandScheduler.getInstance().scheduleWithOther(this, trueCommand, condition);
+        CommandScheduler.getInstance().scheduleWithOther(this, falseCommand, ()->!condition.getAsBoolean());
+
     }
 
-    @Override
-    public void run() {
-        switch (commandState) {
-            case RESET:
-                currentChoice = supplier.getAsBoolean() ? ifTrue : ifFalse;
-                if (currentChoice != null) {
-                    currentChoice.init();
-                    commandState = CommandState.INITIALIZED;
-                }
-                return;
-            case INITIALIZED:
-                currentChoice.execute();
-                commandState = currentChoice.isFinished() ? CommandState.EXECUTED : CommandState.INITIALIZED;
-                return;
-            case EXECUTED:
-                currentChoice.end(false);
-                commandState = CommandState.RESET;
-                return;
-        }
-    }
 }

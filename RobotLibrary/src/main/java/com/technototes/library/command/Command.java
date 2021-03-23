@@ -6,9 +6,10 @@ import com.technototes.library.subsystem.Subsystem;
 
 
 import java.util.Arrays;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
 
 /** The root Command class
  * @author Alex Stedman
@@ -25,7 +26,7 @@ public class Command implements Runnable {
     public Command() {
         commandState = CommandState.RESET;
         commandRuntime = new ElapsedTime();
-        requirements = new LinkedHashSet<>();
+        requirements = new HashSet<>();
         commandRuntime.reset();
     }
 
@@ -69,30 +70,28 @@ public class Command implements Runnable {
 
     }
 
-    /** Add a command to be run after this
-     *
-     * @param command The next command
-     * @return A {@link SequentialCommandGroup} for this and the added command
-     */
-    @Deprecated
-    public final Command andThen(Command command) {
-        if (command instanceof SequentialCommandGroup) {
-            SequentialCommandGroup c2 = new SequentialCommandGroup(this);
-            //c2.commands.addAll(((SequentialCommandGroup) command).commands);
-            return c2;
-        }
-        return new SequentialCommandGroup(this, command);
+    //run a command after
+    public final Command then(Command c){
+        CommandScheduler.getInstance().scheduleAfterOther(this, c);
+        return c;
+    }
+    //wait a time
+    public final Command wait(double sec){
+        return then(new WaitCommand(sec));
+    }
+    public final Command wait(DoubleSupplier sup){
+        return then(new WaitCommand(sup));
     }
 
-    /** Add a command to be run after this when a condition is met
-     *
-     * @param condition The condition
-     * @param command The command
-     * @return A {@link SequentialCommandGroup} with the condition as a condition for the command
-     */
-    @Deprecated
-    public final Command waitUntil(BooleanSupplier condition, Command command) {
-        return andThen(new ConditionalCommand(condition, command));
+    //await a condition
+    public final Command await(BooleanSupplier condition) {
+        return then(new ConditionalCommand(condition));
+    }
+
+    //run a command in parallel
+    public final Command with(Command c){
+        CommandScheduler.getInstance().scheduleWithOther(this, c);
+        return c;
     }
 
     /** Run the commmand
@@ -103,17 +102,19 @@ public class Command implements Runnable {
         switch (commandState) {
             case RESET:
                 commandRuntime.reset();
+                commandState = CommandState.INITILAIZING;
+                return;
+            case INITILAIZING:
                 init();
-                commandState = CommandState.INITIALIZED;
+                commandState = CommandState.EXECUTING;
                 //THERE IS NO RETURN HERE SO IT FALLS THROUGH TO POST-INITIALIZATION
-            case INITIALIZED:
+            case EXECUTING:
                 execute();
-                commandState = isFinished() ? CommandState.EXECUTED : CommandState.INITIALIZED;
-                if(!isFinished()){
-                    return;
-                }
-            case EXECUTED:
-                end(false);
+                commandState = isFinished() ? CommandState.FINISHED : CommandState.EXECUTING;
+                if (isFinished()) end(false);
+                //allow one cycle to run so other dependent commands can schedule
+                return;
+            case FINISHED:
                 commandState = CommandState.RESET;
                 return;
         }
@@ -123,7 +124,7 @@ public class Command implements Runnable {
      *
      */
     public enum CommandState {
-        RESET, INITIALIZED, EXECUTED
+        RESET, INITILAIZING, EXECUTING, FINISHED
     }
 
 
@@ -159,4 +160,13 @@ public class Command implements Runnable {
     public ConditionalCommand asConditional(BooleanSupplier condition){
         return new ConditionalCommand(condition, this);
     }
+
+
+    public final boolean justFinished(){
+        return commandState == CommandState.FINISHED;
+    }
+    public final boolean justStarted() {
+        return commandState == CommandState.INITILAIZING;
+    }
+
 }

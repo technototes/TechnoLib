@@ -4,14 +4,7 @@ package com.technototes.library.command;
  * @author Alex Stedman
  */
 public class SequentialCommandGroup extends CommandGroup {
-    private int currentCommandIndex = 0;
-
-    /** Make sequential command group
-     *
-     */
-    public SequentialCommandGroup(){
-        super();
-    }
+    protected Command lastCommand;
 
     /** Make sequential command group
      *
@@ -19,14 +12,18 @@ public class SequentialCommandGroup extends CommandGroup {
      */
     public SequentialCommandGroup(Command... commands) {
         super(commands);
+        lastCommand = null;
     }
 
-    /** Run the commands in sequence
-     *
-     */
+
     @Override
-    public void runCommands() {
-        if(getCurrentCommand() != null) getCurrentCommand().run();
+    public void schedule(Command c) {
+        if(lastCommand == null){
+            this.with(c);
+        } else{
+            lastCommand.then(c);
+        }
+        lastCommand = c;
     }
 
     /** Returns if all the commands are finished
@@ -35,25 +32,6 @@ public class SequentialCommandGroup extends CommandGroup {
      */
     @Override
     public boolean isFinished() {
-        if (getCurrentCommand() != null) {
-            if (getCurrentCommand().commandState == CommandState.RESET) {
-                currentCommandIndex++;
-            }
-            return currentCommandIndex > commands.length - 1;
-        }
-        return true;
-    }
-
-    /** Get the command being currently run
-     *
-     * @return The current command
-     */
-    public Command getCurrentCommand() {
-        try {
-            return commands[currentCommandIndex];
-        }catch (ArrayIndexOutOfBoundsException e){
-            System.out.println("oman idk this issue but this works for now");
-            return null;
-        }
+        return lastCommand.justFinished();
     }
 }
