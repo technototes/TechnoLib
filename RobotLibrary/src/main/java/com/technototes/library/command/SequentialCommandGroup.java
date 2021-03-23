@@ -35,10 +35,13 @@ public class SequentialCommandGroup extends CommandGroup {
      */
     @Override
     public boolean isFinished() {
-        if (getCurrentCommand().commandState == CommandState.RESET && getCurrentCommand() != null) {
-            currentCommandIndex++;
+        if (getCurrentCommand() != null) {
+            if (getCurrentCommand().commandState == CommandState.RESET) {
+                currentCommandIndex++;
+            }
+            return currentCommandIndex > commands.length - 1;
         }
-        return currentCommandIndex > commands.length-1;
+        return true;
     }
 
     /** Get the command being currently run
