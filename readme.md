@@ -14,9 +14,11 @@ TechnoLib is a FTC Library for everyone:
 ## Installation
 But if this library is so good, it must be hard to install right? wrong:
  - Add this right before the dependencies{} block in TeamCode/build.gradle: 
-   ```repositories{
+   ```  
+      repositories{
          maven { url 'https://jitpack.io' }
-      }```
+      }
+    ```
  - And add this to the dependencies block in TeamCode/build.gradle: 
    ```implementation 'com.github.technototes:TechnoLib:1.0.0'```    
    **(replace 1.0.0 with the latest release if it isnt already)**
