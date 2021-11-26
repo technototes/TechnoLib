@@ -16,6 +16,7 @@ But if this library is so good, it must be hard to install right? wrong:
  - Add this right before the dependencies{} block in TeamCode/build.gradle: 
    ```  
       repositories{
+       ` maven { url = 'https://maven.brott.dev/' }
          maven { url 'https://jitpack.io' }
       }
     ```
