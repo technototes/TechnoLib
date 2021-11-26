@@ -1,28 +1,31 @@
 package com.technototes.library.subsystem.servo;
 
 import com.technototes.library.hardware.servo.Servo;
-import com.technototes.library.subsystem.Subsystem;
+import com.technototes.library.hardware.servo.ServoGroup;
+import com.technototes.library.subsystem.SubsystemBase;
 
 /** Class for servo subsystems
  * @author Alex Stedman
  */
-public class ServoSubsystem extends Subsystem<Servo> {
+public class ServoSubsystem extends SubsystemBase<Servo> {
     /** Create servo subsystem
      *
-     * @param servos The servos
+     * @param servo The servo
      */
-    public ServoSubsystem(Servo... servos) {
-        super(servos);
+    public ServoSubsystem(Servo servo) {
+        super(servo);
     }
+    public ServoSubsystem(Servo... servo) {
+        super(new ServoGroup(servo));
+    }
+
 
     /** Set servo subsystem position
      *
      * @param position The position
      */
     public void setPosition(double position) {
-        for (Servo m : getDevices()) {
-            m.setPosition(position);
-        }
+        getDevice().setPosition(position);
     }
 
     /** Get subsystem servo position
@@ -30,7 +33,7 @@ public class ServoSubsystem extends Subsystem<Servo> {
      * @return The position
      */
     public double getPosition(){
-        return getDevices()[0].getPosition();
+        return getDevice().getPosition();
     }
 
 }

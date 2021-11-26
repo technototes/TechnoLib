@@ -6,7 +6,7 @@ import java.util.function.DoubleSupplier;
  * @author Alex Stedman
  * class for commands with time to run
  */
-public class WaitCommand extends Command {
+public class WaitCommand implements Command {
     public double getSeconds() {
         return supplier.getAsDouble();
     }
@@ -21,7 +21,12 @@ public class WaitCommand extends Command {
     }
 
     @Override
+    public void execute() {
+
+    }
+
+    @Override
     public boolean isFinished() {
-        return supplier.getAsDouble() <= commandRuntime.seconds();
+        return supplier.getAsDouble() <= getRuntime().seconds();
     }
 }

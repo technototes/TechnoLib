@@ -1,11 +1,11 @@
 package com.technototes.library.hardware.sensor;
 
 import com.qualcomm.robotcore.hardware.DigitalChannel;
-import com.technototes.logger.Log;
 
 /** Class for digital sensors
  * @author Alex Stedman
  */
+@SuppressWarnings("unused")
 public class DigitalSensor extends Sensor<DigitalChannel> {
     /** Make a digital sensor
      *

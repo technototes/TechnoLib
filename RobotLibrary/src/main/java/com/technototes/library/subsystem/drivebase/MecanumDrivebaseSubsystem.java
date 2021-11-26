@@ -1,7 +1,7 @@
 package com.technototes.library.subsystem.drivebase;
 
+import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.motor.Motor;
-import com.technototes.subsystem.HolonomicDrivebaseSubsystem;
 
 import java.util.function.DoubleSupplier;
 
@@ -9,7 +9,7 @@ import java.util.function.DoubleSupplier;
  * @author Alex Stedman
  * @param <T> The motor type for the subsystem
  */
-public class MecanumDrivebaseSubsystem<T extends Motor<?>> extends DrivebaseSubsystem<T> implements HolonomicDrivebaseSubsystem {
+public class MecanumDrivebaseSubsystem<T extends Motor<?>> extends DrivebaseSubsystem<T>{
     /** Drive motors
      *
      */
@@ -30,6 +30,7 @@ public class MecanumDrivebaseSubsystem<T extends Motor<?>> extends DrivebaseSubs
         this.rrMotor = rrMotor;
     }
 
+
     /** Create mecanum drivebase
      *
      * @param gyro The gyro supplier
@@ -45,12 +46,46 @@ public class MecanumDrivebaseSubsystem<T extends Motor<?>> extends DrivebaseSubs
         this.rlMotor = rlMotor;
         this.rrMotor = rrMotor;
     }
-    
-    @Override
+
+    public void joystickDrive(double x, double y, double rotation){
+        joystickDriveWithGyro(x, y, rotation, 0);
+    }
+
+    public void joystickDriveWithGyro(double x, double y, double rotation, double gyroAngle) {
+        double speed = Range.clip(Math.abs(Math.hypot(x, y)), 0, 1);
+        double headingRad = Math.toRadians(gyroAngle);
+        double angle = -Math.atan2(y, x) + headingRad - Math.PI/4;
+        drive(speed, angle, rotation);
+    }
+    public void drive(double speed, double angle, double rotation) {
+        double x = Math.cos(angle) * speed;
+        double y = Math.sin(angle) * speed;
+
+        double powerCompY = -(x + y);
+        double powerCompX = x - y;
+
+        speed = Range.clip(speed + Math.abs(rotation), 0, 1);
+
+        double flPower = powerCompY - powerCompX - 2*rotation;
+        double frPower = -powerCompY - powerCompX - 2*rotation;
+        double rlPower = powerCompY + powerCompX - 2*rotation;
+        double rrPower = -powerCompY + powerCompX - 2*rotation;
+
+        double scale = getScale(flPower, frPower, rlPower, rrPower);
+        scale = scale == 0 ? 0 : speed/scale;
+        scale = Math.cbrt(scale);
+        drive(flPower*scale, frPower*scale,rlPower*scale, rrPower*scale);
+    }
+
+    public void stop() {
+        drive(0, 0, 0, 0);
+    }
+
     public void drive(double flSpeed, double frSpeed, double rlSpeed, double rrSpeed) {
         flMotor.setSpeed(flSpeed*getSpeed());
         frMotor.setSpeed(frSpeed*getSpeed());
         rlMotor.setSpeed(rlSpeed*getSpeed());
         rrMotor.setSpeed(rrSpeed*getSpeed());
     }
+
 }

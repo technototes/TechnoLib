@@ -12,4 +12,8 @@ public interface Encoder extends Sensored {
      */
     void zeroEncoder();
 
+    default double getPosition(){
+        return getSensorValue();
+    }
+
 }

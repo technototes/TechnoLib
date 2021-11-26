@@ -1,22 +1,23 @@
 package com.technototes.library.hardware.servo;
 
 import com.technototes.library.hardware.HardwareDeviceGroup;
-import com.technototes.logger.Log;
 
 /** Class for servo group
  * @author Alex Stedman
  */
-public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
-    private Servo[] followers;
+@SuppressWarnings("unused")
+public class ServoGroup extends Servo implements HardwareDeviceGroup {
+    private final Servo[] followers;
 
     /** Create a servo group
      *
-     * @param leader The leader servo
-     * @param followers The follower servos
+     * @param servos the servos
      */
-    public ServoGroup(Servo leader, Servo... followers) {
-        super(leader.getDevice());
-        this.followers = followers;
+    public ServoGroup(Servo... servos) {
+        super(servos[0].getDevice());
+        super.setInverted(servos[0].getInverted());
+        followers = new Servo[servos.length-1];
+        System.arraycopy(servos, 1, followers, 0, followers.length);
     }
 
     @Override
@@ -43,5 +44,10 @@ public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
     public void setPosition(double position) {
         super.setPosition(position);
         propogate(position);
+    }
+
+    @Override
+    public ServoGroup setStartingPosition(double position) {
+        return (ServoGroup) super.setStartingPosition(position);
     }
 }

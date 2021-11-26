@@ -1,21 +1,20 @@
 package com.technototes.library.hardware.motor;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.technototes.library.hardware.Sensored;
 import com.technototes.library.hardware.sensor.encoder.Encoder;
-import com.technototes.library.hardware.sensor.encoder.ExternalEncoder;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
-import com.technototes.logger.Log;
-import com.technototes.logger.Stated;
 
 /** Class for encoded motors
  * @author Alex Stedman
  * @param <T> The qualcomm motor device interface
  */
+@SuppressWarnings("unused")
 public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements Sensored {
 
-    //public PIDCoefficients coefficients;
     /** Deadzone for going to positions with encoder
      *
      */
@@ -27,11 +26,32 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      *
      * @param device The dcmotor object
      */
+    public EncodedMotor(T device, Encoder e) {
+        super(device);
+        encoder = e;
+    }
+    public EncodedMotor(String device, Encoder e) {
+        super(device);
+        encoder = e;
+    }
+
     public EncodedMotor(T device) {
         super(device);
-        //coefficients = new PIDCoefficients(0, 0, 0);
-        if (device instanceof DcMotor) {
-            encoder = new MotorEncoder((DcMotor) device);
+        if (device instanceof DcMotorEx) {
+            encoder = new MotorEncoder((DcMotorEx) device);
+        }
+    }
+
+
+
+    /** Make encoded motor
+     *
+     * @param deviceName The dcmotor device name in hardware map
+     */
+    public EncodedMotor(String deviceName) {
+        super(deviceName);
+        if (getDevice() instanceof DcMotorEx) {
+            encoder = new MotorEncoder((DcMotorEx) getDevice());
         }
     }
 
@@ -40,24 +60,20 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
         return this;
     }
 
-    /** Make encoded motor
-     *
-     * @param deviceName The dcmotor device name in hardware map
-     */
-    public EncodedMotor(String deviceName) {
-        super(deviceName);
-        //coefficients = new PIDCoefficients(0, 0, 0);
-        //controller = new PIDFController(coefficients);
-        //coefficients = new PIDCoefficients(0, 0, 0);
-        if (getDevice() instanceof DcMotor) {
-            encoder = new MotorEncoder((DcMotor) getDevice());
+    public EncodedMotor<T> setPIDFCoeffecients(double p, double i, double d, double f){
+        if(getDevice() instanceof DcMotorEx){
+            ((DcMotorEx) getDevice()).setVelocityPIDFCoefficients(p, i, d, f);
         }
+        return this;
     }
-
-//    public EncodedMotor setPID(double p, double i, double d){
-//        coefficients = new PIDCoefficients(p, i, d);
-//        return this;
-//    }
+    public EncodedMotor<T> setPIDFCoeffecients(PIDFCoefficients coeffecients){
+        return setPIDFCoeffecients(coeffecients.p, coeffecients.i, coeffecients.d, coeffecients.f);
+    }
+    public EncodedMotor<T> setRunMode(DcMotor.RunMode m){
+        if(getDevice() instanceof DcMotor)
+            ((DcMotor) getDevice()).setMode(m);
+        return this;
+    }
 
     @Override
     public EncodedMotor<T> setInverted(boolean invert) {
@@ -141,7 +157,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     }
 
     @Override
-    public Double getState() {
+    public Double get() {
         return getSensorValue();
     }
 
@@ -153,35 +169,21 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
         if(getDevice() instanceof DcMotor){
             ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             getDevice().setPower(tps);
-        } else {
-            //TODO velo for non dcmotors
         }
     }
 
     public double getVelocity(){
-        if(getDevice() instanceof DcMotor){
-            ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            return getDevice().getPower();
-        } else {
-            //TODO velo for non dcmotors
-            return 0;
-        }
+        return getDevice().getPower();
     }
     @Override
     public double getSpeed(){
-        if(getDevice() instanceof DcMotor){
-            ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            return getDevice().getPower();
-        } else {
-            //TODO velo for non dcmotors
-            return 0;
-        }
+        return getDevice().getPower();
     }
 
 
     @Override
     public void setSpeed(double speed) {
-        if(getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //if(getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         super.setSpeed(speed);
     }
 }

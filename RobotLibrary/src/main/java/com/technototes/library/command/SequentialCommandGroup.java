@@ -4,7 +4,7 @@ package com.technototes.library.command;
  * @author Alex Stedman
  */
 public class SequentialCommandGroup extends CommandGroup {
-    protected Command lastCommand = null;
+    protected Command lastCommand;
 
     /** Make sequential command group
      *
@@ -18,9 +18,9 @@ public class SequentialCommandGroup extends CommandGroup {
     @Override
     public void schedule(Command c) {
         if(lastCommand == null){
-            this.with(c);
-        } else{
-            lastCommand.then(c);
+             CommandScheduler.getInstance().scheduleWithOther(this, c);
+        }else {
+            CommandScheduler.getInstance().scheduleAfterOther(lastCommand, c);
         }
         lastCommand = c;
     }
@@ -31,6 +31,8 @@ public class SequentialCommandGroup extends CommandGroup {
      */
     @Override
     public boolean isFinished() {
-        return lastCommand.justFinished();
+        return !commandMap.containsValue(false);
     }
+
+
 }

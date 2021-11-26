@@ -1,19 +1,17 @@
 package com.technototes.library.control.gamepad;
 
-import com.technototes.control.gamepad.GamepadAxis;
 import com.technototes.library.command.Command;
-import com.technototes.library.control.Trigger;
 
+import java.util.function.Consumer;
+import java.util.function.DoubleConsumer;
+import java.util.function.DoubleFunction;
 import java.util.function.DoubleSupplier;
+import java.util.function.Function;
 
 /** Class for command axis for the gamepad
  * @author Alex Stedman
  */
-public class CommandAxis extends GamepadAxis implements GamepadTrigger<CommandAxis> {
-    public CommandAxis(){
-        super();
-    }
-
+public class CommandAxis extends GamepadAxis implements GamepadInput<CommandAxis> {
     /** Make a command axis
      *
      * @param supplier The axis supplier
@@ -36,4 +34,16 @@ public class CommandAxis extends GamepadAxis implements GamepadTrigger<CommandAx
         return this;
     }
 
+    @Override
+    public CommandAxis setTriggerThreshold(double threshold) {
+        super.setTriggerThreshold(threshold);
+        return this;
+    }
+
+    public CommandAxis schedulePressed(Function<DoubleSupplier, Command> f){
+        return whilePressed(f.apply(this));
+    }
+    public CommandAxis schedule(Function<Double, Command> f){
+        return schedule(f.apply(this.getAsDouble()));
+    }
 }

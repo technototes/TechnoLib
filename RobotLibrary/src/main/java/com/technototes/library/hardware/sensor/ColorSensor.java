@@ -5,6 +5,7 @@ import android.graphics.Color;
 /** Class for color sensors
  * @author Alex Stedman
  */
+@SuppressWarnings("unused")
 public class ColorSensor extends Sensor<com.qualcomm.robotcore.hardware.ColorSensor> {
     /** Make a color Sensor
      *

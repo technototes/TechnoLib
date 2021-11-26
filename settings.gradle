@@ -1,5 +1,3 @@
 include ':RobotLibrary'
-include ':TeamCode'
-include ':Control'
-include ':Logger'
-include ':Subsystem'
+include ':Vision'
+include ':Path'

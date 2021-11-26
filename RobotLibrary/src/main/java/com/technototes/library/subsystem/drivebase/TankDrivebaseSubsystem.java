@@ -1,13 +1,13 @@
 package com.technototes.library.subsystem.drivebase;
 
+import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.motor.Motor;
-import com.technototes.subsystem.NonHolomonicDrivebaseSubsystem;
 
 /** Class for drivebase subsystems
  * @author Alex Stedman
  * @param <T> The type of motor for the drivebase
  */
-public class TankDrivebaseSubsystem<T extends Motor<?>> extends DrivebaseSubsystem<T> implements NonHolomonicDrivebaseSubsystem {
+public class TankDrivebaseSubsystem<T extends Motor> extends DrivebaseSubsystem<T> {
     /** Drive motors
      *
      */
@@ -24,8 +24,19 @@ public class TankDrivebaseSubsystem<T extends Motor<?>> extends DrivebaseSubsyst
         rightSide = rightMotor;
     }
 
+    public void arcadeDrive(double y, double x){
+        double lp = y+x;
+        double rp = -y+x;
+        double scale = getScale(lp, rp);
+        double speed = Range.clip(Math.abs(y)+Math.abs(x), 0, 1);
+        scale = scale == 0 ? 0 : speed/scale;
+        drive(lp*scale, rp*scale);
+    }
 
-    @Override
+    public void stop() {
+        drive(0, 0);
+    }
+
     public void drive(double l, double r) {
         leftSide.setSpeed(l*getSpeed());
         rightSide.setSpeed(r*getSpeed());

@@ -1,6 +1,4 @@
-//
-// build.gradle in Ftc3543Lib
-//
+
 apply plugin: 'com.android.library'
 
 android {
@@ -26,24 +24,14 @@ dependencies {
 
     testImplementation(platform('org.junit:junit-bom:5.7.0'))
     testImplementation('org.junit.jupiter:junit-jupiter-api:5.7.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.7.0')
     testImplementation('org.mockito:mockito-core:3.5.11')
     testImplementation "org.junit.jupiter:junit-jupiter-params:5.7.0"
+}
 
-    compileOnly 'org.firstinspires.ftc:Inspection:6.0'
-    compileOnly 'org.firstinspires.ftc:Blocks:6.0'
-    compileOnly 'org.firstinspires.ftc:RobotCore:6.0'
-    compileOnly 'org.firstinspires.ftc:RobotServer:6.0'
-    compileOnly 'org.firstinspires.ftc:OnBotJava:6.0'
-    compileOnly 'org.firstinspires.ftc:Hardware:6.0'
-    compileOnly 'org.firstinspires.ftc:FtcCommon:6.0'
-    compileOnly 'androidx.appcompat:appcompat:1.2.0'
-
-    compileOnly project(':Control')
-    compileOnly project(':Logger')
-    compileOnly project(':Subsystem')
-
-
+tasks.withType(Test) {
+    useJUnitPlatform()
 }
 
 repositories {
@@ -53,4 +41,4 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
-apply from: 'build.release.gradle'
+apply from: '../build.dependencies.gradle'

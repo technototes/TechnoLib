@@ -2,17 +2,19 @@ package com.technototes.library.hardware.motor;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
-import com.technototes.library.hardware.Followable;
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.hardware.Invertable;
-import com.technototes.logger.Log;
-import com.technototes.logger.Stated;
+
+import java.util.function.Supplier;
 
 /** Class for motors
  * @author Alex Stedman
  * @param <T> The qualcomm hardware device interface
  */
-public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements Invertable<Motor>, Followable<Motor>, Stated<Double> {
+@SuppressWarnings("unused")
+public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements Invertable<Motor<T>>, Supplier<Double> {
+    private boolean invert = false;
+    private double min = -1, max = 1;
     /** Create a motor
      *
      * @param device The hardware device
@@ -29,43 +31,44 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
         super(deviceName);
     }
 
-
-    @Override
-    public boolean getInverted() {
-        return getDevice().getDirection() == DcMotorSimple.Direction.FORWARD;
-    }
-
-    @Override
-    public Motor setInverted(boolean invert) {
-        getDevice().setDirection(invert ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);
+    public Motor<T> setOutputLimits(double mi, double ma){
+        min = Range.clip(mi, -1, 1);
+        max = Range.clip(ma, -1, 1);
         return this;
     }
 
     @Override
-    public Motor invert() {
+    public boolean getInverted() {
+        return invert;
+    }
+
+    @Override
+    public Motor<T> setInverted(boolean inv) {
+        getDevice().setDirection(inv ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);
+        invert = inv;
+        return this;
+    }
+
+    @Override
+    public Motor<T> invert() {
         return setInverted(!getInverted());
     }
 
     public double getSpeed() {
-        return getDevice().getPower();
+        return device.getPower();
     }
 
-    /** Set speed of motor
+    /** Set speed of motor  
      *
      * @param speed The speed of the motor
      */
     public void setSpeed(double speed) {
-        getDevice().setPower(Range.clip(speed, -1, 1));
+        device.setPower(Range.clip(speed, min, max));
     }
 
-    @Override
-    @Deprecated
-    public Motor follow(Motor device) {
-        return new MotorGroup(device, this);
-    }
 
     @Override
-    public Double getState() {
+    public Double get() {
         return getSpeed();
     }
 }

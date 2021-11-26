@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.gamepad.CommandGamepad;
 import com.technototes.library.hardware.HardwareDevice;
-import com.technototes.logger.Logger;
+import com.technototes.library.logger.Logger;
 
 /** Class for command based op modes
  * @author Alex Stedman
@@ -21,6 +21,8 @@ public abstract class CommandOpMode extends LinearOpMode {
     private OpModeState opModeState = OpModeState.INIT;
 
     private Logger logger;
+
+    private boolean terminated = false;
 
     /** Get op mode state
      *
@@ -48,22 +50,25 @@ public abstract class CommandOpMode extends LinearOpMode {
 
     @Override
     public final void runOpMode() {
+        opModeState = OpModeState.INIT;
+        opModeTimer.reset();
         driverGamepad = new CommandGamepad(gamepad1);
         codriverGamepad = new CommandGamepad(gamepad2);
         HardwareDevice.hardwareMap = hardwareMap;
-        CommandScheduler.getInstance().opMode = this;
-        opModeTimer.reset();
-        logger = new Logger(this);
+        CommandScheduler.resetScheduler().setOpMode(this);
         uponInit();
-        while (!isStarted()) {
+        logger = new Logger(this);
+        while (!(isStarted() && additionalInitConditions()) && !terminated && !isStopRequested()) {
             initLoop();
             universalLoop();
             CommandScheduler.getInstance().run();
             logger.initUpdate();
         }
         opModeState = OpModeState.RUN;
+        CommandScheduler.getInstance().run();
         uponStart();
-        while (opModeIsActive()) {
+        opModeTimer.reset();
+        while (opModeIsActive() && !terminated && !isStopRequested()) {
             runLoop();
             universalLoop();
             CommandScheduler.getInstance().run();
@@ -74,8 +79,8 @@ public abstract class CommandOpMode extends LinearOpMode {
         opModeState = OpModeState.END;
         end();
         CommandScheduler.getInstance().run();
+        CommandScheduler.resetScheduler();
         opModeTimer.reset();
-
     }
 
     /** Runs once when op mode is initialized
@@ -136,5 +141,12 @@ public abstract class CommandOpMode extends LinearOpMode {
             }
             return false;
         }
+    }
+    public void terminate(){
+        terminated = true;
+    }
+
+    public boolean additionalInitConditions(){
+        return true;
     }
 }

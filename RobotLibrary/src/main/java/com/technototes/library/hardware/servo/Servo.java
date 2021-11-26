@@ -1,16 +1,16 @@
 package com.technototes.library.hardware.servo;
 
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.*;
-import com.technototes.logger.Log;
-import com.technototes.logger.Stated;
 
 /** Class for servos
  * @author Alex Stedman
  */
-public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo> implements Sensored, Invertable<Servo>, Followable<Servo> {
+@SuppressWarnings("unused")
+public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo> implements Sensored, Invertable<Servo> {
 
-    //public double pid_p, pid_i, pid_d;
-
+    private boolean inverted = false;
     /** Create servo object
      *
      * @param device The servo
@@ -39,12 +39,12 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
 
     @Override
     public boolean getInverted() {
-        return getDevice().getDirection() == com.qualcomm.robotcore.hardware.Servo.Direction.FORWARD;
+        return inverted;
     }
 
     @Override
     public Servo setInverted(boolean invert) {
-        getDevice().setDirection(invert ? com.qualcomm.robotcore.hardware.Servo.Direction.FORWARD : com.qualcomm.robotcore.hardware.Servo.Direction.REVERSE);
+        inverted = invert;
         return this;
     }
 
@@ -53,13 +53,33 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
      * @param position The position to set the servo to
      */
     public void setPosition(double position) {
-        getDevice().setPosition(position);
+        device.setPosition(Range.clip(!inverted ? position : 1-position, 0, 1));
+    }
+    public void incrementPosition(double incAmount){
+        setPosition(getPosition()+incAmount);
     }
 
-    @Log
+    private ElapsedTime t;
+    private double startingPosition, startTargetPos;
+    public boolean setPositionAsync(double targetPos, double time){
+        if(t == null || startTargetPos != targetPos){
+            t = new ElapsedTime();
+            startingPosition = getPosition();
+            startTargetPos = targetPos;
+        }
+        setPosition(startingPosition+(targetPos-startingPosition)*(t.seconds()/time));
+        if(Math.abs(getPosition()-targetPos)<0.01){
+            t = null;
+            return true;
+        }
+        return false;
+
+    }
+
+
     @Override
     public double getSensorValue() {
-        return getDevice().getPosition();
+        return inverted ? 1-device.getPosition() : device.getPosition();
     }
 
     /** Get servo position
@@ -80,23 +100,8 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
         getDevice().scaleRange(min, max);
         return this;
     }
-    @Deprecated
-    @Override
-    public Servo follow(Servo d) {
-        return new ServoGroup(this, d);
-    }
 
-//    @Override
-//    public void setPIDValues(double p, double i, double d) {
-//        pid_p = p;
-//        pid_i = i;
-//        pid_d = d;
-//    }
 
-//    @Override
-//    public boolean setPositionPID(double val) {
-//        device.setPosition(PIDUtils.calculatePIDDouble(pid_p, pid_i, pid_d, device.getPosition(), val));
-//        return isAtPosition(val);
-//    }
+
 
 }

@@ -4,13 +4,14 @@ package com.technototes.library;
  * @author Alex Stedman
  *
  */
+@SuppressWarnings("unused")
 public class RobotLibrary {
     /** Get library version
      *
      * @return Library version
      */
     public static String getVersion(){
-        return "0.3.0";
+        return "0.10.1";
     }
 
     /** Get if the library is a pre release

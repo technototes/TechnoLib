@@ -2,9 +2,9 @@ package com.technototes.library.hardware;
 
 /** Interface for hardware devices that can be inverted
  * @author Alex Stedman
- * @param <T> The Hardware device to invert
  */
-public interface Invertable<T extends HardwareDevice> {
+@SuppressWarnings("unused")
+public interface Invertable<T extends Invertable>{
     /** Set the inversion on the device
      *
      * @param invert Inversion to set device to

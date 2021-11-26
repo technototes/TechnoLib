@@ -1,58 +1,39 @@
 package com.technototes.library.subsystem;
 
-import android.util.Pair;
-
 import com.technototes.library.command.Command;
+import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.hardware.HardwareDevice;
+import com.technototes.library.structure.CommandOpMode;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.function.BooleanSupplier;
 
-/** Root class for subsystems
- * @author Alex Stedman
- * @param <T> The {@link HardwareDevice} for this subsystem
- */
-public abstract class Subsystem<T extends HardwareDevice<?>> {
-    private T[] devices;
-    private Command defaultCommand;
+public interface Subsystem<T extends HardwareDevice> {
 
-    /** Create a subsystem
-     *
-     * @param devices The main devices for the subsystem
-     */
-    @SafeVarargs
-    public Subsystem(T... devices) {
-        this.devices = devices;
-    }
+    Map<Subsystem<?>, Object> map = new HashMap<>();
 
-    /** Set the default command of the subsystem
-     *
-     * @param command The default command
-     * @return this
-     */
-    public Subsystem<?> setDefaultCommand(Command command){
-        defaultCommand = command;
+    default Subsystem<T> setDefaultCommand(Command c){
+        CommandScheduler.getInstance().scheduleDefault(c, this);
         return this;
     }
 
-    /** Get the devices for this subsystem
-     *
-     * @return The devices
-     */
-    public T[] getDevices() {
-        return devices;
+    default Command getDefaultCommand(){
+        return CommandScheduler.getInstance().getDefault(this);
     }
 
-    /** Get the default command for the subsystem
-     *
-     * @return The default command
-     */
-    public Command getDefaultCommand(){
-        return defaultCommand;
+    default void setDevice(T device){
+        map.put(this, device);
     }
 
-    public void periodic(){
+    default T getDevice(){
+        return (T) map.get(this);
+    }
+
+    default void periodic(){
 
     }
+    static void clear(){
+        map.clear();
+    }
+
 }

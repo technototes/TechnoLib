@@ -1,30 +1,31 @@
 package com.technototes.library.control.gamepad;
 
-import com.technototes.control.gamepad.AbstractBinding;
-
-import java.util.function.BooleanSupplier;
-
-/** Command implementation of {@link AbstractBinding}
+/** Command implementation of {@link Binding}
  * @author Alex Stedman
  */
-public class CommandBinding extends AbstractBinding<CommandButton> {
-    /** Create binding
-     *
-     * @param buttons The Buttons
-     */
-    public CommandBinding(BooleanSupplier... buttons){
-        super(buttons);
+//TODO make this less jank to use
+public class CommandBinding extends CommandButton implements Binding<CommandButton> {
+    private CommandButton[] buttons;
+    private Type defaultType;
+
+    public CommandBinding(CommandButton... b){
+        this(Type.ALL_ACTIVE, b);
     }
-    /** Create binding
-     *
-     * @param buttons The Buttons
-     * @param type The binding type
-     */
-    public CommandBinding(Type type, BooleanSupplier... buttons){
-        super(type, buttons);
+
+    public CommandBinding(Type type, CommandButton... b){
+        super(null);
+        buttons = b;
+        defaultType = type;
+        booleanSupplier = this::get;
     }
+
     @Override
-    public CommandButton getAsButton(AbstractBinding.Type t) {
-        return new CommandButton(()->get(t));
+    public CommandButton[] getSuppliers() {
+        return buttons;
+    }
+
+    @Override
+    public Type getDefaultType() {
+        return defaultType;
     }
 }

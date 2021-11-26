@@ -1,1 +1,1 @@
-javadoc -d docs Control\src\main\java\com\technototes\control\*.java\*.java
+javadoc -d docs RobotLibrary\src\main\java\com\technototes\library\*.java\*.java

@@ -2,12 +2,11 @@ package com.technototes.library.subsystem.drivebase;
 
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.motor.Motor;
-import com.technototes.subsystem.HolonomicDrivebaseSubsystem;
 
 import java.util.function.DoubleSupplier;
 //dont use incomplete
 @Deprecated
-public class SwerveDrivebaseSubsystem<T extends Motor<?>, U extends EncodedMotor<?>> extends DrivebaseSubsystem<T> implements HolonomicDrivebaseSubsystem {
+public class SwerveDrivebaseSubsystem<T extends Motor<?>, U extends EncodedMotor<?>> extends DrivebaseSubsystem<T>  {
     public U steer1, steer2, steer3, steer4;
     //int numMod
     public SwerveDrivebaseSubsystem(T[] d, U[] s) {
@@ -25,7 +24,6 @@ public class SwerveDrivebaseSubsystem<T extends Motor<?>, U extends EncodedMotor
         super(gyro, d);
     }
 
-    @Override
     public void drive(double flSpeed, double frSpeed, double rlSpeed, double rrSpeed) {
 
     }

@@ -1,7 +1,5 @@
 package com.technototes.library.command;
 
-import java.util.Map;
-
 /** Command group to run commands in parallel until one finished
  * @author Alex Stedman
  */
@@ -17,9 +15,8 @@ public class ParallelRaceGroup extends CommandGroup {
 
     @Override
     public void schedule(Command c) {
-        this.with(c);
+        CommandScheduler.getInstance().scheduleWithOther(this, c);
     }
-
 
     /** Is this finished
      *
@@ -27,8 +24,6 @@ public class ParallelRaceGroup extends CommandGroup {
      */
     @Override
     public boolean isFinished() {
-        //makes true if command just finished
-        commandMap.replaceAll((command, bool) -> command.justFinished() ? true : bool);
         //if there is a single finished command
         return commandMap.containsValue(true);
     }

@@ -1,11 +1,11 @@
 package com.technototes.library.hardware.sensor;
 
-import com.technototes.logger.Log;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /** Class for range sensors
  * @author Alex Stedman
  */
+@SuppressWarnings("unused")
 public class RangeSensor extends Sensor<com.qualcomm.robotcore.hardware.DistanceSensor> {
 
     private DistanceUnit distanceUnit;

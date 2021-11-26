@@ -1,11 +1,11 @@
 package com.technototes.library.hardware.sensor;
 
 import com.qualcomm.robotcore.hardware.AnalogInput;
-import com.technototes.logger.Log;
 
 /** Class for analog sensors
  * @author Alex Stedman
  */
+@SuppressWarnings("unused")
 public class AnalogSensor extends Sensor<AnalogInput> {
     /** Make an analog sensor
      *

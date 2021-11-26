@@ -13,10 +13,10 @@ public class EncodedMotorSubsystem extends MotorSubsystem<EncodedMotor<?>>{
 
     /** Create encoded motor subsystem
      *
-     * @param motors The motors
+     * @param motor The motor
      */
-    public EncodedMotorSubsystem(EncodedMotor<?>... motors) {
-        super(motors);
+    public EncodedMotorSubsystem(EncodedMotor<?> motor) {
+        super(motor);
     }
 
     /** Set the max speed for the subsystem
@@ -44,12 +44,7 @@ public class EncodedMotorSubsystem extends MotorSubsystem<EncodedMotor<?>>{
      * @return If this is at specified position
      */
     public boolean setPosition(double ticks, double speed) {
-        boolean b = true;
-        for (EncodedMotor<?> s : getDevices()) {
-            if (!s.setPosition(ticks, speed))
-                b = false;
-        }
-        return b;
+        return getDevice().setPosition(ticks, speed);
     }
 
 
