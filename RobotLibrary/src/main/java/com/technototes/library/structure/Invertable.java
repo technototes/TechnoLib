@@ -1,18 +1,18 @@
-package com.technototes.library.hardware;
+package com.technototes.library.structure;
 
-/** Interface for hardware devices that can be inverted
+/** Interface for anything that can be inverted
  * @author Alex Stedman
  */
 @SuppressWarnings("unused")
 public interface Invertable<T extends Invertable>{
-    /** Set the inversion on the device
+    /** Set the inversion
      *
-     * @param invert Inversion to set device to
+     * @param invert Inversion to set
      * @return this
      */
     T setInverted(boolean invert);
 
-    /** Invert the device
+    /** Invert
      *
      * @return this
      */

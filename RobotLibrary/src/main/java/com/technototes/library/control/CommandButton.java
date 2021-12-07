@@ -1,4 +1,4 @@
-package com.technototes.library.control.gamepad;
+package com.technototes.library.control;
 
 import com.technototes.library.command.Command;
 
@@ -9,7 +9,7 @@ import java.util.function.Function;
 /** Class for command buttons for gamepad
  * @author Alex Stedman
  */
-public class CommandButton extends GamepadButton implements GamepadInput<CommandButton> {
+public class CommandButton extends GamepadButton implements CommandInput<CommandButton> {
     /** Make command button
      *
      * @param supplier The supplier for the button
@@ -30,4 +30,8 @@ public class CommandButton extends GamepadButton implements GamepadInput<Command
         return schedule(()->f.accept(this.getAsBoolean()));
     }
 
+    @Override
+    public CommandButton setInverted(boolean invert) {
+        return (CommandButton) super.setInverted(invert);
+    }
 }

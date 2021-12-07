@@ -2,12 +2,12 @@ package com.technototes.library.subsystem.servo;
 
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.hardware.servo.ServoGroup;
-import com.technototes.library.subsystem.SubsystemBase;
+import com.technototes.library.subsystem.DeviceSubsystem;
 
 /** Class for servo subsystems
  * @author Alex Stedman
  */
-public class ServoSubsystem extends SubsystemBase<Servo> {
+public class ServoSubsystem extends DeviceSubsystem<Servo> {
     /** Create servo subsystem
      *
      * @param servo The servo

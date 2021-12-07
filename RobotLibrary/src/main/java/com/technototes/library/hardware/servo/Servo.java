@@ -2,7 +2,9 @@ package com.technototes.library.hardware.servo;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-import com.technototes.library.hardware.*;
+import com.technototes.library.hardware.HardwareDevice;
+import com.technototes.library.hardware.Sensored;
+import com.technototes.library.structure.Invertable;
 
 /** Class for servos
  * @author Alex Stedman

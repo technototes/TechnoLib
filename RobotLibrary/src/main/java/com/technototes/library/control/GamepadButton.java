@@ -1,19 +1,21 @@
-package com.technototes.library.control.gamepad;
+package com.technototes.library.control;
 
-import com.technototes.library.control.Periodic;
+import com.technototes.library.structure.Invertable;
+import com.technototes.library.structure.Periodic;
 
 import java.util.function.BooleanSupplier;
 
 /** The class to extend custom gamepad buttons from
  * @author Alex Stedman
  */
-public class GamepadButton implements BooleanSupplier, Periodic {
+public class GamepadButton implements BooleanSupplier, Periodic, Invertable<GamepadButton> {
     protected BooleanSupplier booleanSupplier;
 
     private boolean pressed = false;
     private boolean toggle = false;
     private boolean recentAction = false;
     private boolean pastState = false;
+    private boolean inverted = false;
 
     /** Create button with boolean supplier
      *
@@ -27,7 +29,7 @@ public class GamepadButton implements BooleanSupplier, Periodic {
 
     @Override
     public void periodic(){
-        periodic(booleanSupplier.getAsBoolean());
+        periodic(getAsBoolean());
     }
 
     private void periodic(boolean currentState){
@@ -99,6 +101,17 @@ public class GamepadButton implements BooleanSupplier, Periodic {
      */
     @Override
     public boolean getAsBoolean() {
-        return booleanSupplier.getAsBoolean();
+        return booleanSupplier.getAsBoolean()^inverted;
+    }
+
+    @Override
+    public GamepadButton setInverted(boolean invert) {
+        inverted = invert;
+        return this;
+    }
+
+    @Override
+    public boolean getInverted() {
+        return inverted;
     }
 }

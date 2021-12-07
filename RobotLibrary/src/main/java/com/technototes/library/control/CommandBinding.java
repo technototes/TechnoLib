@@ -1,4 +1,4 @@
-package com.technototes.library.control.gamepad;
+package com.technototes.library.control;
 
 /** Command implementation of {@link Binding}
  * @author Alex Stedman
@@ -28,4 +28,5 @@ public class CommandBinding extends CommandButton implements Binding<CommandButt
     public Type getDefaultType() {
         return defaultType;
     }
+
 }

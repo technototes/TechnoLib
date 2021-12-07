@@ -44,7 +44,6 @@ public final class CommandScheduler {
     public static synchronized CommandScheduler resetScheduler() {
         instance = null;
         Command.clear();
-        Subsystem.clear();
         return getInstance();
     }
 

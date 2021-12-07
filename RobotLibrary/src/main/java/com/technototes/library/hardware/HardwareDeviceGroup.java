@@ -1,21 +1,31 @@
 package com.technototes.library.hardware;
 
+import java.util.Arrays;
+import java.util.List;
+
 /** Interface for hardware device groups
  * @author Alex Stedman
  */
 @SuppressWarnings("unused")
-public interface HardwareDeviceGroup {
+public interface HardwareDeviceGroup<T extends HardwareDevice> {
     /** Get the followers for the lead device
      *
      * @return The followers
      */
-    HardwareDevice[] getFollowers();
+    T[] getFollowers();
 
+    default List<T> getFollowerist(){
+        return Arrays.asList(getFollowers());
+    }
     /** Get all devices in group
      *
      * @return All devices
      */
-    HardwareDevice[] getAllDevices();
+    T[] getAllDevices();
+
+    default List<T> getAllDeviceList(){
+        return Arrays.asList(getAllDevices());
+    }
 
     /** Propogate actions across the followers
      *

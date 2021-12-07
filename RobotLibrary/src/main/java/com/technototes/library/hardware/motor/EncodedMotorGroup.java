@@ -7,28 +7,28 @@ import com.technototes.library.hardware.HardwareDeviceGroup;
  * @author Alex Stedman
  */
 @SuppressWarnings("unused")
-public class EncodedMotorGroup extends EncodedMotor<DcMotorSimple> implements HardwareDeviceGroup {
-    private final Motor[] followers;
+public class EncodedMotorGroup<T extends DcMotorSimple> extends EncodedMotor<T> implements HardwareDeviceGroup<Motor<T>> {
+    private final Motor<T>[] followers;
 
-    /** Create an encoded motor group
+    /** Create an encoded motor groupM
      *
      * @param leader The Lead motor
      * @param followers The following motors
      */
-    public EncodedMotorGroup(EncodedMotor<?> leader, Motor... followers) {
+    public EncodedMotorGroup(EncodedMotor<T> leader, Motor<T>... followers) {
         super(leader.getDevice());
         this.followers = followers;
 
     }
 
     @Override
-    public Motor[] getFollowers() {
+    public Motor<T>[] getFollowers() {
         return followers;
     }
 
     @Override
-    public Motor[] getAllDevices() {
-        Motor[] m = new Motor[followers.length + 1];
+    public Motor<T>[] getAllDevices() {
+        Motor<T>[] m =  new Motor[followers.length + 1];
         m[0] = this;
         System.arraycopy(followers, 0, m, 1, m.length - 1);
         return m;
@@ -36,11 +36,10 @@ public class EncodedMotorGroup extends EncodedMotor<DcMotorSimple> implements Ha
 
     @Override
     public void propogate(double value) {
-        for(Motor m : followers){
+        for(Motor<T> m : followers){
             m.setSpeed(value);
         }
     }
-
 
     @Override
     public void setVelocity(double tps) {

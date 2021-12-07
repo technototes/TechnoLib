@@ -1,17 +1,14 @@
-package com.technototes.library.control.gamepad;
+package com.technototes.library.control;
 
 import com.technototes.library.command.Command;
 
-import java.util.function.Consumer;
-import java.util.function.DoubleConsumer;
-import java.util.function.DoubleFunction;
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
 
 /** Class for command axis for the gamepad
  * @author Alex Stedman
  */
-public class CommandAxis extends GamepadAxis implements GamepadInput<CommandAxis> {
+public class CommandAxis extends GamepadAxis implements CommandInput<CommandAxis> {
     /** Make a command axis
      *
      * @param supplier The axis supplier
@@ -46,4 +43,10 @@ public class CommandAxis extends GamepadAxis implements GamepadInput<CommandAxis
     public CommandAxis schedule(Function<Double, Command> f){
         return schedule(f.apply(this.getAsDouble()));
     }
+
+    @Override
+    public CommandAxis setInverted(boolean invert) {
+        return (CommandAxis) super.setInverted(invert);
+    }
+
 }

@@ -8,7 +8,7 @@ import com.technototes.library.hardware.HardwareDeviceGroup;
  * @param <T> The type of motors to group
  */
 @SuppressWarnings("unused")
-public class MotorGroup<T extends Motor> extends Motor<DcMotorSimple> implements HardwareDeviceGroup {
+public class MotorGroup<T extends DcMotorSimple> extends Motor<T> implements HardwareDeviceGroup<Motor<T>> {
     private final Motor[] followers;
 
     /** Make a motor group
@@ -16,8 +16,8 @@ public class MotorGroup<T extends Motor> extends Motor<DcMotorSimple> implements
      * @param motors The motors
      */
     @SafeVarargs
-    public MotorGroup(T... motors) {
-        super((DcMotorSimple) motors[0].getDevice());
+    public MotorGroup(Motor<T>... motors) {
+        super(motors[0].getDevice());
         followers = new Motor[motors.length-1];
         System.arraycopy(motors, 1, followers, 0, followers.length);
     }
@@ -25,13 +25,13 @@ public class MotorGroup<T extends Motor> extends Motor<DcMotorSimple> implements
 
 
     @Override
-    public Motor[] getFollowers() {
+    public Motor<T>[] getFollowers() {
         return followers;
     }
 
     @Override
-    public Motor[] getAllDevices() {
-        Motor[] m = new Motor[followers.length + 1];
+    public Motor<T>[] getAllDevices() {
+        Motor<T>[] m = new Motor[followers.length + 1];
         m[0] = this;
         System.arraycopy(followers, 0, m, 1, m.length - 1);
         return m;

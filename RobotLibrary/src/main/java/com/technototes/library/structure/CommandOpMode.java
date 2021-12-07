@@ -3,7 +3,7 @@ package com.technototes.library.structure;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.technototes.library.command.CommandScheduler;
-import com.technototes.library.control.gamepad.CommandGamepad;
+import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.logger.Logger;
 

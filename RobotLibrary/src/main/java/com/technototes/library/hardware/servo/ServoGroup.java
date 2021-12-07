@@ -6,7 +6,7 @@ import com.technototes.library.hardware.HardwareDeviceGroup;
  * @author Alex Stedman
  */
 @SuppressWarnings("unused")
-public class ServoGroup extends Servo implements HardwareDeviceGroup {
+public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
     private final Servo[] followers;
 
     /** Create a servo group

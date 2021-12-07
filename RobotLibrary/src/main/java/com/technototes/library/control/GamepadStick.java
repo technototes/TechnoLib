@@ -1,4 +1,4 @@
-package com.technototes.library.control.gamepad;
+package com.technototes.library.control;
 
 /** A class for gamepad sticks
  * @author Alex Stedman

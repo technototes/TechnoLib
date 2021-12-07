@@ -1,4 +1,4 @@
-package com.technototes.library.control.gamepad;
+package com.technototes.library.control;
 
 import java.util.function.BooleanSupplier;
 
@@ -6,7 +6,7 @@ import java.util.function.BooleanSupplier;
  * @author Alex Stedman
  *
  */
-public interface Binding<T extends BooleanSupplier> extends BooleanSupplier{
+public interface Binding<T extends BooleanSupplier> extends BooleanSupplier {
     /** Button type
      *
      */

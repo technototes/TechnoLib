@@ -2,8 +2,8 @@ package com.technototes.library.command;
 
 
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.technototes.library.subsystem.DeviceSubsystem;
 import com.technototes.library.subsystem.Subsystem;
-import com.technototes.library.subsystem.SubsystemBase;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
 
 /**
  * The root Command class
@@ -19,7 +20,7 @@ import java.util.function.DoubleSupplier;
  * @author Alex Stedman
  */
 @FunctionalInterface
-public interface Command extends Runnable {
+public interface Command extends Runnable, Supplier<Command.CommandState> {
 
     Map<Command, CommandState> stateMap = new HashMap<>();
     Map<Command, ElapsedTime> timeMap = new HashMap<>();
@@ -82,7 +83,7 @@ public interface Command extends Runnable {
     }
 
     //await a condition
-    default SequentialCommandGroup until(BooleanSupplier condition) {
+    default SequentialCommandGroup waitUntil(BooleanSupplier condition) {
         return andThen(new ConditionalCommand(condition));
     }
 
@@ -133,17 +134,21 @@ public interface Command extends Runnable {
         switch (getState()) {
             case RESET:
                 getRuntime().reset();
+                setState(CommandState.STARTED);
+                return;
+            case STARTED:
                 setState(CommandState.INITIALIZING);
                 return;
             case INITIALIZING:
                 initialize();
                 setState(CommandState.EXECUTING);
-                return;
+                //no return for fallthrough
             case EXECUTING:
                 execute();
                 if (isFinished()) setState(CommandState.FINISHED);
                 return;
             case INTERRUPTED:
+                //state to allow
                 setState(CommandState.CANCELLED);
                 return;
             case CANCELLED:
@@ -157,7 +162,7 @@ public interface Command extends Runnable {
      * The command state enum
      */
     enum CommandState {
-        RESET, INITIALIZING, EXECUTING, FINISHED, INTERRUPTED, CANCELLED
+        RESET, STARTED, INITIALIZING, EXECUTING, FINISHED, INTERRUPTED, CANCELLED
     }
 
 
@@ -188,7 +193,7 @@ public interface Command extends Runnable {
     /**
      * Return the subsystem requirements for this command
      *
-     * @return The {@link SubsystemBase} requirements
+     * @return The {@link DeviceSubsystem} requirements
      */
     default Set<Subsystem> getRequirements() {
         requirementMap.putIfAbsent(this, new LinkedHashSet<>());
@@ -205,7 +210,7 @@ public interface Command extends Runnable {
     }
 
     default boolean justStarted() {
-        return getState() == CommandState.INITIALIZING;
+        return getState() == CommandState.STARTED;
     }
 
 
@@ -232,5 +237,8 @@ public interface Command extends Runnable {
         return c.addRequirements(s);
     }
 
-
+    @Override
+    default CommandState get(){
+        return getState();
+    }
 }

@@ -1,15 +1,13 @@
 package com.technototes.library.subsystem.motor;
 
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.technototes.library.hardware.motor.Motor;
-import com.technototes.library.hardware.motor.MotorGroup;
-import com.technototes.library.subsystem.SubsystemBase;
+import com.technototes.library.subsystem.DeviceSubsystem;
 
 /** Class for motor subsystems
  * @author Alex Stedman
  * @param <T> The motor type
  */
-public class MotorSubsystem<T extends Motor<?>> extends SubsystemBase<T> {
+public class MotorSubsystem<T extends Motor<?>> extends DeviceSubsystem<T> {
     /** Create motor subsystem
      *
      * @param motor The motor

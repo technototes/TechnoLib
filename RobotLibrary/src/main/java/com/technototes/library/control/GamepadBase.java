@@ -1,7 +1,7 @@
-package com.technototes.library.control.gamepad;
+package com.technototes.library.control;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.technototes.library.control.Periodic;
+import com.technototes.library.structure.Periodic;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.BooleanSupplier;
@@ -12,7 +12,7 @@ import java.util.function.DoubleSupplier;
  * @param <T> The class for the button components on the gamepad
  * @param <U> The class for the axis components on the gamepad
  */
-public abstract class AbstractGamepad<T extends GamepadButton, U extends GamepadAxis> implements Periodic {
+public class GamepadBase<T extends GamepadButton, U extends GamepadAxis> implements Periodic {
     //normal gamepad
     private Gamepad gamepad;
     //buttons
@@ -49,7 +49,7 @@ public abstract class AbstractGamepad<T extends GamepadButton, U extends Gamepad
      * @param bClass The class object passed for the button components (Should be the same as the one used for the class parameter T)
      * @param aClass The class object passed for the axis components (Should be the same as the one used for the class parameter U)
      */
-    public AbstractGamepad(Gamepad g, Class<T> bClass, Class<U> aClass){
+    public GamepadBase(Gamepad g, Class<T> bClass, Class<U> aClass){
         gamepad = g;
         buttonClass = bClass;
         axisClass = aClass;

@@ -1,6 +1,6 @@
-package com.technototes.library.control.gamepad;
+package com.technototes.library.control;
 
-import com.technototes.library.control.Periodic;
+import com.technototes.library.structure.Periodic;
 
 import java.util.function.DoubleSupplier;
 

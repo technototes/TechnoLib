@@ -1,4 +1,4 @@
-package com.technototes.library.control.gamepad;
+package com.technototes.library.control;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.technototes.library.command.Command;
@@ -10,7 +10,7 @@ import java.util.function.BiFunction;
 /** Class for command gamepads that specifies class params
  * @author Alex Stedman
  */
-public class CommandGamepad extends AbstractGamepad<CommandButton, CommandAxis> {
+public class CommandGamepad extends GamepadBase<CommandButton, CommandAxis> {
     /** Make command gamepad
      *
      * @param gamepad The normal gamepad

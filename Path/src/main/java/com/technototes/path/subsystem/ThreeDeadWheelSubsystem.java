@@ -5,12 +5,17 @@ import androidx.annotation.NonNull;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
-
+import com.technototes.library.subsystem.Subsystem;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.technototes.path.subsystem.DeadWheelConstants.*;
+import static com.technototes.path.subsystem.DeadWheelConstants.EncoderOverflow;
+import static com.technototes.path.subsystem.DeadWheelConstants.ForwardOffset;
+import static com.technototes.path.subsystem.DeadWheelConstants.GearRatio;
+import static com.technototes.path.subsystem.DeadWheelConstants.LateralDistance;
+import static com.technototes.path.subsystem.DeadWheelConstants.TicksPerRev;
+import static com.technototes.path.subsystem.DeadWheelConstants.WheelRadius;
 
 /*
  * Sample tracking wheel localizer implementation assuming the standard configuration:
@@ -25,7 +30,7 @@ import static com.technototes.path.subsystem.DeadWheelConstants.*;
  *    \--------------/
  *
  */
-public class ThreeDeadWheelLocalizer extends ThreeTrackingWheelLocalizer {
+public class ThreeDeadWheelSubsystem extends ThreeTrackingWheelLocalizer implements Subsystem {
 
     protected MotorEncoder leftEncoder, rightEncoder, frontEncoder;
 
@@ -34,7 +39,7 @@ public class ThreeDeadWheelLocalizer extends ThreeTrackingWheelLocalizer {
     protected boolean encoderOverflow;
 
 
-    public ThreeDeadWheelLocalizer(MotorEncoder l, MotorEncoder r, MotorEncoder f, DeadWheelConstants constants) {
+    public ThreeDeadWheelSubsystem(MotorEncoder l, MotorEncoder r, MotorEncoder f, DeadWheelConstants constants) {
         super(
                 Arrays.asList(
                 new Pose2d(0, constants.getDouble(LateralDistance.class) / 2, 0), // left
