@@ -1,6 +1,5 @@
 package com.technototes.library.command;
 
-import com.technototes.library.control.gamepad.CommandGamepad;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,8 @@
 package com.technototes.library.gamepad;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.technototes.library.control.gamepad.CommandButton;
-import com.technototes.library.control.gamepad.CommandGamepad;
+import com.technototes.library.control.CommandButton;
+import com.technototes.library.control.CommandGamepad;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
