@@ -3,11 +3,9 @@
 buildscript {
 
     repositories {
+        mavenCentral()
         google()
         jcenter()
-        mavenCentral()
-        maven { url = "https://dl.bintray.com/first-tech-challenge/ftcsdk/" }
-        maven { url = 'https://maven.brott.dev/' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.1'
@@ -19,12 +17,17 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         google()
         jcenter()
-        mavenCentral()
-        maven { url = "https://dl.bintray.com/first-tech-challenge/ftcsdk/" }
-        maven { url = 'https://maven.brott.dev/' }
+    }
+}
 
+repositories {
+    mavenCentral()
+
+    flatDir {
+        dirs '../libs'
     }
 }
 
