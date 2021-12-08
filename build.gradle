@@ -18,10 +18,8 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            url 'https://dl.bintray.com/openftc/maven';
-        }
         maven { url = "https://dl.bintray.com/first-tech-challenge/ftcsdk/" }
+        maven { url = 'https://maven.brott.dev/' }
 
     }
 }
