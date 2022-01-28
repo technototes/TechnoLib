@@ -23,16 +23,12 @@ public class DigitalSensor extends Sensor<DigitalChannel> {
         super(deviceName);
     }
 
-    @Override
-    public double getSensorValue() {
-        return getDevice().getState() ? 1 : 0;
-    }
 
     /** Get the sensor value as a boolean
      *
      * @return Sensor value as boolean
      */
-    public boolean getSensorValueAsBoolean() {
+    public boolean getValue() {
         return getDevice().getState();
     }
 }

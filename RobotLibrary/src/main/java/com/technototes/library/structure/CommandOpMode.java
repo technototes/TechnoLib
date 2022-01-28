@@ -1,11 +1,14 @@
 package com.technototes.library.structure;
 
+import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandGamepad;
-import com.technototes.library.hardware.HardwareDevice;
+import com.technototes.library.hardware2.HardwareBuilder;
 import com.technototes.library.logger.Logger;
+
+import java.util.List;
 
 /** Class for command based op modes
  * @author Alex Stedman
@@ -21,6 +24,8 @@ public abstract class CommandOpMode extends LinearOpMode {
     private OpModeState opModeState = OpModeState.INIT;
 
     private Logger logger;
+
+    private List<LynxModule> hubs;
 
     private boolean terminated = false;
 
@@ -51,11 +56,13 @@ public abstract class CommandOpMode extends LinearOpMode {
     @Override
     public final void runOpMode() {
         opModeState = OpModeState.INIT;
-        opModeTimer.reset();
+        CommandScheduler.resetScheduler().setOpMode(this);
+        hubs = hardwareMap.getAll(LynxModule.class);
+        hubs.forEach(e->e.setBulkCachingMode(LynxModule.BulkCachingMode.MANUAL));
+        HardwareBuilder.initMap(hardwareMap);
         driverGamepad = new CommandGamepad(gamepad1);
         codriverGamepad = new CommandGamepad(gamepad2);
-        HardwareDevice.hardwareMap = hardwareMap;
-        CommandScheduler.resetScheduler().setOpMode(this);
+        opModeTimer.reset();
         uponInit();
         logger = new Logger(this);
         while (!(isStarted() && additionalInitConditions()) && !terminated && !isStopRequested()) {
@@ -63,6 +70,9 @@ public abstract class CommandOpMode extends LinearOpMode {
             universalLoop();
             CommandScheduler.getInstance().run();
             logger.initUpdate();
+            driverGamepad.periodic();
+            codriverGamepad.periodic();
+            hubs.forEach(LynxModule::clearBulkCache);
         }
         opModeState = OpModeState.RUN;
         CommandScheduler.getInstance().run();
@@ -75,6 +85,7 @@ public abstract class CommandOpMode extends LinearOpMode {
             logger.runUpdate();
             driverGamepad.periodic();
             codriverGamepad.periodic();
+            hubs.forEach(LynxModule::clearBulkCache);
         }
         opModeState = OpModeState.END;
         end();
@@ -149,4 +160,6 @@ public abstract class CommandOpMode extends LinearOpMode {
     public boolean additionalInitConditions(){
         return true;
     }
+
+
 }

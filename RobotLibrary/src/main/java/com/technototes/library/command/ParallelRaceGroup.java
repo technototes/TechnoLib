@@ -10,7 +10,7 @@ public class ParallelRaceGroup extends CommandGroup {
      * @param commands The commands for the group
      */
     public ParallelRaceGroup(Command... commands) {
-        super(commands);
+        super(true, commands);
     }
 
     @Override

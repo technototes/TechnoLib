@@ -5,7 +5,8 @@ package com.technototes.library.control;
  * @param <T> The class for the gamepad axis
  * @param <U> The class for the gamepad buttons
  */
-public class GamepadStick<T extends GamepadAxis, U extends GamepadButton> implements Stick {
+public class GamepadStick<T extends AxisBase, U extends ButtonBase> implements Stick {
+    private boolean enabled = true;
     /** The objects for the stick axis
      *
      */
@@ -29,6 +30,7 @@ public class GamepadStick<T extends GamepadAxis, U extends GamepadButton> implem
 
     @Override
     public void periodic() {
+        if(isDisabled()) return;
         xAxis.periodic();
         yAxis.periodic();
         stickButton.periodic();
@@ -44,4 +46,17 @@ public class GamepadStick<T extends GamepadAxis, U extends GamepadButton> implem
         return yAxis.getAsDouble();
     }
 
+    @Override
+    public GamepadStick<T, U> setEnabled(boolean enable) {
+        enabled = enable;
+        xAxis.setEnabled(enabled);
+        yAxis.setEnabled(enabled);
+        stickButton.setEnabled(enabled);
+        return this;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
 }

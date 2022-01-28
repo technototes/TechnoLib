@@ -5,7 +5,7 @@ import com.technototes.library.hardware.motor.EncodedMotor;
 /** Class for encoded motor subsystems
  * @author Alex Stedman
  */
-public class EncodedMotorSubsystem extends MotorSubsystem<EncodedMotor<?>> {
+public class EncodedMotorSubsystem extends MotorSubsystem<EncodedMotor<?>>{
     /** Max speed
      *
      */

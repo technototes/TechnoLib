@@ -8,7 +8,7 @@ import java.util.function.Function;
 /** Class for command axis for the gamepad
  * @author Alex Stedman
  */
-public class CommandAxis extends GamepadAxis implements CommandInput<CommandAxis> {
+public class CommandAxis extends AxisBase implements CommandInput<CommandAxis> {
     /** Make a command axis
      *
      * @param supplier The axis supplier
@@ -40,6 +40,7 @@ public class CommandAxis extends GamepadAxis implements CommandInput<CommandAxis
     public CommandAxis schedulePressed(Function<DoubleSupplier, Command> f){
         return whilePressed(f.apply(this));
     }
+
     public CommandAxis schedule(Function<Double, Command> f){
         return schedule(f.apply(this.getAsDouble()));
     }
@@ -47,6 +48,13 @@ public class CommandAxis extends GamepadAxis implements CommandInput<CommandAxis
     @Override
     public CommandAxis setInverted(boolean invert) {
         return (CommandAxis) super.setInverted(invert);
+    }
+
+    public CommandButton getAsButton(){
+        return new CommandButton(this);
+    }
+    public CommandButton getAsButton(double threshold){
+        return new CommandButton(()->threshold >= 0 ? getAsDouble() >= threshold : getAsDouble() < threshold);
     }
 
 }

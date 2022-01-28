@@ -13,7 +13,7 @@ public class ParallelDeadlineGroup extends CommandGroup {
      * @param commands The commands for the group
      */
     public ParallelDeadlineGroup(Command command, Command... commands) {
-        super(commands);
+        super(true, commands);
         addCommands(command);
         deadline = command;
     }

@@ -125,6 +125,9 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return raceWith(new ConditionalCommand(condition));
     }
 
+    default ChoiceCommand onlyIf(BooleanSupplier choiceCondition){
+        return new ChoiceCommand(choiceCondition, this);
+    }
 
     /**
      * Run the commmand
@@ -224,7 +227,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
 
 
     default void cancel() {
-        if (isRunning() && !isCancelled()) setState(CommandState.INTERRUPTED);
+        if (isRunning() && !justFinished()) setState(CommandState.INTERRUPTED);
     }
 
     static void clear() {

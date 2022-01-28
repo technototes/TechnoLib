@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  * @param <T> The class for the default device (ones found in ftcsdk)
  */
 @SuppressWarnings("unused")
-public abstract class HardwareDevice<T> {
+public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.HardwareDevice> {
     /** Hardware map object for stuff
      *
      */
@@ -28,7 +28,7 @@ public abstract class HardwareDevice<T> {
      */
     @SuppressWarnings("unchecked cast")
     protected HardwareDevice(String deviceName) {
-         this(hardwareMap.get((Class<T>) Object.class /*T.class*/, deviceName));
+         this(hardwareMap.get((Class<T>) com.qualcomm.robotcore.hardware.HardwareDevice.class /*T.class*/, deviceName));
     }
 
     /** Get encapsulated device

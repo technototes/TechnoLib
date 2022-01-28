@@ -1,7 +1,15 @@
 package com.technototes.library.util;
 
+import static java.lang.annotation.ElementType.TYPE;
+
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 public enum Alliance {
-    RED(Color.RED), BLUE(Color.BLUE);
+    RED(Color.RED), BLUE(Color.BLUE), NONE(Color.BLACK);
     Color color;
     Alliance(Color c) {
         color = c;
@@ -13,6 +21,8 @@ public enum Alliance {
     public <T> T selectOf(T a, T b){
         return Selector.selectOf(this, a, b);
     }
+
+
 
     public static class Selector<T>{
         private final T r, b;
@@ -31,4 +41,17 @@ public enum Alliance {
             return Selector.of(red, blue).select(alliance);
         }
     }
+    public static Alliance get(Class<? extends OpMode> c){
+        if(c.isAnnotationPresent(Red.class)) return RED;
+        if(c.isAnnotationPresent(Blue.class)) return BLUE;
+        return NONE;
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(TYPE)
+    public @interface Red{}
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(TYPE)
+    public @interface Blue{}
+
 }

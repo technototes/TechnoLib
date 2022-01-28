@@ -11,8 +11,9 @@ public class SequentialCommandGroup extends CommandGroup {
      * @param commands The commands to run
      */
     public SequentialCommandGroup(Command... commands) {
-        super(commands);
+        super(true, commands);
     }
+
 
 
     @Override
@@ -31,7 +32,7 @@ public class SequentialCommandGroup extends CommandGroup {
      */
     @Override
     public boolean isFinished() {
-        return !commandMap.containsValue(false);
+        return lastCommand.justFinished() || (anyCancelled && !countCancel);
     }
 
 

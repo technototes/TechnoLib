@@ -9,8 +9,7 @@ import java.util.function.BooleanSupplier;
  * @author Alex Stedman
  * @param <T> The type of Gamepad Button
  */
-@FunctionalInterface
-public interface CommandInput<T extends GamepadButton> {
+public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
 
     default T whenPressed(Command command){
         return schedule(getInstance()::isJustPressed, command);

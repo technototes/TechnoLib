@@ -1,19 +1,21 @@
 package com.technototes.library.hardware.sensor;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 /** Class for imus
  *
  */
 @SuppressWarnings("unused")
-public class IMU extends Sensor<BNO055IMU> {
+public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
 
+
+    private double angleOffset = 0;
 
     public enum AxesSigns {
         PPP(0b000),
@@ -39,7 +41,7 @@ public class IMU extends Sensor<BNO055IMU> {
      *
      * @param device The imu device
      */
-    public IMU(BNO055IMU device) {
+    public IMU(BNO055IMUImpl device) {
         super(device);
         parameters = new BNO055IMU.Parameters();
         degrees();
@@ -78,20 +80,32 @@ public class IMU extends Sensor<BNO055IMU> {
         getDevice().initialize(parameters);
         return this;
     }
-    @Override
-    public double getSensorValue() {
-        return gyroHeading();
-    }
 
     /** Get gyro heading
      *
      * @return The gyro heading
      */
+    @Override
     public double gyroHeading() {
-        Orientation angles1 =
-                getDevice().getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX,
-                        getDevice().getParameters().angleUnit == BNO055IMU.AngleUnit.DEGREES? AngleUnit.DEGREES : AngleUnit.RADIANS);
-        return -AngleUnit.DEGREES.fromUnit(angles1.angleUnit, angles1.firstAngle);
+        return getAngularOrientation().firstAngle;
+    }
+    public double gyroHeading(AngleUnit unit) {
+        return unit.fromUnit(device.getAngularOrientation().angleUnit, gyroHeading()-angleOffset);
+    }
+
+    @Override
+    public double gyroHeadingInDegrees() {
+        return gyroHeading(AngleUnit.DEGREES);
+    }
+
+    @Override
+    public double gyroHeadingInRadians() {
+        return gyroHeading(AngleUnit.RADIANS);
+    }
+
+    @Override
+    public void setHeading(double newHeading) {
+        angleOffset = gyroHeading()-newHeading;
     }
 
     public IMU remapAxes(AxesOrder order, AxesSigns signs) {
@@ -101,7 +115,7 @@ public class IMU extends Sensor<BNO055IMU> {
             int axisMapConfig = 0;
             axisMapConfig |= (indices[0] << 4);
             axisMapConfig |= (indices[1] << 2);
-            axisMapConfig |= (indices[2] << 0);
+            axisMapConfig |= (indices[2]);
 
             // the BNO055 driver flips the first orientation vector so we also flip here
             int axisMapSign = signs.bVal ^ (0b100 >> indices[0]);

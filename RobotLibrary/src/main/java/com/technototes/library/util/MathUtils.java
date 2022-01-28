@@ -83,4 +83,19 @@ public class MathUtils {
     {
         return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
+
+    public static double closestTo(double d, double... values){
+        int lowestDif = 0;
+        for(int i = 1; i < values.length; i++){
+            if(Math.abs(values[lowestDif]-d) > Math.abs(values[i]-d)) lowestDif = i;
+        }
+        return values[lowestDif];
+    }
+    public static int closestTo(double d, int... values){
+        int lowestDif = 0;
+        for(int i = 1; i < values.length; i++){
+            if(Math.abs(values[lowestDif]-d) > Math.abs(values[i]-d)) lowestDif = i;
+        }
+        return values[lowestDif];
+    }
 }

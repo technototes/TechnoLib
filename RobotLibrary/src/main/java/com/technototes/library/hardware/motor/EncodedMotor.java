@@ -151,7 +151,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     /** Zero the encoder
      * @return This
      */
-    public EncodedMotor<T> zeroEncoder(){
+    public EncodedMotor<T> tare(){
         encoder.zeroEncoder();
         return this;
     }
@@ -185,5 +185,20 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     public void setSpeed(double speed) {
         //if(getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         super.setSpeed(speed);
+    }
+
+    @Override
+    public EncodedMotor<T> brake() {
+        return (EncodedMotor<T>) super.brake();
+    }
+
+    @Override
+    public EncodedMotor<T> coast() {
+        return (EncodedMotor<T>) super.coast();
+    }
+
+    @Override
+    public EncodedMotor<T> setLimits(double mi, double ma) {
+        return (EncodedMotor<T>) super.setLimits(mi, ma);
     }
 }

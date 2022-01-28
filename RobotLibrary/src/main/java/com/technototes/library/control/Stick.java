@@ -1,13 +1,14 @@
 package com.technototes.library.control;
 
-import com.technototes.library.structure.Periodic;
+import com.technototes.library.general.Enablable;
+import com.technototes.library.general.Periodic;
 
 import java.util.function.DoubleSupplier;
 
 /** Interface for objects that behave as sticks
  * @author Alex Stedman
  */
-public interface Stick extends Periodic {
+public interface Stick extends Periodic, Enablable<Stick> {
     /** Return x axis double
      *
      * @return The double
@@ -48,4 +49,6 @@ public interface Stick extends Periodic {
     default double getDistanceFromCenter(){
         return Math.sqrt(getXAxis()*getXAxis()+getYAxis()*getYAxis());
     }
+
+
 }

@@ -12,4 +12,8 @@ public class ChoiceCommand extends ParallelRaceGroup {
     public ChoiceCommand(Pair<BooleanSupplier, Command>... cs){
         super(Arrays.stream(cs).<Command>map(p -> new ConditionalCommand(p.first, p.second)).collect(Collectors.toList()).toArray(new Command[]{}));
     }
+
+    public ChoiceCommand(BooleanSupplier b, Command c){
+        this(new Pair<>(b, c));
+    }
 }

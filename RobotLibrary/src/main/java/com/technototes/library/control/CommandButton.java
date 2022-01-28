@@ -9,7 +9,7 @@ import java.util.function.Function;
 /** Class for command buttons for gamepad
  * @author Alex Stedman
  */
-public class CommandButton extends GamepadButton implements CommandInput<CommandButton> {
+public class CommandButton extends ButtonBase implements CommandInput<CommandButton> {
     /** Make command button
      *
      * @param supplier The supplier for the button

@@ -4,7 +4,8 @@ package com.technototes.library.control;
  * @author Alex Stedman
  * @param <T> The gamepad button class
  */
-public class GamepadDpad<T extends GamepadButton> implements Stick {
+public class GamepadDpad<T extends ButtonBase> implements Stick {
+    private boolean enabled = true;
     /** The objects for the dpad buttons
      *
      */
@@ -43,9 +44,25 @@ public class GamepadDpad<T extends GamepadButton> implements Stick {
 
     @Override
     public void periodic() {
+        if(isDisabled()) return;
         up.periodic();
         down.periodic();
         left.periodic();
         right.periodic();
+    }
+
+    @Override
+    public GamepadDpad<T> setEnabled(boolean enable) {
+        enabled = enable;
+        up.setEnabled(enabled);
+        down.setEnabled(enabled);
+        left.setEnabled(enabled);
+        right.setEnabled(enabled);
+        return this;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 }

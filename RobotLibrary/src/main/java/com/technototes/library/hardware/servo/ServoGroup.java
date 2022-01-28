@@ -47,7 +47,7 @@ public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
     }
 
     @Override
-    public ServoGroup setStartingPosition(double position) {
-        return (ServoGroup) super.setStartingPosition(position);
+    public ServoGroup startAt(double position) {
+        return (ServoGroup) super.startAt(position);
     }
 }

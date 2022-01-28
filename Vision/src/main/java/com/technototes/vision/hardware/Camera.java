@@ -12,9 +12,8 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import org.openftc.easyopencv.PipelineRecordingParameters;
 
 import java.util.function.IntConsumer;
-import java.util.function.IntFunction;
 
-public abstract class Camera<T extends OpenCvCamera, U> extends HardwareDevice<U> implements OpenCvCamera {
+public abstract class Camera<T extends OpenCvCamera, U extends com.qualcomm.robotcore.hardware.HardwareDevice> extends HardwareDevice<U> implements OpenCvCamera {
     protected T openCvCamera;
 
 

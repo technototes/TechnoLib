@@ -32,7 +32,7 @@ public interface Binding<T extends BooleanSupplier> extends BooleanSupplier {
      * @return If the binding meets the criteria
      */
     default boolean get(Type type){
-        boolean on=false, off=false;
+        boolean on=false, off=getSuppliers().length==0;
         for(T s : getSuppliers()){
             if(s.getAsBoolean()){
                 on=true;

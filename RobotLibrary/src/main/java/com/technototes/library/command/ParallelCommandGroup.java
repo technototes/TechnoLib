@@ -10,7 +10,7 @@ public class ParallelCommandGroup extends CommandGroup {
      * @param commands The commands for the group
      */
     public ParallelCommandGroup(Command... commands) {
-        super(commands);
+        super(true, commands);
     }
 
 

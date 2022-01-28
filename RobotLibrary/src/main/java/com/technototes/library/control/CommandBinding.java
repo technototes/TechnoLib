@@ -3,25 +3,24 @@ package com.technototes.library.control;
 /** Command implementation of {@link Binding}
  * @author Alex Stedman
  */
-//TODO make this less jank to use
-public class CommandBinding extends CommandButton implements Binding<CommandButton> {
-    private CommandButton[] buttons;
+public class CommandBinding extends CommandButton implements Binding<CommandInput> {
+    private CommandInput[] inputs;
     private Type defaultType;
 
-    public CommandBinding(CommandButton... b){
+    public CommandBinding(CommandInput... b){
         this(Type.ALL_ACTIVE, b);
     }
 
-    public CommandBinding(Type type, CommandButton... b){
+    public CommandBinding(Type type, CommandInput... b){
         super(null);
-        buttons = b;
+        inputs = b;
         defaultType = type;
         booleanSupplier = this::get;
     }
 
     @Override
-    public CommandButton[] getSuppliers() {
-        return buttons;
+    public CommandInput[] getSuppliers() {
+        return inputs;
     }
 
     @Override

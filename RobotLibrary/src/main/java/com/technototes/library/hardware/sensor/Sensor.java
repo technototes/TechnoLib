@@ -1,14 +1,13 @@
 package com.technototes.library.hardware.sensor;
 
 import com.technototes.library.hardware.HardwareDevice;
-import com.technototes.library.hardware.Sensored;
 
 /** Root class for sensors
  * @author Alex Stedman
  * @param <T> The Sensor hardware device
  */
 @SuppressWarnings("unused")
-public abstract class Sensor<T> extends HardwareDevice<T> implements Sensored {
+public abstract class Sensor<T extends com.qualcomm.robotcore.hardware.HardwareDevice> extends HardwareDevice<T> {
     /** Crease sensor
      *
      * @param device The device

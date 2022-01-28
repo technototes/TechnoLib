@@ -1,6 +1,7 @@
 package com.technototes.vision.hardware;
 
 
+import com.technototes.library.hardware.DummyDevice;
 import com.technototes.library.hardware.HardwareDevice;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -8,13 +9,14 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvSwitchableWebcam;
 
 import java.util.Arrays;
+
 @SuppressWarnings("unused")
-public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, WebcamName[]>{
+public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice<WebcamName[]>>{
 
     private final Webcam[] devices;
 
     public SwitchableWebcam(WebcamName... device) {
-        super(device);
+        super(new DummyDevice<>(device));
         devices = Arrays.stream(device).map(Webcam::new).toArray(Webcam[]::new);
     }
     public SwitchableWebcam(String... device) {
@@ -29,7 +31,7 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, WebcamName[
     public OpenCvSwitchableWebcam createCamera() {
         return OpenCvCameraFactory.getInstance().createSwitchableWebcam(
                 hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id",
-                        hardwareMap.appContext.getPackageName()), getDevice());
+                        hardwareMap.appContext.getPackageName()), getDevice().get());
     }
 
     public SwitchableWebcam setActiveCamera(Webcam w){

@@ -1,7 +1,8 @@
 package com.technototes.library.control;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.technototes.library.structure.Periodic;
+import com.technototes.library.general.Enablable;
+import com.technototes.library.general.Periodic;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.BooleanSupplier;
@@ -12,7 +13,8 @@ import java.util.function.DoubleSupplier;
  * @param <T> The class for the button components on the gamepad
  * @param <U> The class for the axis components on the gamepad
  */
-public class GamepadBase<T extends GamepadButton, U extends GamepadAxis> implements Periodic {
+public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Periodic, Enablable<GamepadBase<T, U>> {
+    private boolean enabled = true;
     //normal gamepad
     private Gamepad gamepad;
     //buttons
@@ -39,6 +41,7 @@ public class GamepadBase<T extends GamepadButton, U extends GamepadAxis> impleme
     public GamepadDpad<T> dpad;
     //periodics to run
     private Periodic[] periodics;
+    private Enablable<?>[] enablables;
 
     private Class<T> buttonClass;
     private Class<U> axisClass;
@@ -64,6 +67,8 @@ public class GamepadBase<T extends GamepadButton, U extends GamepadAxis> impleme
         dpad = new GamepadDpad<>(dpadUp, dpadDown, dpadLeft, dpadRight);
         periodics = new Periodic[]{a, b, x, y, start, back, leftBumper, rightBumper,
                 leftTrigger, rightTrigger, leftStick, rightStick, dpad};
+        enablables = new Enablable[]{a, b, x, y, start, back, leftBumper, rightBumper,
+                leftTrigger, rightTrigger, leftStick, rightStick, dpad};
     }
 
     //to actually instantiate the objects
@@ -71,7 +76,6 @@ public class GamepadBase<T extends GamepadButton, U extends GamepadAxis> impleme
 
         //buttons
         //a=new T();
-
         a = buttonInstance(()->g.a);
         b = buttonInstance(()->g.b);
         x = buttonInstance(()->g.x);
@@ -243,6 +247,7 @@ public class GamepadBase<T extends GamepadButton, U extends GamepadAxis> impleme
     }
     @Override
     public void periodic() {
+        if(isDisabled()) return;
         for(Periodic p : periodics){
             p.periodic();
         }
@@ -261,5 +266,37 @@ public class GamepadBase<T extends GamepadButton, U extends GamepadAxis> impleme
     }
     public U axisInstance(DoubleSupplier d) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         return axisClass.getConstructor(DoubleSupplier.class).newInstance(d);
+    }
+
+    //rumble stuff
+    public void rumbleBlips(int blips){
+        gamepad.rumbleBlips(blips);
+    }
+    public void rumbleBlip(){
+        rumbleBlips(1);
+    }
+    public void rumble(double seconds){
+        gamepad.rumble((int) (seconds*1000));
+    }
+    public boolean isRumbling(){
+        return gamepad.isRumbling();
+    }
+    public void stopRumble(){
+        gamepad.stopRumble();
+    }
+    public void rumble(){
+        rumble(120);
+    }
+
+    @Override
+    public GamepadBase<T, U> setEnabled(boolean enable) {
+        enabled = enable;
+        for (Enablable<?> enablable : enablables) enablable.setEnabled(enable);
+        return this;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 }

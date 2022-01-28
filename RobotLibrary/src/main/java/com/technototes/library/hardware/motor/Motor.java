@@ -1,9 +1,10 @@
 package com.technototes.library.hardware.motor;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
+import com.technototes.library.general.Invertable;
 import com.technototes.library.hardware.HardwareDevice;
-import com.technototes.library.structure.Invertable;
 
 import java.util.function.Supplier;
 
@@ -31,7 +32,7 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
         super(deviceName);
     }
 
-    public Motor<T> setOutputLimits(double mi, double ma){
+    public Motor<T> setLimits(double mi, double ma){
         min = Range.clip(mi, -1, 1);
         max = Range.clip(ma, -1, 1);
         return this;
@@ -64,6 +65,15 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      */
     public void setSpeed(double speed) {
         device.setPower(Range.clip(speed, min, max));
+    }
+
+    public Motor<T> brake(){
+        if(getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        return this;
+    }
+    public Motor<T> coast(){
+        if(getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        return this;
     }
 
 
