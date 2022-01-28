@@ -63,10 +63,10 @@ public final class CommandScheduler {
     }
 
     public CommandScheduler scheduleOnce(Command command) {
-        return schedule(command.andThen(()->commandMap.remove(command)));
+        return schedule(command);
     }
     public CommandScheduler scheduleOnceForState(Command command, CommandOpMode.OpModeState state) {
-        return scheduleForState(command.andThen(()->commandMap.remove(command)), state);
+        return scheduleForState(command, state);
     }
 
     public CommandScheduler scheduleInit(Command command, BooleanSupplier supplier) {
