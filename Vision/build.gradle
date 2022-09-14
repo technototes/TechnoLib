@@ -24,7 +24,7 @@ dependencies {
         exclude group: 'org.ejml', module: 'ejml-all'
     }
 
-    implementation 'org.openftc:easyopencv:1.5.0'
+    implementation 'org.openftc:easyopencv:1.5.2'
 
 
     testImplementation(platform('org.junit:junit-bom:5.7.0'))
