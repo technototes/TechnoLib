@@ -2,7 +2,6 @@ package com.technototes.library.hardware.motor;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.technototes.library.hardware.HardwareDeviceGroup;
-import com.technototes.library.hardware.sensor.encoder.Encoder;
 
 /** Class for encoded motor groups
  * @author Alex Stedman

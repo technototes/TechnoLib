@@ -1,7 +1,7 @@
 package com.technototes.library.logger.entry;
 
-import com.technototes.library.util.Color;
 import com.technototes.library.logger.Logger;
+import com.technototes.library.util.Color;
 
 import java.util.function.Supplier;
 

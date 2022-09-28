@@ -4,7 +4,6 @@ import static com.technototes.library.hardware.HardwareDevice.hardwareMap;
 
 import com.qualcomm.ftccommon.SoundPlayer;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 

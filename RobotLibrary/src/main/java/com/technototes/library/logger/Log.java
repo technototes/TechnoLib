@@ -1,5 +1,9 @@
 package com.technototes.library.logger;
 
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.LOCAL_VARIABLE;
+import static java.lang.annotation.ElementType.METHOD;
+
 import com.technototes.library.util.Color;
 
 import java.lang.annotation.Documented;
@@ -8,10 +12,6 @@ import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.LOCAL_VARIABLE;
-import static java.lang.annotation.ElementType.METHOD;
 
 /** The root annotation for annotation logging, also doubles as a basic string log
  * @author Alex Stedman

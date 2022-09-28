@@ -1,11 +1,11 @@
 package com.technototes.vision.hardware;
 
 
-import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.technototes.library.hardware.DummyDevice;
 
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvInternalCamera;
+
 @SuppressWarnings("unused")
 public class InternalCamera extends Camera<OpenCvInternalCamera, DummyDevice<OpenCvInternalCamera.CameraDirection>> {
 

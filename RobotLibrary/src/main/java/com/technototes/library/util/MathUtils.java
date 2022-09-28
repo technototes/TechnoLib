@@ -1,8 +1,5 @@
 package com.technototes.library.util;
 
-import java.util.Arrays;
-import java.util.function.DoublePredicate;
-
 /** Class with various math functions
  * @author Alex Stedman
  */

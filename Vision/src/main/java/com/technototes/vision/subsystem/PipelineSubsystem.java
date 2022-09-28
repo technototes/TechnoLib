@@ -4,7 +4,7 @@ import com.technototes.library.subsystem.Subsystem;
 import com.technototes.vision.hardware.Camera;
 
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvPipeline;
+
 @SuppressWarnings("unused")
 public class PipelineSubsystem implements Subsystem {
 

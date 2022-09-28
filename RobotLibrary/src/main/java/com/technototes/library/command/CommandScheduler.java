@@ -2,9 +2,9 @@ package com.technototes.library.command;
 
 import androidx.annotation.Nullable;
 
+import com.technototes.library.general.Periodic;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.subsystem.Subsystem;
-import com.technototes.library.general.Periodic;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -68,6 +68,7 @@ public final class CommandScheduler {
     public CommandScheduler scheduleOnceForState(Command command, CommandOpMode.OpModeState state) {
         return scheduleForState(command, state);
     }
+
     public CommandScheduler scheduleInit(Command command, BooleanSupplier supplier) {
         return scheduleForState(command, supplier, CommandOpMode.OpModeState.INIT);
     }

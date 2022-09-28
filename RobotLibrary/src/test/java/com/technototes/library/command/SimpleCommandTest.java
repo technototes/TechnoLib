@@ -18,6 +18,7 @@ public class SimpleCommandTest {
             initialized++;
         }
 
+
         @Override
         public void execute() {
             executed++;
@@ -33,7 +34,7 @@ public class SimpleCommandTest {
     }
 
     @BeforeEach
-    public void setup() {
+    public void setup(){
         CommandScheduler.resetScheduler();
     }
 

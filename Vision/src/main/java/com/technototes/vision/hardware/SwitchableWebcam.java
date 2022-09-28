@@ -9,6 +9,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvSwitchableWebcam;
 
 import java.util.Arrays;
+
 @SuppressWarnings("unused")
 public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice<WebcamName[]>>{
 

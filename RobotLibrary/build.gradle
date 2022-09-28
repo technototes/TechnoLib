@@ -1,3 +1,4 @@
+
 apply plugin: 'com.android.library'
 
 android {
@@ -38,9 +39,6 @@ tasks.withType(Test) {
 }
 
 repositories {
-    flatDir {
-        dirs '../libs'
-    }
     maven { url 'https://jitpack.io' }
     mavenCentral()
 }

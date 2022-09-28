@@ -2,8 +2,8 @@ package com.technototes.library.command;
 
 
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.technototes.library.subsystem.Subsystem;
 import com.technototes.library.subsystem.DeviceSubsystem;
+import com.technototes.library.subsystem.Subsystem;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,23 +40,18 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
 
     /**
      * Init the command
-     * <p>
-     * Defaults to "do nothing"
      */
     default void initialize() {
+
     }
 
     /**
      * Execute the command
-     * <p>
-     * No default: This is where the work for the command gets done.
      */
     void execute();
 
     /**
      * Return if the command is finished
-     * <p>
-     * Defaults to "true" meaning that, by default, the command will execute only once
      *
      * @return Is command finished
      */
@@ -67,38 +62,23 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
     /**
      * End the command
      *
-     * @param cancel True if the command was cancelled, false if it ended naturally
+     * @param cancel If the command was cancelled or ended naturally
      */
     default void end(boolean cancel) {
 
     }
 
-    /**
-     * Chaining helper to schedule subsequent commands
-     *
-     * @param c The list of commands to schedule (in parallel!) after this command complets
-     * @return A sequential command group of this command, followed by the subsequent commands
-     */
+    //run a command after
     default SequentialCommandGroup andThen(Command... c) {
         return new SequentialCommandGroup(this, c.length == 1 ? c[0] : new ParallelCommandGroup(c));
     }
 
-    /**
-     * Chaining helper to add a wait after this command.
-     *
-     * @param sec the number of seconds to wait
-     * @return a sequential command group of this command, then a WaitCommand
-     */
+    //wait a time
     default SequentialCommandGroup sleep(double sec) {
         return andThen(new WaitCommand(sec));
     }
 
-    /**
-     * Chaining helper to add a wait after this command.
-     *
-     * @param sup A function that will calculate the number of seconds to wait
-     * @return a sequential command group of this command, then a WaitCommand
-     */
+    //await a condition
     default SequentialCommandGroup sleep(DoubleSupplier sup) {
         return andThen(new WaitCommand(sup));
     }
@@ -146,7 +126,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return raceWith(new ConditionalCommand(condition));
     }
 
-    default ChoiceCommand onlyIf(BooleanSupplier choiceCondition) {
+    default ChoiceCommand onlyIf(BooleanSupplier choiceCondition){
         return new ChoiceCommand(choiceCondition, this);
     }
 
@@ -192,8 +172,6 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
 
     /**
      * Return the command runtime
-     * <p>
-     * This is helpful for knowing how long the command has been running since it was last reset
      *
      * @return The runtime as an {@link ElapsedTime}
      */
@@ -225,6 +203,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         requirementMap.putIfAbsent(this, new LinkedHashSet<>());
         return requirementMap.get(this);
     }
+
 
     default boolean justFinished() {
         return getState() == CommandState.FINISHED || getState() == CommandState.CANCELLED;
@@ -258,12 +237,12 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         requirementMap.clear();
     }
 
-    static Command create(Command c, Subsystem... s) {
+    static Command create(Command c, Subsystem... s){
         return c.addRequirements(s);
     }
 
     @Override
-    default CommandState get() {
+    default CommandState get(){
         return getState();
     }
 }

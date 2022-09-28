@@ -4,8 +4,6 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 import com.technototes.path.subsystem.MecanumDrivebaseSubsystem;
-import com.technototes.path.trajectorysequence.TrajectorySequence;
-import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;

@@ -33,9 +33,6 @@ import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
 import com.technototes.path.trajectorysequence.TrajectorySequenceRunner;
 import com.technototes.path.util.LynxModuleUtil;
 
-import org.apache.commons.math3.analysis.function.Tan;
-import org.intellij.lang.annotations.Subst;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

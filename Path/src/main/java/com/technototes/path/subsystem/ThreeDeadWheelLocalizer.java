@@ -7,7 +7,6 @@ import com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
 import com.technototes.library.subsystem.Subsystem;
 
-
 import java.util.Arrays;
 import java.util.List;
 
