@@ -10,11 +10,11 @@
 10
 11    <uses-sdk
 12        android:minSdkVersion="24"
-12-->C:\Users\freik\src\TechnoLib\RobotLibrary\src\main\AndroidManifest.xml
+12-->/Users/freik/src/TechnoLib/RobotLibrary/src/main/AndroidManifest.xml
 13        android:targetSdkVersion="31" />
-13-->C:\Users\freik\src\TechnoLib\RobotLibrary\src\main\AndroidManifest.xml
+13-->/Users/freik/src/TechnoLib/RobotLibrary/src/main/AndroidManifest.xml
 14
 15    <application />
-15-->C:\Users\freik\src\TechnoLib\RobotLibrary\src\main\AndroidManifest.xml:10:5-20
+15-->/Users/freik/src/TechnoLib/RobotLibrary/src/main/AndroidManifest.xml:10:5-20
 16
 17</manifest>
