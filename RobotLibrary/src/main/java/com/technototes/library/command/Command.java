@@ -78,17 +78,16 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return andThen(new WaitCommand(sec));
     }
 
-    //await a condition
     default SequentialCommandGroup sleep(DoubleSupplier sup) {
         return andThen(new WaitCommand(sup));
     }
 
-    // await a condition
+    //await a condition
     default SequentialCommandGroup waitUntil(BooleanSupplier condition) {
         return andThen(new ConditionalCommand(condition));
     }
 
-    // run a command in parallel
+    //run a command in parallel
     default ParallelCommandGroup alongWith(Command... c) {
         Command[] c1 = new Command[c.length + 1];
         c1[0] = this;

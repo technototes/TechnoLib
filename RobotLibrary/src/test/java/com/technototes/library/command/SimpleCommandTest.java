@@ -17,8 +17,6 @@ public class SimpleCommandTest {
         public void initialize() {
             initialized++;
         }
-
-
         @Override
         public void execute() {
             executed++;

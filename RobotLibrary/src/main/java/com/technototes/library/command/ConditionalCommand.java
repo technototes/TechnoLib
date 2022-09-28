@@ -22,7 +22,7 @@ public class ConditionalCommand implements Command {
     /** Make a conditional command
      *
      * @param condition The condition
-     * @param command     The command to run when the condition is true.
+     * @param command The command to run when the condition is true.
      */
     public ConditionalCommand(BooleanSupplier condition, Command command) {
         supplier = condition;
