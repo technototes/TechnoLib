@@ -2,8 +2,10 @@ package com.technototes.path.geometry;
 
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 
+import java.util.function.BinaryOperator;
 import java.util.function.DoubleFunction;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 @SuppressWarnings("unchecked")
 public class ConfigurableVector {
@@ -37,14 +39,14 @@ public class ConfigurableVector {
         return this;
     }
 
-    public ConfigurableVector mutateVec(Function<Vector2d, Vector2d> callback){
+    public ConfigurableVector mutateVec(UnaryOperator<Vector2d> callback){
         return set(mapVec(callback));
     }
 
-    public ConfigurableVector mutateX(DoubleFunction<Double> callback){
+    public ConfigurableVector mutateX(UnaryOperator<Double> callback){
         return setX(mapX(callback));
     }
-    public ConfigurableVector mutateY(DoubleFunction<Double> callback){
+    public ConfigurableVector mutateY(UnaryOperator<Double> callback){
         return setY(mapY(callback));
     }
 
@@ -52,10 +54,10 @@ public class ConfigurableVector {
     public <T> T mapVec(Function<Vector2d, T> callback){
         return callback.apply(toVec());
     }
-    public <T> T mapX(DoubleFunction<T> callback){
+    public <T> T mapX(Function<Double, T> callback){
         return callback.apply(getX());
     }
-    public <T> T mapY(DoubleFunction<T> callback){
+    public <T> T mapY(Function<Double, T> callback){
         return callback.apply(getY());
     }
 

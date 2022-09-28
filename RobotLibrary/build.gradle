@@ -3,12 +3,16 @@ apply plugin: 'com.android.library'
 
 android {
 
-    defaultConfig {
-        minSdkVersion 24
-        targetSdkVersion 30
+    lint {
+        disable 'ExpiredTargetSdkVersion'
     }
 
-    compileSdkVersion 30
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 28
+    }
+
+    compileSdkVersion 29
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -35,9 +39,6 @@ tasks.withType(Test) {
 }
 
 repositories {
-    flatDir {
-        dirs '../libs'
-    }
     maven { url 'https://jitpack.io' }
     mavenCentral()
 }
