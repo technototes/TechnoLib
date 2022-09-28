@@ -1,6 +1,5 @@
 package com.technototes.library;
 
-
 import org.junit.jupiter.api.Test;
 
 public class TestTest {
@@ -8,6 +7,5 @@ public class TestTest {
     public void test(){
         System.out.println("test");
     }
-
 
 }

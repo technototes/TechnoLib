@@ -1,6 +1,7 @@
 package com.technototes.library.hardware.sensor;
 
 import com.technototes.library.hardware.HardwareDevice;
+import com.technototes.library.hardware.Sensored;
 
 /** Root class for sensors
  * @author Alex Stedman

@@ -1,7 +1,6 @@
 package com.technototes.library.util;
 
 import com.qualcomm.robotcore.util.Range;
-
 import java.util.function.DoubleConsumer;
 
 /**

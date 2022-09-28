@@ -1,5 +1,6 @@
 package com.technototes.library.hardware2;
 
+import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import java.util.function.UnaryOperator;

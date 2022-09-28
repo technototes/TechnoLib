@@ -2,8 +2,8 @@ package com.technototes.library.command;
 
 
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.technototes.library.subsystem.DeviceSubsystem;
 import com.technototes.library.subsystem.Subsystem;
+import com.technototes.library.subsystem.DeviceSubsystem;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -27,31 +27,14 @@ import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.hardware.motor.EncodedMotorGroup;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.subsystem.Subsystem;
-import com.technototes.path.subsystem.TankConstants.AxialPID;
-import com.technototes.path.subsystem.TankConstants.CrossPID;
-import com.technototes.path.subsystem.TankConstants.GearRatio;
-import com.technototes.path.subsystem.TankConstants.HeadPID;
-import com.technototes.path.subsystem.TankConstants.KA;
-import com.technototes.path.subsystem.TankConstants.KStatic;
-import com.technototes.path.subsystem.TankConstants.KV;
-import com.technototes.path.subsystem.TankConstants.LateralMult;
-import com.technototes.path.subsystem.TankConstants.MaxAccel;
-import com.technototes.path.subsystem.TankConstants.MaxAngleAccel;
-import com.technototes.path.subsystem.TankConstants.MaxAngleVelo;
-import com.technototes.path.subsystem.TankConstants.MaxRPM;
-import com.technototes.path.subsystem.TankConstants.MaxVelo;
-import com.technototes.path.subsystem.TankConstants.MotorVeloPID;
-import com.technototes.path.subsystem.TankConstants.OmegaWeight;
-import com.technototes.path.subsystem.TankConstants.PoseLimit;
-import com.technototes.path.subsystem.TankConstants.TicksPerRev;
-import com.technototes.path.subsystem.TankConstants.TrackWidth;
-import com.technototes.path.subsystem.TankConstants.UseDriveEncoder;
-import com.technototes.path.subsystem.TankConstants.VXWeight;
-import com.technototes.path.subsystem.TankConstants.WheelRadius;
+import com.technototes.path.subsystem.TankConstants.*;
 import com.technototes.path.trajectorysequence.TrajectorySequence;
 import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
 import com.technototes.path.trajectorysequence.TrajectorySequenceRunner;
 import com.technototes.path.util.LynxModuleUtil;
+
+import org.apache.commons.math3.analysis.function.Tan;
+import org.intellij.lang.annotations.Subst;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -158,7 +141,7 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
             motor.setMotorType(motorConfigurationType);
         }
 
-        if (c.getBoolean(UseDriveEncoder.class)) {
+        if (c.getBoolean(TankConstants.UseDriveEncoder.class)) {
             setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
 

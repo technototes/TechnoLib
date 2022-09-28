@@ -3,9 +3,8 @@ package com.technototes.library.hardware.servo;
 import com.qualcomm.robotcore.hardware.PwmControl;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.util.Range;
+import com.technototes.library.hardware.*;
 import com.technototes.library.general.Invertable;
-import com.technototes.library.hardware.HardwareDevice;
-import com.technototes.library.hardware.Sensored;
 
 /** Class for servos
  * @author Alex Stedman

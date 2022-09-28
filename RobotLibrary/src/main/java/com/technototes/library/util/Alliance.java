@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public enum Alliance {
     RED(Color.RED), BLUE(Color.BLUE), NONE(Color.BLACK);

@@ -115,6 +115,10 @@ public interface MecanumConstants {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
+    @interface WheelBase{}
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.FIELD)
     @interface KV{}
 
     @Retention(RetentionPolicy.RUNTIME)

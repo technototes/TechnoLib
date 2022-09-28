@@ -60,6 +60,11 @@ public class ServoProfiler {
         return this;
     }
 
+    public ServoProfiler translateTargetPosition(double translation){
+        return setTargetPosition(Range.clip(0,targetPosition+translation, 1));
+
+    }
+
     public ServoProfiler setTargetTolerance(double tolerance) {
         targetTolerance = tolerance;
         return this;

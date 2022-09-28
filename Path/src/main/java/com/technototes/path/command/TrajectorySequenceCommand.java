@@ -1,6 +1,8 @@
 package com.technototes.path.command;
 
+import com.acmerobotics.roadrunner.drive.DriveSignal;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.technototes.library.command.Command;
 import com.technototes.path.subsystem.MecanumDrivebaseSubsystem;
 import com.technototes.path.trajectorysequence.TrajectorySequence;

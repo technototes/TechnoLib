@@ -48,6 +48,7 @@ import com.technototes.path.subsystem.MecanumConstants.TransPID;
 import com.technototes.path.subsystem.MecanumConstants.UseDriveEncoder;
 import com.technototes.path.subsystem.MecanumConstants.VXWeight;
 import com.technototes.path.subsystem.MecanumConstants.VYWeight;
+import com.technototes.path.subsystem.MecanumConstants.WheelBase;
 import com.technototes.path.subsystem.MecanumConstants.WheelRadius;
 import com.technototes.path.trajectorysequence.TrajectorySequence;
 import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
@@ -74,7 +75,7 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
 
     public final PIDFCoefficients MOTOR_VELO_PID;
 
-    public final double WHEEL_RADIUS, GEAR_RATIO, TRACK_WIDTH, kV, kA, kStatic;
+    public final double WHEEL_RADIUS, GEAR_RATIO, TRACK_WIDTH, WHEEL_BASE, kV, kA, kStatic;
 
     public final double MAX_VEL, MAX_ACCEL, MAX_ANG_VEL, MAX_ANG_ACCEL;
 
@@ -108,7 +109,7 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
     public MecanumDrivebaseSubsystem(EncodedMotor<DcMotorEx> fl, EncodedMotor<DcMotorEx> fr,
                                      EncodedMotor<DcMotorEx> rl, EncodedMotor<DcMotorEx> rr,
                                      IMU i, MecanumConstants c, Localizer localizer) {
-        super(c.getDouble(KV.class), c.getDouble(KA.class), c.getDouble(KStatic.class), c.getDouble(TrackWidth.class), c.getDouble(LateralMult.class));
+        super(c.getDouble(KV.class), c.getDouble(KA.class), c.getDouble(KStatic.class), c.getDouble(TrackWidth.class), c.getDouble(WheelBase.class), c.getDouble(LateralMult.class));
         leftFront = fl.getDevice();
         leftRear = rl.getDevice();
         rightRear = rr.getDevice();
@@ -127,6 +128,7 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
         WHEEL_RADIUS = c.getDouble(WheelRadius.class);
         GEAR_RATIO = c.getDouble(GearRatio.class);
         TRACK_WIDTH = c.getDouble(TrackWidth.class);
+        WHEEL_BASE = c.getDouble(WheelBase.class);
         kV = c.getDouble(KV.class);
         kA = c.getDouble(KA.class);
         kStatic = c.getDouble(KStatic.class);

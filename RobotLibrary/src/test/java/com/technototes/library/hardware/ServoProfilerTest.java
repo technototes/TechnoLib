@@ -6,7 +6,7 @@ import com.technototes.library.hardware.servo.ServoProfiler;
 
 import org.junit.jupiter.api.Test;
 
-public class ServoControllerTest {
+public class ServoProfilerTest {
     public ServoProfiler servoController;
     public Servo servo;
     public ElapsedTime time;

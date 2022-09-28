@@ -37,7 +37,7 @@ public class SimpleCommandTest {
     }
 
     @Test
-    public void scheduleCommandNoCancel() {
+    public void scheduleCommandNoCancel(){
         InstantCommand command = new InstantCommand();
 
         // Creating a command shouldn't cause it to be scheduled
@@ -67,13 +67,11 @@ public class SimpleCommandTest {
         assertEquals(0, command.canceled);
 
         CommandScheduler.getInstance().run();
-        //extra call to deal with lib change
-        CommandScheduler.getInstance().run();
 
         // ?? The second run after scheduling a command initializes the command
         // see above
         assertEquals(1, command.initialized);
-        assertEquals(1, command.executed);
+        assertEquals(0, command.executed);
         assertEquals(0, command.ended);
         assertEquals(0, command.canceled);
 
@@ -82,7 +80,7 @@ public class SimpleCommandTest {
         // The third run after scheduling a command finally runs it
         assertEquals(1, command.initialized);
         assertEquals(1, command.executed);
-        assertEquals(1, command.ended);
+        assertEquals(0, command.ended);
         assertEquals(0, command.canceled);
 
         CommandScheduler.getInstance().run();
@@ -98,6 +96,61 @@ public class SimpleCommandTest {
         assertEquals(1, command.initialized);
         assertEquals(1, command.executed);
         assertEquals(1, command.ended);
+        assertEquals(0, command.canceled);
+
+        CommandScheduler.getInstance().run();
+        // An ended command doesn't get scheduled anymore
+        // ?? But it does get initialized
+        // when you schedule a command, its added to a loop.
+        // just scheduling means the command will run again the moment it is finished
+        // it might be smart to change this at some point because of larger loops in the loop set,
+        // but would mean you have to loop anything that schedules a command, so same problem i think
+        assertEquals(2, command.initialized);
+        assertEquals(1, command.executed);
+        assertEquals(1, command.ended);
+        assertEquals(0, command.canceled);
+
+        CommandScheduler.getInstance().run();
+        // An ended command doesn't get scheduled anymore
+        // ?? But it does get initialized
+        // ?? And executed??
+        assertEquals(2, command.initialized);
+        assertEquals(2, command.executed);
+        assertEquals(1, command.ended);
+        assertEquals(0, command.canceled);
+
+        CommandScheduler.getInstance().run();
+        // An ended command doesn't get scheduled anymore
+        // ?? But it does get initialized
+        // ?? And executed??
+        // ?? And ends again?
+        assertEquals(2, command.initialized);
+        assertEquals(2, command.executed);
+        assertEquals(2, command.ended);
+        assertEquals(0, command.canceled);
+
+        CommandScheduler.getInstance().run();
+        assertEquals(2, command.initialized);
+        assertEquals(2, command.executed);
+        assertEquals(2, command.ended);
+        assertEquals(0, command.canceled);
+
+        CommandScheduler.getInstance().run();
+        assertEquals(3, command.initialized);
+        assertEquals(2, command.executed);
+        assertEquals(2, command.ended);
+        assertEquals(0, command.canceled);
+
+        CommandScheduler.getInstance().run();
+        assertEquals(3, command.initialized);
+        assertEquals(3, command.executed);
+        assertEquals(2, command.ended);
+        assertEquals(0, command.canceled);
+
+        CommandScheduler.getInstance().run();
+        assertEquals(3, command.initialized);
+        assertEquals(3, command.executed);
+        assertEquals(3, command.ended);
         assertEquals(0, command.canceled);
     }
 

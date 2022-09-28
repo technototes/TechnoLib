@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 
 import java.util.function.DoubleFunction;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 public class ConfigurablePose extends ConfigurableVector {
     public double heading;
@@ -49,17 +50,17 @@ public class ConfigurablePose extends ConfigurableVector {
     }
 
     @Override
-    public ConfigurablePose mutateVec(Function<Vector2d, Vector2d> callback) {
+    public ConfigurablePose mutateVec(UnaryOperator<Vector2d> callback) {
         return (ConfigurablePose) super.mutateVec(callback);
     }
 
     @Override
-    public ConfigurablePose mutateX(DoubleFunction<Double> callback) {
+    public ConfigurablePose mutateX(UnaryOperator<Double> callback) {
         return (ConfigurablePose) super.mutateX(callback);
     }
 
     @Override
-    public ConfigurablePose mutateY(DoubleFunction<Double> callback) {
+    public ConfigurablePose mutateY(UnaryOperator<Double> callback) {
         return (ConfigurablePose) super.mutateY(callback);
     }
 
@@ -85,11 +86,11 @@ public class ConfigurablePose extends ConfigurableVector {
     }
 
 
-    public ConfigurablePose mutatePose(Function<Pose2d, Pose2d> callback){
+    public ConfigurablePose mutatePose(UnaryOperator<Pose2d> callback){
         return set(mapPose(callback));
     }
 
-    public ConfigurablePose mutateHeading(DoubleFunction<Double> callback){
+    public ConfigurablePose mutateHeading(UnaryOperator<Double> callback){
         return setHeading(mapHeading(callback));
     }
 
@@ -98,7 +99,7 @@ public class ConfigurablePose extends ConfigurableVector {
         return callback.apply(toPose());
     }
 
-    private <T> T mapHeading(DoubleFunction<T> callback) {
+    private <T> T mapHeading(Function<Double, T> callback) {
         return callback.apply(getHeading());
     }
 
