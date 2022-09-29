@@ -15,16 +15,16 @@ public class DigitalBuilder extends HardwareBuilder<DigitalChannel> {
         super(port);
     }
 
-    public DigitalBuilder mode(DigitalChannel.Mode mode){
+    public DigitalBuilder mode(DigitalChannel.Mode mode) {
         product.setMode(mode);
         return this;
     }
 
-    public DigitalBuilder input(){
+    public DigitalBuilder input() {
         return mode(DigitalChannel.Mode.INPUT);
     }
 
-    public DigitalBuilder output(){
+    public DigitalBuilder output() {
         return mode(DigitalChannel.Mode.OUTPUT);
     }
 }

@@ -15,10 +15,10 @@ public class ServoSubsystem extends DeviceSubsystem<Servo> {
     public ServoSubsystem(Servo servo) {
         super(servo);
     }
+
     public ServoSubsystem(Servo... servo) {
         super(new ServoGroup(servo));
     }
-
 
     /** Set servo subsystem position
      *
@@ -32,8 +32,7 @@ public class ServoSubsystem extends DeviceSubsystem<Servo> {
      *
      * @return The position
      */
-    public double getPosition(){
+    public double getPosition() {
         return getDevice().getPosition();
     }
-
 }

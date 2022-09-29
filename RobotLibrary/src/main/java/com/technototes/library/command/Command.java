@@ -1,10 +1,5 @@
 package com.technototes.library.command;
 
-
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.technototes.library.subsystem.DeviceSubsystem;
-import com.technototes.library.subsystem.Subsystem;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -13,6 +8,11 @@ import java.util.Set;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
+
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import com.technototes.library.subsystem.DeviceSubsystem;
+import com.technototes.library.subsystem.Subsystem;
 
 /**
  * The root Command class
@@ -25,7 +25,6 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
     Map<Command, CommandState> stateMap = new HashMap<>();
     Map<Command, ElapsedTime> timeMap = new HashMap<>();
     Map<Command, Set<Subsystem>> requirementMap = new HashMap<>();
-
 
     /**
      * Add requirement subsystems to command
@@ -41,9 +40,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
     /**
      * Init the command
      */
-    default void initialize() {
-
-    }
+    default void initialize() {}
 
     /**
      * Execute the command
@@ -64,16 +61,14 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
      *
      * @param cancel If the command was cancelled or ended naturally
      */
-    default void end(boolean cancel) {
+    default void end(boolean cancel) {}
 
-    }
-
-    //run a command after
+    // run a command after
     default SequentialCommandGroup andThen(Command... c) {
         return new SequentialCommandGroup(this, c.length == 1 ? c[0] : new ParallelCommandGroup(c));
     }
 
-    //wait a time
+    // wait a time
     default SequentialCommandGroup sleep(double sec) {
         return andThen(new WaitCommand(sec));
     }
@@ -82,12 +77,12 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return andThen(new WaitCommand(sup));
     }
 
-    //await a condition
+    // await a condition
     default SequentialCommandGroup waitUntil(BooleanSupplier condition) {
         return andThen(new ConditionalCommand(condition));
     }
 
-    //run a command in parallel
+    // run a command in parallel
     default ParallelCommandGroup alongWith(Command... c) {
         Command[] c1 = new Command[c.length + 1];
         c1[0] = this;
@@ -105,7 +100,6 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         System.arraycopy(c, 0, c1, 1, c.length);
         return new ParallelRaceGroup(c1);
     }
-
 
     /**
      * Creates a conditional command out of this
@@ -125,7 +119,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return raceWith(new ConditionalCommand(condition));
     }
 
-    default ChoiceCommand onlyIf(BooleanSupplier choiceCondition){
+    default ChoiceCommand onlyIf(BooleanSupplier choiceCondition) {
         return new ChoiceCommand(choiceCondition, this);
     }
 
@@ -145,13 +139,13 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
             case INITIALIZING:
                 initialize();
                 setState(CommandState.EXECUTING);
-                //no return for fallthrough
+                // no return for fallthrough
             case EXECUTING:
                 execute();
                 if (isFinished()) setState(CommandState.FINISHED);
                 return;
             case INTERRUPTED:
-                //state to allow
+                // state to allow
                 setState(CommandState.CANCELLED);
                 return;
             case CANCELLED:
@@ -165,9 +159,14 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
      * The command state enum
      */
     enum CommandState {
-        RESET, STARTED, INITIALIZING, EXECUTING, FINISHED, INTERRUPTED, CANCELLED
+        RESET,
+        STARTED,
+        INITIALIZING,
+        EXECUTING,
+        FINISHED,
+        INTERRUPTED,
+        CANCELLED
     }
-
 
     /**
      * Return the command runtime
@@ -203,7 +202,6 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return requirementMap.get(this);
     }
 
-
     default boolean justFinished() {
         return getState() == CommandState.FINISHED || getState() == CommandState.CANCELLED;
     }
@@ -216,7 +214,6 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return getState() == CommandState.STARTED;
     }
 
-
     default boolean isRunning() {
         return getState() != CommandState.RESET;
     }
@@ -224,7 +221,6 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
     default boolean isCancelled() {
         return getState() == CommandState.CANCELLED;
     }
-
 
     default void cancel() {
         if (isRunning() && !justFinished()) setState(CommandState.INTERRUPTED);
@@ -236,12 +232,12 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         requirementMap.clear();
     }
 
-    static Command create(Command c, Subsystem... s){
+    static Command create(Command c, Subsystem... s) {
         return c.addRequirements(s);
     }
 
     @Override
-    default CommandState get(){
+    default CommandState get() {
         return getState();
     }
 }

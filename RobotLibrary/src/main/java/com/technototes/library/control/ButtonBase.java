@@ -1,10 +1,10 @@
 package com.technototes.library.control;
 
+import java.util.function.BooleanSupplier;
+
 import com.technototes.library.general.Enablable;
 import com.technototes.library.general.Invertable;
 import com.technototes.library.general.Periodic;
-
-import java.util.function.BooleanSupplier;
 
 /** The class to extend custom gamepad buttons from
  * @author Alex Stedman
@@ -20,24 +20,21 @@ public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonB
     private boolean inverted = false;
     private boolean enabled = true;
 
-
     /** Create button with boolean supplier
      *
      * @param b The supplier
      */
-    public ButtonBase(BooleanSupplier b){
+    public ButtonBase(BooleanSupplier b) {
         booleanSupplier = b;
     }
 
-
-
     @Override
-    public void periodic(){
+    public void periodic() {
         periodic(getAsBoolean());
     }
 
-    private void periodic(boolean currentState){
-        if(isDisabled()) {
+    private void periodic(boolean currentState) {
+        if (isDisabled()) {
             recentAction = false;
             pastState = false;
             pressed = false;
@@ -54,56 +51,56 @@ public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonB
      *
      * @return The above condition
      */
-    public boolean isJustPressed(){
+    public boolean isJustPressed() {
         return pressed && recentAction;
     }
     /** Returns if the button is just released
      *
      * @return The above condition
      */
-    public boolean isJustReleased(){
+    public boolean isJustReleased() {
         return !pressed && recentAction;
     }
     /** Returns if the button is pressed
      *
      * @return The above condition
      */
-    public boolean isPressed(){
+    public boolean isPressed() {
         return pressed;
     }
     /** Returns if the button is released
      *
      * @return The above condition
      */
-    public boolean isReleased(){
+    public boolean isReleased() {
         return !pressed;
     }
     /** Returns if the button is just toggled
      *
      * @return The above condition
      */
-    public boolean isJustToggled(){
+    public boolean isJustToggled() {
         return toggle && recentAction && pressed;
     }
     /** Returns if the button is just untoggled
      *
      * @return The above condition
      */
-    public boolean isJustInverseToggled(){
+    public boolean isJustInverseToggled() {
         return !toggle && recentAction && pressed;
     }
     /** Returns if the button is toggled
      *
      * @return The above condition
      */
-    public boolean isToggled(){
+    public boolean isToggled() {
         return toggle;
     }
     /** Returns if the button is untoggled
      *
      * @return The above condition
      */
-    public boolean isInverseToggled(){
+    public boolean isInverseToggled() {
         return !toggle;
     }
 
@@ -112,7 +109,7 @@ public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonB
      */
     @Override
     public boolean getAsBoolean() {
-        return booleanSupplier.getAsBoolean()^inverted&&isEnabled();
+        return booleanSupplier.getAsBoolean() ^ inverted && isEnabled();
     }
 
     @Override
@@ -125,7 +122,6 @@ public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonB
     public boolean getInverted() {
         return inverted;
     }
-
 
     @Override
     public ButtonBase setEnabled(boolean enable) {

@@ -23,10 +23,8 @@ public class ParallelDeadlineGroup extends CommandGroup {
         CommandScheduler.getInstance().scheduleWithOther(this, c);
     }
 
-
     @Override
     public boolean isFinished() {
         return deadline.justFinished();
     }
-
 }

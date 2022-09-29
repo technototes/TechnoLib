@@ -11,22 +11,21 @@ public class ColorRangeBuilder extends HardwareBuilder<ColorRangeSensor> {
         super(device);
     }
 
-    public ColorRangeBuilder gain(float val){
+    public ColorRangeBuilder gain(float val) {
         product.setGain(val);
         return this;
     }
 
-    public ColorRangeBuilder led(boolean l){
+    public ColorRangeBuilder led(boolean l) {
         product.enableLed(l);
         return this;
     }
 
-    public ColorRangeBuilder enable(){
+    public ColorRangeBuilder enable() {
         return led(true);
     }
 
-    public ColorRangeBuilder disable(){
+    public ColorRangeBuilder disable() {
         return led(false);
     }
-
 }

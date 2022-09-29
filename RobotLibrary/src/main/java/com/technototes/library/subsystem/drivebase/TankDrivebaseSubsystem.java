@@ -2,6 +2,7 @@ package com.technototes.library.subsystem.drivebase;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
+
 import com.technototes.library.hardware.motor.Motor;
 
 /** Class for drivebase subsystems
@@ -25,13 +26,13 @@ public class TankDrivebaseSubsystem<T extends DcMotorSimple> extends DrivebaseSu
         rightSide = rightMotor;
     }
 
-    public void arcadeDrive(double y, double x){
-        double lp = y+x;
-        double rp = -y+x;
+    public void arcadeDrive(double y, double x) {
+        double lp = y + x;
+        double rp = -y + x;
         double scale = getScale(lp, rp);
-        double speed = Range.clip(Math.abs(y)+Math.abs(x), 0, 1);
-        scale = scale == 0 ? 0 : speed/scale;
-        drive(lp*scale, rp*scale);
+        double speed = Range.clip(Math.abs(y) + Math.abs(x), 0, 1);
+        scale = scale == 0 ? 0 : speed / scale;
+        drive(lp * scale, rp * scale);
     }
 
     public void stop() {
@@ -39,7 +40,7 @@ public class TankDrivebaseSubsystem<T extends DcMotorSimple> extends DrivebaseSu
     }
 
     public void drive(double l, double r) {
-        leftSide.setSpeed(l*getSpeed());
-        rightSide.setSpeed(r*getSpeed());
+        leftSide.setSpeed(l * getSpeed());
+        rightSide.setSpeed(r * getSpeed());
     }
 }

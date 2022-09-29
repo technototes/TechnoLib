@@ -23,7 +23,6 @@ public class DigitalSensor extends Sensor<DigitalChannel> {
         super(deviceName);
     }
 
-
     /** Get the sensor value as a boolean
      *
      * @return Sensor value as boolean

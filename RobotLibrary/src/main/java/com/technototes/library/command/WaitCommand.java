@@ -12,18 +12,17 @@ public class WaitCommand implements Command {
     }
 
     private DoubleSupplier supplier;
-    public WaitCommand(double sec){
-        supplier = ()->sec;
+
+    public WaitCommand(double sec) {
+        supplier = () -> sec;
     }
 
-    public WaitCommand(DoubleSupplier sup){
+    public WaitCommand(DoubleSupplier sup) {
         supplier = sup;
     }
 
     @Override
-    public void execute() {
-
-    }
+    public void execute() {}
 
     @Override
     public boolean isFinished() {

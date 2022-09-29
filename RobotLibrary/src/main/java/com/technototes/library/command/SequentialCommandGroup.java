@@ -14,13 +14,11 @@ public class SequentialCommandGroup extends CommandGroup {
         super(true, commands);
     }
 
-
-
     @Override
     public void schedule(Command c) {
-        if(lastCommand == null){
-             CommandScheduler.getInstance().scheduleWithOther(this, c);
-        }else {
+        if (lastCommand == null) {
+            CommandScheduler.getInstance().scheduleWithOther(this, c);
+        } else {
             CommandScheduler.getInstance().scheduleAfterOther(lastCommand, c);
         }
         lastCommand = c;
@@ -34,6 +32,4 @@ public class SequentialCommandGroup extends CommandGroup {
     public boolean isFinished() {
         return lastCommand.justFinished() || (anyCancelled && !countCancel);
     }
-
-
 }

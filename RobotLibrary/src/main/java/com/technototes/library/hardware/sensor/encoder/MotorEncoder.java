@@ -3,6 +3,7 @@ package com.technototes.library.hardware.sensor.encoder;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.Sensor;
 
@@ -10,8 +11,8 @@ import com.technototes.library.hardware.sensor.Sensor;
  * Wraps a motor instance to provide corrected velocity counts and allow reversing independently of the corresponding
  * slot's motor direction
  */
-public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder{
-    private final static int CPS_STEP = 0x10000;
+public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder {
+    private static final int CPS_STEP = 0x10000;
     public int offset = 0;
 
     private static double inverseOverflow(double input, double estimate) {
@@ -58,7 +59,7 @@ public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder{
 
     public MotorEncoder(DcMotorEx motor, ElapsedTime clock) {
         super(motor);
-        //motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         this.motor = motor;
         this.clock = clock;
         clock.reset();
@@ -74,10 +75,11 @@ public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder{
         this(motor, new ElapsedTime());
     }
 
-    public MotorEncoder(EncodedMotor<DcMotorEx> motor){
+    public MotorEncoder(EncodedMotor<DcMotorEx> motor) {
         this(motor.getDevice());
     }
-    public MotorEncoder(String deviceName){
+
+    public MotorEncoder(String deviceName) {
         this(hardwareMap.get(DcMotorEx.class, deviceName));
     }
 
@@ -97,14 +99,14 @@ public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder{
         this.direction = direction;
     }
 
-    public MotorEncoder invert(){
+    public MotorEncoder invert() {
         setDirection(getDirection() == Direction.FORWARD ? Direction.REVERSE : Direction.FORWARD);
         return this;
     }
 
     public int getCurrentPosition() {
         int multiplier = getMultiplier();
-        int currentPosition = (motor.getCurrentPosition()-offset) * multiplier;
+        int currentPosition = (motor.getCurrentPosition() - offset) * multiplier;
         if (currentPosition != lastPosition) {
             double currentTime = clock.seconds();
             double dt = currentTime - lastUpdateTime;

@@ -4,8 +4,6 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.LOCAL_VARIABLE;
 import static java.lang.annotation.ElementType.METHOD;
 
-import com.technototes.library.util.Color;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Repeatable;
@@ -13,13 +11,15 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.technototes.library.util.Color;
+
 /** The root annotation for annotation logging, also doubles as a basic string log
  * @author Alex Stedman
  */
 @Documented
 @Repeatable(Log.Logs.class)
 @Retention(RetentionPolicy.RUNTIME)
-@Target(value={FIELD, LOCAL_VARIABLE, METHOD})
+@Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
 public @interface Log {
     /** Store index for this annotation (position in telemetry)
      *
@@ -68,8 +68,8 @@ public @interface Log {
      *
      */
     @Retention(RetentionPolicy.RUNTIME)
-    @Target(value={FIELD, LOCAL_VARIABLE, METHOD})
-    @interface Number{
+    @Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+    @interface Number {
         /** Store index for this annotation (position in telemetry)
          *
          * @return The index
@@ -97,15 +97,14 @@ public @interface Log {
          * @return The color
          */
         Color numberColor() default Color.NO_COLOR;
-
     }
 
     /** Log a number, but store it as a number bar
      *
      */
     @Retention(RetentionPolicy.RUNTIME)
-    @Target(value={FIELD, LOCAL_VARIABLE, METHOD})
-    @interface NumberBar{
+    @Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+    @interface NumberBar {
         /** Store index for this annotation (position in telemetry)
          *
          * @return The index
@@ -159,12 +158,11 @@ public @interface Log {
          * @return The color
          */
         Color outline() default Color.NO_COLOR;
-
     }
 
     @Retention(RetentionPolicy.RUNTIME)
-    @Target(value={FIELD, LOCAL_VARIABLE, METHOD})
-    @interface NumberSlider{
+    @Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+    @interface NumberSlider {
         /** Store index for this annotation (position in telemetry)
          *
          * @return The index
@@ -218,13 +216,11 @@ public @interface Log {
          * @return The color
          */
         Color slider() default Color.NO_COLOR;
-
-
     }
 
     @Retention(RetentionPolicy.RUNTIME)
-    @Target(value={FIELD, LOCAL_VARIABLE, METHOD})
-    @interface Boolean{
+    @Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+    @interface Boolean {
         /** Store index for this annotation (position in telemetry)
          *
          * @return The index
@@ -280,7 +276,5 @@ public @interface Log {
          * @return The color
          */
         Color color() default Color.NO_COLOR;
-
     }
-
 }

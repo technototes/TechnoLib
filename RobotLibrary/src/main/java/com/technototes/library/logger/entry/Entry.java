@@ -1,9 +1,8 @@
 package com.technototes.library.logger.entry;
 
+import java.util.function.Supplier;
 
 import com.technototes.library.util.Color;
-
-import java.util.function.Supplier;
 
 /** The root class for logging entries
  * @author Alex Stedman
@@ -19,17 +18,19 @@ public abstract class Entry<T> implements Supplier<T> {
     protected String tag;
     protected Color color;
 
-    public Entry(String n, Supplier<T> s, int index, Color c){
+    public Entry(String n, Supplier<T> s, int index, Color c) {
         x = index;
         supplier = s;
         name = n;
         color = c;
-        tag =  (name.equals("") ? " " : color.format(name)+" ` ");
+        tag = (name.equals("") ? " " : color.format(name) + " ` ");
     }
-    public Entry<T> setPriority(int p){
+
+    public Entry<T> setPriority(int p) {
         priority = p;
         return this;
     }
+
     @Override
     public T get() {
         return supplier.get();
@@ -48,7 +49,7 @@ public abstract class Entry<T> implements Supplier<T> {
      *
      * @return The tag
      */
-    public String getTag(){
+    public String getTag() {
         return tag;
     }
 
@@ -73,7 +74,7 @@ public abstract class Entry<T> implements Supplier<T> {
      * @param i New index
      * @return this
      */
-    public Entry setIndex(int i){
+    public Entry setIndex(int i) {
         x = i;
         return this;
     }
@@ -81,9 +82,7 @@ public abstract class Entry<T> implements Supplier<T> {
     /** Get Priority for the entry
      * @return The priority
      */
-    public int getPriority(){
+    public int getPriority() {
         return priority;
     }
-
-
 }

@@ -20,12 +20,10 @@ public class AnalogSensor extends Sensor<AnalogInput> {
      * @param deviceName The device name in hardware map
      */
     public AnalogSensor(String deviceName) {
-        super(deviceName );
+        super(deviceName);
     }
-
 
     public double getSensorValue() {
         return getDevice().getMaxVoltage();
     }
-
 }

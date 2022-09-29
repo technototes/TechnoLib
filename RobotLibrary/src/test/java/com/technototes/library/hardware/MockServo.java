@@ -4,9 +4,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoController;
 
 public class MockServo implements Servo {
-    public MockServo(){
+    public MockServo() {}
 
-    }
     @Override
     public ServoController getController() {
         return null;
@@ -18,9 +17,7 @@ public class MockServo implements Servo {
     }
 
     @Override
-    public void setDirection(Direction direction) {
-
-    }
+    public void setDirection(Direction direction) {}
 
     @Override
     public Direction getDirection() {
@@ -28,6 +25,7 @@ public class MockServo implements Servo {
     }
 
     double pos;
+
     @Override
     public void setPosition(double position) {
         pos = position;
@@ -39,9 +37,7 @@ public class MockServo implements Servo {
     }
 
     @Override
-    public void scaleRange(double min, double max) {
-
-    }
+    public void scaleRange(double min, double max) {}
 
     @Override
     public Manufacturer getManufacturer() {
@@ -64,12 +60,8 @@ public class MockServo implements Servo {
     }
 
     @Override
-    public void resetDeviceConfigurationForOpMode() {
-
-    }
+    public void resetDeviceConfigurationForOpMode() {}
 
     @Override
-    public void close() {
-
-    }
+    public void close() {}
 }

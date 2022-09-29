@@ -1,24 +1,26 @@
 package com.technototes.library.gamepad;
 
-import com.qualcomm.robotcore.hardware.Gamepad;
-import com.technototes.library.control.CommandButton;
-import com.technototes.library.control.CommandGamepad;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.qualcomm.robotcore.hardware.Gamepad;
+
+import com.technototes.library.control.CommandButton;
+import com.technototes.library.control.CommandGamepad;
 
 public class GamepadTest {
     private Gamepad gamepad;
     private CommandGamepad commandGamepad;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         gamepad = new Gamepad();
         commandGamepad = new CommandGamepad(gamepad);
     }
+
     @Test
-    public void buttonTest(){
+    public void buttonTest() {
         CommandButton commandButton = commandGamepad.a;
         gamepad.a = false;
         commandButton.periodic();

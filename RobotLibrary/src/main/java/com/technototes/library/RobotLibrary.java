@@ -10,7 +10,7 @@ public class RobotLibrary {
      *
      * @return Library version
      */
-    public static String getVersion(){
+    public static String getVersion() {
         return "1.0.2";
     }
 
@@ -18,7 +18,7 @@ public class RobotLibrary {
      *
      * @return If this library version is a pre release
      */
-    public static boolean isPreRelease(){
+    public static boolean isPreRelease() {
         return true;
     }
 }

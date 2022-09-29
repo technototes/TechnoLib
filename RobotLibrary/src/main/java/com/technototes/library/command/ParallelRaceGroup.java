@@ -24,7 +24,7 @@ public class ParallelRaceGroup extends CommandGroup {
      */
     @Override
     public boolean isFinished() {
-        //if there is a single finished command
+        // if there is a single finished command
         return commandMap.containsValue(true);
     }
 }

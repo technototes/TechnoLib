@@ -3,6 +3,7 @@ package com.technototes.library.hardware.servo;
 import com.qualcomm.robotcore.hardware.PwmControl;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.util.Range;
+
 import com.technototes.library.general.Invertable;
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.hardware.Sensored;
@@ -11,7 +12,8 @@ import com.technototes.library.hardware.Sensored;
  * @author Alex Stedman
  */
 @SuppressWarnings("unused")
-public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo> implements Sensored, Invertable<Servo> {
+public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
+        implements Sensored, Invertable<Servo> {
 
     private boolean inverted = false;
     /** Create servo object
@@ -40,12 +42,13 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
         return this;
     }
 
-    public Servo scalePWM(double min, double max){
-        if(getDevice() instanceof ServoImplEx) ((ServoImplEx) getDevice()).setPwmRange(new PwmControl.PwmRange(min, max));
+    public Servo scalePWM(double min, double max) {
+        if (getDevice() instanceof ServoImplEx)
+            ((ServoImplEx) getDevice()).setPwmRange(new PwmControl.PwmRange(min, max));
         return this;
     }
 
-    public Servo expandedRange(){
+    public Servo expandedRange() {
         return scalePWM(500, 2500);
     }
 
@@ -65,22 +68,23 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
      * @param position The position to set the servo to
      */
     public void setPosition(double position) {
-        device.setPosition(Range.clip(!inverted ? position : 1-position, 0, 1));
+        device.setPosition(Range.clip(!inverted ? position : 1 - position, 0, 1));
     }
-    public void incrementPosition(double incAmount){
-        setPosition(getPosition()+incAmount);
+
+    public void incrementPosition(double incAmount) {
+        setPosition(getPosition() + incAmount);
     }
 
     @Override
     public double getSensorValue() {
-        return inverted ? 1-device.getPosition() : device.getPosition();
+        return inverted ? 1 - device.getPosition() : device.getPosition();
     }
 
     /** Get servo position
      *
      * @return The servo position
      */
-    public double getPosition(){
+    public double getPosition() {
         return getSensorValue();
     }
 
@@ -94,8 +98,4 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
         getDevice().scaleRange(min, max);
         return this;
     }
-
-
-
-
 }

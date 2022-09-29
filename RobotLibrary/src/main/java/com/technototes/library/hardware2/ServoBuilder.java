@@ -16,36 +16,38 @@ public class ServoBuilder extends HardwareBuilder<Servo> {
         super(port);
     }
 
-    public ServoBuilder direction(Servo.Direction dir){
+    public ServoBuilder direction(Servo.Direction dir) {
         product.setDirection(dir);
         return this;
     }
 
-    public ServoBuilder forward(){
+    public ServoBuilder forward() {
         return direction(Servo.Direction.FORWARD);
     }
 
-    public ServoBuilder reverse(){
+    public ServoBuilder reverse() {
         return direction(Servo.Direction.REVERSE);
     }
 
-    public ServoBuilder at(double position){
+    public ServoBuilder at(double position) {
         product.setPosition(position);
         return this;
     }
 
-    public ServoBuilder range(double min, double max){
+    public ServoBuilder range(double min, double max) {
         product.scaleRange(min, max);
         return this;
     }
 
-    public ServoBuilder pwmRange(double min, double max){
-        if(product instanceof PwmControl) ((PwmControl) product).setPwmRange(new PwmControl.PwmRange(min, max));
-        else throw new UnsupportedOperationException("scaling pwm range only supported on devices that implement pwmcontrol");
+    public ServoBuilder pwmRange(double min, double max) {
+        if (product instanceof PwmControl) ((PwmControl) product).setPwmRange(new PwmControl.PwmRange(min, max));
+        else
+            throw new UnsupportedOperationException(
+                    "scaling pwm range only supported on devices that implement pwmcontrol");
         return this;
     }
 
-    public ServoBuilder expandedPWM(){
+    public ServoBuilder expandedPWM() {
         return pwmRange(500, 2500);
     }
 }

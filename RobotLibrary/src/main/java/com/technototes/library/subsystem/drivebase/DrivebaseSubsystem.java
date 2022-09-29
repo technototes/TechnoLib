@@ -1,11 +1,12 @@
 package com.technototes.library.subsystem.drivebase;
 
+import java.util.function.DoubleSupplier;
+
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
 import com.technototes.library.hardware.motor.Motor;
 import com.technototes.library.hardware.motor.MotorGroup;
 import com.technototes.library.subsystem.DeviceSubsystem;
-
-import java.util.function.DoubleSupplier;
 
 /** Class for DriveBase subsystems
  * @author Alex Stedman The motors for the drivebase
@@ -15,19 +16,21 @@ public abstract class DrivebaseSubsystem<T extends DcMotorSimple> extends Device
 
     protected DoubleSupplier gyroSupplier = () -> 0;
 
-
     @Deprecated
     public enum SampleDriveSpeed {
-        SNAIL(0.2), NORMAL(0.5), TURBO(1);
+        SNAIL(0.2),
+        NORMAL(0.5),
+        TURBO(1);
         public double spe;
-        SampleDriveSpeed(double s){
+
+        SampleDriveSpeed(double s) {
             spe = s;
         }
-        public double getSpeed(){
+
+        public double getSpeed() {
             return spe;
         }
     }
-
 
     /** The default drive speeds
      *
@@ -51,9 +54,9 @@ public abstract class DrivebaseSubsystem<T extends DcMotorSimple> extends Device
         gyroSupplier = gyro;
     }
 
-    public double getScale(double... powers){
+    public double getScale(double... powers) {
         double max = 0;
-        for(double d : powers){
+        for (double d : powers) {
             max = Math.max(Math.abs(d), max);
         }
         return max;
@@ -62,13 +65,11 @@ public abstract class DrivebaseSubsystem<T extends DcMotorSimple> extends Device
      *
      * @return Gyro angle from supplier
      */
-    public double getGyro(){
+    public double getGyro() {
         return gyroSupplier.getAsDouble();
     }
 
-
-    public double getSpeed(){
+    public double getSpeed() {
         return 1;
     }
-
 }

@@ -16,17 +16,16 @@ public class CRServoBuilder extends HardwareBuilder<CRServo> {
         super(port);
     }
 
-    public CRServoBuilder direction(DcMotorSimple.Direction dir){
+    public CRServoBuilder direction(DcMotorSimple.Direction dir) {
         product.setDirection(dir);
         return this;
     }
 
-    public CRServoBuilder forward(){
+    public CRServoBuilder forward() {
         return direction(DcMotorSimple.Direction.FORWARD);
     }
 
-    public CRServoBuilder reverse(){
+    public CRServoBuilder reverse() {
         return direction(DcMotorSimple.Direction.REVERSE);
     }
-
 }

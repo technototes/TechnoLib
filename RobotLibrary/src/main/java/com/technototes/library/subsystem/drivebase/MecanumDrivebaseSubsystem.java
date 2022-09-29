@@ -1,16 +1,17 @@
 package com.technototes.library.subsystem.drivebase;
 
+import java.util.function.DoubleSupplier;
+
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
-import com.technototes.library.hardware.motor.Motor;
 
-import java.util.function.DoubleSupplier;
+import com.technototes.library.hardware.motor.Motor;
 
 /** Class for mecanum/xdrive drivebases
  * @author Alex Stedman
  * @param <T> The motor type for the subsystem
  */
-public class MecanumDrivebaseSubsystem<T extends DcMotorSimple> extends DrivebaseSubsystem<T>{
+public class MecanumDrivebaseSubsystem<T extends DcMotorSimple> extends DrivebaseSubsystem<T> {
     /** Drive motors
      *
      */
@@ -31,7 +32,6 @@ public class MecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Drivebas
         this.rrMotor = rrMotor;
     }
 
-
     /** Create mecanum drivebase
      *
      * @param gyro The gyro supplier
@@ -40,7 +40,8 @@ public class MecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Drivebas
      * @param rlMotor The rear left motor for the drivebase
      * @param rrMotor The rear right motor for the drivebase
      */
-    public MecanumDrivebaseSubsystem(DoubleSupplier gyro, Motor<T> flMotor, Motor<T> frMotor, Motor<T> rlMotor, Motor<T> rrMotor) {
+    public MecanumDrivebaseSubsystem(
+            DoubleSupplier gyro, Motor<T> flMotor, Motor<T> frMotor, Motor<T> rlMotor, Motor<T> rrMotor) {
         super(gyro, flMotor, frMotor, rlMotor, rrMotor);
         this.flMotor = flMotor;
         this.frMotor = frMotor;
@@ -48,16 +49,17 @@ public class MecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Drivebas
         this.rrMotor = rrMotor;
     }
 
-    public void joystickDrive(double x, double y, double rotation){
+    public void joystickDrive(double x, double y, double rotation) {
         joystickDriveWithGyro(x, y, rotation, 0);
     }
 
     public void joystickDriveWithGyro(double x, double y, double rotation, double gyroAngle) {
         double speed = Range.clip(Math.abs(Math.hypot(x, y)), 0, 1);
         double headingRad = Math.toRadians(gyroAngle);
-        double angle = -Math.atan2(y, x) + headingRad - Math.PI/4;
+        double angle = -Math.atan2(y, x) + headingRad - Math.PI / 4;
         drive(speed, angle, rotation);
     }
+
     public void drive(double speed, double angle, double rotation) {
         double x = Math.cos(angle) * speed;
         double y = Math.sin(angle) * speed;
@@ -67,15 +69,15 @@ public class MecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Drivebas
 
         speed = Range.clip(speed + Math.abs(rotation), 0, 1);
 
-        double flPower = powerCompY - powerCompX - 2*rotation;
-        double frPower = -powerCompY - powerCompX - 2*rotation;
-        double rlPower = powerCompY + powerCompX - 2*rotation;
-        double rrPower = -powerCompY + powerCompX - 2*rotation;
+        double flPower = powerCompY - powerCompX - 2 * rotation;
+        double frPower = -powerCompY - powerCompX - 2 * rotation;
+        double rlPower = powerCompY + powerCompX - 2 * rotation;
+        double rrPower = -powerCompY + powerCompX - 2 * rotation;
 
         double scale = getScale(flPower, frPower, rlPower, rrPower);
-        scale = scale == 0 ? 0 : speed/scale;
+        scale = scale == 0 ? 0 : speed / scale;
         scale = Math.cbrt(scale);
-        drive(flPower*scale, frPower*scale,rlPower*scale, rrPower*scale);
+        drive(flPower * scale, frPower * scale, rlPower * scale, rrPower * scale);
     }
 
     public void stop() {
@@ -83,10 +85,9 @@ public class MecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Drivebas
     }
 
     public void drive(double flSpeed, double frSpeed, double rlSpeed, double rrSpeed) {
-        flMotor.setSpeed(flSpeed*getSpeed());
-        frMotor.setSpeed(frSpeed*getSpeed());
-        rlMotor.setSpeed(rlSpeed*getSpeed());
-        rrMotor.setSpeed(rrSpeed*getSpeed());
+        flMotor.setSpeed(flSpeed * getSpeed());
+        frMotor.setSpeed(frSpeed * getSpeed());
+        rlMotor.setSpeed(rlSpeed * getSpeed());
+        rrMotor.setSpeed(rrSpeed * getSpeed());
     }
-
 }

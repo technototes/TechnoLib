@@ -1,9 +1,9 @@
 package com.technototes.library.control;
 
+import java.util.function.BooleanSupplier;
+
 import com.technototes.library.command.Command;
 import com.technototes.library.command.CommandScheduler;
-
-import java.util.function.BooleanSupplier;
 
 /** Class for gamepad-command integration
  * @author Alex Stedman
@@ -11,47 +11,47 @@ import java.util.function.BooleanSupplier;
  */
 public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
 
-    default T whenPressed(Command command){
+    default T whenPressed(Command command) {
         return schedule(getInstance()::isJustPressed, command);
     }
 
-    default T whenReleased(Command command){
+    default T whenReleased(Command command) {
         return schedule(getInstance()::isJustReleased, command);
     }
 
-    default T whilePressed(Command command){
+    default T whilePressed(Command command) {
         return schedule(getInstance()::isPressed, command.cancelUpon(getInstance()::isReleased));
     }
 
-    default T whileReleased(Command command){
+    default T whileReleased(Command command) {
         return schedule(getInstance()::isReleased, command.cancelUpon(getInstance()::isPressed));
     }
 
-    default T whilePressedOnce(Command command){
+    default T whilePressedOnce(Command command) {
         return schedule(getInstance()::isJustPressed, command.cancelUpon(getInstance()::isReleased));
     }
 
-    default T whilePressedContinuous(Command command){
+    default T whilePressedContinuous(Command command) {
         return schedule(getInstance()::isPressed, command);
     }
 
-    default T whileReleasedOnce(Command command){
+    default T whileReleasedOnce(Command command) {
         return schedule(getInstance()::isJustReleased, command.cancelUpon(getInstance()::isPressed));
     }
 
-    default T whenToggled(Command command){
+    default T whenToggled(Command command) {
         return schedule(getInstance()::isJustToggled, command);
     }
 
-    default T whenInverseToggled(Command command){
+    default T whenInverseToggled(Command command) {
         return schedule(getInstance()::isJustInverseToggled, command);
     }
 
-    default T whileToggled(Command command){
+    default T whileToggled(Command command) {
         return schedule(getInstance()::isToggled, command.cancelUpon(getInstance()::isInverseToggled));
     }
 
-    default T whileInverseToggled(Command command){
+    default T whileInverseToggled(Command command) {
         return schedule(getInstance()::isInverseToggled, command.cancelUpon(getInstance()::isToggled));
     }
 
@@ -67,7 +67,7 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
      * @param command The command to schedule
      * @return The instance
      */
-    default T schedule(BooleanSupplier condition, Command command){
+    default T schedule(BooleanSupplier condition, Command command) {
         CommandScheduler.getInstance().scheduleJoystick(command, condition);
         return getInstance();
     }
@@ -77,23 +77,22 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
      * @param command command
      * @return the instance
      */
-    default T schedule(Command command){
-        return schedule(()->true,command);
+    default T schedule(Command command) {
+        return schedule(() -> true, command);
     }
 
-    default T whenPressedReleased(Command press, Command release){
+    default T whenPressedReleased(Command press, Command release) {
         whenPressed(press);
         return whenReleased(release);
     }
 
-    default T whilePressedReleased(Command press, Command release){
+    default T whilePressedReleased(Command press, Command release) {
         whilePressed(press);
         return whileReleased(release);
     }
 
-    default T toggle(Command toggle, Command itoggle){
+    default T toggle(Command toggle, Command itoggle) {
         whenToggled(toggle);
         return whenInverseToggled(itoggle);
     }
-
 }

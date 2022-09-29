@@ -2,6 +2,10 @@ package com.technototes.path.subsystem;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.drive.DriveSignal;
 import com.acmerobotics.roadrunner.drive.MecanumDrive;
@@ -24,6 +28,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
+
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.IMU;
@@ -55,10 +60,6 @@ import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
 import com.technototes.path.trajectorysequence.TrajectorySequenceRunner;
 import com.technototes.path.util.LynxModuleUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 @SuppressWarnings("unused")
 public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem {
     public double speed = 1;
@@ -76,11 +77,8 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
     public final PIDFCoefficients MOTOR_VELO_PID;
 
     public final double WHEEL_RADIUS, GEAR_RATIO, TRACK_WIDTH, WHEEL_BASE, kV, kA, kStatic;
-
     public final double MAX_VEL, MAX_ACCEL, MAX_ANG_VEL, MAX_ANG_ACCEL;
-
     public final PIDCoefficients TRANSLATIONAL_PID, HEADING_PID;
-
     public final double LATERAL_MULTIPLIER, VX_WEIGHT, VY_WEIGHT, OMEGA_WEIGHT;
 
     public final int POSE_HISTORY_LIMIT;
@@ -92,31 +90,43 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
 
     private final TrajectoryFollower follower;
 
-
     protected DcMotorEx leftFront, leftRear, rightRear, rightFront;
     protected List<DcMotorEx> motors;
     protected IMU imu;
 
     protected VoltageSensor batteryVoltageSensor;
 
-
-    public MecanumDrivebaseSubsystem(EncodedMotor<DcMotorEx> fl, EncodedMotor<DcMotorEx> fr,
-                                     EncodedMotor<DcMotorEx> rl, EncodedMotor<DcMotorEx> rr,
-                                     IMU i, MecanumConstants c) {
+    public MecanumDrivebaseSubsystem(
+            EncodedMotor<DcMotorEx> fl,
+            EncodedMotor<DcMotorEx> fr,
+            EncodedMotor<DcMotorEx> rl,
+            EncodedMotor<DcMotorEx> rr,
+            IMU i,
+            MecanumConstants c) {
         this(fl, fr, rl, rr, i, c, null);
     }
 
-    public MecanumDrivebaseSubsystem(EncodedMotor<DcMotorEx> fl, EncodedMotor<DcMotorEx> fr,
-                                     EncodedMotor<DcMotorEx> rl, EncodedMotor<DcMotorEx> rr,
-                                     IMU i, MecanumConstants c, Localizer localizer) {
-        super(c.getDouble(KV.class), c.getDouble(KA.class), c.getDouble(KStatic.class), c.getDouble(TrackWidth.class), c.getDouble(WheelBase.class), c.getDouble(LateralMult.class));
+    public MecanumDrivebaseSubsystem(
+            EncodedMotor<DcMotorEx> fl,
+            EncodedMotor<DcMotorEx> fr,
+            EncodedMotor<DcMotorEx> rl,
+            EncodedMotor<DcMotorEx> rr,
+            IMU i,
+            MecanumConstants c,
+            Localizer localizer) {
+        super(
+                c.getDouble(KV.class),
+                c.getDouble(KA.class),
+                c.getDouble(KStatic.class),
+                c.getDouble(TrackWidth.class),
+                c.getDouble(WheelBase.class),
+                c.getDouble(LateralMult.class));
         leftFront = fl.getDevice();
         leftRear = rl.getDevice();
         rightRear = rr.getDevice();
         rightFront = fr.getDevice();
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
-
 
         TICKS_PER_REV = c.getDouble(TicksPerRev.class);
         MAX_RPM = c.getDouble(MaxRPM.class);
@@ -151,12 +161,13 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
         VEL_CONSTRAINT = getVelocityConstraint(MAX_VEL, MAX_ANG_VEL, TRACK_WIDTH);
         ACCEL_CONSTRAINT = getAccelerationConstraint(MAX_ACCEL);
 
-        follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID,
-                new Pose2d(0.5, 0.5, Math.toRadians(5.0)), 0.5);
+        follower = new HolonomicPIDVAFollower(
+                TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID, new Pose2d(0.5, 0.5, Math.toRadians(5.0)), 0.5);
 
         LynxModuleUtil.ensureMinimumFirmwareVersion(HardwareDevice.hardwareMap);
 
-        batteryVoltageSensor = HardwareDevice.hardwareMap.voltageSensor.iterator().next();
+        batteryVoltageSensor =
+                HardwareDevice.hardwareMap.voltageSensor.iterator().next();
 
         for (LynxModule module : HardwareDevice.hardwareMap.getAll(LynxModule.class)) {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
@@ -168,7 +179,6 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
         // TODO: if your hub is mounted vertically, remap the IMU axes so that the z-axis points
         // upward (normal to the floor) using a command like the following:
         // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
-
 
         for (DcMotorEx motor : motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
@@ -192,10 +202,9 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // TODO: if desired, use setLocalizer() to change the localization method
-        if(localizer != null) setLocalizer(localizer);
+        if (localizer != null) setLocalizer(localizer);
 
         trajectorySequenceRunner = new TrajectorySequenceRunner(follower, HEADING_PID);
-
     }
 
     public TrajectoryBuilder trajectoryBuilder(Pose2d startPose) {
@@ -211,11 +220,7 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
     }
 
     public TrajectorySequenceBuilder trajectorySequenceBuilder(Pose2d startPose) {
-        return new TrajectorySequenceBuilder(
-                startPose,
-                VEL_CONSTRAINT, ACCEL_CONSTRAINT,
-                MAX_ANG_VEL, MAX_ANG_ACCEL
-        );
+        return new TrajectorySequenceBuilder(startPose, VEL_CONSTRAINT, ACCEL_CONSTRAINT, MAX_ANG_VEL, MAX_ANG_ACCEL);
     }
 
     public TrajectorySequenceBuilder trajectorySequenceBuilder() {
@@ -224,10 +229,7 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
 
     public void turnAsync(double angle) {
         trajectorySequenceRunner.followTrajectorySequenceAsync(
-                trajectorySequenceBuilder(getPoseEstimate())
-                        .turn(angle)
-                        .build()
-        );
+                trajectorySequenceBuilder(getPoseEstimate()).turn(angle).build());
     }
 
     public void turn(double angle) {
@@ -237,11 +239,10 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
 
     public void followTrajectoryAsync(Trajectory trajectory) {
         if (trajectory == null) trajectorySequenceRunner.followTrajectorySequenceAsync(null);
-        else trajectorySequenceRunner.followTrajectorySequenceAsync(
-                trajectorySequenceBuilder(trajectory.start())
-                        .addTrajectory(trajectory)
-                        .build()
-        );
+        else
+            trajectorySequenceRunner.followTrajectorySequenceAsync(trajectorySequenceBuilder(trajectory.start())
+                    .addTrajectory(trajectory)
+                    .build());
     }
 
     public void followTrajectory(Trajectory trajectory) {
@@ -275,8 +276,7 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
     }
 
     public void waitForIdle() {
-        while (!Thread.currentThread().isInterrupted() && isBusy())
-            update();
+        while (!Thread.currentThread().isInterrupted() && isBusy()) update();
     }
 
     public boolean isBusy() {
@@ -297,9 +297,10 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
 
     public void setPIDFCoefficients(DcMotor.RunMode runMode, PIDFCoefficients coefficients) {
         PIDFCoefficients compensatedCoefficients = new PIDFCoefficients(
-                coefficients.p, coefficients.i, coefficients.d,
-                coefficients.f * 12 / batteryVoltageSensor.getVoltage()
-        );
+                coefficients.p,
+                coefficients.i,
+                coefficients.d,
+                coefficients.f * 12 / batteryVoltageSensor.getVoltage());
 
         for (DcMotorEx motor : motors) {
             motor.setPIDFCoefficients(runMode, compensatedCoefficients);
@@ -309,29 +310,28 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
     public void setWeightedDrivePower(Pose2d drivePower) {
         Pose2d vel = drivePower;
 
-        if (Math.abs(drivePower.getX()) + Math.abs(drivePower.getY())
-                + Math.abs(drivePower.getHeading()) > 1) {
+        if (Math.abs(drivePower.getX()) + Math.abs(drivePower.getY()) + Math.abs(drivePower.getHeading()) > 1) {
             // re-normalize the powers according to the weights
             double denom = VX_WEIGHT * Math.abs(drivePower.getX())
                     + VY_WEIGHT * Math.abs(drivePower.getY())
                     + OMEGA_WEIGHT * Math.abs(drivePower.getHeading());
 
             vel = new Pose2d(
-                    VX_WEIGHT * drivePower.getX(),
-                    VY_WEIGHT * drivePower.getY(),
-                    OMEGA_WEIGHT * drivePower.getHeading()
-            ).div(denom);
+                            VX_WEIGHT * drivePower.getX(),
+                            VY_WEIGHT * drivePower.getY(),
+                            OMEGA_WEIGHT * drivePower.getHeading())
+                    .div(denom);
         }
 
         setDrivePower(vel);
     }
 
-    @NonNull
-    @Override
+    @NonNull @Override
     public List<Double> getWheelPositions() {
         List<Double> wheelPositions = new ArrayList<>();
         for (DcMotorEx motor : motors) {
-            wheelPositions.add(MecanumConstants.encoderTicksToInches(motor.getCurrentPosition(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV));
+            wheelPositions.add(MecanumConstants.encoderTicksToInches(
+                    motor.getCurrentPosition(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV));
         }
         return wheelPositions;
     }
@@ -340,7 +340,8 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
     public List<Double> getWheelVelocities() {
         List<Double> wheelVelocities = new ArrayList<>();
         for (DcMotorEx motor : motors) {
-            wheelVelocities.add(MecanumConstants.encoderTicksToInches(motor.getVelocity(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV));
+            wheelVelocities.add(MecanumConstants.encoderTicksToInches(
+                    motor.getVelocity(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV));
         }
         return wheelVelocities;
     }
@@ -381,18 +382,17 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
         return (double) imu.getAngularVelocity().zRotationRate;
     }
 
-    public static TrajectoryVelocityConstraint getVelocityConstraint(double maxVel, double maxAngularVel, double trackWidth) {
+    public static TrajectoryVelocityConstraint getVelocityConstraint(
+            double maxVel, double maxAngularVel, double trackWidth) {
         return new MinVelocityConstraint(Arrays.asList(
-                new AngularVelocityConstraint(maxAngularVel),
-                new MecanumVelocityConstraint(maxVel, trackWidth)
-        ));
+                new AngularVelocityConstraint(maxAngularVel), new MecanumVelocityConstraint(maxVel, trackWidth)));
     }
 
     public static TrajectoryAccelerationConstraint getAccelerationConstraint(double maxAccel) {
         return new ProfileAccelerationConstraint(maxAccel);
     }
 
-    public void zeroExternalHeading(){
+    public void zeroExternalHeading() {
         setExternalHeading(0);
     }
 }

@@ -5,11 +5,9 @@ package com.technototes.library.command;
  */
 public abstract class CommandBase implements Command {
     @Override
-    public void execute() {
+    public void execute() {}
 
-    }
-
-    //also for parity
+    // also for parity
     @Override
     public boolean isFinished() {
         return false;

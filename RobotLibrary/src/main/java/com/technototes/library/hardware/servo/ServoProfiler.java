@@ -10,14 +10,16 @@ public class ServoProfiler {
     private double delta;
     private double proportion;
 
-    public static class Constraints{
+    public static class Constraints {
 
         public double maxVelocity, maxAcceleration, proportion;
-        public Constraints(double vel, double accel, double prop){
+
+        public Constraints(double vel, double accel, double prop) {
             maxVelocity = vel;
             maxAcceleration = accel;
             proportion = prop;
         }
+
         public double getMaxVelocity() {
             return maxVelocity;
         }
@@ -45,6 +47,7 @@ public class ServoProfiler {
         proportion = prop;
         return this;
     }
+
     public ServoProfiler setConstraints(Constraints c) {
         return setConstraints(c.maxVelocity, c.maxAcceleration, c.proportion);
     }
@@ -60,39 +63,39 @@ public class ServoProfiler {
         return this;
     }
 
-    public ServoProfiler translateTargetPosition(double translation){
-        return setTargetPosition(Range.clip(0,targetPosition+translation, 1));
-
+    public ServoProfiler translateTargetPosition(double translation) {
+        return setTargetPosition(Range.clip(0, targetPosition + translation, 1));
     }
 
     public ServoProfiler setTargetTolerance(double tolerance) {
         targetTolerance = tolerance;
         return this;
     }
-    //fun method to update servo
+    // fun method to update servo
     public ServoProfiler update() {
-        //if at the target dont do anything
+        // if at the target dont do anything
         if (isAtTarget()) return this;
         // set the past delta pos
         double pastDelta = delta;
-        //get the change in time, then reset the timer instantly
+        // get the change in time, then reset the timer instantly
         double deltaSec = deltaTime.seconds();
         deltaTime.reset();
 
-        //generate the new change in servo pos.
-        //range.clip makes the change fit the max constraints
+        // generate the new change in servo pos.
+        // range.clip makes the change fit the max constraints
         // the min and max make sure both constraints are hit
         // the deltasec makes it independent of looptime
-        delta = Range.clip(deltaSec * servoRange * proportion * (getTargetPosition() - getCurrentPosition()),
-                Math.max(pastDelta -maxAccel*deltaSec, -maxVel*deltaSec),
-                Math.min(pastDelta +maxAccel*deltaSec, maxVel*deltaSec));
-        servo.setPosition(getCurrentPosition()+delta/servoRange);
+        delta = Range.clip(
+                deltaSec * servoRange * proportion * (getTargetPosition() - getCurrentPosition()),
+                Math.max(pastDelta - maxAccel * deltaSec, -maxVel * deltaSec),
+                Math.min(pastDelta + maxAccel * deltaSec, maxVel * deltaSec));
+        servo.setPosition(getCurrentPosition() + delta / servoRange);
 
         return this;
     }
 
     public boolean isAtTarget() {
-        return Math.abs(getCurrentPosition()-getTargetPosition()) < targetTolerance;
+        return Math.abs(getCurrentPosition() - getTargetPosition()) < targetTolerance;
     }
 
     public double getCurrentPosition() {
@@ -118,5 +121,4 @@ public class ServoProfiler {
     public double getTargetTolerance() {
         return targetTolerance;
     }
-
 }

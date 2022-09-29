@@ -22,7 +22,7 @@ public class GamepadStick<T extends AxisBase, U extends ButtonBase> implements S
      * @param y The y joystick axis
      * @param b The joystick button
      */
-    public GamepadStick(T x, T y, U b){
+    public GamepadStick(T x, T y, U b) {
         xAxis = x;
         yAxis = y;
         stickButton = b;
@@ -30,7 +30,7 @@ public class GamepadStick<T extends AxisBase, U extends ButtonBase> implements S
 
     @Override
     public void periodic() {
-        if(isDisabled()) return;
+        if (isDisabled()) return;
         xAxis.periodic();
         yAxis.periodic();
         stickButton.periodic();

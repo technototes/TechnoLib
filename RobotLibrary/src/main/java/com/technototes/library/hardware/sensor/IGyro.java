@@ -9,7 +9,7 @@ public interface IGyro {
 
     void setHeading(double newHeading);
 
-    default void zero(){
+    default void zero() {
         setHeading(0);
     }
 }

@@ -2,6 +2,11 @@ package com.technototes.path.trajectorysequence;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.canvas.Canvas;
 import com.acmerobotics.dashboard.config.Config;
@@ -15,17 +20,12 @@ import com.acmerobotics.roadrunner.profile.MotionState;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.acmerobotics.roadrunner.trajectory.TrajectoryMarker;
 import com.acmerobotics.roadrunner.util.NanoClock;
+
 import com.technototes.path.trajectorysequence.sequencesegment.SequenceSegment;
 import com.technototes.path.trajectorysequence.sequencesegment.TrajectorySegment;
 import com.technototes.path.trajectorysequence.sequencesegment.TurnSegment;
 import com.technototes.path.trajectorysequence.sequencesegment.WaitSegment;
 import com.technototes.path.util.DashboardUtil;
-
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 
 @Config
 public class TrajectorySequenceRunner {
@@ -67,8 +67,8 @@ public class TrajectorySequenceRunner {
 
         clock = NanoClock.system();
 
-        if(DO_DASH) dashboard = FtcDashboard.getInstance();
-        if(dashboard!=null) dashboard.setTelemetryTransmissionInterval(25);
+        if (DO_DASH) dashboard = FtcDashboard.getInstance();
+        if (dashboard != null) dashboard.setTelemetryTransmissionInterval(25);
     }
 
     public void followTrajectorySequenceAsync(TrajectorySequence trajectorySequence) {
@@ -78,8 +78,7 @@ public class TrajectorySequenceRunner {
         lastSegmentIndex = -1;
     }
 
-    public @Nullable
-    DriveSignal update(Pose2d poseEstimate, Pose2d poseVelocity) {
+    public @Nullable DriveSignal update(Pose2d poseEstimate, Pose2d poseVelocity) {
         Pose2d targetPose = null;
         DriveSignal driveSignal = null;
 
@@ -96,8 +95,7 @@ public class TrajectorySequenceRunner {
                 currentTrajectorySequence = null;
             }
 
-            if (currentTrajectorySequence == null)
-                return new DriveSignal();
+            if (currentTrajectorySequence == null) return new DriveSignal();
 
             double now = clock.seconds();
             boolean isNewTransition = currentSegmentIndex != lastSegmentIndex;
@@ -123,8 +121,7 @@ public class TrajectorySequenceRunner {
             if (currentSegment instanceof TrajectorySegment) {
                 Trajectory currentTrajectory = ((TrajectorySegment) currentSegment).getTrajectory();
 
-                if (isNewTransition)
-                    follower.followTrajectory(currentTrajectory);
+                if (isNewTransition) follower.followTrajectory(currentTrajectory);
 
                 if (!follower.isFollowing()) {
                     currentSegmentIndex++;
@@ -137,7 +134,8 @@ public class TrajectorySequenceRunner {
 
                 targetPose = currentTrajectory.get(deltaTime);
             } else if (currentSegment instanceof TurnSegment) {
-                MotionState targetState = ((TurnSegment) currentSegment).getMotionProfile().get(deltaTime);
+                MotionState targetState =
+                        ((TurnSegment) currentSegment).getMotionProfile().get(deltaTime);
 
                 turnController.setTargetPosition(targetState.getX());
 
@@ -151,10 +149,8 @@ public class TrajectorySequenceRunner {
                 Pose2d startPose = currentSegment.getStartPose();
                 targetPose = startPose.copy(startPose.getX(), startPose.getY(), targetState.getX());
 
-                driveSignal = new DriveSignal(
-                        new Pose2d(0, 0, targetOmega + correction),
-                        new Pose2d(0, 0, targetAlpha)
-                );
+                driveSignal =
+                        new DriveSignal(new Pose2d(0, 0, targetOmega + correction), new Pose2d(0, 0, targetAlpha));
 
                 if (deltaTime >= currentSegment.getDuration()) {
                     currentSegmentIndex++;
@@ -171,7 +167,8 @@ public class TrajectorySequenceRunner {
                 }
             }
 
-            while (remainingMarkers.size() > 0 && deltaTime > remainingMarkers.get(0).getTime()) {
+            while (remainingMarkers.size() > 0
+                    && deltaTime > remainingMarkers.get(0).getTime()) {
                 remainingMarkers.get(0).getCallback().onMarkerReached();
                 remainingMarkers.remove(0);
             }
@@ -183,8 +180,7 @@ public class TrajectorySequenceRunner {
             poseHistory.removeFirst();
         }
 
-
-        if(DO_DASH){
+        if (DO_DASH) {
             TelemetryPacket packet = new TelemetryPacket();
             Canvas fieldOverlay = packet.fieldOverlay();
 
@@ -196,9 +192,10 @@ public class TrajectorySequenceRunner {
             packet.put("yError", getLastPoseError().getY());
             packet.put("headingError (deg)", Math.toDegrees(getLastPoseError().getHeading()));
 
-            if(dashboard!=null) draw(fieldOverlay, currentTrajectorySequence, currentSegment, targetPose, poseEstimate);
+            if (dashboard != null)
+                draw(fieldOverlay, currentTrajectorySequence, currentSegment, targetPose, poseEstimate);
 
-            if(dashboard!=null) dashboard.sendTelemetryPacket(packet);
+            if (dashboard != null) dashboard.sendTelemetryPacket(packet);
         }
 
         return driveSignal;
@@ -206,9 +203,10 @@ public class TrajectorySequenceRunner {
 
     private void draw(
             Canvas fieldOverlay,
-            TrajectorySequence sequence, SequenceSegment currentSegment,
-            Pose2d targetPose, Pose2d poseEstimate
-    ) {
+            TrajectorySequence sequence,
+            SequenceSegment currentSegment,
+            Pose2d targetPose,
+            Pose2d poseEstimate) {
         if (sequence != null) {
             for (int i = 0; i < sequence.size(); i++) {
                 SequenceSegment segment = sequence.get(i);
@@ -217,7 +215,9 @@ public class TrajectorySequenceRunner {
                     fieldOverlay.setStrokeWidth(1);
                     fieldOverlay.setStroke(COLOR_INACTIVE_TRAJECTORY);
 
-                    DashboardUtil.drawSampledPath(fieldOverlay, ((TrajectorySegment) segment).getTrajectory().getPath());
+                    DashboardUtil.drawSampledPath(
+                            fieldOverlay,
+                            ((TrajectorySegment) segment).getTrajectory().getPath());
                 } else if (segment instanceof TurnSegment) {
                     Pose2d pose = segment.getStartPose();
 

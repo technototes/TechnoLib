@@ -12,6 +12,7 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
      *
      */
     public static HardwareMap hardwareMap = null;
+
     protected T device;
 
     /** Make a hardware device
@@ -28,11 +29,11 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
      */
     @SuppressWarnings("unchecked cast")
     protected HardwareDevice(String deviceName) {
-         this(hardwareMap.get((Class<T>) com.qualcomm.robotcore.hardware.HardwareDevice.class /*T.class*/, deviceName));
+        this(hardwareMap.get((Class<T>) com.qualcomm.robotcore.hardware.HardwareDevice.class /*T.class*/, deviceName));
     }
 
     /** Get encapsulated device
-      * @return The device
+     * @return The device
      */
     public T getDevice() {
         return device;

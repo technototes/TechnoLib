@@ -7,11 +7,11 @@ public class CommandBinding extends CommandButton implements Binding<CommandInpu
     private CommandInput[] inputs;
     private Type defaultType;
 
-    public CommandBinding(CommandInput... b){
+    public CommandBinding(CommandInput... b) {
         this(Type.ALL_ACTIVE, b);
     }
 
-    public CommandBinding(Type type, CommandInput... b){
+    public CommandBinding(Type type, CommandInput... b) {
         super(null);
         inputs = b;
         defaultType = type;
@@ -27,5 +27,4 @@ public class CommandBinding extends CommandButton implements Binding<CommandInpu
     public Type getDefaultType() {
         return defaultType;
     }
-
 }

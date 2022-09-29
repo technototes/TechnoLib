@@ -16,7 +16,7 @@ public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
     public ServoGroup(Servo... servos) {
         super(servos[0].getDevice());
         super.setInverted(servos[0].getInverted());
-        followers = new Servo[servos.length-1];
+        followers = new Servo[servos.length - 1];
         System.arraycopy(servos, 1, followers, 0, followers.length);
     }
 
@@ -35,7 +35,7 @@ public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
 
     @Override
     public void propogate(double value) {
-        for(Servo s : followers){
+        for (Servo s : followers) {
             s.setPosition(value);
         }
     }

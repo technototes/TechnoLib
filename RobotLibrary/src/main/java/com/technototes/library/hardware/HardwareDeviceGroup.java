@@ -14,7 +14,7 @@ public interface HardwareDeviceGroup<T extends HardwareDevice> {
      */
     T[] getFollowers();
 
-    default List<T> getFollowerist(){
+    default List<T> getFollowerist() {
         return Arrays.asList(getFollowers());
     }
     /** Get all devices in group
@@ -23,7 +23,7 @@ public interface HardwareDeviceGroup<T extends HardwareDevice> {
      */
     T[] getAllDevices();
 
-    default List<T> getAllDeviceList(){
+    default List<T> getAllDeviceList() {
         return Arrays.asList(getAllDevices());
     }
 
@@ -31,5 +31,5 @@ public interface HardwareDeviceGroup<T extends HardwareDevice> {
      *
      * @param value the value to propogate
      */
-    default void propogate(double value){}
+    default void propogate(double value) {}
 }

@@ -1,12 +1,12 @@
 package com.technototes.path.util;
 
-import com.qualcomm.hardware.lynx.LynxModule;
-import com.qualcomm.robotcore.hardware.HardwareMap;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.firstinspires.ftc.robotcore.internal.system.Misc;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.qualcomm.hardware.lynx.LynxModule;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 /**
  * Collection of utilites for interacting with Lynx modules.
@@ -33,8 +33,7 @@ public class LynxModuleUtil {
         public boolean equals(Object other) {
             if (other instanceof LynxFirmwareVersion) {
                 LynxFirmwareVersion otherVersion = (LynxFirmwareVersion) other;
-                return major == otherVersion.major && minor == otherVersion.minor &&
-                        eng == otherVersion.eng;
+                return major == otherVersion.major && minor == otherVersion.minor && eng == otherVersion.eng;
             } else {
                 return false;
             }
@@ -76,10 +75,7 @@ public class LynxModuleUtil {
         try {
             // note: for now, we ignore the hardware entry
             return new LynxFirmwareVersion(
-                    Integer.parseInt(parts[3]),
-                    Integer.parseInt(parts[5]),
-                    Integer.parseInt(parts[7])
-            );
+                    Integer.parseInt(parts[3]), Integer.parseInt(parts[5]), Integer.parseInt(parts[7]));
         } catch (NumberFormatException e) {
             return null;
         }
@@ -111,11 +107,12 @@ public class LynxModuleUtil {
         if (outdatedModules.size() > 0) {
             StringBuilder msgBuilder = new StringBuilder();
             msgBuilder.append("One or more of the attached Lynx modules has outdated firmware\n");
-            msgBuilder.append(Misc.formatInvariant("Mandatory minimum firmware version for Road Runner: %s\n",
-                    MIN_VERSION.toString()));
+            msgBuilder.append(Misc.formatInvariant(
+                    "Mandatory minimum firmware version for Road Runner: %s\n", MIN_VERSION.toString()));
             for (Map.Entry<String, LynxFirmwareVersion> entry : outdatedModules.entrySet()) {
                 msgBuilder.append(Misc.formatInvariant(
-                        "\t%s: %s\n", entry.getKey(),
+                        "\t%s: %s\n",
+                        entry.getKey(),
                         entry.getValue() == null ? "Unknown" : entry.getValue().toString()));
             }
             throw new LynxFirmwareVersionException(msgBuilder.toString());

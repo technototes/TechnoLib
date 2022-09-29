@@ -1,14 +1,14 @@
 package com.technototes.path.subsystem;
 
-import com.acmerobotics.roadrunner.control.PIDCoefficients;
-import com.qualcomm.robotcore.hardware.PIDFCoefficients;
-
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
+
+import com.acmerobotics.roadrunner.control.PIDCoefficients;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 @SuppressWarnings("unused")
 @FunctionalInterface
@@ -19,11 +19,11 @@ public interface TankConstants {
     default double getDouble(Class<? extends Annotation> a) {
         for (Field f : getConstant().getFields()) {
             try {
-                if (f.isAnnotationPresent(a)){
-                    System.out.println(a.toString()+" as "+f.getDouble(null));
+                if (f.isAnnotationPresent(a)) {
+                    System.out.println(a.toString() + " as " + f.getDouble(null));
                     return f.getDouble(null);
                 }
-            }catch(IllegalAccessException e){
+            } catch (IllegalAccessException e) {
                 System.err.println(f.getType() + " is inaccessible for some reason");
             }
         }
@@ -33,11 +33,11 @@ public interface TankConstants {
     default int getInt(Class<? extends Annotation> a) {
         for (Field f : getConstant().getFields()) {
             try {
-                if (f.isAnnotationPresent(a)){
-                    System.out.println(a.toString()+" as "+f.getInt(null));
+                if (f.isAnnotationPresent(a)) {
+                    System.out.println(a.toString() + " as " + f.getInt(null));
                     return f.getInt(null);
                 }
-            }catch(IllegalAccessException e){
+            } catch (IllegalAccessException e) {
                 System.err.println(f.getType() + " is inaccessible for some reason");
             }
         }
@@ -47,24 +47,25 @@ public interface TankConstants {
     default boolean getBoolean(Class<? extends Annotation> a) {
         for (Field f : getConstant().getFields()) {
             try {
-                if (f.isAnnotationPresent(a)){
-                    System.out.println(a.toString()+" as "+f.getBoolean(null));
+                if (f.isAnnotationPresent(a)) {
+                    System.out.println(a.toString() + " as " + f.getBoolean(null));
                     return f.getBoolean(null);
                 }
-            }catch(IllegalAccessException e){
+            } catch (IllegalAccessException e) {
                 System.err.println(f.getType() + " is inaccessible for some reason");
             }
         }
         return false;
     }
+
     default PIDCoefficients getPID(Class<? extends Annotation> a) {
         for (Field f : getConstant().getFields()) {
             try {
-                if (f.isAnnotationPresent(a)){
-                    System.out.println(a.toString()+" as "+f.get(null));
+                if (f.isAnnotationPresent(a)) {
+                    System.out.println(a.toString() + " as " + f.get(null));
                     return (PIDCoefficients) f.get(null);
                 }
-            }catch(IllegalAccessException e){
+            } catch (IllegalAccessException e) {
                 System.err.println(f.getType() + " is inaccessible for some reason");
             }
         }
@@ -74,11 +75,11 @@ public interface TankConstants {
     default PIDFCoefficients getPIDF(Class<? extends Annotation> a) {
         for (Field f : getConstant().getFields()) {
             try {
-                if (f.isAnnotationPresent(a)){
-                    System.out.println(a.toString()+" as "+f.get(null));
+                if (f.isAnnotationPresent(a)) {
+                    System.out.println(a.toString() + " as " + f.get(null));
                     return (PIDFCoefficients) f.get(null);
                 }
-            }catch(IllegalAccessException e){
+            } catch (IllegalAccessException e) {
                 System.err.println(f.getType() + " is inaccessible for some reason");
             }
         }
@@ -87,11 +88,11 @@ public interface TankConstants {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface TicksPerRev{}
+    @interface TicksPerRev {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface MaxRPM{}
+    @interface MaxRPM {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
@@ -103,35 +104,35 @@ public interface TankConstants {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface WheelRadius{}
+    @interface WheelRadius {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface GearRatio{}
+    @interface GearRatio {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface TrackWidth{}
+    @interface TrackWidth {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface KV{}
+    @interface KV {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface KA{}
+    @interface KA {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface KStatic{}
+    @interface KStatic {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface MaxVelo{}
+    @interface MaxVelo {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface MaxAccel{}
+    @interface MaxAccel {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
@@ -143,32 +144,31 @@ public interface TankConstants {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface CrossPID{}
+    @interface CrossPID {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface AxialPID{}
+    @interface AxialPID {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface HeadPID{}
+    @interface HeadPID {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface LateralMult{}
+    @interface LateralMult {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface VXWeight{}
+    @interface VXWeight {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface OmegaWeight{}
+    @interface OmegaWeight {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
     @interface PoseLimit {}
-
 
     static double encoderTicksToInches(double ticks, double rad, double rat, double rev) {
         return rad * 2 * Math.PI * rat * ticks / rev;
@@ -181,5 +181,4 @@ public interface TankConstants {
     static double getMotorVelocityF(double ticksPerSecond) {
         return 32767 / ticksPerSecond;
     }
-
 }

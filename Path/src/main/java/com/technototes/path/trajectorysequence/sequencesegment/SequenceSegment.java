@@ -1,9 +1,9 @@
 package com.technototes.path.trajectorysequence.sequencesegment;
 
+import java.util.List;
+
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.TrajectoryMarker;
-
-import java.util.List;
 
 public abstract class SequenceSegment {
     private final double duration;
@@ -11,11 +11,7 @@ public abstract class SequenceSegment {
     private final Pose2d endPose;
     private final List<TrajectoryMarker> markers;
 
-    protected SequenceSegment(
-            double duration,
-            Pose2d startPose, Pose2d endPose,
-            List<TrajectoryMarker> markers
-    ) {
+    protected SequenceSegment(double duration, Pose2d startPose, Pose2d endPose, List<TrajectoryMarker> markers) {
         this.duration = duration;
         this.startPose = startPose;
         this.endPose = endPose;

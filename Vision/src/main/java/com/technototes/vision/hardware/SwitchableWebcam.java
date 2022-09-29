@@ -1,17 +1,17 @@
 package com.technototes.vision.hardware;
 
+import java.util.Arrays;
+
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvSwitchableWebcam;
 
 import com.technototes.library.hardware.DummyDevice;
 import com.technototes.library.hardware.HardwareDevice;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvSwitchableWebcam;
-
-import java.util.Arrays;
-
 @SuppressWarnings("unused")
-public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice<WebcamName[]>>{
+public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice<WebcamName[]>> {
 
     private final Webcam[] devices;
 
@@ -19,8 +19,11 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice
         super(new DummyDevice<>(device));
         devices = Arrays.stream(device).map(Webcam::new).toArray(Webcam[]::new);
     }
+
     public SwitchableWebcam(String... device) {
-        this(Arrays.stream(device).map((s)->hardwareMap.get(WebcamName.class, s)).toArray(WebcamName[]::new));
+        this(Arrays.stream(device)
+                .map((s) -> hardwareMap.get(WebcamName.class, s))
+                .toArray(WebcamName[]::new));
     }
 
     public SwitchableWebcam(Webcam... device) {
@@ -29,12 +32,16 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice
 
     @Override
     public OpenCvSwitchableWebcam createCamera() {
-        return OpenCvCameraFactory.getInstance().createSwitchableWebcam(
-                hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id",
-                        hardwareMap.appContext.getPackageName()), getDevice().get());
+        return OpenCvCameraFactory.getInstance()
+                .createSwitchableWebcam(
+                        hardwareMap
+                                .appContext
+                                .getResources()
+                                .getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName()),
+                        getDevice().get());
     }
 
-    public SwitchableWebcam setActiveCamera(Webcam w){
+    public SwitchableWebcam setActiveCamera(Webcam w) {
         return setActiveCamera(w.getDevice());
     }
 
@@ -47,14 +54,12 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice
         return setActiveCamera(hardwareMap.get(WebcamName.class, device));
     }
 
-
-    public Webcam getActiveCamera(){
-        for(Webcam c : devices){
-            if(c.openCvCamera == openCvCamera){
+    public Webcam getActiveCamera() {
+        for (Webcam c : devices) {
+            if (c.openCvCamera == openCvCamera) {
                 return c;
             }
         }
         return null;
     }
-
 }

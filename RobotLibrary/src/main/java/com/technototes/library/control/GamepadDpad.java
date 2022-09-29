@@ -44,7 +44,7 @@ public class GamepadDpad<T extends ButtonBase> implements Stick {
 
     @Override
     public void periodic() {
-        if(isDisabled()) return;
+        if (isDisabled()) return;
         up.periodic();
         down.periodic();
         left.periodic();

@@ -1,9 +1,9 @@
 package com.technototes.library.control;
 
-import com.technototes.library.command.Command;
-
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
+
+import com.technototes.library.command.Command;
 
 /** Class for command axis for the gamepad
  * @author Alex Stedman
@@ -13,7 +13,7 @@ public class CommandAxis extends AxisBase implements CommandInput<CommandAxis> {
      *
      * @param supplier The axis supplier
      */
-    public CommandAxis(DoubleSupplier supplier){
+    public CommandAxis(DoubleSupplier supplier) {
         super(supplier);
     }
 
@@ -22,7 +22,7 @@ public class CommandAxis extends AxisBase implements CommandInput<CommandAxis> {
      * @param supplier The axis supplier
      * @param threshold The threshold to trigger to make the axis behave as a button
      */
-    public CommandAxis(DoubleSupplier supplier, double threshold){
+    public CommandAxis(DoubleSupplier supplier, double threshold) {
         super(supplier, threshold);
     }
 
@@ -37,11 +37,11 @@ public class CommandAxis extends AxisBase implements CommandInput<CommandAxis> {
         return this;
     }
 
-    public CommandAxis schedulePressed(Function<DoubleSupplier, Command> f){
+    public CommandAxis schedulePressed(Function<DoubleSupplier, Command> f) {
         return whilePressed(f.apply(this));
     }
 
-    public CommandAxis schedule(Function<Double, Command> f){
+    public CommandAxis schedule(Function<Double, Command> f) {
         return schedule(f.apply(this.getAsDouble()));
     }
 
@@ -50,11 +50,11 @@ public class CommandAxis extends AxisBase implements CommandInput<CommandAxis> {
         return (CommandAxis) super.setInverted(invert);
     }
 
-    public CommandButton getAsButton(){
+    public CommandButton getAsButton() {
         return new CommandButton(this);
     }
-    public CommandButton getAsButton(double threshold){
-        return new CommandButton(()->threshold >= 0 ? getAsDouble() >= threshold : getAsDouble() < threshold);
-    }
 
+    public CommandButton getAsButton(double threshold) {
+        return new CommandButton(() -> threshold >= 0 ? getAsDouble() >= threshold : getAsDouble() < threshold);
+    }
 }

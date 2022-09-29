@@ -1,6 +1,7 @@
 package com.technototes.library.hardware.motor;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
 import com.technototes.library.hardware.HardwareDeviceGroup;
 
 /** Class for a group of motors
@@ -18,11 +19,9 @@ public class MotorGroup<T extends DcMotorSimple> extends Motor<T> implements Har
     @SafeVarargs
     public MotorGroup(Motor<T>... motors) {
         super(motors[0].getDevice());
-        followers = new Motor[motors.length-1];
+        followers = new Motor[motors.length - 1];
         System.arraycopy(motors, 1, followers, 0, followers.length);
     }
-
-
 
     @Override
     public Motor<T>[] getFollowers() {
@@ -39,7 +38,7 @@ public class MotorGroup<T extends DcMotorSimple> extends Motor<T> implements Har
 
     @Override
     public void propogate(double value) {
-        for(Motor m : followers){
+        for (Motor m : followers) {
             m.setSpeed(value);
         }
     }

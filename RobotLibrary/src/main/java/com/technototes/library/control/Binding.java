@@ -11,15 +11,14 @@ public interface Binding<T extends BooleanSupplier> extends BooleanSupplier {
      *
      */
     enum Type {
-        NONE_ACTIVE, SOME_ACTIVE, ALL_ACTIVE
-
+        NONE_ACTIVE,
+        SOME_ACTIVE,
+        ALL_ACTIVE
     }
-
 
     T[] getSuppliers();
 
     Type getDefaultType();
-
 
     @Override
     default boolean getAsBoolean() {
@@ -31,28 +30,26 @@ public interface Binding<T extends BooleanSupplier> extends BooleanSupplier {
      * @param type The type to get boolean as
      * @return If the binding meets the criteria
      */
-    default boolean get(Type type){
-        boolean on=false, off=getSuppliers().length==0;
-        for(T s : getSuppliers()){
-            if(s.getAsBoolean()){
-                on=true;
-            }else{
-                off=true;
+    default boolean get(Type type) {
+        boolean on = false, off = getSuppliers().length == 0;
+        for (T s : getSuppliers()) {
+            if (s.getAsBoolean()) {
+                on = true;
+            } else {
+                off = true;
             }
         }
-        switch (type){
+        switch (type) {
             case NONE_ACTIVE:
                 return !on;
             case ALL_ACTIVE:
                 return !off;
             default:
                 return on;
-
         }
-
     }
-    default boolean get(){
+
+    default boolean get() {
         return get(getDefaultType());
     }
-
 }

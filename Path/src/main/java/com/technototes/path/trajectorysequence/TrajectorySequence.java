@@ -1,11 +1,11 @@
 package com.technototes.path.trajectorysequence;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.technototes.path.trajectorysequence.sequencesegment.SequenceSegment;
-
-
 import java.util.Collections;
 import java.util.List;
+
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+
+import com.technototes.path.trajectorysequence.sequencesegment.SequenceSegment;
 
 public class TrajectorySequence {
     private final List<SequenceSegment> sequenceList;

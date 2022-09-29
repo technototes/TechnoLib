@@ -1,8 +1,8 @@
 package com.technototes.library.control;
 
-import com.technototes.library.general.Periodic;
-
 import java.util.function.DoubleSupplier;
+
+import com.technototes.library.general.Periodic;
 
 /** The class to extend custom gamepad axis from
  * @author Alex Stedman
@@ -12,6 +12,7 @@ public class AxisBase extends ButtonBase implements DoubleSupplier, Periodic {
      *
      */
     public static final double DEFAULT_TRIGGER_THRESHOLD = 0.05;
+
     private double triggerThreshold;
     protected DoubleSupplier doubleSupplier;
 
@@ -19,7 +20,7 @@ public class AxisBase extends ButtonBase implements DoubleSupplier, Periodic {
      *
      * @param d The supplier to make the axis around
      */
-    public AxisBase(DoubleSupplier d){
+    public AxisBase(DoubleSupplier d) {
         this(d, DEFAULT_TRIGGER_THRESHOLD);
     }
     /** Make a GamepadAxis with the supplier and the threshold for the stick to behave as a button
@@ -27,12 +28,11 @@ public class AxisBase extends ButtonBase implements DoubleSupplier, Periodic {
      * @param d The supplier to make the axis around
      * @param t The threshold
      */
-    public AxisBase(DoubleSupplier d, double t){
-        super(() -> Math.abs(d.getAsDouble())>=t);
+    public AxisBase(DoubleSupplier d, double t) {
+        super(() -> Math.abs(d.getAsDouble()) >= t);
         doubleSupplier = d;
         triggerThreshold = t;
     }
-
 
     /** Returns the double from the axis
      *
@@ -40,7 +40,7 @@ public class AxisBase extends ButtonBase implements DoubleSupplier, Periodic {
      */
     @Override
     public double getAsDouble() {
-        if(isDisabled()) return 0;
+        if (isDisabled()) return 0;
         return getInverted() ? -doubleSupplier.getAsDouble() : doubleSupplier.getAsDouble();
     }
 
@@ -55,7 +55,7 @@ public class AxisBase extends ButtonBase implements DoubleSupplier, Periodic {
     /** Set threshold
      * @param threshold the new threshold
      */
-    public AxisBase setTriggerThreshold(double threshold){
+    public AxisBase setTriggerThreshold(double threshold) {
         triggerThreshold = threshold;
         return this;
     }

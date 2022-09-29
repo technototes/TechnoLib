@@ -6,21 +6,19 @@ import com.technototes.library.general.Periodic;
 
 public interface Subsystem extends Periodic {
 
-    default void register(){
+    default void register() {
         CommandScheduler.getInstance().register(this);
     }
 
-    default Subsystem setDefaultCommand(Command c){
+    default Subsystem setDefaultCommand(Command c) {
         CommandScheduler.getInstance().scheduleDefault(c, this);
         return this;
     }
 
-    default Command getDefaultCommand(){
+    default Command getDefaultCommand() {
         return CommandScheduler.getInstance().getDefault(this);
     }
 
     @Override
-    default void periodic(){
-
-    }
+    default void periodic() {}
 }

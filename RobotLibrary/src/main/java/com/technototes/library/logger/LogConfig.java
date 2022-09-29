@@ -12,15 +12,14 @@ import java.lang.annotation.Target;
  * @author Alex Stedman
  */
 @Retention(RetentionPolicy.RUNTIME)
-
 public @interface LogConfig {
 
     /** Annotation for determining when logged item will be sent to Telemetry
      *
      */
     @Retention(RetentionPolicy.RUNTIME)
-    @Target(value={FIELD, LOCAL_VARIABLE, METHOD})
-    @interface Run{
+    @Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+    @interface Run {
         /** Run the log during the teleop Period
          *
          * @return The above condition
@@ -31,15 +30,14 @@ public @interface LogConfig {
          * @return The above condition
          */
         boolean duringInit() default false;
-
     }
 
     /** Annotation for Whitelisting Opmodes to log this item
      *
      */
     @Retention(RetentionPolicy.RUNTIME)
-    @Target(value={FIELD, LOCAL_VARIABLE, METHOD})
-    @interface Whitelist{
+    @Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+    @interface Whitelist {
         /** The whitelisted opmodes
          *
          * @return Opmode Classes
@@ -50,8 +48,8 @@ public @interface LogConfig {
      *
      */
     @Retention(RetentionPolicy.RUNTIME)
-    @Target(value={FIELD, LOCAL_VARIABLE, METHOD})
-    @interface Blacklist{
+    @Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+    @interface Blacklist {
         /** The blacklisted opmodes
          *
          * @return Opmode Classes
@@ -63,9 +61,6 @@ public @interface LogConfig {
      *
      */
     @Retention(RetentionPolicy.RUNTIME)
-    @Target(value={FIELD, LOCAL_VARIABLE, METHOD})
-    @interface Disabled{
-
-    }
-
+    @Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+    @interface Disabled {}
 }

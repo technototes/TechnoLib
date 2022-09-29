@@ -1,14 +1,25 @@
 package com.technototes.library.logger.entry;
 
+import java.util.function.Supplier;
+
 import com.technototes.library.logger.Logger;
 import com.technototes.library.util.Color;
-
-import java.util.function.Supplier;
 
 public class NumberSliderEntry extends NumberEntry {
     protected Number min, max, scale;
     protected Color primary, secondary, tertiary;
-    public NumberSliderEntry(String n, Supplier<Number> s, int x, Number mi, Number ma, Number sc, Color c, Color pr, Color sec, Color tert) {
+
+    public NumberSliderEntry(
+            String n,
+            Supplier<Number> s,
+            int x,
+            Number mi,
+            Number ma,
+            Number sc,
+            Color c,
+            Color pr,
+            Color sec,
+            Color tert) {
         super(n, s, x, c);
         min = mi;
         max = ma;
@@ -17,27 +28,31 @@ public class NumberSliderEntry extends NumberEntry {
         secondary = sec;
         tertiary = tert;
     }
-    public double min(){
+
+    public double min() {
         return min.doubleValue();
     }
-    public double max(){
+
+    public double max() {
         return max.doubleValue();
     }
-    public double scale(){
+
+    public double scale() {
         return scale.doubleValue();
     }
 
-    public double getDouble(){
+    public double getDouble() {
         return get().doubleValue();
     }
+
     @Override
     public String toString() {
         StringBuilder r = new StringBuilder(secondary.format("["));
-        int totalAmt = (int)((max()-min())/scale());
-        int fullAmt = (int)(Math.round((getDouble()-min())/scale()));
+        int totalAmt = (int) ((max() - min()) / scale());
+        int fullAmt = (int) (Math.round((getDouble() - min()) / scale()));
         r.append(tertiary.format(Logger.repeat("━", fullAmt)));
         r.append(primary.format("█"));
-        r.append(tertiary.format(Logger.repeat("━", totalAmt-fullAmt)));
+        r.append(tertiary.format(Logger.repeat("━", totalAmt - fullAmt)));
         r.append(secondary.format("]"));
         return r.toString();
     }

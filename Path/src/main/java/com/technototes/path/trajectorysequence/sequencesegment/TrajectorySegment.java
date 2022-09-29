@@ -1,8 +1,8 @@
 package com.technototes.path.trajectorysequence.sequencesegment;
 
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
-
 import java.util.Collections;
+
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 
 public final class TrajectorySegment extends SequenceSegment {
     private final Trajectory trajectory;

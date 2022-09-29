@@ -1,8 +1,8 @@
 package com.technototes.path.util;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+
+import com.qualcomm.hardware.bosch.BNO055IMU;
 
 /**
  * Various utility functions for the BNO055 IMU.

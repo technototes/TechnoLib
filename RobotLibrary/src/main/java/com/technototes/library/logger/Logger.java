@@ -1,15 +1,5 @@
 package com.technototes.library.logger;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.technototes.library.logger.entry.BooleanEntry;
-import com.technototes.library.logger.entry.Entry;
-import com.technototes.library.logger.entry.NumberBarEntry;
-import com.technototes.library.logger.entry.NumberEntry;
-import com.technototes.library.logger.entry.NumberSliderEntry;
-import com.technototes.library.logger.entry.StringEntry;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -23,6 +13,17 @@ import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;
 import java.util.function.Supplier;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+
+import com.technototes.library.logger.entry.BooleanEntry;
+import com.technototes.library.logger.entry.Entry;
+import com.technototes.library.logger.entry.NumberBarEntry;
+import com.technototes.library.logger.entry.NumberEntry;
+import com.technototes.library.logger.entry.NumberSliderEntry;
+import com.technototes.library.logger.entry.StringEntry;
 
 /**
  * The class to manage logging
@@ -56,7 +57,6 @@ public class Logger {
         configure(op);
         runEntries = generate(unindexedRunEntries);
         initEntries = generate(unindexedInitEntries);
-
     }
 
     private void configure(Object root) {
@@ -66,8 +66,10 @@ public class Logger {
                 if (isFieldAllowed(field)) {
                     if (o instanceof Loggable) {
                         configure(o);
-                    } else if (field.isAnnotationPresent(Log.class) || field.isAnnotationPresent(Log.Number.class) ||
-                            field.isAnnotationPresent(Log.NumberSlider.class) || field.isAnnotationPresent(Log.NumberBar.class)
+                    } else if (field.isAnnotationPresent(Log.class)
+                            || field.isAnnotationPresent(Log.Number.class)
+                            || field.isAnnotationPresent(Log.NumberSlider.class)
+                            || field.isAnnotationPresent(Log.NumberBar.class)
                             || field.isAnnotationPresent(Log.Boolean.class)) {
                         if (field.getType().isPrimitive() || o instanceof String) {
                             set(field.getDeclaredAnnotations(), field, root);
@@ -87,8 +89,8 @@ public class Logger {
         }
     }
 
-    //TODO make list and do sort with comparators
-    //List<List<Entry<?>>
+    // TODO make list and do sort with comparators
+    // List<List<Entry<?>>
     private Entry<?>[] generate(Set<Entry<?>> a) {
         Entry<?>[] returnEntry = new Entry[10];
         List<Entry<?>> unindexed = new ArrayList<>();
@@ -117,18 +119,18 @@ public class Logger {
         }
 
         return returnEntry;
-
     }
-
 
     private void update(Entry<?>[] choice) {
         try {
             for (int i = 0; i < choice.length; i++) {
-                telemetry.addLine((i > 9 ? i + "| " : i + " | ") + (choice[i] == null ? "" :
-                        choice[i].getTag().replace('`', captionDivider) + choice[i].toString()));
+                telemetry.addLine((i > 9 ? i + "| " : i + " | ")
+                        + (choice[i] == null
+                                ? ""
+                                : choice[i].getTag().replace('`', captionDivider) + choice[i].toString()));
             }
             telemetry.update();
-        }catch(Exception ignored){
+        } catch (Exception ignored) {
 
         }
     }
@@ -168,46 +170,72 @@ public class Logger {
             return null;
         });
     }
+
     @SuppressWarnings({"unchecked"})
     private void set(Annotation[] a, Supplier<?> m) {
         boolean init = false, run = true;
         Entry<?> e = null;
         for (Annotation as : a) {
             if (as instanceof Log.NumberSlider) {
-                e = new NumberSliderEntry(((Log.NumberSlider) as).name(), (Supplier<Number>) m,
-                        ((Log.NumberSlider) as).index(), ((Log.NumberSlider) as).min(),
-                        ((Log.NumberSlider) as).max(), ((Log.NumberSlider) as).scale(),
-                        ((Log.NumberSlider) as).color(), ((Log.NumberSlider) as).sliderBackground(),
-                        ((Log.NumberSlider) as).outline(), ((Log.NumberSlider) as).slider());
+                e = new NumberSliderEntry(
+                        ((Log.NumberSlider) as).name(),
+                        (Supplier<Number>) m,
+                        ((Log.NumberSlider) as).index(),
+                        ((Log.NumberSlider) as).min(),
+                        ((Log.NumberSlider) as).max(),
+                        ((Log.NumberSlider) as).scale(),
+                        ((Log.NumberSlider) as).color(),
+                        ((Log.NumberSlider) as).sliderBackground(),
+                        ((Log.NumberSlider) as).outline(),
+                        ((Log.NumberSlider) as).slider());
                 e.setPriority(((Log.NumberSlider) as).priority());
             } else if (as instanceof Log.NumberBar) {
-                e = new NumberBarEntry(((Log.NumberBar) as).name(), (Supplier<Number>) m,
-                        ((Log.NumberBar) as).index(), ((Log.NumberBar) as).min(),
-                        ((Log.NumberBar) as).max(), ((Log.NumberBar) as).scale(),
-                        ((Log.NumberBar) as).color(), ((Log.NumberBar) as).completeBarColor(),
-                        ((Log.NumberBar) as).outline(), ((Log.NumberBar) as).incompleteBarColor());
+                e = new NumberBarEntry(
+                        ((Log.NumberBar) as).name(),
+                        (Supplier<Number>) m,
+                        ((Log.NumberBar) as).index(),
+                        ((Log.NumberBar) as).min(),
+                        ((Log.NumberBar) as).max(),
+                        ((Log.NumberBar) as).scale(),
+                        ((Log.NumberBar) as).color(),
+                        ((Log.NumberBar) as).completeBarColor(),
+                        ((Log.NumberBar) as).outline(),
+                        ((Log.NumberBar) as).incompleteBarColor());
                 e.setPriority(((Log.NumberBar) as).priority());
             } else if (as instanceof Log.Number) {
-                e = new NumberEntry(((Log.Number) as).name(), (Supplier<Number>) m,
-                        ((Log.Number) as).index(), ((Log.Number) as).color(),
+                e = new NumberEntry(
+                        ((Log.Number) as).name(),
+                        (Supplier<Number>) m,
+                        ((Log.Number) as).index(),
+                        ((Log.Number) as).color(),
                         ((Log.Number) as).numberColor());
                 e.setPriority(((Log.Number) as).priority());
             } else if (as instanceof Log) {
-                e = new StringEntry(((Log) as).name(), (Supplier<String>) m,
-                        ((Log) as).index(), ((Log) as).color(), ((Log) as).format(), ((Log) as).entryColor());
+                e = new StringEntry(
+                        ((Log) as).name(),
+                        (Supplier<String>) m,
+                        ((Log) as).index(),
+                        ((Log) as).color(),
+                        ((Log) as).format(),
+                        ((Log) as).entryColor());
                 e.setPriority(((Log) as).priority());
             } else if (as instanceof Log.Boolean) {
-                e = new BooleanEntry(((Log.Boolean) as).name(), (Supplier<Boolean>) m, ((Log.Boolean) as).index(),
-                        ((Log.Boolean) as).trueValue(), ((Log.Boolean) as).falseValue(),
-                        ((Log.Boolean) as).color(), ((Log.Boolean) as).trueFormat(),
-                        ((Log.Boolean) as).falseFormat(), ((Log.Boolean) as).trueColor(),
+                e = new BooleanEntry(
+                        ((Log.Boolean) as).name(),
+                        (Supplier<Boolean>) m,
+                        ((Log.Boolean) as).index(),
+                        ((Log.Boolean) as).trueValue(),
+                        ((Log.Boolean) as).falseValue(),
+                        ((Log.Boolean) as).color(),
+                        ((Log.Boolean) as).trueFormat(),
+                        ((Log.Boolean) as).falseFormat(),
+                        ((Log.Boolean) as).trueColor(),
                         ((Log.Boolean) as).falseColor());
                 e.setPriority(((Log.Boolean) as).priority());
             } else if (as instanceof LogConfig.Run) {
                 init = ((LogConfig.Run) as).duringInit();
                 run = ((LogConfig.Run) as).duringRun();
             }
-
         }
         if (e != null) {
             if (init) {
@@ -227,12 +255,11 @@ public class Logger {
      * @return The String s repeated num times
      */
     public static String repeat(String s, int num) {
-        if(num > 100) {
+        if (num > 100) {
             System.err.println("One of the entries is too long, make sure your scaling is correct");
             num = 100;
-         }
+        }
         return num > 0 ? repeat(s, num - 1) + s : "";
-
     }
 
     private static Supplier<?> getCustom(Object o) {
@@ -244,12 +271,12 @@ public class Logger {
             return ((IntSupplier) o)::getAsInt;
         } else if (o instanceof DoubleSupplier) {
             return ((DoubleSupplier) o)::getAsDouble;
-        } else if(o instanceof Integer){
-            return ()-> (Integer) o;
-        } else if(o instanceof Double){
-            return ()-> (Double) o;
-        } else if(o instanceof Boolean){
-            return ()-> (Boolean) o;
+        } else if (o instanceof Integer) {
+            return () -> (Integer) o;
+        } else if (o instanceof Double) {
+            return () -> (Double) o;
+        } else if (o instanceof Boolean) {
+            return () -> (Boolean) o;
         } else {
             return null;
         }
@@ -257,12 +284,14 @@ public class Logger {
 
     private boolean isFieldAllowed(Field f) {
         if (f.isAnnotationPresent(LogConfig.Whitelist.class)) {
-            if (!Arrays.asList(f.getAnnotation(LogConfig.Whitelist.class).value()).contains(opMode.getClass())) {
+            if (!Arrays.asList(f.getAnnotation(LogConfig.Whitelist.class).value())
+                    .contains(opMode.getClass())) {
                 return false;
             }
         }
         if (f.isAnnotationPresent(LogConfig.Blacklist.class)) {
-            if (Arrays.asList(f.getAnnotation(LogConfig.Blacklist.class).value()).contains(opMode.getClass())) {
+            if (Arrays.asList(f.getAnnotation(LogConfig.Blacklist.class).value())
+                    .contains(opMode.getClass())) {
                 return false;
             }
         }

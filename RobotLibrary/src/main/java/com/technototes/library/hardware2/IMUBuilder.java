@@ -1,11 +1,11 @@
 package com.technototes.library.hardware2;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.BNO055IMUImpl;
+import java.util.function.Consumer;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 
-import java.util.function.Consumer;
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 
 public class IMUBuilder extends HardwareBuilder<BNO055IMU> {
 
@@ -28,7 +28,6 @@ public class IMUBuilder extends HardwareBuilder<BNO055IMU> {
 
     private BNO055IMU.Parameters parameters;
 
-
     public IMUBuilder(String name) {
         super(name);
         parameters = new BNO055IMU.Parameters();
@@ -39,17 +38,17 @@ public class IMUBuilder extends HardwareBuilder<BNO055IMU> {
         parameters = new BNO055IMU.Parameters();
     }
 
-    public IMUBuilder parameter(Consumer<BNO055IMU.Parameters> consumer){
+    public IMUBuilder parameter(Consumer<BNO055IMU.Parameters> consumer) {
         consumer.accept(parameters);
         return this;
     }
 
-    public IMUBuilder degrees(){
+    public IMUBuilder degrees() {
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         return this;
     }
 
-    public IMUBuilder radians(){
+    public IMUBuilder radians() {
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
         return this;
     }
@@ -87,7 +86,6 @@ public class IMUBuilder extends HardwareBuilder<BNO055IMU> {
         parameters = product.getParameters();
         return this;
     }
-
 
     @Override
     public <U extends BNO055IMU> U build() {

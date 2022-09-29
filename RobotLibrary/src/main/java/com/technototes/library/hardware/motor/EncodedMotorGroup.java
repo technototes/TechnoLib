@@ -1,13 +1,15 @@
 package com.technototes.library.hardware.motor;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
 import com.technototes.library.hardware.HardwareDeviceGroup;
 
 /** Class for encoded motor groups
  * @author Alex Stedman
  */
 @SuppressWarnings("unused")
-public class EncodedMotorGroup<T extends DcMotorSimple> extends EncodedMotor<T> implements HardwareDeviceGroup<Motor<T>> {
+public class EncodedMotorGroup<T extends DcMotorSimple> extends EncodedMotor<T>
+        implements HardwareDeviceGroup<Motor<T>> {
     private final Motor<T>[] followers;
 
     /** Create an encoded motor groupM
@@ -18,7 +20,6 @@ public class EncodedMotorGroup<T extends DcMotorSimple> extends EncodedMotor<T> 
     public EncodedMotorGroup(EncodedMotor<T> leader, Motor<T>... followers) {
         super(leader.getDevice());
         this.followers = followers;
-
     }
 
     @Override
@@ -28,7 +29,7 @@ public class EncodedMotorGroup<T extends DcMotorSimple> extends EncodedMotor<T> 
 
     @Override
     public Motor<T>[] getAllDevices() {
-        Motor<T>[] m =  new Motor[followers.length + 1];
+        Motor<T>[] m = new Motor[followers.length + 1];
         m[0] = this;
         System.arraycopy(followers, 0, m, 1, m.length - 1);
         return m;
@@ -36,7 +37,7 @@ public class EncodedMotorGroup<T extends DcMotorSimple> extends EncodedMotor<T> 
 
     @Override
     public void propogate(double value) {
-        for(Motor<T> m : followers){
+        for (Motor<T> m : followers) {
             m.setSpeed(value);
         }
     }

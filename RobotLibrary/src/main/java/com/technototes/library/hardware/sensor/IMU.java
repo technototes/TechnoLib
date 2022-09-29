@@ -1,19 +1,18 @@
 package com.technototes.library.hardware.sensor;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.BNO055IMUImpl;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 
 /** Class for imus
  *
  */
 @SuppressWarnings("unused")
 public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
-
 
     private double angleOffset = 0;
 
@@ -33,7 +32,6 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
             this.bVal = bVal;
         }
     }
-
 
     private BNO055IMU.Parameters parameters;
 
@@ -63,7 +61,7 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      *
      * @return this
      */
-    public IMU degrees(){
+    public IMU degrees() {
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         return this;
     }
@@ -71,12 +69,12 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      *
      * @return this
      */
-    public IMU radians(){
+    public IMU radians() {
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
         return this;
     }
 
-    public IMU initialize(){
+    public IMU initialize() {
         getDevice().initialize(parameters);
         return this;
     }
@@ -89,8 +87,9 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
     public double gyroHeading() {
         return getAngularOrientation().firstAngle;
     }
+
     public double gyroHeading(AngleUnit unit) {
-        return unit.fromUnit(device.getAngularOrientation().angleUnit, gyroHeading()-angleOffset);
+        return unit.fromUnit(device.getAngularOrientation().angleUnit, gyroHeading() - angleOffset);
     }
 
     @Override
@@ -105,7 +104,7 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
 
     @Override
     public void setHeading(double newHeading) {
-        angleOffset = gyroHeading()-newHeading;
+        angleOffset = gyroHeading() - newHeading;
     }
 
     public IMU remapAxes(AxesOrder order, AxesSigns signs) {
@@ -142,12 +141,11 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
         return this;
     }
 
-    public AngularVelocity getAngularVelocity(){
+    public AngularVelocity getAngularVelocity() {
         return device.getAngularVelocity();
     }
 
-    public Orientation getAngularOrientation(){
+    public Orientation getAngularOrientation() {
         return device.getAngularOrientation();
     }
-
 }

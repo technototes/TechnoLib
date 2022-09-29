@@ -4,7 +4,7 @@ package com.technototes.library.general;
  * @author Alex Stedman
  */
 @SuppressWarnings("unused")
-public interface Invertable<T extends Invertable<T>>{
+public interface Invertable<T extends Invertable<T>> {
     /** Set the inversion
      *
      * @param invert Inversion to set
@@ -16,7 +16,7 @@ public interface Invertable<T extends Invertable<T>>{
      *
      * @return this
      */
-    default T invert(){
+    default T invert() {
         return setInverted(!getInverted());
     }
 

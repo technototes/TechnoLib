@@ -1,16 +1,16 @@
 package com.technototes.vision.subsystem;
 
+import org.openftc.easyopencv.OpenCvCameraRotation;
+
 import com.technototes.library.subsystem.Subsystem;
 import com.technototes.vision.hardware.Camera;
-
-import org.openftc.easyopencv.OpenCvCameraRotation;
 
 @SuppressWarnings("unused")
 public class PipelineSubsystem implements Subsystem {
 
     protected Camera camera;
 
-    public PipelineSubsystem(Camera c){
+    public PipelineSubsystem(Camera c) {
         camera = c;
     }
 
@@ -18,10 +18,9 @@ public class PipelineSubsystem implements Subsystem {
         return camera;
     }
 
-
     public PipelineSubsystem startStreaming(int width, int height) {
-         camera.startStreaming(width, height);
-         return this;
+        camera.startStreaming(width, height);
+        return this;
     }
 
     public PipelineSubsystem startStreaming(int width, int height, OpenCvCameraRotation rotation) {
@@ -29,9 +28,8 @@ public class PipelineSubsystem implements Subsystem {
         return this;
     }
 
-    public PipelineSubsystem stopStreaming(){
+    public PipelineSubsystem stopStreaming() {
         camera.stopStreaming();
         return this;
     }
-
 }

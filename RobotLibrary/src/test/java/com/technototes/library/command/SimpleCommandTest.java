@@ -17,6 +17,7 @@ public class SimpleCommandTest {
         public void initialize() {
             initialized++;
         }
+
         @Override
         public void execute() {
             executed++;
@@ -32,7 +33,7 @@ public class SimpleCommandTest {
     }
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         CommandScheduler.resetScheduler();
     }
 
@@ -69,10 +70,10 @@ public class SimpleCommandTest {
         CommandScheduler.getInstance().run();
 
         /* KBF: This is a little odd. For reasons that are obvious in the code,
-                the initialized state exists only before first execution, but not between command
-                scheduler runs. The odd thing is that we have to run the command scheduler twice
-                before the scheduler inits & executes the command. I should dig into this. Later.
-         */
+               the initialized state exists only before first execution, but not between command
+               scheduler runs. The odd thing is that we have to run the command scheduler twice
+               before the scheduler inits & executes the command. I should dig into this. Later.
+        */
 
         // ?? The second run after scheduling a command initializes the command
         // see above
@@ -164,5 +165,4 @@ public class SimpleCommandTest {
         assertEquals(3, command.ended);
         assertEquals(0, command.canceled);
     }
-
 }

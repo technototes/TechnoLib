@@ -21,13 +21,10 @@ public abstract class DeviceSubsystem<T extends HardwareDevice<?>> implements Su
      *
      * @return The devices
      */
-
     public T getDevice() {
         return device;
     }
 
     @Override
-    public void periodic(){
-
-    }
+    public void periodic() {}
 }

@@ -13,9 +13,8 @@ public interface Sensored extends DoubleSupplier {
      */
     double getSensorValue();
 
-
     @Override
-    default double getAsDouble(){
+    default double getAsDouble() {
         return getSensorValue();
     }
 }

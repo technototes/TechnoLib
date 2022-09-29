@@ -10,21 +10,19 @@ public interface SmartConsumer<T> {
 
     void consume(T t);
 
-    default SmartConsumer<T> accept(T t){
-        if(!t.equals(map.get(this))){
+    default SmartConsumer<T> accept(T t) {
+        if (!t.equals(map.get(this))) {
             consume(t);
             map.put(this, t);
         }
         return this;
     }
 
-    default T getLast(){
+    default T getLast() {
         return (T) map.get(this);
     }
 
-
-    static void reset(){
+    static void reset() {
         map.clear();
     }
-
 }

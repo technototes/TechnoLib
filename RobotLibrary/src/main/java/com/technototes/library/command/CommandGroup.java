@@ -25,23 +25,23 @@ public abstract class CommandGroup implements Command {
      * @param commands The command
      * @return this
      */
-    public CommandGroup addCommands(Command... commands){
-        for(Command c : commands){
+    public CommandGroup addCommands(Command... commands) {
+        for (Command c : commands) {
             schedule(c);
             commandMap.put(c, false);
         }
         return this;
     }
 
-    public CommandGroup countCancel(){
+    public CommandGroup countCancel() {
         countCancel = true;
         return this;
     }
-    public CommandGroup ignoreCancel(){
+
+    public CommandGroup ignoreCancel() {
         countCancel = false;
         return this;
     }
-
 
     public abstract void schedule(Command c);
 
@@ -53,9 +53,10 @@ public abstract class CommandGroup implements Command {
 
     @Override
     public void execute() {
-        //makes true if command just finished
-        commandMap.replaceAll((command, bool) -> (countCancel ? command.justFinished() : command.justFinishedNoCancel()) || bool);
-         anyCancelled = commandMap.keySet().stream().anyMatch(Command::isCancelled) || anyCancelled;
+        // makes true if command just finished
+        commandMap.replaceAll(
+                (command, bool) -> (countCancel ? command.justFinished() : command.justFinishedNoCancel()) || bool);
+        anyCancelled = commandMap.keySet().stream().anyMatch(Command::isCancelled) || anyCancelled;
     }
 
     @Override

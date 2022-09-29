@@ -1,6 +1,7 @@
 package com.technototes.library.hardware.sensor.encoder;
 
 import com.qualcomm.robotcore.hardware.AnalogInput;
+
 import com.technototes.library.hardware.sensor.Sensor;
 
 public class ExternalEncoder extends Sensor<AnalogInput> implements Encoder {
@@ -9,10 +10,10 @@ public class ExternalEncoder extends Sensor<AnalogInput> implements Encoder {
     public ExternalEncoder(AnalogInput device) {
         super(device);
     }
+
     public ExternalEncoder(String deviceName) {
         super(deviceName);
     }
-
 
     @Override
     public void zeroEncoder() {
@@ -21,6 +22,6 @@ public class ExternalEncoder extends Sensor<AnalogInput> implements Encoder {
 
     @Override
     public double getSensorValue() {
-        return getDevice().getVoltage()-zero;
+        return getDevice().getVoltage() - zero;
     }
 }

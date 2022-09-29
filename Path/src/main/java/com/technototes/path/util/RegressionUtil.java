@@ -2,15 +2,15 @@ package com.technototes.path.util;
 
 import androidx.annotation.Nullable;
 
-import com.acmerobotics.roadrunner.kinematics.Kinematics;
-
-import org.apache.commons.math3.stat.regression.SimpleRegression;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.math3.stat.regression.SimpleRegression;
+
+import com.acmerobotics.roadrunner.kinematics.Kinematics;
 
 /**
  * Various regression utilities.
@@ -53,10 +53,7 @@ public class RegressionUtil {
     private static List<Double> numericalDerivative(List<Double> x, List<Double> y) {
         List<Double> deriv = new ArrayList<>(x.size());
         for (int i = 1; i < x.size() - 1; i++) {
-            deriv.add(
-                    (y.get(i + 1) - y.get(i - 1)) /
-                    (x.get(i + 1) - x.get(i - 1))
-            );
+            deriv.add((y.get(i + 1) - y.get(i - 1)) / (x.get(i + 1) - x.get(i - 1)));
         }
         // copy endpoints to pad output
         deriv.add(0, deriv.get(0));
@@ -78,9 +75,12 @@ public class RegressionUtil {
      * @param fitStatic fit kStatic
      * @param file log file
      */
-    public static RampResult fitRampData(List<Double> timeSamples, List<Double> positionSamples,
-                                         List<Double> powerSamples, boolean fitStatic,
-                                         @Nullable File file) {
+    public static RampResult fitRampData(
+            List<Double> timeSamples,
+            List<Double> positionSamples,
+            List<Double> powerSamples,
+            boolean fitStatic,
+            @Nullable File file) {
         if (file != null) {
             try (PrintWriter pw = new PrintWriter(file)) {
                 pw.println("time,position,power");
@@ -105,8 +105,7 @@ public class RegressionUtil {
             rampReg.addData(vel, power);
         }
 
-        return new RampResult(Math.abs(rampReg.getSlope()), Math.abs(rampReg.getIntercept()),
-                              rampReg.getRSquare());
+        return new RampResult(Math.abs(rampReg.getSlope()), Math.abs(rampReg.getIntercept()), rampReg.getRSquare());
     }
 
     /**
@@ -118,9 +117,12 @@ public class RegressionUtil {
      * @param rampResult ramp result
      * @param file log file
      */
-    public static AccelResult fitAccelData(List<Double> timeSamples, List<Double> positionSamples,
-                                           List<Double> powerSamples, RampResult rampResult,
-                                           @Nullable File file) {
+    public static AccelResult fitAccelData(
+            List<Double> timeSamples,
+            List<Double> positionSamples,
+            List<Double> powerSamples,
+            RampResult rampResult,
+            @Nullable File file) {
         if (file != null) {
             try (PrintWriter pw = new PrintWriter(file)) {
                 pw.println("time,position,power");
@@ -144,8 +146,8 @@ public class RegressionUtil {
             double accel = accelSamples.get(i);
             double power = powerSamples.get(i);
 
-            double powerFromVel = Kinematics.calculateMotorFeedforward(
-                    vel, 0.0, rampResult.kV, 0.0, rampResult.kStatic);
+            double powerFromVel =
+                    Kinematics.calculateMotorFeedforward(vel, 0.0, rampResult.kV, 0.0, rampResult.kStatic);
             double powerFromAccel = power - powerFromVel;
 
             accelReg.addData(accel, powerFromAccel);

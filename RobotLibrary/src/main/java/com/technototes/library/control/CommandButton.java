@@ -1,10 +1,10 @@
 package com.technototes.library.control;
 
-import com.technototes.library.command.Command;
-
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import java.util.function.Function;
+
+import com.technototes.library.command.Command;
 
 /** Class for command buttons for gamepad
  * @author Alex Stedman
@@ -23,11 +23,12 @@ public class CommandButton extends ButtonBase implements CommandInput<CommandBut
         return this;
     }
 
-    public CommandButton schedule(Function<Boolean, Command> f){
-            return schedule(f.apply(this.getAsBoolean()));
+    public CommandButton schedule(Function<Boolean, Command> f) {
+        return schedule(f.apply(this.getAsBoolean()));
     }
-    public CommandButton schedule(Consumer<Boolean> f){
-        return schedule(()->f.accept(this.getAsBoolean()));
+
+    public CommandButton schedule(Consumer<Boolean> f) {
+        return schedule(() -> f.accept(this.getAsBoolean()));
     }
 
     @Override

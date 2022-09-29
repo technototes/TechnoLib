@@ -5,7 +5,8 @@ import com.qualcomm.robotcore.hardware.HardwareDevice;
 public class DummyDevice<T> implements HardwareDevice {
 
     private final T internal;
-    public DummyDevice(T inter){
+
+    public DummyDevice(T inter) {
         internal = inter;
     }
 
@@ -30,15 +31,12 @@ public class DummyDevice<T> implements HardwareDevice {
     }
 
     @Override
-    public void resetDeviceConfigurationForOpMode() {
-
-    }
+    public void resetDeviceConfigurationForOpMode() {}
 
     @Override
-    public void close() {
-    }
+    public void close() {}
 
-    public T get(){
+    public T get() {
         return internal;
     }
 }

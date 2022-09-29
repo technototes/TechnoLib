@@ -1,8 +1,8 @@
 package com.technototes.library.hardware.sensor;
 
-import com.qualcomm.robotcore.hardware.DistanceSensor;
-
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 /** Class for range sensors
  * @author Alex Stedman
@@ -50,7 +50,6 @@ public class Rev2MDistanceSensor extends Sensor<DistanceSensor> implements IDist
     public DistanceUnit getUnit() {
         return distanceUnit;
     }
-
 
     /**
      * Set the distance unit

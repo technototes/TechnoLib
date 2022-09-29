@@ -9,15 +9,13 @@ import java.util.function.BooleanSupplier;
  */
 public class ConditionalCommand implements Command {
     private BooleanSupplier supplier;
-    @Nullable
-    private Command trueCommand, falseCommand;
+    @Nullable private Command trueCommand, falseCommand;
 
-    public ConditionalCommand(BooleanSupplier condition){
+    public ConditionalCommand(BooleanSupplier condition) {
         supplier = condition;
         trueCommand = null;
         falseCommand = null;
     }
-
 
     /** Make a conditional command
      *
@@ -42,19 +40,16 @@ public class ConditionalCommand implements Command {
         trueCommand = trueC;
         falseCommand = falseC;
         CommandScheduler.getInstance().scheduleWithOther(this, trueCommand, condition);
-        CommandScheduler.getInstance().scheduleWithOther(this, falseCommand, ()->!condition.getAsBoolean());
-
+        CommandScheduler.getInstance().scheduleWithOther(this, falseCommand, () -> !condition.getAsBoolean());
     }
 
     @Override
-    public void execute() {
-
-    }
+    public void execute() {}
 
     @Override
     public boolean isFinished() {
-        if(trueCommand == null) return supplier.getAsBoolean();
-        if(falseCommand == null) return trueCommand.justFinished();
+        if (trueCommand == null) return supplier.getAsBoolean();
+        if (falseCommand == null) return trueCommand.justFinished();
         return trueCommand.justFinished() || falseCommand.justFinished();
     }
 }

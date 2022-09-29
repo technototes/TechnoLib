@@ -31,7 +31,8 @@ public class MotorSubsystem<T extends Motor<?>> extends DeviceSubsystem<T> {
     public void setSpeed(double speed) {
         getDevice().setSpeed(speed);
     }
-    public void stop(){
+
+    public void stop() {
         setSpeed(0);
     }
 }

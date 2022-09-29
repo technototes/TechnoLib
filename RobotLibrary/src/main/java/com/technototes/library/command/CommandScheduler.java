@@ -2,15 +2,15 @@ package com.technototes.library.command;
 
 import androidx.annotation.Nullable;
 
-import com.technototes.library.general.Periodic;
-import com.technototes.library.structure.CommandOpMode;
-import com.technototes.library.subsystem.Subsystem;
-
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
+
+import com.technototes.library.general.Periodic;
+import com.technototes.library.structure.CommandOpMode;
+import com.technototes.library.subsystem.Subsystem;
 
 public final class CommandScheduler {
 
@@ -31,6 +31,7 @@ public final class CommandScheduler {
         opMode.terminate();
         return this;
     }
+
     public double getOpModeRuntime() {
         return opMode.getOpModeRuntime();
     }
@@ -44,7 +45,7 @@ public final class CommandScheduler {
         return instance;
     }
 
-    //be careful with this
+    // be careful with this
     public static synchronized CommandScheduler resetScheduler() {
         instance = null;
         Command.clear();
@@ -65,6 +66,7 @@ public final class CommandScheduler {
     public CommandScheduler scheduleOnce(Command command) {
         return schedule(command);
     }
+
     public CommandScheduler scheduleOnceForState(Command command, CommandOpMode.OpModeState state) {
         return scheduleForState(command, state);
     }
@@ -80,19 +82,23 @@ public final class CommandScheduler {
     public CommandScheduler scheduleJoystick(Command command, BooleanSupplier supplier) {
         return scheduleForState(command, supplier, CommandOpMode.OpModeState.RUN, CommandOpMode.OpModeState.END);
     }
+
     public CommandScheduler scheduleJoystick(Command command) {
         return scheduleForState(command, CommandOpMode.OpModeState.RUN, CommandOpMode.OpModeState.END);
     }
 
-
-    public CommandScheduler scheduleForState(Command command, BooleanSupplier supplier, CommandOpMode.OpModeState... states) {
-        return schedule(command.cancelUpon(() -> !opMode.getOpModeState().isState(states)), () -> supplier.getAsBoolean() && opMode.getOpModeState().isState(states));
+    public CommandScheduler scheduleForState(
+            Command command, BooleanSupplier supplier, CommandOpMode.OpModeState... states) {
+        return schedule(
+                command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
+                () -> supplier.getAsBoolean() && opMode.getOpModeState().isState(states));
     }
 
     public CommandScheduler scheduleForState(Command command, CommandOpMode.OpModeState... states) {
-        return schedule(command.cancelUpon(() -> !opMode.getOpModeState().isState(states)), () -> opMode.getOpModeState().isState(states));
+        return schedule(
+                command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
+                () -> opMode.getOpModeState().isState(states));
     }
-
 
     public CommandScheduler scheduleAfterOther(Command dependency, Command other) {
         return schedule(other, dependency::justFinishedNoCancel);
@@ -115,27 +121,25 @@ public final class CommandScheduler {
             defaultMap.put(subsystem, command);
             schedule(command, () -> getCurrent(subsystem) == command);
         } else {
-            System.err.println("default commands must require their subsystem: " + command.getClass().toString());
+            System.err.println("default commands must require their subsystem: "
+                    + command.getClass().toString());
         }
         return this;
     }
 
-    public CommandScheduler register(Periodic p){
+    public CommandScheduler register(Periodic p) {
         registered.add(p);
         return this;
     }
 
-
-    @Nullable
-    public Command getDefault(Subsystem s) {
+    @Nullable public Command getDefault(Subsystem s) {
         return opMode.getOpModeState() == CommandOpMode.OpModeState.RUN ? defaultMap.get(s) : null;
     }
 
-    @Nullable
-    public Command getCurrent(Subsystem s) {
-        if(requirementMap.get(s) == null) return null;
-        for(Command c : requirementMap.get(s)){
-            if(c.isRunning()) return c;
+    @Nullable public Command getCurrent(Subsystem s) {
+        if (requirementMap.get(s) == null) return null;
+        for (Command c : requirementMap.get(s)) {
+            if (c.isRunning()) return c;
         }
         return getDefault(s);
     }
@@ -149,8 +153,9 @@ public final class CommandScheduler {
         }
         return this;
     }
+
     public void run() {
-        //better way to do this soontm
+        // better way to do this soontm
 
         commandMap.forEach((c1, b) -> {
             if (c1.justStarted()) {
@@ -161,8 +166,8 @@ public final class CommandScheduler {
                 }
             }
         });
-        commandMap.forEach((c1, b)->{
-            if(b.getAsBoolean() || c1.isRunning()) c1.run();
+        commandMap.forEach((c1, b) -> {
+            if (b.getAsBoolean() || c1.isRunning()) c1.run();
         });
         registered.forEach(Periodic::periodic);
     }

@@ -1,6 +1,5 @@
 package com.technototes.library.hardware.sensor.encoder;
 
-
 import com.technototes.library.hardware.Sensored;
 
 /** Interfaces for encoders to use
@@ -12,8 +11,7 @@ public interface Encoder extends Sensored {
      */
     void zeroEncoder();
 
-    default double getPosition(){
+    default double getPosition() {
         return getSensorValue();
     }
-
 }
