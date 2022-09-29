@@ -12,6 +12,13 @@ import com.technototes.library.general.Periodic;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.subsystem.Subsystem;
 
+/**
+ * This is a "singleton" object.
+ *
+ * TODO: The "CommandScheduler.getInstance()" thing is really kinda silly. Perhaps it's how WPIlib
+ * TODO: works, but it's clunky and makes things messier for non-FRC programmers. I think I'm going
+ * TODO: yoink that method and make static methods for next year's release...
+ */
 public final class CommandScheduler {
 
     private final Map<Command, BooleanSupplier> commandMap;
@@ -36,8 +43,14 @@ public final class CommandScheduler {
         return opMode.getOpModeRuntime();
     }
 
+    // The Singleton CommandScheduler
     private static CommandScheduler instance;
 
+    /**
+     * Get (or create) the singleton CommandScheduler object
+     *
+     * @return The CommandScheduler singleton
+     */
     public static synchronized CommandScheduler getInstance() {
         if (instance == null) {
             instance = new CommandScheduler();
@@ -45,7 +58,12 @@ public final class CommandScheduler {
         return instance;
     }
 
-    // be careful with this
+    /**
+     * Alex had a comment "be careful with this" and he's not wrong.
+     * This removes the old Singleton & creates a new one. That's pretty dangerous...
+     *
+     * @return a *new* singleton object (which makes very little sense)
+     */
     public static synchronized CommandScheduler resetScheduler() {
         instance = null;
         Command.clear();

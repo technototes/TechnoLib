@@ -5,12 +5,26 @@ import androidx.annotation.Nullable;
 import java.util.function.BooleanSupplier;
 
 /** Simple class for commands that require a certain condition to be true to run
+ *
+ * This encapsulates *two* different capabilities.
+ * 1. A ConditionalCommand with only a condition, but no commands, is a a "wait" command.
+ *    It will only finish once the condition is true.
+ * 2. A ConditionalCommand with a condition and a true (and optionally false) command
+ *    is a generic "if/else" command: If the condition is true, execute the 'true command',
+ *    if not true, execute the 'false command' if it is supplied.
+ *
+ * TODO: This makes the class a little clunky. It wouldn't be terrible to break the functionality
+ * TODO: out into multiple classes instead
  * @author Alex Stedman
  */
 public class ConditionalCommand implements Command {
     private BooleanSupplier supplier;
     @Nullable private Command trueCommand, falseCommand;
 
+    /** This makes a "wait" command
+     *
+     * @param condition The BooleanSupplier that will be waited upon until true
+     */
     public ConditionalCommand(BooleanSupplier condition) {
         supplier = condition;
         trueCommand = null;

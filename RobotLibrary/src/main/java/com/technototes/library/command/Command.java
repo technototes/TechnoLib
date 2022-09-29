@@ -22,6 +22,9 @@ import com.technototes.library.subsystem.Subsystem;
 @FunctionalInterface
 public interface Command extends Runnable, Supplier<Command.CommandState> {
 
+    /* These are *static* fields of the Command interface, because interfaces aren't allowed
+     * to have member fields (because they're interfaces...)
+     */
     Map<Command, CommandState> stateMap = new HashMap<>();
     Map<Command, ElapsedTime> timeMap = new HashMap<>();
     Map<Command, Set<Subsystem>> requirementMap = new HashMap<>();
@@ -46,8 +49,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
      * <p>
      * Defaults to doing nothing
      */
-    default void initialize() {
-    }
+    default void initialize() {}
 
     /**
      * Execute the command
@@ -74,8 +76,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
      *
      * @param cancel True if the command was cancelled, False if it ended naturally
      */
-    default void end(boolean cancel) {
-    }
+    default void end(boolean cancel) {}
 
     /**
      * Run a command or series of ParallelCommands after this one
@@ -100,7 +101,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
     /**
      * Delay the command for some time
      *
-     * @param sec A function that returns the number of sections to delay
+     * @param sup A function that returns the number of sections to delay
      * @return The new SequentialCommandGroup of this command and a WaitCommand
      */
     default SequentialCommandGroup sleep(DoubleSupplier sup) {
@@ -111,7 +112,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
      * After this command, wait until the condition function is true
      *
      * @param condition The function that returns true when ready to proceed
-     * @return the new SequentiaCommandGroup of this command and a Conditional Command
+     * @return the new SequentialCommandGroup of this command and a Conditional Command
      * for waiting
      */
     default SequentialCommandGroup waitUntil(BooleanSupplier condition) {
