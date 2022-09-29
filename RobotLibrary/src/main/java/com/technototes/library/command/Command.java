@@ -28,8 +28,12 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
 
     /**
      * Add requirement subsystems to command
+     * <p>
+     * Requirements are subsystems upon which this command depends. When executing a command,
+     * any commands that are currently being executed which depend upon the subsystem(s) required
+     * will be cancelled by the CommandScheduler.
      *
-     * @param requirements The subsystems
+     * @param requirements The subsystems this command uses
      * @return this
      */
     default Command addRequirements(Subsystem... requirements) {
@@ -39,18 +43,25 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
 
     /**
      * Init the command
+     * <p>
+     * Defaults to doing nothing
      */
-    default void initialize() {}
+    default void initialize() {
+    }
 
     /**
      * Execute the command
+     * <p>
+     * This is (probably) where the majority of your command belongs
      */
     void execute();
 
     /**
      * Return if the command is finished
+     * <p>
+     * Defaults to returning *true* which means that the command will execute once and complete.
      *
-     * @return Is command finished
+     * @return Is the command finished
      */
     default boolean isFinished() {
         return true;
@@ -58,31 +69,61 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
 
     /**
      * End the command
+     * <p>
+     * Defaults to doing nothing
      *
-     * @param cancel If the command was cancelled or ended naturally
+     * @param cancel True if the command was cancelled, False if it ended naturally
      */
-    default void end(boolean cancel) {}
+    default void end(boolean cancel) {
+    }
 
-    // run a command after
+    /**
+     * Run a command or series of ParallelCommands after this one
+     *
+     * @param c the list of commands to run
+     * @return the new SequentialCommandGroup of this Command, then the next set
+     */
     default SequentialCommandGroup andThen(Command... c) {
         return new SequentialCommandGroup(this, c.length == 1 ? c[0] : new ParallelCommandGroup(c));
     }
 
-    // wait a time
+    /**
+     * Delay the command for some time
+     *
+     * @param sec The number of sections to delay
+     * @return The new SequentialCommandGroup of this command and a WaitCommand
+     */
     default SequentialCommandGroup sleep(double sec) {
         return andThen(new WaitCommand(sec));
     }
 
+    /**
+     * Delay the command for some time
+     *
+     * @param sec A function that returns the number of sections to delay
+     * @return The new SequentialCommandGroup of this command and a WaitCommand
+     */
     default SequentialCommandGroup sleep(DoubleSupplier sup) {
         return andThen(new WaitCommand(sup));
     }
 
-    // await a condition
+    /**
+     * After this command, wait until the condition function is true
+     *
+     * @param condition The function that returns true when ready to proceed
+     * @return the new SequentiaCommandGroup of this command and a Conditional Command
+     * for waiting
+     */
     default SequentialCommandGroup waitUntil(BooleanSupplier condition) {
         return andThen(new ConditionalCommand(condition));
     }
 
-    // run a command in parallel
+    /**
+     * Run this command in parallel with additional commands
+     *
+     * @param c the command (or list of commands) to be run in parallel
+     * @return a ParallelCommandGroup of this command, and all the c commands
+     */
     default ParallelCommandGroup alongWith(Command... c) {
         Command[] c1 = new Command[c.length + 1];
         c1[0] = this;
@@ -90,10 +131,22 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return new ParallelCommandGroup(c1);
     }
 
+    /**
+     * Runs all the commands specified in parallel *until this command is completed*
+     *
+     * @param c The command or list of commands to run in parallel with this command
+     * @return a new ParallelDeadlineGroup with this command, and all the other commands
+     */
     default ParallelDeadlineGroup deadline(Command... c) {
         return new ParallelDeadlineGroup(this, c);
     }
 
+    /**
+     * Runs all the commands in parallel (including this command) until one of them finishes
+     *
+     * @param c the additional commands to run in parallel
+     * @return a ParallelRaceGroup
+     */
     default ParallelRaceGroup raceWith(Command... c) {
         Command[] c1 = new Command[c.length + 1];
         c1[0] = this;
@@ -111,14 +164,32 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return new ConditionalCommand(condition, this);
     }
 
+    /**
+     * Runs this command until it either finishes, or the timeout has elapsed
+     *
+     * @param seconds The maximum number of seconds to wait
+     * @return A ParallelRaceGroup of this command and a WaitCommand
+     */
     default ParallelRaceGroup withTimeout(double seconds) {
         return raceWith(new WaitCommand(seconds));
     }
 
+    /**
+     * Runs this command until it finishes, or until the condition supplied is true
+     *
+     * @param condition A boolean function that returns true if the command should be cancelled
+     * @return A ParallelRaceGroup of this command and a ConditionalCommand of condition
+     */
     default ParallelRaceGroup cancelUpon(BooleanSupplier condition) {
         return raceWith(new ConditionalCommand(condition));
     }
 
+    /**
+     * Runs this command only if the choiceCondition is met (i.e. returns true)
+     *
+     * @param choiceCondition a boolean function that determins if this command should run or not
+     * @return a ChoiceCommand with this command as the "true" command.
+     */
     default ChoiceCommand onlyIf(BooleanSupplier choiceCondition) {
         return new ChoiceCommand(choiceCondition, this);
     }
@@ -169,7 +240,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
     }
 
     /**
-     * Return the command runtime
+     * Return the amount of time since the command was first initialized
      *
      * @return The runtime as an {@link ElapsedTime}
      */
@@ -179,7 +250,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
     }
 
     /**
-     * Return the command state
+     * Return the command state: Probably don't use this
      *
      * @return The state as an {@link CommandState}
      */
@@ -187,6 +258,9 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return stateMap.getOrDefault(this, CommandState.RESET);
     }
 
+    /**
+     * Set the command state: DEFINITELY DO NOT USE THIS!
+     */
     default Command setState(CommandState s) {
         stateMap.put(this, s);
         return this;
@@ -232,6 +306,14 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         requirementMap.clear();
     }
 
+    /**
+     * This is a helper to create a new command from an existing command, but with additional
+     * subsystem requirements
+     *
+     * @param c The command to add the extra subsystem
+     * @param s The subsystem (or list of subsystems) to add to the commands requiremets
+     * @return The new command
+     */
     static Command create(Command c, Subsystem... s) {
         return c.addRequirements(s);
     }
