@@ -22,11 +22,20 @@ import com.technototes.library.subsystem.Subsystem;
 @FunctionalInterface
 public interface Command extends Runnable, Supplier<Command.CommandState> {
 
-    /* These are *static* fields of the Command interface, because interfaces aren't allowed
-     * to have member fields (because they're interfaces...)
+    // These are *static* fields of the Command interface, because interfaces aren't allowed
+    // to have member fields (because they're interfaces...)
+
+    /**
+     * The Command to Current State of the Command lookup
      */
     Map<Command, CommandState> stateMap = new HashMap<>();
+    /**
+     * The Command to Total Time Spent Running lookup
+     */
     Map<Command, ElapsedTime> timeMap = new HashMap<>();
+    /**
+     * The Command to Required Subsystems lookup
+     */
     Map<Command, Set<Subsystem>> requirementMap = new HashMap<>();
 
     /**
@@ -231,12 +240,33 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
      * The command state enum
      */
     enum CommandState {
+        /**
+         * The command has just be scheduled
+         */
         RESET,
+        /**
+         * The command has been triggered
+         */
         STARTED,
+        /**
+         * The command is initializing after having been triggered
+         */
         INITIALIZING,
+        /**
+         * The command is running normally
+         */
         EXECUTING,
+        /**
+         * The command has completed successfully
+         */
         FINISHED,
+        /**
+         * The command is pending cancellation (but has not yet processed the cancellation)
+         */
         INTERRUPTED,
+        /**
+         * The command has been cancelled
+         */
         CANCELLED
     }
 
@@ -261,6 +291,9 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
 
     /**
      * Set the command state: DEFINITELY DO NOT USE THIS!
+     *
+     * @param s The state to set this command to
+     * @return This command
      */
     default Command setState(CommandState s) {
         stateMap.put(this, s);
@@ -277,30 +310,61 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return requirementMap.get(this);
     }
 
+    /**
+     * Is this command finished?
+     *
+     * @return True if the command has finished, or has been cancelled
+     */
     default boolean justFinished() {
         return getState() == CommandState.FINISHED || getState() == CommandState.CANCELLED;
     }
 
+    /**
+     * Is this command completed?
+     *
+     * @return True if the command has finished and NOT been cancelled.
+     */
     default boolean justFinishedNoCancel() {
         return getState() == CommandState.FINISHED;
     }
 
+    /**
+     * Has the command just be started?
+     *
+     * @return True if the command was started, but hasn't yet been run
+     */
     default boolean justStarted() {
         return getState() == CommandState.STARTED;
     }
 
+    /**
+     * Is the command in some state of running/started/finished/cancelled
+     *
+     * @return True if the command is not in the RESET state
+     */
     default boolean isRunning() {
         return getState() != CommandState.RESET;
     }
 
+    /**
+     * Exactly what it says
+     *
+     * @return True if the command has been cancelled
+     */
     default boolean isCancelled() {
         return getState() == CommandState.CANCELLED;
     }
 
+    /**
+     * If the command is running, interrupt it such that it can be cancelled
+     */
     default void cancel() {
         if (isRunning() && !justFinished()) setState(CommandState.INTERRUPTED);
     }
 
+    /**
+     * Clear out the state, time, and requirement maps. Be careful with this one!
+     */
     static void clear() {
         stateMap.clear();
         timeMap.clear();
@@ -319,6 +383,11 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return c.addRequirements(s);
     }
 
+    /**
+     * Gets the current state of the command (Supplier&lt;CommandState&gt;)
+     *
+     * @return The current CommandState of this command
+     */
     @Override
     default CommandState get() {
         return getState();

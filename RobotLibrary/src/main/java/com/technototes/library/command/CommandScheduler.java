@@ -29,16 +29,32 @@ public final class CommandScheduler {
 
     private CommandOpMode opMode;
 
+    /**
+     * Set the scheduler's opmode
+     *
+     * @param c the opmode
+     * @return the CommandScheduler (useful for chaining)
+     */
     public CommandScheduler setOpMode(CommandOpMode c) {
         opMode = c;
         return this;
     }
 
+    /**
+     * Forcefully halt the opmode
+     *
+     * @return the CommandScheduler (useful for chaining)
+     */
     public CommandScheduler terminateOpMode() {
         opMode.terminate();
         return this;
     }
 
+    /**
+     * Gets the number of seconds that the opmode has been executing
+     *
+     * @return elapsed time since opmode was started, in seconds
+     */
     public double getOpModeRuntime() {
         return opMode.getOpModeRuntime();
     }
@@ -77,14 +93,33 @@ public final class CommandScheduler {
         registered = new LinkedHashSet<>();
     }
 
+    /**
+     * Schedule a command to run
+     *
+     * @param command the command to schedule
+     * @return the CommandScheduler (useful for chaining)
+     */
     public CommandScheduler schedule(Command command) {
         return schedule(command, () -> true);
     }
 
+    /**
+     * Schedule a command to run
+     *
+     * @param command the command to schedule
+     * @return the CommandScheduler (useful for chaining)
+     */
     public CommandScheduler scheduleOnce(Command command) {
         return schedule(command);
     }
 
+    /**
+     * Schedule a command to run during a particular OpModeState
+     *
+     * @param command the command to schedule
+     * @param state   the state during which the command should be scheduled
+     * @return the CommandScheduler (useful for chaining)
+     */
     public CommandScheduler scheduleOnceForState(Command command, CommandOpMode.OpModeState state) {
         return scheduleForState(command, state);
     }
@@ -150,13 +185,11 @@ public final class CommandScheduler {
         return this;
     }
 
-    @Nullable
-    public Command getDefault(Subsystem s) {
+    @Nullable public Command getDefault(Subsystem s) {
         return opMode.getOpModeState() == CommandOpMode.OpModeState.RUN ? defaultMap.get(s) : null;
     }
 
-    @Nullable
-    public Command getCurrent(Subsystem s) {
+    @Nullable public Command getCurrent(Subsystem s) {
         if (requirementMap.get(s) == null) return null;
         for (Command c : requirementMap.get(s)) {
             if (c.isRunning()) return c;

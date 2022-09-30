@@ -9,14 +9,24 @@ import java.util.Map;
  * @author Alex Stedman
  */
 public abstract class CommandGroup implements Command {
-    // This is a map from the command to whether it has been run
+    /**
+     * This is a map from the command to whether it has been run
+     */
     protected Map<Command, Boolean> commandMap;
-    protected boolean countCancel, anyCancelled;
+    /**
+     * Should a cancelled command be considered 'finished'
+     */
+    protected boolean countCancel;
+    /**
+     * Have *any* of the command list been cancelled
+     */
+    protected boolean anyCancelled;
 
     /**
      * Create a command group with commands
      *
-     * @param commands Commands for group
+     * @param countCancel true if a cancelled command is considered 'finished'
+     * @param commands    Commands for group
      */
     public CommandGroup(boolean countCancel, Command... commands) {
         commandMap = new HashMap<>();
@@ -38,18 +48,37 @@ public abstract class CommandGroup implements Command {
         return this;
     }
 
+    /**
+     * Specify that this CommandGroup should count a cancellation as 'completed'
+     *
+     * @return this CommandGroup
+     */
     public CommandGroup countCancel() {
         countCancel = true;
         return this;
     }
 
+    /**
+     * Specify that this CommandGroup should NOT count cancellation as 'completed'
+     *
+     * @return this CommandGroup
+     */
     public CommandGroup ignoreCancel() {
         countCancel = false;
         return this;
     }
 
+    /**
+     * This should schedule the command as part of this command group, I think.
+     * TODO: Is this correct?
+     *
+     * @param c The command to add to the command group
+     */
     public abstract void schedule(Command c);
 
+    /**
+     * Mark all commands in the group as not yet run
+     */
     @Override
     public void initialize() {
         commandMap.replaceAll((command, bool) -> false);
@@ -64,12 +93,19 @@ public abstract class CommandGroup implements Command {
         anyCancelled = commandMap.keySet().stream().anyMatch(Command::isCancelled) || anyCancelled;
     }
 
-    @Override
-    /** Return if commandgroup is finished
+    /**
+     * MUST IMPLEMENT IN SUBCLASSES:
      *
+     * @return True if this CommandGroup is finished
      */
+    @Override
     public abstract boolean isFinished();
 
+    /**
+     * This stops the command group from executing
+     *
+     * @param cancel True if the command was cancelled, False if it ended naturally
+     */
     @Override
     public void end(boolean cancel) {
         commandMap.keySet().forEach(Command::cancel);

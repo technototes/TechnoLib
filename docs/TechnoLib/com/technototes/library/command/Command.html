@@ -123,13 +123,19 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>,&#8203;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../subsystem/Subsystem.html" title="interface in com.technototes.library.subsystem">Subsystem</a>&gt;&gt;</code></div>
 <div class="col-second even-row-color"><code><span class="member-name-link"><a href="#requirementMap">requirementMap</a></span></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The Command to Required Subsystems lookup</div>
+</div>
 <div class="col-first odd-row-color"><code>static <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>,&#8203;<a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a>&gt;</code></div>
 <div class="col-second odd-row-color"><code><span class="member-name-link"><a href="#stateMap">stateMap</a></span></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">The Command to Current State of the Command lookup</div>
+</div>
 <div class="col-first even-row-color"><code>static <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>,&#8203;com.qualcomm.robotcore.util.ElapsedTime&gt;</code></div>
 <div class="col-second even-row-color"><code><span class="member-name-link"><a href="#timeMap">timeMap</a></span></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The Command to Total Time Spent Running lookup</div>
+</div>
 </div>
 </section>
 </li>
@@ -166,7 +172,9 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default void</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#cancel()">cancel</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">If the command is running, interrupt it such that it can be cancelled</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default <a href="ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#cancelUpon(java.util.function.BooleanSupplier)">cancelUpon</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
@@ -174,7 +182,9 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 </div>
 <div class="col-first even-row-color method-summary-table-tab1 method-summary-table"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table-tab1 method-summary-table"><code><span class="member-name-link"><a href="#clear()">clear</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab1 method-summary-table">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab1 method-summary-table">
+<div class="block">Clear out the state, time, and requirement maps.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab1 method-summary-table"><code>static <a href="Command.html" title="interface in com.technototes.library.command">Command</a></code></div>
 <div class="col-second odd-row-color method-summary-table-tab1 method-summary-table"><code><span class="member-name-link"><a href="#create(com.technototes.library.command.Command,com.technototes.library.subsystem.Subsystem...)">create</a></span>&#8203;(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c,
  <a href="../subsystem/Subsystem.html" title="interface in com.technototes.library.subsystem">Subsystem</a>...&nbsp;s)</code></div>
@@ -199,7 +209,9 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default <a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a></code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#get()">get</a></span>()</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">Gets the current state of the command (Supplier&lt;CommandState&gt;)</div>
+</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../subsystem/Subsystem.html" title="interface in com.technototes.library.subsystem">Subsystem</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#getRequirements()">getRequirements</a></span>()</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
@@ -222,7 +234,9 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default boolean</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#isCancelled()">isCancelled</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">Exactly what it says</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default boolean</code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#isFinished()">isFinished</a></span>()</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
@@ -230,16 +244,24 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default boolean</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#isRunning()">isRunning</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">Is the command in some state of running/started/finished/cancelled</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default boolean</code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#justFinished()">justFinished</a></span>()</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">Is this command finished?</div>
+</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default boolean</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#justFinishedNoCancel()">justFinishedNoCancel</a></span>()</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">Is this command completed?</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default boolean</code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#justStarted()">justStarted</a></span>()</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">Has the command just be started?</div>
+</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default <a href="ChoiceCommand.html" title="class in com.technototes.library.command">ChoiceCommand</a></code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#onlyIf(java.util.function.BooleanSupplier)">onlyIf</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;choiceCondition)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
@@ -297,19 +319,22 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="stateMap">
 <h3>stateMap</h3>
-<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>,&#8203;<a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.28">stateMap</a></span></div>
+<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>,&#8203;<a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.31">stateMap</a></span></div>
+<div class="block">The Command to Current State of the Command lookup</div>
 </section>
 </li>
 <li>
 <section class="detail" id="timeMap">
 <h3>timeMap</h3>
-<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>,&#8203;com.qualcomm.robotcore.util.ElapsedTime&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.29">timeMap</a></span></div>
+<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>,&#8203;com.qualcomm.robotcore.util.ElapsedTime&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.35">timeMap</a></span></div>
+<div class="block">The Command to Total Time Spent Running lookup</div>
 </section>
 </li>
 <li>
 <section class="detail" id="requirementMap">
 <h3>requirementMap</h3>
-<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>,&#8203;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../subsystem/Subsystem.html" title="interface in com.technototes.library.subsystem">Subsystem</a>&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.30">requirementMap</a></span></div>
+<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>,&#8203;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../subsystem/Subsystem.html" title="interface in com.technototes.library.subsystem">Subsystem</a>&gt;&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.39">requirementMap</a></span></div>
+<div class="block">The Command to Required Subsystems lookup</div>
 </section>
 </li>
 </ul>
@@ -323,7 +348,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="addRequirements(com.technototes.library.subsystem.Subsystem...)">
 <h3>addRequirements</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Command.html" title="interface in com.technototes.library.command">Command</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.42">addRequirements</a></span>&#8203;<span class="parameters">(<a href="../subsystem/Subsystem.html" title="interface in com.technototes.library.subsystem">Subsystem</a>...&nbsp;requirements)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Command.html" title="interface in com.technototes.library.command">Command</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.51">addRequirements</a></span>&#8203;<span class="parameters">(<a href="../subsystem/Subsystem.html" title="interface in com.technototes.library.subsystem">Subsystem</a>...&nbsp;requirements)</span></div>
 <div class="block">Add requirement subsystems to command
  <p>
  Requirements are subsystems upon which this command depends. When executing a command,
@@ -340,7 +365,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="initialize()">
 <h3>initialize</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.52">initialize</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.61">initialize</a></span>()</div>
 <div class="block">Init the command
  <p>
  Defaults to doing nothing</div>
@@ -349,7 +374,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="execute()">
 <h3>execute</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.59">execute</a></span>()</div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.68">execute</a></span>()</div>
 <div class="block">Execute the command
  <p>
  This is (probably) where the majority of your command belongs</div>
@@ -358,7 +383,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="isFinished()">
 <h3>isFinished</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.68">isFinished</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.77">isFinished</a></span>()</div>
 <div class="block">Return if the command is finished
  <p>
  Defaults to returning *true* which means that the command will execute once and complete.</div>
@@ -371,7 +396,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="end(boolean)">
 <h3>end</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.79">end</a></span>&#8203;<span class="parameters">(boolean&nbsp;cancel)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.88">end</a></span>&#8203;<span class="parameters">(boolean&nbsp;cancel)</span></div>
 <div class="block">End the command
  <p>
  Defaults to doing nothing</div>
@@ -384,7 +409,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="andThen(com.technototes.library.command.Command...)">
 <h3>andThen</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.87">andThen</a></span>&#8203;<span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;c)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.96">andThen</a></span>&#8203;<span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;c)</span></div>
 <div class="block">Run a command or series of ParallelCommands after this one</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -397,7 +422,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="sleep(double)">
 <h3>sleep</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.97">sleep</a></span>&#8203;<span class="parameters">(double&nbsp;sec)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.106">sleep</a></span>&#8203;<span class="parameters">(double&nbsp;sec)</span></div>
 <div class="block">Delay the command for some time</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -410,7 +435,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="sleep(java.util.function.DoubleSupplier)">
 <h3>sleep</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.107">sleep</a></span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/DoubleSupplier.html" title="class or interface in java.util.function" class="external-link">DoubleSupplier</a>&nbsp;sup)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.116">sleep</a></span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/DoubleSupplier.html" title="class or interface in java.util.function" class="external-link">DoubleSupplier</a>&nbsp;sup)</span></div>
 <div class="block">Delay the command for some time</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -423,7 +448,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="waitUntil(java.util.function.BooleanSupplier)">
 <h3>waitUntil</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.118">waitUntil</a></span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.127">waitUntil</a></span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition)</span></div>
 <div class="block">After this command, wait until the condition function is true</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -437,7 +462,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="alongWith(com.technototes.library.command.Command...)">
 <h3>alongWith</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ParallelCommandGroup.html" title="class in com.technototes.library.command">ParallelCommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.128">alongWith</a></span>&#8203;<span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;c)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ParallelCommandGroup.html" title="class in com.technototes.library.command">ParallelCommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.137">alongWith</a></span>&#8203;<span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;c)</span></div>
 <div class="block">Run this command in parallel with additional commands</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -450,7 +475,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="deadline(com.technototes.library.command.Command...)">
 <h3>deadline</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ParallelDeadlineGroup.html" title="class in com.technototes.library.command">ParallelDeadlineGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.141">deadline</a></span>&#8203;<span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;c)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ParallelDeadlineGroup.html" title="class in com.technototes.library.command">ParallelDeadlineGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.150">deadline</a></span>&#8203;<span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;c)</span></div>
 <div class="block">Runs all the commands specified in parallel *until this command is completed*</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -463,7 +488,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="raceWith(com.technototes.library.command.Command...)">
 <h3>raceWith</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.151">raceWith</a></span>&#8203;<span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;c)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.160">raceWith</a></span>&#8203;<span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;c)</span></div>
 <div class="block">Runs all the commands in parallel (including this command) until one of them finishes</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -476,7 +501,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="asConditional(java.util.function.BooleanSupplier)">
 <h3>asConditional</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ConditionalCommand.html" title="class in com.technototes.library.command">ConditionalCommand</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.164">asConditional</a></span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ConditionalCommand.html" title="class in com.technototes.library.command">ConditionalCommand</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.173">asConditional</a></span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition)</span></div>
 <div class="block">Creates a conditional command out of this</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -489,7 +514,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="withTimeout(double)">
 <h3>withTimeout</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.174">withTimeout</a></span>&#8203;<span class="parameters">(double&nbsp;seconds)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.183">withTimeout</a></span>&#8203;<span class="parameters">(double&nbsp;seconds)</span></div>
 <div class="block">Runs this command until it either finishes, or the timeout has elapsed</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -502,7 +527,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="cancelUpon(java.util.function.BooleanSupplier)">
 <h3>cancelUpon</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.184">cancelUpon</a></span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.193">cancelUpon</a></span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition)</span></div>
 <div class="block">Runs this command until it finishes, or until the condition supplied is true</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -515,7 +540,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="onlyIf(java.util.function.BooleanSupplier)">
 <h3>onlyIf</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ChoiceCommand.html" title="class in com.technototes.library.command">ChoiceCommand</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.194">onlyIf</a></span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;choiceCondition)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="ChoiceCommand.html" title="class in com.technototes.library.command">ChoiceCommand</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.203">onlyIf</a></span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;choiceCondition)</span></div>
 <div class="block">Runs this command only if the choiceCondition is met (i.e. returns true)</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -528,7 +553,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="run()">
 <h3>run</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.201">run</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.210">run</a></span>()</div>
 <div class="block">Run the commmand</div>
 <dl class="notes">
 <dt>Specified by:</dt>
@@ -539,7 +564,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="getRuntime()">
 <h3>getRuntime</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">com.qualcomm.robotcore.util.ElapsedTime</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.248">getRuntime</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">com.qualcomm.robotcore.util.ElapsedTime</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.278">getRuntime</a></span>()</div>
 <div class="block">Return the amount of time since the command was first initialized</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -550,7 +575,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="getState()">
 <h3>getState</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.258">getState</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.288">getState</a></span>()</div>
 <div class="block">Return the command state: Probably don't use this</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -561,14 +586,20 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="setState(com.technototes.library.command.Command.CommandState)">
 <h3>setState</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Command.html" title="interface in com.technototes.library.command">Command</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.265">setState</a></span>&#8203;<span class="parameters">(<a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a>&nbsp;s)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Command.html" title="interface in com.technototes.library.command">Command</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.298">setState</a></span>&#8203;<span class="parameters">(<a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a>&nbsp;s)</span></div>
 <div class="block">Set the command state: DEFINITELY DO NOT USE THIS!</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>s</code> - The state to set this command to</dd>
+<dt>Returns:</dt>
+<dd>This command</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getRequirements()">
 <h3>getRequirements</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../subsystem/Subsystem.html" title="interface in com.technototes.library.subsystem">Subsystem</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.275">getRequirements</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Set.html" title="class or interface in java.util" class="external-link">Set</a>&lt;<a href="../subsystem/Subsystem.html" title="interface in com.technototes.library.subsystem">Subsystem</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.308">getRequirements</a></span>()</div>
 <div class="block">Return the subsystem requirements for this command</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -579,49 +610,76 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="justFinished()">
 <h3>justFinished</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.280">justFinished</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.318">justFinished</a></span>()</div>
+<div class="block">Is this command finished?</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>True if the command has finished, or has been cancelled</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="justFinishedNoCancel()">
 <h3>justFinishedNoCancel</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.284">justFinishedNoCancel</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.327">justFinishedNoCancel</a></span>()</div>
+<div class="block">Is this command completed?</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>True if the command has finished and NOT been cancelled.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="justStarted()">
 <h3>justStarted</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.288">justStarted</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.336">justStarted</a></span>()</div>
+<div class="block">Has the command just be started?</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>True if the command was started, but hasn't yet been run</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isRunning()">
 <h3>isRunning</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.292">isRunning</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.345">isRunning</a></span>()</div>
+<div class="block">Is the command in some state of running/started/finished/cancelled</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>True if the command is not in the RESET state</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isCancelled()">
 <h3>isCancelled</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.296">isCancelled</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.354">isCancelled</a></span>()</div>
+<div class="block">Exactly what it says</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>True if the command has been cancelled</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="cancel()">
 <h3>cancel</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.300">cancel</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.361">cancel</a></span>()</div>
+<div class="block">If the command is running, interrupt it such that it can be cancelled</div>
 </section>
 </li>
 <li>
 <section class="detail" id="clear()">
 <h3>clear</h3>
-<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.304">clear</a></span>()</div>
+<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.368">clear</a></span>()</div>
+<div class="block">Clear out the state, time, and requirement maps. Be careful with this one!</div>
 </section>
 </li>
 <li>
 <section class="detail" id="create(com.technototes.library.command.Command,com.technototes.library.subsystem.Subsystem...)">
 <h3>create</h3>
-<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="Command.html" title="interface in com.technototes.library.command">Command</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.318">create</a></span>&#8203;<span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c,
+<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type"><a href="Command.html" title="interface in com.technototes.library.command">Command</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.382">create</a></span>&#8203;<span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c,
  <a href="../subsystem/Subsystem.html" title="interface in com.technototes.library.subsystem">Subsystem</a>...&nbsp;s)</span></div>
 <div class="block">This is a helper to create a new command from an existing command, but with additional
  subsystem requirements</div>
@@ -637,10 +695,13 @@ extends <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/ja
 <li>
 <section class="detail" id="get()">
 <h3>get</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.322">get</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/Command.html#line.391">get</a></span>()</div>
+<div class="block">Gets the current state of the command (Supplier&lt;CommandState&gt;)</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/Supplier.html#get()" title="class or interface in java.util.function" class="external-link">get</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a>&gt;</code></dd>
+<dt>Returns:</dt>
+<dd>The current CommandState of this command</dd>
 </dl>
 </section>
 </li>

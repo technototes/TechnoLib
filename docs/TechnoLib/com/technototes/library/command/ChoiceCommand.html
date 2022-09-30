@@ -83,8 +83,9 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="Command.html" title="interface in com.technototes.library.command">Command</a></code>, <code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a></code>, <code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a>&gt;</code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ChoiceCommand.html#line.9">ChoiceCommand</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ChoiceCommand.html#line.12">ChoiceCommand</a></span>
 <span class="extends-implements">extends <a href="ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></span></div>
+<div class="block">A command that allows choosing among a number of commands based on variety of conditions</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -118,10 +119,16 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><span class="member-name-link"><a href="#%3Cinit%3E(android.util.Pair...)">ChoiceCommand</a></span>&#8203;(android.util.Pair&lt;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>,&#8203;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;...&nbsp;cs)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Each pair represents a condition to check, and the command to execute if that condition is
+ true</div>
+</div>
 <div class="col-constructor-name odd-row-color"><code><span class="member-name-link"><a href="#%3Cinit%3E(java.util.function.BooleanSupplier,com.technototes.library.command.Command)">ChoiceCommand</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;b,
  <a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block">This is a simplistic ChoiceCommand that is simply a single conditional command
+ I *think* this will wwait until b is true</div>
+</div>
 </div>
 </section>
 </li>
@@ -156,14 +163,28 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(android.util.Pair...)">
 <h3>ChoiceCommand</h3>
 <div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/SafeVarargs.html" title="class or interface in java.lang" class="external-link">@SafeVarargs</a>
-</span><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ChoiceCommand.html#line.11">ChoiceCommand</a></span>&#8203;<span class="parameters">(android.util.Pair&lt;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>,&#8203;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;...&nbsp;cs)</span></div>
+</span><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ChoiceCommand.html#line.21">ChoiceCommand</a></span>&#8203;<span class="parameters">(android.util.Pair&lt;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>,&#8203;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;...&nbsp;cs)</span></div>
+<div class="block">Each pair represents a condition to check, and the command to execute if that condition is
+ true</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>cs</code> - The pair of BooleanSupplier (function that returns true/false) and Command to
+           execute if the function is true</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.function.BooleanSupplier,com.technototes.library.command.Command)">
 <h3>ChoiceCommand</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ChoiceCommand.html#line.19">ChoiceCommand</a></span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;b,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ChoiceCommand.html#line.36">ChoiceCommand</a></span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;b,
  <a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c)</span></div>
+<div class="block">This is a simplistic ChoiceCommand that is simply a single conditional command
+ I *think* this will wwait until b is true</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>b</code> - The function to invoke to determine if the command should be run</dd>
+<dd><code>c</code> - The command to be run</dd>
+</dl>
 </section>
 </li>
 </ul>
