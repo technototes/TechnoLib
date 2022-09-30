@@ -1,4 +1,3 @@
-
 apply plugin: 'com.android.library'
 
 android {
@@ -41,6 +40,15 @@ tasks.withType(Test) {
 repositories {
     maven { url 'https://jitpack.io' }
     mavenCentral()
+}
+
+task genDocs(type: Javadoc)
+{
+    source = android.sourceSets.main.java.srcDirs
+    options.linkSource false
+    classpath += project.files(android.getCompileClasspath().join(File.pathSeparator))
+    failOnError false
+    destinationDir = file("../docs/")
 }
 
 apply from: '../build.dependencies.gradle'

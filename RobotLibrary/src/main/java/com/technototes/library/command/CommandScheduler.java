@@ -14,7 +14,7 @@ import com.technototes.library.subsystem.Subsystem;
 
 /**
  * This is a "singleton" object.
- *
+ * <p>
  * TODO: The "CommandScheduler.getInstance()" thing is really kinda silly. Perhaps it's how WPIlib
  * TODO: works, but it's clunky and makes things messier for non-FRC programmers. I think I'm going
  * TODO: yoink that method and make static methods for next year's release...
@@ -173,19 +173,23 @@ public final class CommandScheduler {
     }
 
     public void run() {
-        // better way to do this soontm
-
+        // For each newly scheduled command,
+        // cancel any existing command that is using the new command's subsystem requirements
         commandMap.forEach((c1, b) -> {
             if (c1.justStarted()) {
                 for (Subsystem s : c1.getRequirements()) {
                     for (Command c2 : requirementMap.get(s)) {
-                        if (c1 != c2) c2.cancel();
+                        if (c1 != c2) {
+                            c2.cancel();
+                        }
                     }
                 }
             }
         });
         commandMap.forEach((c1, b) -> {
-            if (b.getAsBoolean() || c1.isRunning()) c1.run();
+            if (b.getAsBoolean() || c1.isRunning()) {
+                c1.run();
+            }
         });
         registered.forEach(Periodic::periodic);
     }

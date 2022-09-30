@@ -3,14 +3,18 @@ package com.technototes.library.command;
 import java.util.HashMap;
 import java.util.Map;
 
-/** Root class for all command groups
+/**
+ * Root class for all command groups
+ *
  * @author Alex Stedman
  */
 public abstract class CommandGroup implements Command {
+    // This is a map from the command to whether it has been run
     protected Map<Command, Boolean> commandMap;
     protected boolean countCancel, anyCancelled;
 
-    /** Create a command group with commands
+    /**
+     * Create a command group with commands
      *
      * @param commands Commands for group
      */
@@ -20,7 +24,8 @@ public abstract class CommandGroup implements Command {
         this.countCancel = countCancel;
     }
 
-    /** Add a command to the group
+    /**
+     * Add a command to the group
      *
      * @param commands The command
      * @return this
