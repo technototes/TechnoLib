@@ -1,1 +1,1 @@
-javadoc -d docs RobotLibrary\src\main\java\com\technototes\library\*.java\*.java
+.\gradlew javadoc

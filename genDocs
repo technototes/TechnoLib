@@ -1,2 +1,2 @@
 #!/bin/sh
-javadoc -d docs RobotLibrary/src/main/java/com/technototes/library/**/*.java
+./gradlew javadoc

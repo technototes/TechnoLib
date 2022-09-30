@@ -60,7 +60,7 @@ public final class CommandScheduler {
 
     /**
      * Alex had a comment "be careful with this" and he's not wrong.
-     * This removes the old Singleton & creates a new one. That's pretty dangerous...
+     * This removes the old Singleton and creates a new one. That's pretty dangerous...
      *
      * @return a *new* singleton object (which makes very little sense)
      */
@@ -150,11 +150,13 @@ public final class CommandScheduler {
         return this;
     }
 
-    @Nullable public Command getDefault(Subsystem s) {
+    @Nullable
+    public Command getDefault(Subsystem s) {
         return opMode.getOpModeState() == CommandOpMode.OpModeState.RUN ? defaultMap.get(s) : null;
     }
 
-    @Nullable public Command getCurrent(Subsystem s) {
+    @Nullable
+    public Command getCurrent(Subsystem s) {
         if (requirementMap.get(s) == null) return null;
         for (Command c : requirementMap.get(s)) {
             if (c.isRunning()) return c;

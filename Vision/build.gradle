@@ -38,5 +38,20 @@ dependencies {
 
 }
 
+task javadoc(type: Javadoc)
+{
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    options.linkSource true
+    failOnError false
+    destinationDir = file("../docs/Vision/")
+}
+
+afterEvaluate {
+    javadoc.classpath += files(android.libraryVariants.collect { variant ->
+        variant.javaCompileProvider.get().classpath.files
+    })
+}
+
 apply from: '../build.dependencies.gradle'
 
