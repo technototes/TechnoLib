@@ -1,1 +1,1 @@
-.\gradlew spotlessApply
+@.\gradlew spotlessApply

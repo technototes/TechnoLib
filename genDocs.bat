@@ -1,1 +1,1 @@
-.\gradlew javadoc
+@.\gradlew javadoc
