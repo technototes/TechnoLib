@@ -42,7 +42,10 @@ task javadoc(type: Javadoc)
 {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    options.linkSource true
+    options {
+        linkSource true
+        encoding = 'utf-8'
+    }
     failOnError false
     destinationDir = file("../docs/Vision/")
 }

@@ -14,24 +14,53 @@ import org.openftc.easyopencv.PipelineRecordingParameters;
 
 import com.technototes.library.hardware.HardwareDevice;
 
+/**
+ * This is an OpenCVCamera interface using the FTC SDK camera hardware
+ *
+ * @param <T> The OpenCvCamera type
+ * @param <U> The HardwareDevice type
+ */
 public abstract class Camera<T extends OpenCvCamera, U extends com.qualcomm.robotcore.hardware.HardwareDevice>
         extends HardwareDevice<U> implements OpenCvCamera {
+    /**
+     * This is the OpenCvCamera object created
+     */
     protected T openCvCamera;
 
+    /**
+     * Create a Camera device from the HardwareDevice provided
+     *
+     * @param device The HardwareDevice for the camera (from hardwareMap.get)
+     */
     protected Camera(U device) {
         super(device);
         openCvCamera = createCamera();
     }
 
+    /**
+     * Create a Camera device from the HardwareDevice provided
+     *
+     * @param device The name of the HardwareDevice for the camera (probably: TODO)
+     */
     protected Camera(String device) {
         super(device);
         openCvCamera = createCamera();
     }
 
+    /**
+     * get the camera created
+     *
+     * @return the OpenCvCamera device created
+     */
     public T getOpenCvCamera() {
         return openCvCamera;
     }
 
+    /**
+     * Create the camera: Child classes need to implement this!
+     *
+     * @return the OpenCvCamera device created
+     */
     abstract T createCamera();
 
     @Override
@@ -46,6 +75,13 @@ public abstract class Camera<T extends OpenCvCamera, U extends com.qualcomm.robo
         getOpenCvCamera().openCameraDeviceAsync(cameraOpenListener);
     }
 
+    /**
+     * Invokes the Runnable's run() method when the camera has been opened,
+     * and calls the IntConsumer's accept() method if an error occurs
+     *
+     * @param open  A Runnable to be notified with the camera is opened
+     * @param error An IntConsumer error handler if an error occurs
+     */
     public void openCameraDeviceAsync(Runnable open, IntConsumer error) {
         getOpenCvCamera().openCameraDeviceAsync(new AsyncCameraOpenListener() {
             @Override
@@ -60,8 +96,15 @@ public abstract class Camera<T extends OpenCvCamera, U extends com.qualcomm.robo
         });
     }
 
+    /**
+     * Invokes the Runnable's run() method when the camera has been opened.
+     * This has no error handling: Good luck, folks!
+     *
+     * @param open A Runnable to be notified with the camera is opened
+     */
     public void openCameraDeviceAsync(Runnable open) {
-        openCameraDeviceAsync(open, i -> {});
+        openCameraDeviceAsync(open, i -> {
+        });
     }
 
     @Override
