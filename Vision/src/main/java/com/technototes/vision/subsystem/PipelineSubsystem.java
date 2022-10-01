@@ -46,7 +46,6 @@ public class PipelineSubsystem implements Subsystem {
         return this;
     }
 
-
     /**
      * This begins streaming frames from the camera
      *

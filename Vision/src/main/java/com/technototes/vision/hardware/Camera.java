@@ -103,8 +103,7 @@ public abstract class Camera<T extends OpenCvCamera, U extends com.qualcomm.robo
      * @param open A Runnable to be notified with the camera is opened
      */
     public void openCameraDeviceAsync(Runnable open) {
-        openCameraDeviceAsync(open, i -> {
-        });
+        openCameraDeviceAsync(open, i -> {});
     }
 
     @Override
