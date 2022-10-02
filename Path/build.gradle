@@ -46,13 +46,13 @@ dependencies {
 task javadoc(type: Javadoc)
 {
     source = android.sourceSets.main.java.srcDirs
+    classpath = project.files(android.getBootClasspath().join(File.pathSeparator))
+    failOnError false
+    destinationDir = file("../docs/Path/")
     options {
         linkSource true
         encoding = 'utf-8'
     }
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    failOnError false
-    destinationDir = file("../docs/Path/")
 }
 
 afterEvaluate {

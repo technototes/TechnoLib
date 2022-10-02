@@ -84,10 +84,13 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="../../general/Invertable.html" title="interface in com.technototes.library.general">Invertable</a>&lt;<a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>&gt;</code>, <code><a href="../HardwareDeviceGroup.html" title="interface in com.technototes.library.hardware">HardwareDeviceGroup</a>&lt;<a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>&gt;</code>, <code><a href="../Sensored.html" title="interface in com.technototes.library.hardware">Sensored</a></code>, <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/DoubleSupplier.html" title="class or interface in java.util.function" class="external-link">DoubleSupplier</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-8">ServoGroup</a></span>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-11">ServoGroup</a></span>
 <span class="extends-implements">extends <a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>
 implements <a href="../HardwareDeviceGroup.html" title="interface in com.technototes.library.hardware">HardwareDeviceGroup</a>&lt;<a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>&gt;</span></div>
-<div class="block">Class for servo group</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="block">Class for servo group
+ This is useful, but needs to be moved into something not based on the HardwareDevice stuff</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -110,6 +113,7 @@ implements <a href="../HardwareDeviceGroup.html" title="interface in com.technot
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.technototes.library.hardware.servo.Servo...)" class="member-name-link">ServoGroup</a><wbr>(<a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>...&nbsp;servos)</code></div>
 <div class="col-last even-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block">Create a servo group</div>
 </div>
 </div>
@@ -120,35 +124,40 @@ implements <a href="../HardwareDeviceGroup.html" title="interface in com.technot
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button><button id="method-summary-table-tab6" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab6', 3)" class="table-tab">Deprecated Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>[]</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAllDevices()" class="member-name-link">getAllDevices</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>[]</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#getAllDevices()" class="member-name-link">getAllDevices</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block">Get all devices in group</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>[]</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getFollowers()" class="member-name-link">getFollowers</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>[]</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#getFollowers()" class="member-name-link">getFollowers</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block">Get the followers for the lead device</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#propogate(double)" class="member-name-link">propogate</a><wbr>(double&nbsp;value)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#propogate(double)" class="member-name-link">propogate</a><wbr>(double&nbsp;value)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block">Propogate actions across the followers</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPosition(double)" class="member-name-link">setPosition</a><wbr>(double&nbsp;position)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#setPosition(double)" class="member-name-link">setPosition</a><wbr>(double&nbsp;position)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block">Set servo position</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ServoGroup.html" title="class in com.technototes.library.hardware.servo">ServoGroup</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#startAt(double)" class="member-name-link">startAt</a><wbr>(double&nbsp;position)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="ServoGroup.html" title="class in com.technototes.library.hardware.servo">ServoGroup</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#startAt(double)" class="member-name-link">startAt</a><wbr>(double&nbsp;position)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block">Set position for the servo and return this</div>
 </div>
 </div>
@@ -186,7 +195,8 @@ implements <a href="../HardwareDeviceGroup.html" title="interface in com.technot
 <li>
 <section class="detail" id="&lt;init&gt;(com.technototes.library.hardware.servo.Servo...)">
 <h3>ServoGroup</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-16">ServoGroup</a></span><wbr><span class="parameters">(<a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>...&nbsp;servos)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-21">ServoGroup</a></span><wbr><span class="parameters">(<a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>...&nbsp;servos)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block">Create a servo group</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -205,7 +215,8 @@ implements <a href="../HardwareDeviceGroup.html" title="interface in com.technot
 <li>
 <section class="detail" id="getFollowers()">
 <h3>getFollowers</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-23">getFollowers</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-28">getFollowers</a></span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../HardwareDeviceGroup.html#getFollowers()">HardwareDeviceGroup</a></code></span></div>
 <div class="block">Get the followers for the lead device</div>
 <dl class="notes">
@@ -219,7 +230,8 @@ implements <a href="../HardwareDeviceGroup.html" title="interface in com.technot
 <li>
 <section class="detail" id="getAllDevices()">
 <h3>getAllDevices</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-28">getAllDevices</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>[]</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-33">getAllDevices</a></span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../HardwareDeviceGroup.html#getAllDevices()">HardwareDeviceGroup</a></code></span></div>
 <div class="block">Get all devices in group</div>
 <dl class="notes">
@@ -233,9 +245,12 @@ implements <a href="../HardwareDeviceGroup.html" title="interface in com.technot
 <li>
 <section class="detail" id="propogate(double)">
 <h3>propogate</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-36">propogate</a></span><wbr><span class="parameters">(double&nbsp;value)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-41">propogate</a></span><wbr><span class="parameters">(double&nbsp;value)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../HardwareDeviceGroup.html#propogate(double)">HardwareDeviceGroup</a></code></span></div>
-<div class="block">Propogate actions across the followers</div>
+<div class="block">Propogate actions across the followers
+ <p>
+ Note to self: Alex couldn't spell :)</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../HardwareDeviceGroup.html#propogate(double)">propogate</a></code>&nbsp;in interface&nbsp;<code><a href="../HardwareDeviceGroup.html" title="interface in com.technototes.library.hardware">HardwareDeviceGroup</a>&lt;<a href="Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a>&gt;</code></dd>
@@ -247,7 +262,8 @@ implements <a href="../HardwareDeviceGroup.html" title="interface in com.technot
 <li>
 <section class="detail" id="setPosition(double)">
 <h3>setPosition</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-43">setPosition</a></span><wbr><span class="parameters">(double&nbsp;position)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-48">setPosition</a></span><wbr><span class="parameters">(double&nbsp;position)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="Servo.html#setPosition(double)">Servo</a></code></span></div>
 <div class="block">Set servo position</div>
 <dl class="notes">
@@ -261,7 +277,8 @@ implements <a href="../HardwareDeviceGroup.html" title="interface in com.technot
 <li>
 <section class="detail" id="startAt(double)">
 <h3>startAt</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ServoGroup.html" title="class in com.technototes.library.hardware.servo">ServoGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-49">startAt</a></span><wbr><span class="parameters">(double&nbsp;position)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ServoGroup.html" title="class in com.technototes.library.hardware.servo">ServoGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/servo/ServoGroup.html#line-54">startAt</a></span><wbr><span class="parameters">(double&nbsp;position)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="Servo.html#startAt(double)">Servo</a></code></span></div>
 <div class="block">Set position for the servo and return this</div>
 <dl class="notes">

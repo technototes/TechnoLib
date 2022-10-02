@@ -78,8 +78,12 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-5">ColorRangeBuilder</a></span>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-9">ColorRangeBuilder</a></span>
 <span class="extends-implements">extends <a href="HardwareBuilder.html" title="class in com.technototes.library.hardware2">HardwareBuilder</a>&lt;com.qualcomm.robotcore.hardware.ColorRangeSensor&gt;</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="block">TODO: Remove this. I don't believe this adds much value. Yeah, HardwareMap.get is weird, but
+ it's in all the documentation, so just read it, see it in the examples, and you're done.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -101,9 +105,13 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.qualcomm.robotcore.hardware.ColorRangeSensor)" class="member-name-link">ColorRangeBuilder</a><wbr>(com.qualcomm.robotcore.hardware.ColorRangeSensor&nbsp;device)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">ColorRangeBuilder</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
 </div>
 </section>
 </li>
@@ -112,24 +120,32 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button><button id="method-summary-table-tab6" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab6', 3)" class="table-tab">Deprecated Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#disable()" class="member-name-link">disable</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#enable()" class="member-name-link">enable</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#gain(float)" class="member-name-link">gain</a><wbr>(float&nbsp;val)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#led(boolean)" class="member-name-link">led</a><wbr>(boolean&nbsp;l)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#disable()" class="member-name-link">disable</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#enable()" class="member-name-link">enable</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#gain(float)" class="member-name-link">gain</a><wbr>(float&nbsp;val)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#led(boolean)" class="member-name-link">led</a><wbr>(boolean&nbsp;l)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
 </div>
 </div>
 </div>
@@ -153,13 +169,15 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>ColorRangeBuilder</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-6">ColorRangeBuilder</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-11">ColorRangeBuilder</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(com.qualcomm.robotcore.hardware.ColorRangeSensor)">
 <h3>ColorRangeBuilder</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-10">ColorRangeBuilder</a></span><wbr><span class="parameters">(com.qualcomm.robotcore.hardware.ColorRangeSensor&nbsp;device)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-15">ColorRangeBuilder</a></span><wbr><span class="parameters">(com.qualcomm.robotcore.hardware.ColorRangeSensor&nbsp;device)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 </ul>
@@ -173,25 +191,29 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="gain(float)">
 <h3>gain</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-14">gain</a></span><wbr><span class="parameters">(float&nbsp;val)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-19">gain</a></span><wbr><span class="parameters">(float&nbsp;val)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="led(boolean)">
 <h3>led</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-19">led</a></span><wbr><span class="parameters">(boolean&nbsp;l)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-24">led</a></span><wbr><span class="parameters">(boolean&nbsp;l)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="enable()">
 <h3>enable</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-24">enable</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-29">enable</a></span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="disable()">
 <h3>disable</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-28">disable</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/ColorRangeBuilder.html#line-33">disable</a></span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 </ul>

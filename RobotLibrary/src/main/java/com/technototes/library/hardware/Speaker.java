@@ -8,6 +8,11 @@ import javax.annotation.Nullable;
 
 import com.qualcomm.ftccommon.SoundPlayer;
 
+/**
+ * There's just no possible way I care about this. I think there are rules about *not* playing
+ * anything through the speaker now, anyway. This is going away.
+ */
+@Deprecated
 public class Speaker {
     private final Map<String, Integer> list;
 

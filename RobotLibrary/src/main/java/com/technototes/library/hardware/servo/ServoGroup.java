@@ -2,14 +2,19 @@ package com.technototes.library.hardware.servo;
 
 import com.technototes.library.hardware.HardwareDeviceGroup;
 
-/** Class for servo group
+/**
+ * Class for servo group
+ * This is useful, but needs to be moved into something not based on the HardwareDevice stuff
+ *
  * @author Alex Stedman
  */
+@Deprecated
 @SuppressWarnings("unused")
 public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
     private final Servo[] followers;
 
-    /** Create a servo group
+    /**
+     * Create a servo group
      *
      * @param servos the servos
      */

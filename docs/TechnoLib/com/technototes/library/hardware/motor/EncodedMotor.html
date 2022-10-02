@@ -183,7 +183,7 @@ implements <a href="../Sensored.html" title="interface in com.technototes.librar
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="EncodedMotor.html" title="class in com.technototes.library.hardware.motor">EncodedMotor</a>&lt;<a href="EncodedMotor.html" title="type parameter in EncodedMotor">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#invert()" class="member-name-link">invert</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Invert</div>
+<div class="block">Toggle inversion</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAtPosition(double)" class="member-name-link">isAtPosition</a><wbr>(double&nbsp;ticks)</code></div>
@@ -196,7 +196,7 @@ implements <a href="../Sensored.html" title="interface in com.technototes.librar
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="EncodedMotor.html" title="class in com.technototes.library.hardware.motor">EncodedMotor</a>&lt;<a href="EncodedMotor.html" title="type parameter in EncodedMotor">T</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setInverted(boolean)" class="member-name-link">setInverted</a><wbr>(boolean&nbsp;invert)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Set the inversion</div>
+<div class="block">Set the inversion (true -> Is inverted, false -> Not inverted)</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="EncodedMotor.html" title="class in com.technototes.library.hardware.motor">EncodedMotor</a>&lt;<a href="EncodedMotor.html" title="type parameter in EncodedMotor">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLimits(double,double)" class="member-name-link">setLimits</a><wbr>(double&nbsp;mi,
@@ -357,14 +357,14 @@ implements <a href="../Sensored.html" title="interface in com.technototes.librar
 <h3>setInverted</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="EncodedMotor.html" title="class in com.technototes.library.hardware.motor">EncodedMotor</a>&lt;<a href="EncodedMotor.html" title="type parameter in EncodedMotor">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-79">setInverted</a></span><wbr><span class="parameters">(boolean&nbsp;invert)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../../general/Invertable.html#setInverted(boolean)">Invertable</a></code></span></div>
-<div class="block">Set the inversion</div>
+<div class="block">Set the inversion (true -> Is inverted, false -> Not inverted)</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../../general/Invertable.html#setInverted(boolean)">setInverted</a></code>&nbsp;in interface&nbsp;<code><a href="../../general/Invertable.html" title="interface in com.technototes.library.general">Invertable</a>&lt;<a href="EncodedMotor.html" title="type parameter in EncodedMotor">T</a> extends com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</code></dd>
 <dt>Overrides:</dt>
 <dd><code><a href="Motor.html#setInverted(boolean)">setInverted</a></code>&nbsp;in class&nbsp;<code><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="EncodedMotor.html" title="type parameter in EncodedMotor">T</a> extends com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</code></dd>
 <dt>Parameters:</dt>
-<dd><code>invert</code> - Inversion to set</dd>
+<dd><code>invert</code> - Inversion value</dd>
 <dt>Returns:</dt>
 <dd>this</dd>
 </dl>
@@ -375,7 +375,7 @@ implements <a href="../Sensored.html" title="interface in com.technototes.librar
 <h3>invert</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="EncodedMotor.html" title="class in com.technototes.library.hardware.motor">EncodedMotor</a>&lt;<a href="EncodedMotor.html" title="type parameter in EncodedMotor">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-85">invert</a></span>()</div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../../general/Invertable.html#invert()">Invertable</a></code></span></div>
-<div class="block">Invert</div>
+<div class="block">Toggle inversion</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../../general/Invertable.html#invert()">invert</a></code>&nbsp;in interface&nbsp;<code><a href="../../general/Invertable.html" title="interface in com.technototes.library.general">Invertable</a>&lt;<a href="EncodedMotor.html" title="type parameter in EncodedMotor">T</a> extends com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</code></dd>

@@ -77,7 +77,7 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="../control/AxisBase.html" title="class in com.technototes.library.control">AxisBase</a></code>, <code><a href="../control/ButtonBase.html" title="class in com.technototes.library.control">ButtonBase</a></code>, <code><a href="../control/CommandAxis.html" title="class in com.technototes.library.control">CommandAxis</a></code>, <code><a href="../control/CommandBinding.html" title="class in com.technototes.library.control">CommandBinding</a></code>, <code><a href="../control/CommandButton.html" title="class in com.technototes.library.control">CommandButton</a></code>, <code><a href="../hardware/motor/EncodedMotor.html" title="class in com.technototes.library.hardware.motor">EncodedMotor</a></code>, <code><a href="../hardware/motor/EncodedMotorGroup.html" title="class in com.technototes.library.hardware.motor">EncodedMotorGroup</a></code>, <code><a href="../hardware/motor/Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a></code>, <code><a href="../hardware/motor/MotorGroup.html" title="class in com.technototes.library.hardware.motor">MotorGroup</a></code>, <code><a href="../hardware/servo/Servo.html" title="class in com.technototes.library.hardware.servo">Servo</a></code>, <code><a href="../hardware/servo/ServoGroup.html" title="class in com.technototes.library.hardware.servo">ServoGroup</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Invertable.html#line-6">Invertable</a>&lt;T extends Invertable&lt;T&gt;&gt;</span></div>
+<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Invertable.html#line-8">Invertable</a>&lt;T extends Invertable&lt;T&gt;&gt;</span></div>
 <div class="block">Interface for anything that can be inverted</div>
 </section>
 <section class="summary">
@@ -101,12 +101,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="Invertable.html" title="type parameter in Invertable">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#invert()" class="member-name-link">invert</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Invert</div>
+<div class="block">Toggle inversion</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="Invertable.html" title="type parameter in Invertable">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setInverted(boolean)" class="member-name-link">setInverted</a><wbr>(boolean&nbsp;invert)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">Set the inversion</div>
+<div class="block">Set the inversion (true -> Is inverted, false -> Not inverted)</div>
 </div>
 </div>
 </div>
@@ -125,11 +125,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="setInverted(boolean)">
 <h3>setInverted</h3>
-<div class="member-signature"><span class="return-type"><a href="Invertable.html" title="type parameter in Invertable">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Invertable.html#line-13">setInverted</a></span><wbr><span class="parameters">(boolean&nbsp;invert)</span></div>
-<div class="block">Set the inversion</div>
+<div class="member-signature"><span class="return-type"><a href="Invertable.html" title="type parameter in Invertable">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Invertable.html#line-16">setInverted</a></span><wbr><span class="parameters">(boolean&nbsp;invert)</span></div>
+<div class="block">Set the inversion (true -> Is inverted, false -> Not inverted)</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>invert</code> - Inversion to set</dd>
+<dd><code>invert</code> - Inversion value</dd>
 <dt>Returns:</dt>
 <dd>this</dd>
 </dl>
@@ -138,8 +138,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="invert()">
 <h3>invert</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Invertable.html" title="type parameter in Invertable">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Invertable.html#line-19">invert</a></span>()</div>
-<div class="block">Invert</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Invertable.html" title="type parameter in Invertable">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Invertable.html#line-23">invert</a></span>()</div>
+<div class="block">Toggle inversion</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>this</dd>
@@ -149,7 +149,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getInverted()">
 <h3>getInverted</h3>
-<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Invertable.html#line-27">getInverted</a></span>()</div>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Invertable.html#line-32">getInverted</a></span>()</div>
 <div class="block">Get current inversion</div>
 <dl class="notes">
 <dt>Returns:</dt>

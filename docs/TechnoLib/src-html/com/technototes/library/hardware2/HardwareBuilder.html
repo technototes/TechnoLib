@@ -17,116 +17,122 @@
 <span class="source-line-no">004</span><span id="line-4"></span>
 <span class="source-line-no">005</span><span id="line-5">import com.qualcomm.robotcore.hardware.HardwareMap;</span>
 <span class="source-line-no">006</span><span id="line-6"></span>
-<span class="source-line-no">007</span><span id="line-7">public class HardwareBuilder&lt;T&gt; {</span>
-<span class="source-line-no">008</span><span id="line-8"></span>
-<span class="source-line-no">009</span><span id="line-9">    private static HardwareMap hardwareMap = null;</span>
-<span class="source-line-no">010</span><span id="line-10"></span>
-<span class="source-line-no">011</span><span id="line-11">    public static HardwareMap getMap() {</span>
-<span class="source-line-no">012</span><span id="line-12">        return hardwareMap;</span>
-<span class="source-line-no">013</span><span id="line-13">    }</span>
-<span class="source-line-no">014</span><span id="line-14"></span>
-<span class="source-line-no">015</span><span id="line-15">    public static void initMap(HardwareMap h) {</span>
-<span class="source-line-no">016</span><span id="line-16">        // fix to maintain old code</span>
-<span class="source-line-no">017</span><span id="line-17">        com.technototes.library.hardware.HardwareDevice.hardwareMap = h;</span>
-<span class="source-line-no">018</span><span id="line-18">        hardwareMap = h;</span>
-<span class="source-line-no">019</span><span id="line-19">    }</span>
-<span class="source-line-no">020</span><span id="line-20"></span>
-<span class="source-line-no">021</span><span id="line-21">    @SuppressWarnings("unchecked cast")</span>
-<span class="source-line-no">022</span><span id="line-22">    public static &lt;T&gt; T create(String s) {</span>
-<span class="source-line-no">023</span><span id="line-23">        if (hardwareMap == null) return null;</span>
-<span class="source-line-no">024</span><span id="line-24">        return hardwareMap.get((Class&lt;T&gt;) Object.class, s);</span>
-<span class="source-line-no">025</span><span id="line-25">    }</span>
-<span class="source-line-no">026</span><span id="line-26">    // TODO</span>
-<span class="source-line-no">027</span><span id="line-27">    public static &lt;T&gt; T create(int port) {</span>
+<span class="source-line-no">007</span><span id="line-7">/**</span>
+<span class="source-line-no">008</span><span id="line-8"> * TODO: Remove this. I don't believe this adds much value. Yeah, HardwareMap.get is weird, but</span>
+<span class="source-line-no">009</span><span id="line-9"> * it's in all the documentation, so just read it, see it in the examples, and you're done.</span>
+<span class="source-line-no">010</span><span id="line-10"> */</span>
+<span class="source-line-no">011</span><span id="line-11">@Deprecated</span>
+<span class="source-line-no">012</span><span id="line-12">public class HardwareBuilder&lt;T&gt; {</span>
+<span class="source-line-no">013</span><span id="line-13"></span>
+<span class="source-line-no">014</span><span id="line-14">    private static HardwareMap hardwareMap = null;</span>
+<span class="source-line-no">015</span><span id="line-15"></span>
+<span class="source-line-no">016</span><span id="line-16">    public static HardwareMap getMap() {</span>
+<span class="source-line-no">017</span><span id="line-17">        return hardwareMap;</span>
+<span class="source-line-no">018</span><span id="line-18">    }</span>
+<span class="source-line-no">019</span><span id="line-19"></span>
+<span class="source-line-no">020</span><span id="line-20">    public static void initMap(HardwareMap h) {</span>
+<span class="source-line-no">021</span><span id="line-21">        // fix to maintain old code</span>
+<span class="source-line-no">022</span><span id="line-22">        com.technototes.library.hardware.HardwareDevice.hardwareMap = h;</span>
+<span class="source-line-no">023</span><span id="line-23">        hardwareMap = h;</span>
+<span class="source-line-no">024</span><span id="line-24">    }</span>
+<span class="source-line-no">025</span><span id="line-25"></span>
+<span class="source-line-no">026</span><span id="line-26">    @SuppressWarnings("unchecked cast")</span>
+<span class="source-line-no">027</span><span id="line-27">    public static &lt;T&gt; T create(String s) {</span>
 <span class="source-line-no">028</span><span id="line-28">        if (hardwareMap == null) return null;</span>
-<span class="source-line-no">029</span><span id="line-29">        return null;</span>
+<span class="source-line-no">029</span><span id="line-29">        return hardwareMap.get((Class&lt;T&gt;) Object.class, s);</span>
 <span class="source-line-no">030</span><span id="line-30">    }</span>
 <span class="source-line-no">031</span><span id="line-31"></span>
-<span class="source-line-no">032</span><span id="line-32">    protected T product;</span>
-<span class="source-line-no">033</span><span id="line-33"></span>
-<span class="source-line-no">034</span><span id="line-34">    public HardwareBuilder(String name) {</span>
-<span class="source-line-no">035</span><span id="line-35">        this(HardwareBuilder.&lt;T&gt;create(name));</span>
+<span class="source-line-no">032</span><span id="line-32">    // TODO</span>
+<span class="source-line-no">033</span><span id="line-33">    public static &lt;T&gt; T create(int port) {</span>
+<span class="source-line-no">034</span><span id="line-34">        if (hardwareMap == null) return null;</span>
+<span class="source-line-no">035</span><span id="line-35">        return null;</span>
 <span class="source-line-no">036</span><span id="line-36">    }</span>
 <span class="source-line-no">037</span><span id="line-37"></span>
-<span class="source-line-no">038</span><span id="line-38">    public HardwareBuilder(T device) {</span>
-<span class="source-line-no">039</span><span id="line-39">        product = device;</span>
-<span class="source-line-no">040</span><span id="line-40">    }</span>
-<span class="source-line-no">041</span><span id="line-41"></span>
-<span class="source-line-no">042</span><span id="line-42">    public HardwareBuilder(int port) {</span>
-<span class="source-line-no">043</span><span id="line-43">        this(HardwareBuilder.&lt;T&gt;create(port));</span>
-<span class="source-line-no">044</span><span id="line-44">    }</span>
-<span class="source-line-no">045</span><span id="line-45"></span>
-<span class="source-line-no">046</span><span id="line-46">    @SuppressWarnings("unchecked cast")</span>
-<span class="source-line-no">047</span><span id="line-47">    public &lt;U extends T&gt; U build() {</span>
-<span class="source-line-no">048</span><span id="line-48">        try {</span>
-<span class="source-line-no">049</span><span id="line-49">            return (U) product;</span>
-<span class="source-line-no">050</span><span id="line-50">        } catch (ClassCastException e) {</span>
-<span class="source-line-no">051</span><span id="line-51">            e.printStackTrace();</span>
-<span class="source-line-no">052</span><span id="line-52">            return null;</span>
-<span class="source-line-no">053</span><span id="line-53">        }</span>
-<span class="source-line-no">054</span><span id="line-54">    }</span>
-<span class="source-line-no">055</span><span id="line-55"></span>
-<span class="source-line-no">056</span><span id="line-56">    public HardwareBuilder&lt;T&gt; apply(UnaryOperator&lt;T&gt; operator) {</span>
-<span class="source-line-no">057</span><span id="line-57">        product = operator.apply(product);</span>
-<span class="source-line-no">058</span><span id="line-58">        return this;</span>
-<span class="source-line-no">059</span><span id="line-59">    }</span>
-<span class="source-line-no">060</span><span id="line-60"></span>
-<span class="source-line-no">061</span><span id="line-61">    public static AnalogBuilder analog(String name) {</span>
-<span class="source-line-no">062</span><span id="line-62">        return new AnalogBuilder(name);</span>
-<span class="source-line-no">063</span><span id="line-63">    }</span>
-<span class="source-line-no">064</span><span id="line-64"></span>
-<span class="source-line-no">065</span><span id="line-65">    public static ColorBuilder color(String name) {</span>
-<span class="source-line-no">066</span><span id="line-66">        return new ColorBuilder(name);</span>
-<span class="source-line-no">067</span><span id="line-67">    }</span>
-<span class="source-line-no">068</span><span id="line-68"></span>
-<span class="source-line-no">069</span><span id="line-69">    public static ColorRangeBuilder colorRange(String name) {</span>
-<span class="source-line-no">070</span><span id="line-70">        return new ColorRangeBuilder(name);</span>
-<span class="source-line-no">071</span><span id="line-71">    }</span>
-<span class="source-line-no">072</span><span id="line-72"></span>
-<span class="source-line-no">073</span><span id="line-73">    public static CRServoBuilder crServo(String name) {</span>
-<span class="source-line-no">074</span><span id="line-74">        return new CRServoBuilder(name);</span>
-<span class="source-line-no">075</span><span id="line-75">    }</span>
-<span class="source-line-no">076</span><span id="line-76"></span>
-<span class="source-line-no">077</span><span id="line-77">    public static DigitalBuilder digital(String name) {</span>
-<span class="source-line-no">078</span><span id="line-78">        return new DigitalBuilder(name);</span>
-<span class="source-line-no">079</span><span id="line-79">    }</span>
-<span class="source-line-no">080</span><span id="line-80"></span>
-<span class="source-line-no">081</span><span id="line-81">    public static DistanceBuilder distance(String name) {</span>
-<span class="source-line-no">082</span><span id="line-82">        return new DistanceBuilder(name);</span>
-<span class="source-line-no">083</span><span id="line-83">    }</span>
-<span class="source-line-no">084</span><span id="line-84"></span>
-<span class="source-line-no">085</span><span id="line-85">    public static IMUBuilder imu(String name) {</span>
-<span class="source-line-no">086</span><span id="line-86">        return new IMUBuilder(name);</span>
-<span class="source-line-no">087</span><span id="line-87">    }</span>
-<span class="source-line-no">088</span><span id="line-88"></span>
-<span class="source-line-no">089</span><span id="line-89">    public static MotorBuilder motor(String name) {</span>
-<span class="source-line-no">090</span><span id="line-90">        return new MotorBuilder(name);</span>
-<span class="source-line-no">091</span><span id="line-91">    }</span>
-<span class="source-line-no">092</span><span id="line-92"></span>
-<span class="source-line-no">093</span><span id="line-93">    public static ServoBuilder servo(String name) {</span>
-<span class="source-line-no">094</span><span id="line-94">        return new ServoBuilder(name);</span>
-<span class="source-line-no">095</span><span id="line-95">    }</span>
-<span class="source-line-no">096</span><span id="line-96"></span>
-<span class="source-line-no">097</span><span id="line-97">    public static AnalogBuilder analog(int port) {</span>
-<span class="source-line-no">098</span><span id="line-98">        return new AnalogBuilder(port);</span>
-<span class="source-line-no">099</span><span id="line-99">    }</span>
-<span class="source-line-no">100</span><span id="line-100"></span>
-<span class="source-line-no">101</span><span id="line-101">    public static CRServoBuilder crServo(int port) {</span>
-<span class="source-line-no">102</span><span id="line-102">        return new CRServoBuilder(port);</span>
-<span class="source-line-no">103</span><span id="line-103">    }</span>
-<span class="source-line-no">104</span><span id="line-104"></span>
-<span class="source-line-no">105</span><span id="line-105">    public static DigitalBuilder digital(int port) {</span>
-<span class="source-line-no">106</span><span id="line-106">        return new DigitalBuilder(port);</span>
-<span class="source-line-no">107</span><span id="line-107">    }</span>
-<span class="source-line-no">108</span><span id="line-108"></span>
-<span class="source-line-no">109</span><span id="line-109">    public static MotorBuilder motor(int port) {</span>
-<span class="source-line-no">110</span><span id="line-110">        return new MotorBuilder(port);</span>
-<span class="source-line-no">111</span><span id="line-111">    }</span>
-<span class="source-line-no">112</span><span id="line-112"></span>
-<span class="source-line-no">113</span><span id="line-113">    public static ServoBuilder servo(int port) {</span>
-<span class="source-line-no">114</span><span id="line-114">        return new ServoBuilder(port);</span>
-<span class="source-line-no">115</span><span id="line-115">    }</span>
-<span class="source-line-no">116</span><span id="line-116">}</span>
+<span class="source-line-no">038</span><span id="line-38">    protected T product;</span>
+<span class="source-line-no">039</span><span id="line-39"></span>
+<span class="source-line-no">040</span><span id="line-40">    public HardwareBuilder(String name) {</span>
+<span class="source-line-no">041</span><span id="line-41">        this(HardwareBuilder.&lt;T&gt;create(name));</span>
+<span class="source-line-no">042</span><span id="line-42">    }</span>
+<span class="source-line-no">043</span><span id="line-43"></span>
+<span class="source-line-no">044</span><span id="line-44">    public HardwareBuilder(T device) {</span>
+<span class="source-line-no">045</span><span id="line-45">        product = device;</span>
+<span class="source-line-no">046</span><span id="line-46">    }</span>
+<span class="source-line-no">047</span><span id="line-47"></span>
+<span class="source-line-no">048</span><span id="line-48">    public HardwareBuilder(int port) {</span>
+<span class="source-line-no">049</span><span id="line-49">        this(HardwareBuilder.&lt;T&gt;create(port));</span>
+<span class="source-line-no">050</span><span id="line-50">    }</span>
+<span class="source-line-no">051</span><span id="line-51"></span>
+<span class="source-line-no">052</span><span id="line-52">    @SuppressWarnings("unchecked cast")</span>
+<span class="source-line-no">053</span><span id="line-53">    public &lt;U extends T&gt; U build() {</span>
+<span class="source-line-no">054</span><span id="line-54">        try {</span>
+<span class="source-line-no">055</span><span id="line-55">            return (U) product;</span>
+<span class="source-line-no">056</span><span id="line-56">        } catch (ClassCastException e) {</span>
+<span class="source-line-no">057</span><span id="line-57">            e.printStackTrace();</span>
+<span class="source-line-no">058</span><span id="line-58">            return null;</span>
+<span class="source-line-no">059</span><span id="line-59">        }</span>
+<span class="source-line-no">060</span><span id="line-60">    }</span>
+<span class="source-line-no">061</span><span id="line-61"></span>
+<span class="source-line-no">062</span><span id="line-62">    public HardwareBuilder&lt;T&gt; apply(UnaryOperator&lt;T&gt; operator) {</span>
+<span class="source-line-no">063</span><span id="line-63">        product = operator.apply(product);</span>
+<span class="source-line-no">064</span><span id="line-64">        return this;</span>
+<span class="source-line-no">065</span><span id="line-65">    }</span>
+<span class="source-line-no">066</span><span id="line-66"></span>
+<span class="source-line-no">067</span><span id="line-67">    public static AnalogBuilder analog(String name) {</span>
+<span class="source-line-no">068</span><span id="line-68">        return new AnalogBuilder(name);</span>
+<span class="source-line-no">069</span><span id="line-69">    }</span>
+<span class="source-line-no">070</span><span id="line-70"></span>
+<span class="source-line-no">071</span><span id="line-71">    public static ColorBuilder color(String name) {</span>
+<span class="source-line-no">072</span><span id="line-72">        return new ColorBuilder(name);</span>
+<span class="source-line-no">073</span><span id="line-73">    }</span>
+<span class="source-line-no">074</span><span id="line-74"></span>
+<span class="source-line-no">075</span><span id="line-75">    public static ColorRangeBuilder colorRange(String name) {</span>
+<span class="source-line-no">076</span><span id="line-76">        return new ColorRangeBuilder(name);</span>
+<span class="source-line-no">077</span><span id="line-77">    }</span>
+<span class="source-line-no">078</span><span id="line-78"></span>
+<span class="source-line-no">079</span><span id="line-79">    public static CRServoBuilder crServo(String name) {</span>
+<span class="source-line-no">080</span><span id="line-80">        return new CRServoBuilder(name);</span>
+<span class="source-line-no">081</span><span id="line-81">    }</span>
+<span class="source-line-no">082</span><span id="line-82"></span>
+<span class="source-line-no">083</span><span id="line-83">    public static DigitalBuilder digital(String name) {</span>
+<span class="source-line-no">084</span><span id="line-84">        return new DigitalBuilder(name);</span>
+<span class="source-line-no">085</span><span id="line-85">    }</span>
+<span class="source-line-no">086</span><span id="line-86"></span>
+<span class="source-line-no">087</span><span id="line-87">    public static DistanceBuilder distance(String name) {</span>
+<span class="source-line-no">088</span><span id="line-88">        return new DistanceBuilder(name);</span>
+<span class="source-line-no">089</span><span id="line-89">    }</span>
+<span class="source-line-no">090</span><span id="line-90"></span>
+<span class="source-line-no">091</span><span id="line-91">    public static IMUBuilder imu(String name) {</span>
+<span class="source-line-no">092</span><span id="line-92">        return new IMUBuilder(name);</span>
+<span class="source-line-no">093</span><span id="line-93">    }</span>
+<span class="source-line-no">094</span><span id="line-94"></span>
+<span class="source-line-no">095</span><span id="line-95">    public static MotorBuilder motor(String name) {</span>
+<span class="source-line-no">096</span><span id="line-96">        return new MotorBuilder(name);</span>
+<span class="source-line-no">097</span><span id="line-97">    }</span>
+<span class="source-line-no">098</span><span id="line-98"></span>
+<span class="source-line-no">099</span><span id="line-99">    public static ServoBuilder servo(String name) {</span>
+<span class="source-line-no">100</span><span id="line-100">        return new ServoBuilder(name);</span>
+<span class="source-line-no">101</span><span id="line-101">    }</span>
+<span class="source-line-no">102</span><span id="line-102"></span>
+<span class="source-line-no">103</span><span id="line-103">    public static AnalogBuilder analog(int port) {</span>
+<span class="source-line-no">104</span><span id="line-104">        return new AnalogBuilder(port);</span>
+<span class="source-line-no">105</span><span id="line-105">    }</span>
+<span class="source-line-no">106</span><span id="line-106"></span>
+<span class="source-line-no">107</span><span id="line-107">    public static CRServoBuilder crServo(int port) {</span>
+<span class="source-line-no">108</span><span id="line-108">        return new CRServoBuilder(port);</span>
+<span class="source-line-no">109</span><span id="line-109">    }</span>
+<span class="source-line-no">110</span><span id="line-110"></span>
+<span class="source-line-no">111</span><span id="line-111">    public static DigitalBuilder digital(int port) {</span>
+<span class="source-line-no">112</span><span id="line-112">        return new DigitalBuilder(port);</span>
+<span class="source-line-no">113</span><span id="line-113">    }</span>
+<span class="source-line-no">114</span><span id="line-114"></span>
+<span class="source-line-no">115</span><span id="line-115">    public static MotorBuilder motor(int port) {</span>
+<span class="source-line-no">116</span><span id="line-116">        return new MotorBuilder(port);</span>
+<span class="source-line-no">117</span><span id="line-117">    }</span>
+<span class="source-line-no">118</span><span id="line-118"></span>
+<span class="source-line-no">119</span><span id="line-119">    public static ServoBuilder servo(int port) {</span>
+<span class="source-line-no">120</span><span id="line-120">        return new ServoBuilder(port);</span>
+<span class="source-line-no">121</span><span id="line-121">    }</span>
+<span class="source-line-no">122</span><span id="line-122">}</span>
 
 
 

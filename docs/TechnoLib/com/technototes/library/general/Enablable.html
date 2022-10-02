@@ -73,6 +73,10 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - </dd>
+</dl>
+<dl class="notes">
 <dt>All Known Subinterfaces:</dt>
 <dd><code><a href="../control/Stick.html" title="interface in com.technototes.library.control">Stick</a></code></dd>
 </dl>
@@ -81,7 +85,11 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="../control/AxisBase.html" title="class in com.technototes.library.control">AxisBase</a></code>, <code><a href="../control/ButtonBase.html" title="class in com.technototes.library.control">ButtonBase</a></code>, <code><a href="../control/CommandAxis.html" title="class in com.technototes.library.control">CommandAxis</a></code>, <code><a href="../control/CommandBinding.html" title="class in com.technototes.library.control">CommandBinding</a></code>, <code><a href="../control/CommandButton.html" title="class in com.technototes.library.control">CommandButton</a></code>, <code><a href="../control/CommandGamepad.html" title="class in com.technototes.library.control">CommandGamepad</a></code>, <code><a href="../control/GamepadBase.html" title="class in com.technototes.library.control">GamepadBase</a></code>, <code><a href="../control/GamepadDpad.html" title="class in com.technototes.library.control">GamepadDpad</a></code>, <code><a href="../control/GamepadStick.html" title="class in com.technototes.library.control">GamepadStick</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-3">Enablable</a>&lt;T extends Enablable&lt;T&gt;&gt;</span></div>
+<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-11">Enablable</a>&lt;T extends Enablable&lt;T&gt;&gt;</span></div>
+<div class="block">Interface for anything that can be enabled/disabled
+ <p>
+ You must have "setEnabled" and "isEnabled" functions. Everything else has
+ functional implementations in the interface</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -98,10 +106,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="Enablable.html" title="type parameter in Enablable">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#disable()" class="member-name-link">disable</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Disable the object</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="Enablable.html" title="type parameter in Enablable">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#enable()" class="member-name-link">enable</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Enable the object</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#isDisabled()" class="member-name-link">isDisabled</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
@@ -110,10 +122,14 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="Enablable.html" title="type parameter in Enablable">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setEnabled(boolean)" class="member-name-link">setEnabled</a><wbr>(boolean&nbsp;enable)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Set whether or not the device is enabled</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="Enablable.html" title="type parameter in Enablable">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#toggleEnabled()" class="member-name-link">toggleEnabled</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Toggle whether this object is enabled or not</div>
+</div>
 </div>
 </div>
 </div>
@@ -131,37 +147,67 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="enable()">
 <h3>enable</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Enablable.html" title="type parameter in Enablable">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-4">enable</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Enablable.html" title="type parameter in Enablable">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-17">enable</a></span>()</div>
+<div class="block">Enable the object</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The object</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="disable()">
 <h3>disable</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Enablable.html" title="type parameter in Enablable">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-8">disable</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Enablable.html" title="type parameter in Enablable">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-26">disable</a></span>()</div>
+<div class="block">Disable the object</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the object</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setEnabled(boolean)">
 <h3>setEnabled</h3>
-<div class="member-signature"><span class="return-type"><a href="Enablable.html" title="type parameter in Enablable">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-12">setEnabled</a></span><wbr><span class="parameters">(boolean&nbsp;enable)</span></div>
+<div class="member-signature"><span class="return-type"><a href="Enablable.html" title="type parameter in Enablable">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-36">setEnabled</a></span><wbr><span class="parameters">(boolean&nbsp;enable)</span></div>
+<div class="block">Set whether or not the device is enabled</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>enable</code> - True for enabled, false for disabled</dd>
+<dt>Returns:</dt>
+<dd>The object</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="toggleEnabled()">
 <h3>toggleEnabled</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Enablable.html" title="type parameter in Enablable">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-14">toggleEnabled</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="Enablable.html" title="type parameter in Enablable">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-43">toggleEnabled</a></span>()</div>
+<div class="block">Toggle whether this object is enabled or not</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>The object</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isEnabled()">
 <h3>isEnabled</h3>
-<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-18">isEnabled</a></span>()</div>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-50">isEnabled</a></span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>Is this object enabled?</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isDisabled()">
 <h3>isDisabled</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-20">isDisabled</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/general/Enablable.html#line-55">isDisabled</a></span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>Is this object disabled?</dd>
+</dl>
 </section>
 </li>
 </ul>

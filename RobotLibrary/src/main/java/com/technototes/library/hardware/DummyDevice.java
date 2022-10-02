@@ -2,6 +2,13 @@ package com.technototes.library.hardware;
 
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 
+/**
+ * This isn't worth actually doing. You have to redo your configuration constantly if you create
+ * a device that isn't part of the core runtime :(
+ *
+ * @param <T> The type of the device
+ */
+@Deprecated
 public class DummyDevice<T> implements HardwareDevice {
 
     private final T internal;

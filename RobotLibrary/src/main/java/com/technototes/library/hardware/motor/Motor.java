@@ -9,16 +9,20 @@ import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.general.Invertable;
 import com.technototes.library.hardware.HardwareDevice;
 
-/** Class for motors
- * @author Alex Stedman
+/**
+ * Class for motors
+ *
  * @param <T> The qualcomm hardware device interface
+ * @author Alex Stedman
  */
 @SuppressWarnings("unused")
 public class Motor<T extends DcMotorSimple> extends HardwareDevice<T>
         implements Invertable<Motor<T>>, Supplier<Double> {
     private boolean invert = false;
     private double min = -1, max = 1;
-    /** Create a motor
+
+    /**
+     * Create a motor
      *
      * @param device The hardware device
      */
@@ -26,7 +30,8 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T>
         super(device);
     }
 
-    /** Create a motor
+    /**
+     * Create a motor
      *
      * @param deviceName The device name
      */
@@ -61,7 +66,8 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T>
         return device.getPower();
     }
 
-    /** Set speed of motor
+    /**
+     * Set speed of motor
      *
      * @param speed The speed of the motor
      */

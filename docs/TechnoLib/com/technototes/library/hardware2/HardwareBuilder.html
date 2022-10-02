@@ -80,8 +80,12 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="AnalogBuilder.html" title="class in com.technototes.library.hardware2">AnalogBuilder</a></code>, <code><a href="ColorBuilder.html" title="class in com.technototes.library.hardware2">ColorBuilder</a></code>, <code><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></code>, <code><a href="CRServoBuilder.html" title="class in com.technototes.library.hardware2">CRServoBuilder</a></code>, <code><a href="DigitalBuilder.html" title="class in com.technototes.library.hardware2">DigitalBuilder</a></code>, <code><a href="DistanceBuilder.html" title="class in com.technototes.library.hardware2">DistanceBuilder</a></code>, <code><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></code>, <code><a href="MotorBuilder.html" title="class in com.technototes.library.hardware2">MotorBuilder</a></code>, <code><a href="ServoBuilder.html" title="class in com.technototes.library.hardware2">ServoBuilder</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-7">HardwareBuilder</a>&lt;T&gt;</span>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-11">HardwareBuilder</a>&lt;T&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="block">TODO: Remove this. I don't believe this adds much value. Yeah, HardwareMap.get is weird, but
+ it's in all the documentation, so just read it, see it in the examples, and you're done.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -96,7 +100,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>protected <a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a></code></div>
 <div class="col-second even-row-color"><code><a href="#product" class="member-name-link">product</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
 </div>
 </section>
 </li>
@@ -109,11 +115,17 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">HardwareBuilder</a><wbr>(int&nbsp;port)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">HardwareBuilder</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(T)" class="member-name-link">HardwareBuilder</a><wbr>(<a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&nbsp;device)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
 </div>
 </section>
 </li>
@@ -122,72 +134,112 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button><button id="method-summary-table-tab6" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab6', 3)" class="table-tab">Deprecated Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="AnalogBuilder.html" title="class in com.technototes.library.hardware2">AnalogBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#analog(int)" class="member-name-link">analog</a><wbr>(int&nbsp;port)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="AnalogBuilder.html" title="class in com.technototes.library.hardware2">AnalogBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#analog(java.lang.String)" class="member-name-link">analog</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="HardwareBuilder.html" title="class in com.technototes.library.hardware2">HardwareBuilder</a>&lt;<a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#apply(java.util.function.UnaryOperator)" class="member-name-link">apply</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&gt;&nbsp;operator)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;U extends <a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&gt;<br>U</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#build()" class="member-name-link">build</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="ColorBuilder.html" title="class in com.technototes.library.hardware2">ColorBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#color(java.lang.String)" class="member-name-link">color</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#colorRange(java.lang.String)" class="member-name-link">colorRange</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#create(int)" class="member-name-link">create</a><wbr>(int&nbsp;port)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;T</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#create(java.lang.String)" class="member-name-link">create</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CRServoBuilder.html" title="class in com.technototes.library.hardware2">CRServoBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#crServo(int)" class="member-name-link">crServo</a><wbr>(int&nbsp;port)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="CRServoBuilder.html" title="class in com.technototes.library.hardware2">CRServoBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#crServo(java.lang.String)" class="member-name-link">crServo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DigitalBuilder.html" title="class in com.technototes.library.hardware2">DigitalBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#digital(int)" class="member-name-link">digital</a><wbr>(int&nbsp;port)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DigitalBuilder.html" title="class in com.technototes.library.hardware2">DigitalBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#digital(java.lang.String)" class="member-name-link">digital</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="DistanceBuilder.html" title="class in com.technototes.library.hardware2">DistanceBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#distance(java.lang.String)" class="member-name-link">distance</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static com.qualcomm.robotcore.hardware.HardwareMap</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getMap()" class="member-name-link">getMap</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#imu(java.lang.String)" class="member-name-link">imu</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#initMap(com.qualcomm.robotcore.hardware.HardwareMap)" class="member-name-link">initMap</a><wbr>(com.qualcomm.robotcore.hardware.HardwareMap&nbsp;h)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="MotorBuilder.html" title="class in com.technototes.library.hardware2">MotorBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#motor(int)" class="member-name-link">motor</a><wbr>(int&nbsp;port)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="MotorBuilder.html" title="class in com.technototes.library.hardware2">MotorBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#motor(java.lang.String)" class="member-name-link">motor</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="ServoBuilder.html" title="class in com.technototes.library.hardware2">ServoBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#servo(int)" class="member-name-link">servo</a><wbr>(int&nbsp;port)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="ServoBuilder.html" title="class in com.technototes.library.hardware2">ServoBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#servo(java.lang.String)" class="member-name-link">servo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="AnalogBuilder.html" title="class in com.technototes.library.hardware2">AnalogBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#analog(int)" class="member-name-link">analog</a><wbr>(int&nbsp;port)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="AnalogBuilder.html" title="class in com.technototes.library.hardware2">AnalogBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#analog(java.lang.String)" class="member-name-link">analog</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="HardwareBuilder.html" title="class in com.technototes.library.hardware2">HardwareBuilder</a>&lt;<a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#apply(java.util.function.UnaryOperator)" class="member-name-link">apply</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&gt;&nbsp;operator)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>&lt;U extends <a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&gt;<br>U</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#build()" class="member-name-link">build</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="ColorBuilder.html" title="class in com.technototes.library.hardware2">ColorBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#color(java.lang.String)" class="member-name-link">color</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#colorRange(java.lang.String)" class="member-name-link">colorRange</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static &lt;T&gt;&nbsp;T</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#create(int)" class="member-name-link">create</a><wbr>(int&nbsp;port)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static &lt;T&gt;&nbsp;T</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#create(java.lang.String)" class="member-name-link">create</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="CRServoBuilder.html" title="class in com.technototes.library.hardware2">CRServoBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#crServo(int)" class="member-name-link">crServo</a><wbr>(int&nbsp;port)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="CRServoBuilder.html" title="class in com.technototes.library.hardware2">CRServoBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#crServo(java.lang.String)" class="member-name-link">crServo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="DigitalBuilder.html" title="class in com.technototes.library.hardware2">DigitalBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#digital(int)" class="member-name-link">digital</a><wbr>(int&nbsp;port)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="DigitalBuilder.html" title="class in com.technototes.library.hardware2">DigitalBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#digital(java.lang.String)" class="member-name-link">digital</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="DistanceBuilder.html" title="class in com.technototes.library.hardware2">DistanceBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#distance(java.lang.String)" class="member-name-link">distance</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static com.qualcomm.robotcore.hardware.HardwareMap</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#getMap()" class="member-name-link">getMap</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#imu(java.lang.String)" class="member-name-link">imu</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#initMap(com.qualcomm.robotcore.hardware.HardwareMap)" class="member-name-link">initMap</a><wbr>(com.qualcomm.robotcore.hardware.HardwareMap&nbsp;h)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="MotorBuilder.html" title="class in com.technototes.library.hardware2">MotorBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#motor(int)" class="member-name-link">motor</a><wbr>(int&nbsp;port)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="MotorBuilder.html" title="class in com.technototes.library.hardware2">MotorBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#motor(java.lang.String)" class="member-name-link">motor</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="ServoBuilder.html" title="class in com.technototes.library.hardware2">ServoBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#servo(int)" class="member-name-link">servo</a><wbr>(int&nbsp;port)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static <a href="ServoBuilder.html" title="class in com.technototes.library.hardware2">ServoBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#servo(java.lang.String)" class="member-name-link">servo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
 </div>
 </div>
 </div>
@@ -208,7 +260,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="product">
 <h3>product</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-32">product</a></span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-38">product</a></span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 </ul>
@@ -222,19 +275,22 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>HardwareBuilder</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-34">HardwareBuilder</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-40">HardwareBuilder</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(T)">
 <h3 id="&lt;init&gt;(java.lang.Object)">HardwareBuilder</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-38">HardwareBuilder</a></span><wbr><span class="parameters">(<a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&nbsp;device)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-44">HardwareBuilder</a></span><wbr><span class="parameters">(<a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&nbsp;device)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>HardwareBuilder</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-42">HardwareBuilder</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-48">HardwareBuilder</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 </ul>
@@ -248,121 +304,141 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getMap()">
 <h3>getMap</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.qualcomm.robotcore.hardware.HardwareMap</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-11">getMap</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">com.qualcomm.robotcore.hardware.HardwareMap</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-16">getMap</a></span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="initMap(com.qualcomm.robotcore.hardware.HardwareMap)">
 <h3>initMap</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-15">initMap</a></span><wbr><span class="parameters">(com.qualcomm.robotcore.hardware.HardwareMap&nbsp;h)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-20">initMap</a></span><wbr><span class="parameters">(com.qualcomm.robotcore.hardware.HardwareMap&nbsp;h)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="create(java.lang.String)">
 <h3>create</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-21">create</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-26">create</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="create(int)">
 <h3>create</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-27">create</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-33">create</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="build()">
 <h3>build</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;U extends <a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&gt;</span>&nbsp;<span class="return-type">U</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-46">build</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;U extends <a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&gt;</span>&nbsp;<span class="return-type">U</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-52">build</a></span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="apply(java.util.function.UnaryOperator)">
 <h3>apply</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="HardwareBuilder.html" title="class in com.technototes.library.hardware2">HardwareBuilder</a>&lt;<a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-56">apply</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&gt;&nbsp;operator)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="HardwareBuilder.html" title="class in com.technototes.library.hardware2">HardwareBuilder</a>&lt;<a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-62">apply</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/UnaryOperator.html" title="class or interface in java.util.function" class="external-link">UnaryOperator</a>&lt;<a href="HardwareBuilder.html" title="type parameter in HardwareBuilder">T</a>&gt;&nbsp;operator)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="analog(java.lang.String)">
 <h3>analog</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="AnalogBuilder.html" title="class in com.technototes.library.hardware2">AnalogBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-61">analog</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="AnalogBuilder.html" title="class in com.technototes.library.hardware2">AnalogBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-67">analog</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="color(java.lang.String)">
 <h3>color</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="ColorBuilder.html" title="class in com.technototes.library.hardware2">ColorBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-65">color</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="ColorBuilder.html" title="class in com.technototes.library.hardware2">ColorBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-71">color</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="colorRange(java.lang.String)">
 <h3>colorRange</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-69">colorRange</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="ColorRangeBuilder.html" title="class in com.technototes.library.hardware2">ColorRangeBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-75">colorRange</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="crServo(java.lang.String)">
 <h3>crServo</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="CRServoBuilder.html" title="class in com.technototes.library.hardware2">CRServoBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-73">crServo</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="CRServoBuilder.html" title="class in com.technototes.library.hardware2">CRServoBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-79">crServo</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="digital(java.lang.String)">
 <h3>digital</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DigitalBuilder.html" title="class in com.technototes.library.hardware2">DigitalBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-77">digital</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DigitalBuilder.html" title="class in com.technototes.library.hardware2">DigitalBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-83">digital</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="distance(java.lang.String)">
 <h3>distance</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DistanceBuilder.html" title="class in com.technototes.library.hardware2">DistanceBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-81">distance</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DistanceBuilder.html" title="class in com.technototes.library.hardware2">DistanceBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-87">distance</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="imu(java.lang.String)">
 <h3>imu</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-85">imu</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-91">imu</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="motor(java.lang.String)">
 <h3>motor</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="MotorBuilder.html" title="class in com.technototes.library.hardware2">MotorBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-89">motor</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="MotorBuilder.html" title="class in com.technototes.library.hardware2">MotorBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-95">motor</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="servo(java.lang.String)">
 <h3>servo</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="ServoBuilder.html" title="class in com.technototes.library.hardware2">ServoBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-93">servo</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="ServoBuilder.html" title="class in com.technototes.library.hardware2">ServoBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-99">servo</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="analog(int)">
 <h3>analog</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="AnalogBuilder.html" title="class in com.technototes.library.hardware2">AnalogBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-97">analog</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="AnalogBuilder.html" title="class in com.technototes.library.hardware2">AnalogBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-103">analog</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="crServo(int)">
 <h3>crServo</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="CRServoBuilder.html" title="class in com.technototes.library.hardware2">CRServoBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-101">crServo</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="CRServoBuilder.html" title="class in com.technototes.library.hardware2">CRServoBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-107">crServo</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="digital(int)">
 <h3>digital</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DigitalBuilder.html" title="class in com.technototes.library.hardware2">DigitalBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-105">digital</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="DigitalBuilder.html" title="class in com.technototes.library.hardware2">DigitalBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-111">digital</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="motor(int)">
 <h3>motor</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="MotorBuilder.html" title="class in com.technototes.library.hardware2">MotorBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-109">motor</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="MotorBuilder.html" title="class in com.technototes.library.hardware2">MotorBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-115">motor</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="servo(int)">
 <h3>servo</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="ServoBuilder.html" title="class in com.technototes.library.hardware2">ServoBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-113">servo</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="ServoBuilder.html" title="class in com.technototes.library.hardware2">ServoBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/HardwareBuilder.html#line-119">servo</a></span><wbr><span class="parameters">(int&nbsp;port)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 </ul>

@@ -15,22 +15,29 @@
 <span class="source-line-no">002</span><span id="line-2"></span>
 <span class="source-line-no">003</span><span id="line-3">import java.util.function.DoubleSupplier;</span>
 <span class="source-line-no">004</span><span id="line-4"></span>
-<span class="source-line-no">005</span><span id="line-5">/** Class for hardware devices with a sensor value</span>
-<span class="source-line-no">006</span><span id="line-6"> * @author Alex Stedman</span>
-<span class="source-line-no">007</span><span id="line-7"> */</span>
-<span class="source-line-no">008</span><span id="line-8">@SuppressWarnings("unused")</span>
-<span class="source-line-no">009</span><span id="line-9">public interface Sensored extends DoubleSupplier {</span>
-<span class="source-line-no">010</span><span id="line-10">    /** Get the sensor value</span>
-<span class="source-line-no">011</span><span id="line-11">     *</span>
-<span class="source-line-no">012</span><span id="line-12">     * @return The value</span>
-<span class="source-line-no">013</span><span id="line-13">     */</span>
-<span class="source-line-no">014</span><span id="line-14">    double getSensorValue();</span>
-<span class="source-line-no">015</span><span id="line-15"></span>
-<span class="source-line-no">016</span><span id="line-16">    @Override</span>
-<span class="source-line-no">017</span><span id="line-17">    default double getAsDouble() {</span>
-<span class="source-line-no">018</span><span id="line-18">        return getSensorValue();</span>
-<span class="source-line-no">019</span><span id="line-19">    }</span>
-<span class="source-line-no">020</span><span id="line-20">}</span>
+<span class="source-line-no">005</span><span id="line-5">/**</span>
+<span class="source-line-no">006</span><span id="line-6"> * Class for hardware devices with a sensor value</span>
+<span class="source-line-no">007</span><span id="line-7"> * &lt;p&gt;</span>
+<span class="source-line-no">008</span><span id="line-8"> * This name is just bad. I'd also like to add normalization to it, so we could scale input values</span>
+<span class="source-line-no">009</span><span id="line-9"> * to consistent ranges (triggers, joystick axes, distance sensors, servo ranges, etc...)</span>
+<span class="source-line-no">010</span><span id="line-10"> *</span>
+<span class="source-line-no">011</span><span id="line-11"> * @author Alex Stedman</span>
+<span class="source-line-no">012</span><span id="line-12"> */</span>
+<span class="source-line-no">013</span><span id="line-13">@Deprecated</span>
+<span class="source-line-no">014</span><span id="line-14">@SuppressWarnings("unused")</span>
+<span class="source-line-no">015</span><span id="line-15">public interface Sensored extends DoubleSupplier {</span>
+<span class="source-line-no">016</span><span id="line-16">    /**</span>
+<span class="source-line-no">017</span><span id="line-17">     * Get the sensor value</span>
+<span class="source-line-no">018</span><span id="line-18">     *</span>
+<span class="source-line-no">019</span><span id="line-19">     * @return The value</span>
+<span class="source-line-no">020</span><span id="line-20">     */</span>
+<span class="source-line-no">021</span><span id="line-21">    double getSensorValue();</span>
+<span class="source-line-no">022</span><span id="line-22"></span>
+<span class="source-line-no">023</span><span id="line-23">    @Override</span>
+<span class="source-line-no">024</span><span id="line-24">    default double getAsDouble() {</span>
+<span class="source-line-no">025</span><span id="line-25">        return getSensorValue();</span>
+<span class="source-line-no">026</span><span id="line-26">    }</span>
+<span class="source-line-no">027</span><span id="line-27">}</span>
 
 
 

@@ -90,7 +90,7 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="EncodedMotor.html" title="class in com.technototes.library.hardware.motor">EncodedMotor</a></code>, <code><a href="MotorGroup.html" title="class in com.technototes.library.hardware.motor">MotorGroup</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-16">Motor</a>&lt;T extends com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-18">Motor</a>&lt;T extends com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</span>
 <span class="extends-implements">extends <a href="../HardwareDevice.html" title="class in com.technototes.library.hardware">HardwareDevice</a>&lt;T&gt;
 implements <a href="../../general/Invertable.html" title="interface in com.technototes.library.general">Invertable</a>&lt;<a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;T&gt;&gt;, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;</span></div>
 <div class="block">Class for motors</div>
@@ -156,12 +156,12 @@ implements <a href="../../general/Invertable.html" title="interface in com.techn
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#invert()" class="member-name-link">invert</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Invert</div>
+<div class="block">Toggle inversion</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setInverted(boolean)" class="member-name-link">setInverted</a><wbr>(boolean&nbsp;inv)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Set the inversion</div>
+<div class="block">Set the inversion (true -> Is inverted, false -> Not inverted)</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLimits(double,double)" class="member-name-link">setLimits</a><wbr>(double&nbsp;mi,
@@ -195,7 +195,7 @@ implements <a href="../../general/Invertable.html" title="interface in com.techn
 <li>
 <section class="detail" id="&lt;init&gt;(T)">
 <h3 id="&lt;init&gt;(com.qualcomm.robotcore.hardware.DcMotorSimple)">Motor</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-25">Motor</a></span><wbr><span class="parameters">(<a href="Motor.html" title="type parameter in Motor">T</a>&nbsp;device)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-29">Motor</a></span><wbr><span class="parameters">(<a href="Motor.html" title="type parameter in Motor">T</a>&nbsp;device)</span></div>
 <div class="block">Create a motor</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -206,7 +206,7 @@ implements <a href="../../general/Invertable.html" title="interface in com.techn
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>Motor</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-33">Motor</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;deviceName)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-38">Motor</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;deviceName)</span></div>
 <div class="block">Create a motor</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -225,14 +225,14 @@ implements <a href="../../general/Invertable.html" title="interface in com.techn
 <li>
 <section class="detail" id="setLimits(double,double)">
 <h3>setLimits</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-37">setLimits</a></span><wbr><span class="parameters">(double&nbsp;mi,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-42">setLimits</a></span><wbr><span class="parameters">(double&nbsp;mi,
  double&nbsp;ma)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="getInverted()">
 <h3>getInverted</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-43">getInverted</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-48">getInverted</a></span>()</div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../../general/Invertable.html#getInverted()">Invertable</a></code></span></div>
 <div class="block">Get current inversion</div>
 <dl class="notes">
@@ -246,14 +246,14 @@ implements <a href="../../general/Invertable.html" title="interface in com.techn
 <li>
 <section class="detail" id="setInverted(boolean)">
 <h3>setInverted</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-48">setInverted</a></span><wbr><span class="parameters">(boolean&nbsp;inv)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-53">setInverted</a></span><wbr><span class="parameters">(boolean&nbsp;inv)</span></div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../../general/Invertable.html#setInverted(boolean)">Invertable</a></code></span></div>
-<div class="block">Set the inversion</div>
+<div class="block">Set the inversion (true -> Is inverted, false -> Not inverted)</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../../general/Invertable.html#setInverted(boolean)">setInverted</a></code>&nbsp;in interface&nbsp;<code><a href="../../general/Invertable.html" title="interface in com.technototes.library.general">Invertable</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a> extends com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</code></dd>
 <dt>Parameters:</dt>
-<dd><code>inv</code> - Inversion to set</dd>
+<dd><code>inv</code> - Inversion value</dd>
 <dt>Returns:</dt>
 <dd>this</dd>
 </dl>
@@ -262,9 +262,9 @@ implements <a href="../../general/Invertable.html" title="interface in com.techn
 <li>
 <section class="detail" id="invert()">
 <h3>invert</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-55">invert</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-60">invert</a></span>()</div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../../general/Invertable.html#invert()">Invertable</a></code></span></div>
-<div class="block">Invert</div>
+<div class="block">Toggle inversion</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../../general/Invertable.html#invert()">invert</a></code>&nbsp;in interface&nbsp;<code><a href="../../general/Invertable.html" title="interface in com.technototes.library.general">Invertable</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a> extends com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</code></dd>
@@ -276,13 +276,13 @@ implements <a href="../../general/Invertable.html" title="interface in com.techn
 <li>
 <section class="detail" id="getSpeed()">
 <h3>getSpeed</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-60">getSpeed</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-65">getSpeed</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="setSpeed(double)">
 <h3>setSpeed</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-68">setSpeed</a></span><wbr><span class="parameters">(double&nbsp;speed)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-74">setSpeed</a></span><wbr><span class="parameters">(double&nbsp;speed)</span></div>
 <div class="block">Set speed of motor</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -293,19 +293,19 @@ implements <a href="../../general/Invertable.html" title="interface in com.techn
 <li>
 <section class="detail" id="brake()">
 <h3>brake</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-72">brake</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-78">brake</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="coast()">
 <h3>coast</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-78">coast</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Motor.html" title="class in com.technototes.library.hardware.motor">Motor</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-84">coast</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="get()">
 <h3>get</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-84">get</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a></span>&nbsp;<span class="element-name"><a href="../../../../../src-html/com/technototes/library/hardware/motor/Motor.html#line-90">get</a></span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html#get()" title="class or interface in java.util.function" class="external-link">get</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="Motor.html" title="type parameter in Motor">T</a> extends com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</code></dd>

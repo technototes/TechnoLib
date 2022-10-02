@@ -3,6 +3,7 @@ package com.technototes.library.hardware.servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+// TODO: Make this use a normal Servo on not a technototes servo
 public class ServoProfiler {
     private final Servo servo;
     private double maxVel, maxAccel, targetPosition, servoRange, targetTolerance;
@@ -71,6 +72,7 @@ public class ServoProfiler {
         targetTolerance = tolerance;
         return this;
     }
+
     // fun method to update servo
     public ServoProfiler update() {
         // if at the target dont do anything

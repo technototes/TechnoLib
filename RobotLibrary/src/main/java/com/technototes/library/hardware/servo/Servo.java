@@ -8,15 +8,23 @@ import com.technototes.library.general.Invertable;
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.hardware.Sensored;
 
-/** Class for servos
+/**
+ * Class for servos
+ * There's some useful functionality in here, but it can be added more easily by making something
+ * that direction extends the robotcore Servo instead. The HardwareDevice base class just adds
+ * a layer of indirection without much value...
+ *
  * @author Alex Stedman
  */
+@Deprecated
 @SuppressWarnings("unused")
 public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
         implements Sensored, Invertable<Servo> {
 
     private boolean inverted = false;
-    /** Create servo object
+
+    /**
+     * Create servo object
      *
      * @param device The servo
      */
@@ -24,7 +32,8 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
         super(device);
     }
 
-    /** Create servo object
+    /**
+     * Create servo object
      *
      * @param deviceName The device name in hardware map
      */
@@ -32,7 +41,8 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
         super(deviceName);
     }
 
-    /** Set position for the servo and return this
+    /**
+     * Set position for the servo and return this
      *
      * @param position The servo position
      * @return this
@@ -63,7 +73,8 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
         return this;
     }
 
-    /** Set servo position
+    /**
+     * Set servo position
      *
      * @param position The position to set the servo to
      */
@@ -80,7 +91,8 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
         return inverted ? 1 - device.getPosition() : device.getPosition();
     }
 
-    /** Get servo position
+    /**
+     * Get servo position
      *
      * @return The servo position
      */
@@ -88,7 +100,8 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
         return getSensorValue();
     }
 
-    /** Set servo range
+    /**
+     * Set servo range
      *
      * @param min The minimum of the range
      * @param max The maximum of the range

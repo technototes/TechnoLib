@@ -85,7 +85,7 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="CommandAxis.html" title="class in com.technototes.library.control">CommandAxis</a></code>, <code><a href="CommandBinding.html" title="class in com.technototes.library.control">CommandBinding</a></code>, <code><a href="CommandButton.html" title="class in com.technototes.library.control">CommandButton</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-12">CommandInput</a>&lt;T extends <a href="ButtonBase.html" title="class in com.technototes.library.control">ButtonBase</a>&gt;</span><span class="extends-implements">
+<div class="type-signature"><span class="modifiers">public interface </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-14">CommandInput</a>&lt;T extends <a href="ButtonBase.html" title="class in com.technototes.library.control">ButtonBase</a>&gt;</span><span class="extends-implements">
 extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a></span></div>
 <div class="block">Class for gamepad-command integration</div>
 </section>
@@ -110,59 +110,94 @@ extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/ja
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#schedule(com.technototes.library.command.Command)" class="member-name-link">schedule</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">just schedules things</div>
+<div class="block">Schedule the command to run</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#schedule(java.util.function.BooleanSupplier,com.technototes.library.command.Command)" class="member-name-link">schedule</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition,
  <a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
-<div class="block">Schedule the commands</div>
+<div class="block">Schedule the command to run over &amp; over</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#toggle(com.technototes.library.command.Command,com.technototes.library.command.Command)" class="member-name-link">toggle</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;toggle,
  <a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;itoggle)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">For scheduling a pair of "opposite" commands for toggling when something
+ is or is not being toggled</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whenInverseToggled(com.technototes.library.command.Command)" class="member-name-link">whenInverseToggled</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Schedule the command to be run when the input has only stopped being toggled</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whenPressed(com.technototes.library.command.Command)" class="member-name-link">whenPressed</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Schedule a command to be run once the input is pressed.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whenPressedReleased(com.technototes.library.command.Command,com.technototes.library.command.Command)" class="member-name-link">whenPressedReleased</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;press,
  <a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;release)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">For scheduling a pair commands for when the input is pressed and released.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whenReleased(com.technototes.library.command.Command)" class="member-name-link">whenReleased</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Schedule a command to be run once the input is released.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whenToggled(com.technototes.library.command.Command)" class="member-name-link">whenToggled</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Schedule a command to be run when the input was just toggled
+ (From pressed to released, or released to pressed)</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whileInverseToggled(com.technototes.library.command.Command)" class="member-name-link">whileInverseToggled</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Schedule the command to run over &amp; over while the input is *not* changing
+ It will be canceled once the input is toggled.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whilePressed(com.technototes.library.command.Command)" class="member-name-link">whilePressed</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Schedule a command to be run over &amp; over while the input is pressed,
+ but once it's released, the command will be cancelled.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whilePressedContinuous(com.technototes.library.command.Command)" class="member-name-link">whilePressedContinuous</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Schedule a command to be run over &amp; over while the input is pressed</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whilePressedOnce(com.technototes.library.command.Command)" class="member-name-link">whilePressedOnce</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Schedule a command to be run while the input is pressed, but only once,
+ and if the command takes so long that the input is released, the command
+ will be cancelled.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whilePressedReleased(com.technototes.library.command.Command,com.technototes.library.command.Command)" class="member-name-link">whilePressedReleased</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;press,
  <a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;release)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">For scheduling a pair commands for while the input is pressed and released.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whileReleased(com.technototes.library.command.Command)" class="member-name-link">whileReleased</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Schedule a command to be run over &amp; over while the input is released,
+ but once it's pressed, the command will be cancelled.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whileReleasedOnce(com.technototes.library.command.Command)" class="member-name-link">whileReleasedOnce</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Schdule the command to be run when the input is released, but only once!</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CommandInput.html" title="type parameter in CommandInput">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#whileToggled(com.technototes.library.command.Command)" class="member-name-link">whileToggled</a><wbr>(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Schedule the command to be run while the input is changing.</div>
+</div>
 </div>
 </div>
 </div>
@@ -183,127 +218,242 @@ extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/ja
 <li>
 <section class="detail" id="whenPressed(com.technototes.library.command.Command)">
 <h3>whenPressed</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-14">whenPressed</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-22">whenPressed</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="block">Schedule a command to be run once the input is pressed.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>command</code> - The command to be run</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="whenReleased(com.technototes.library.command.Command)">
 <h3>whenReleased</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-18">whenReleased</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-32">whenReleased</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="block">Schedule a command to be run once the input is released.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>command</code> - The command to be run</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="whilePressed(com.technototes.library.command.Command)">
 <h3>whilePressed</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-22">whilePressed</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-43">whilePressed</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="block">Schedule a command to be run over &amp; over while the input is pressed,
+ but once it's released, the command will be cancelled.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>command</code> - The command to be run</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="whileReleased(com.technototes.library.command.Command)">
 <h3>whileReleased</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-26">whileReleased</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-54">whileReleased</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="block">Schedule a command to be run over &amp; over while the input is released,
+ but once it's pressed, the command will be cancelled.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>command</code> - The command to be run</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="whilePressedOnce(com.technototes.library.command.Command)">
 <h3>whilePressedOnce</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-30">whilePressedOnce</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-66">whilePressedOnce</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="block">Schedule a command to be run while the input is pressed, but only once,
+ and if the command takes so long that the input is released, the command
+ will be cancelled.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>command</code> - The command to be run</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="whilePressedContinuous(com.technototes.library.command.Command)">
 <h3>whilePressedContinuous</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-34">whilePressedContinuous</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-76">whilePressedContinuous</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="block">Schedule a command to be run over &amp; over while the input is pressed</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>command</code> - The command to be run</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="whileReleasedOnce(com.technototes.library.command.Command)">
 <h3>whileReleasedOnce</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-38">whileReleasedOnce</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-86">whileReleasedOnce</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="block">Schdule the command to be run when the input is released, but only once!</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>command</code> - The command to be run</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="whenToggled(com.technototes.library.command.Command)">
 <h3>whenToggled</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-42">whenToggled</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-97">whenToggled</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="block">Schedule a command to be run when the input was just toggled
+ (From pressed to released, or released to pressed)</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>command</code> - The command to be run</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="whenInverseToggled(com.technototes.library.command.Command)">
 <h3>whenInverseToggled</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-46">whenInverseToggled</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-107">whenInverseToggled</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="block">Schedule the command to be run when the input has only stopped being toggled</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>command</code> - The command to be run</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="whileToggled(com.technototes.library.command.Command)">
 <h3>whileToggled</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-50">whileToggled</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-120">whileToggled</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="block">Schedule the command to be run while the input is changing.
+ It will be canceled once the input is not changing.
+ This is questionably useful, as toggling over &amp; over is a 'frequency' problem.
+ I expect this is going to behave almost the same as whenToggled...</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>command</code> - The command to be run</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="whileInverseToggled(com.technototes.library.command.Command)">
 <h3>whileInverseToggled</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-54">whileInverseToggled</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-131">whileInverseToggled</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="block">Schedule the command to run over &amp; over while the input is *not* changing
+ It will be canceled once the input is toggled.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>command</code> - The command to be run repetetively</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getInstance()">
 <h3>getInstance</h3>
-<div class="member-signature"><span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-62">getInstance</a></span>()</div>
+<div class="member-signature"><span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-140">getInstance</a></span>()</div>
 <div class="block">Return instance of class parameter</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>The instance</dd>
+<dd>The CommandInput&lt;T&gt; instance</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="schedule(java.util.function.BooleanSupplier,com.technototes.library.command.Command)">
 <h3>schedule</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-70">schedule</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition,
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-149">schedule</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition,
  <a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
-<div class="block">Schedule the commands</div>
+<div class="block">Schedule the command to run over &amp; over</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>condition</code> - The condition</dd>
 <dd><code>command</code> - The command to schedule</dd>
 <dt>Returns:</dt>
-<dd>The instance</dd>
+<dd>The CommandInput&lt;T&gt; instance</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="schedule(com.technototes.library.command.Command)">
 <h3>schedule</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-80">schedule</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
-<div class="block">just schedules things</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-160">schedule</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
+<div class="block">Schedule the command to run</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>command</code> - command</dd>
+<dd><code>command</code> - The command</dd>
 <dt>Returns:</dt>
-<dd>the instance</dd>
+<dd>The CommandInput&lt;T&gt; instance</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="whenPressedReleased(com.technototes.library.command.Command,com.technototes.library.command.Command)">
 <h3>whenPressedReleased</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-84">whenPressedReleased</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;press,
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-173">whenPressedReleased</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;press,
  <a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;release)</span></div>
+<div class="block">For scheduling a pair commands for when the input is pressed and released.
+ 'press' will be executed once when the input is pressed.
+ 'release' will be executed once when the input is released.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>press</code> - The command to run on Press</dd>
+<dd><code>release</code> - The command to run on Release</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="whilePressedReleased(com.technototes.library.command.Command,com.technototes.library.command.Command)">
 <h3>whilePressedReleased</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-89">whilePressedReleased</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;press,
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-187">whilePressedReleased</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;press,
  <a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;release)</span></div>
+<div class="block">For scheduling a pair commands for while the input is pressed and released.
+ 'press' will be executed over &amp; over while the input is pressed.
+ 'release' will be exeucted over &amp; over while the input is released.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>press</code> - The command to run on Press</dd>
+<dd><code>release</code> - The command to run on Release</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="toggle(com.technototes.library.command.Command,com.technototes.library.command.Command)">
 <h3>toggle</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-94">toggle</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;toggle,
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CommandInput.html" title="type parameter in CommandInput">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/control/CommandInput.html#line-200">toggle</a></span><wbr><span class="parameters">(<a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;toggle,
  <a href="../command/Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;itoggle)</span></div>
+<div class="block">For scheduling a pair of "opposite" commands for toggling when something
+ is or is not being toggled</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>toggle</code> - The command to run when the input flips states</dd>
+<dd><code>itoggle</code> - The command to run when the input has not changed states</dd>
+<dt>Returns:</dt>
+<dd>The CommandInput&lt;T&gt; instance</dd>
+</dl>
 </section>
 </li>
 </ul>

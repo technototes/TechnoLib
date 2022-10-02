@@ -4,6 +4,11 @@ import java.util.function.UnaryOperator;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+/**
+ * TODO: Remove this. I don't believe this adds much value. Yeah, HardwareMap.get is weird, but
+ * it's in all the documentation, so just read it, see it in the examples, and you're done.
+ */
+@Deprecated
 public class HardwareBuilder<T> {
 
     private static HardwareMap hardwareMap = null;
@@ -23,6 +28,7 @@ public class HardwareBuilder<T> {
         if (hardwareMap == null) return null;
         return hardwareMap.get((Class<T>) Object.class, s);
     }
+
     // TODO
     public static <T> T create(int port) {
         if (hardwareMap == null) return null;

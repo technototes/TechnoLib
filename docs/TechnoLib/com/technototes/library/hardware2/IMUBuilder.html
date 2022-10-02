@@ -78,8 +78,12 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-10">IMUBuilder</a></span>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+</span><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-14">IMUBuilder</a></span>
 <span class="extends-implements">extends <a href="HardwareBuilder.html" title="class in com.technototes.library.hardware2">HardwareBuilder</a>&lt;com.qualcomm.hardware.bosch.BNO055IMU&gt;</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
+<div class="block">TODO: Remove this. I don't believe this adds much value. Yeah, HardwareMap.get is weird, but
+ it's in all the documentation, so just read it, see it in the examples, and you're done.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,7 +98,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static enum&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="IMUBuilder.AxesSigns.html" class="type-name-link" title="enum class in com.technototes.library.hardware2">IMUBuilder.AxesSigns</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
 </div>
 </section>
 </li>
@@ -116,9 +122,13 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.qualcomm.hardware.bosch.BNO055IMUImpl)" class="member-name-link">IMUBuilder</a><wbr>(com.qualcomm.hardware.bosch.BNO055IMUImpl&nbsp;device)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">IMUBuilder</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-last odd-row-color">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
 </div>
 </section>
 </li>
@@ -127,28 +137,38 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab2" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab2', 3)" class="table-tab">Instance Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button><button id="method-summary-table-tab6" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab6', 3)" class="table-tab">Deprecated Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel">
 <div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;U extends com.qualcomm.hardware.bosch.BNO055IMU&gt;<br>U</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#build()" class="member-name-link">build</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#degrees()" class="member-name-link">degrees</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#parameter(java.util.function.Consumer)" class="member-name-link">parameter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;com.qualcomm.hardware.bosch.BNO055IMU.Parameters&gt;&nbsp;consumer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#radians()" class="member-name-link">radians</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#remap(org.firstinspires.ftc.robotcore.external.navigation.AxesOrder,com.technototes.library.hardware2.IMUBuilder.AxesSigns)" class="member-name-link">remap</a><wbr>(org.firstinspires.ftc.robotcore.external.navigation.AxesOrder&nbsp;order,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code>&lt;U extends com.qualcomm.hardware.bosch.BNO055IMU&gt;<br>U</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#build()" class="member-name-link">build</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#degrees()" class="member-name-link">degrees</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#parameter(java.util.function.Consumer)" class="member-name-link">parameter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;com.qualcomm.hardware.bosch.BNO055IMU.Parameters&gt;&nbsp;consumer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#radians()" class="member-name-link">radians</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#remap(org.firstinspires.ftc.robotcore.external.navigation.AxesOrder,com.technototes.library.hardware2.IMUBuilder.AxesSigns)" class="member-name-link">remap</a><wbr>(org.firstinspires.ftc.robotcore.external.navigation.AxesOrder&nbsp;order,
  <a href="IMUBuilder.AxesSigns.html" title="enum class in com.technototes.library.hardware2">IMUBuilder.AxesSigns</a>&nbsp;signs)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated.</span></div>
+&nbsp;</div>
 </div>
 </div>
 </div>
@@ -172,13 +192,15 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>IMUBuilder</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-31">IMUBuilder</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-36">IMUBuilder</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(com.qualcomm.hardware.bosch.BNO055IMUImpl)">
 <h3>IMUBuilder</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-36">IMUBuilder</a></span><wbr><span class="parameters">(com.qualcomm.hardware.bosch.BNO055IMUImpl&nbsp;device)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-41">IMUBuilder</a></span><wbr><span class="parameters">(com.qualcomm.hardware.bosch.BNO055IMUImpl&nbsp;device)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 </ul>
@@ -192,33 +214,38 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="parameter(java.util.function.Consumer)">
 <h3>parameter</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-41">parameter</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;com.qualcomm.hardware.bosch.BNO055IMU.Parameters&gt;&nbsp;consumer)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-46">parameter</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;com.qualcomm.hardware.bosch.BNO055IMU.Parameters&gt;&nbsp;consumer)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="degrees()">
 <h3>degrees</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-46">degrees</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-51">degrees</a></span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="radians()">
 <h3>radians</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-51">radians</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-56">radians</a></span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="remap(org.firstinspires.ftc.robotcore.external.navigation.AxesOrder,com.technototes.library.hardware2.IMUBuilder.AxesSigns)">
 <h3>remap</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-56">remap</a></span><wbr><span class="parameters">(org.firstinspires.ftc.robotcore.external.navigation.AxesOrder&nbsp;order,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="IMUBuilder.html" title="class in com.technototes.library.hardware2">IMUBuilder</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-61">remap</a></span><wbr><span class="parameters">(org.firstinspires.ftc.robotcore.external.navigation.AxesOrder&nbsp;order,
  <a href="IMUBuilder.AxesSigns.html" title="enum class in com.technototes.library.hardware2">IMUBuilder.AxesSigns</a>&nbsp;signs)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="build()">
 <h3>build</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;U extends com.qualcomm.hardware.bosch.BNO055IMU&gt;</span>
-<span class="return-type">U</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-90">build</a></span>()</div>
+<span class="return-type">U</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/hardware2/IMUBuilder.html#line-95">build</a></span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span></div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="HardwareBuilder.html#build()">build</a></code>&nbsp;in class&nbsp;<code><a href="HardwareBuilder.html" title="class in com.technototes.library.hardware2">HardwareBuilder</a>&lt;com.qualcomm.hardware.bosch.BNO055IMU&gt;</code></dd>

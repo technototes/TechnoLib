@@ -41,13 +41,13 @@ dependencies {
 task javadoc(type: Javadoc)
 {
     source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath = project.files(android.getBootClasspath().join(File.pathSeparator))
+    failOnError false
+    destinationDir = file("../docs/Vision/")
     options {
         linkSource true
         encoding = 'utf-8'
     }
-    failOnError false
-    destinationDir = file("../docs/Vision/")
 }
 
 afterEvaluate {

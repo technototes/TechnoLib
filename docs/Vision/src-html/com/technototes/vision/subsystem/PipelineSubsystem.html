@@ -59,30 +59,29 @@
 <span class="source-line-no">046</span><span id="line-46">        return this;</span>
 <span class="source-line-no">047</span><span id="line-47">    }</span>
 <span class="source-line-no">048</span><span id="line-48"></span>
-<span class="source-line-no">049</span><span id="line-49"></span>
-<span class="source-line-no">050</span><span id="line-50">    /**</span>
-<span class="source-line-no">051</span><span id="line-51">     * This begins streaming frames from the camera</span>
-<span class="source-line-no">052</span><span id="line-52">     *</span>
-<span class="source-line-no">053</span><span id="line-53">     * @param width    The width of the frame (constrained to a specific range, based on the camera device)</span>
-<span class="source-line-no">054</span><span id="line-54">     * @param height   The height of the frame (consrained based on the camera device)</span>
-<span class="source-line-no">055</span><span id="line-55">     * @param rotation The rotation of the frame to acquire</span>
-<span class="source-line-no">056</span><span id="line-56">     * @return this PipelineSubsystem (for chaining, I guess?)</span>
-<span class="source-line-no">057</span><span id="line-57">     */</span>
-<span class="source-line-no">058</span><span id="line-58">    public PipelineSubsystem startStreaming(int width, int height, OpenCvCameraRotation rotation) {</span>
-<span class="source-line-no">059</span><span id="line-59">        camera.startStreaming(width, height, rotation);</span>
-<span class="source-line-no">060</span><span id="line-60">        return this;</span>
-<span class="source-line-no">061</span><span id="line-61">    }</span>
-<span class="source-line-no">062</span><span id="line-62"></span>
-<span class="source-line-no">063</span><span id="line-63">    /**</span>
-<span class="source-line-no">064</span><span id="line-64">     * Stop frame processing</span>
-<span class="source-line-no">065</span><span id="line-65">     *</span>
-<span class="source-line-no">066</span><span id="line-66">     * @return this PipelineSubsystem (for chaining)</span>
-<span class="source-line-no">067</span><span id="line-67">     */</span>
-<span class="source-line-no">068</span><span id="line-68">    public PipelineSubsystem stopStreaming() {</span>
-<span class="source-line-no">069</span><span id="line-69">        camera.stopStreaming();</span>
-<span class="source-line-no">070</span><span id="line-70">        return this;</span>
-<span class="source-line-no">071</span><span id="line-71">    }</span>
-<span class="source-line-no">072</span><span id="line-72">}</span>
+<span class="source-line-no">049</span><span id="line-49">    /**</span>
+<span class="source-line-no">050</span><span id="line-50">     * This begins streaming frames from the camera</span>
+<span class="source-line-no">051</span><span id="line-51">     *</span>
+<span class="source-line-no">052</span><span id="line-52">     * @param width    The width of the frame (constrained to a specific range, based on the camera device)</span>
+<span class="source-line-no">053</span><span id="line-53">     * @param height   The height of the frame (consrained based on the camera device)</span>
+<span class="source-line-no">054</span><span id="line-54">     * @param rotation The rotation of the frame to acquire</span>
+<span class="source-line-no">055</span><span id="line-55">     * @return this PipelineSubsystem (for chaining, I guess?)</span>
+<span class="source-line-no">056</span><span id="line-56">     */</span>
+<span class="source-line-no">057</span><span id="line-57">    public PipelineSubsystem startStreaming(int width, int height, OpenCvCameraRotation rotation) {</span>
+<span class="source-line-no">058</span><span id="line-58">        camera.startStreaming(width, height, rotation);</span>
+<span class="source-line-no">059</span><span id="line-59">        return this;</span>
+<span class="source-line-no">060</span><span id="line-60">    }</span>
+<span class="source-line-no">061</span><span id="line-61"></span>
+<span class="source-line-no">062</span><span id="line-62">    /**</span>
+<span class="source-line-no">063</span><span id="line-63">     * Stop frame processing</span>
+<span class="source-line-no">064</span><span id="line-64">     *</span>
+<span class="source-line-no">065</span><span id="line-65">     * @return this PipelineSubsystem (for chaining)</span>
+<span class="source-line-no">066</span><span id="line-66">     */</span>
+<span class="source-line-no">067</span><span id="line-67">    public PipelineSubsystem stopStreaming() {</span>
+<span class="source-line-no">068</span><span id="line-68">        camera.stopStreaming();</span>
+<span class="source-line-no">069</span><span id="line-69">        return this;</span>
+<span class="source-line-no">070</span><span id="line-70">    }</span>
+<span class="source-line-no">071</span><span id="line-71">}</span>
 
 
 
