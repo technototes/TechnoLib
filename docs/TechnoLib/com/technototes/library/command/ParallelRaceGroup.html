@@ -86,9 +86,9 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="ChoiceCommand.html" title="class in com.technototes.library.command">ChoiceCommand</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ParallelRaceGroup.html#line-6">ParallelRaceGroup</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ParallelRaceGroup.html#line-8">ParallelRaceGroup</a></span>
 <span class="extends-implements">extends <a href="CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></span></div>
-<div class="block">Command group to run commands in parallel until one finished</div>
+<div class="block">Command group to run commands in parallel until *one* is finished</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -142,12 +142,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFinished()" class="member-name-link">isFinished</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Is this finished</div>
+<div class="block">Is this finished?</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#schedule(com.technototes.library.command.Command)" class="member-name-link">schedule</a><wbr>(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">This should schedule the command as part of this command group, I think.</div>
+<div class="block">Add one more command to the list of commands that will be run at the same time</div>
 </div>
 </div>
 </div>
@@ -175,7 +175,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(com.technototes.library.command.Command...)">
 <h3>ParallelRaceGroup</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ParallelRaceGroup.html#line-12">ParallelRaceGroup</a></span><wbr><span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;commands)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ParallelRaceGroup.html#line-14">ParallelRaceGroup</a></span><wbr><span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;commands)</span></div>
 <div class="block">Make parallel race group</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -194,30 +194,28 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="schedule(com.technototes.library.command.Command)">
 <h3>schedule</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ParallelRaceGroup.html#line-16">schedule</a></span><wbr><span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="CommandGroup.html#schedule(com.technototes.library.command.Command)">CommandGroup</a></code></span></div>
-<div class="block">This should schedule the command as part of this command group, I think.
- TODO: Is this correct?</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ParallelRaceGroup.html#line-23">schedule</a></span><wbr><span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c)</span></div>
+<div class="block">Add one more command to the list of commands that will be run at the same time</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="CommandGroup.html#schedule(com.technototes.library.command.Command)">schedule</a></code>&nbsp;in class&nbsp;<code><a href="CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>c</code> - The command to add to the command group</dd>
+<dd><code>c</code> - The command to add to the group</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isFinished()">
 <h3>isFinished</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ParallelRaceGroup.html#line-25">isFinished</a></span>()</div>
-<div class="block">Is this finished</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ParallelRaceGroup.html#line-33">isFinished</a></span>()</div>
+<div class="block">Is this finished?</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="Command.html#isFinished()">isFinished</a></code>&nbsp;in interface&nbsp;<code><a href="Command.html" title="interface in com.technototes.library.command">Command</a></code></dd>
 <dt>Specified by:</dt>
 <dd><code><a href="CommandGroup.html#isFinished()">isFinished</a></code>&nbsp;in class&nbsp;<code><a href="CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></code></dd>
 <dt>Returns:</dt>
-<dd>If all of the commands are finished</dd>
+<dd>True if *any* of the commands are finished, false if *none* have finished.</dd>
 </dl>
 </section>
 </li>

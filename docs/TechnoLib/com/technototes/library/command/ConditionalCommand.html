@@ -80,18 +80,18 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="Command.html" title="interface in com.technototes.library.command">Command</a></code>, <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a></code>, <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Supplier.html" title="class or interface in java.util.function" class="external-link">Supplier</a>&lt;<a href="Command.CommandState.html" title="enum class in com.technototes.library.command">Command.CommandState</a>&gt;</code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ConditionalCommand.html#line-20">ConditionalCommand</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ConditionalCommand.html#line-22">ConditionalCommand</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="Command.html" title="interface in com.technototes.library.command">Command</a></span></div>
 <div class="block">Simple class for commands that require a certain condition to be true to run
-
+ <p>
  This encapsulates *two* different capabilities.
  1. A ConditionalCommand with only a condition, but no commands, is a a "wait" command.
-    It will only finish once the condition is true.
+ It will only finish once the condition is true.
  2. A ConditionalCommand with a condition and a true (and optionally false) command
-    is a generic "if/else" command: If the condition is true, execute the 'true command',
-    if not true, execute the 'false command' if it is supplied.
-
+ is a generic "if/else" command: If the condition is true, execute the 'true command',
+ if not true, execute the 'false command' if it is supplied.
+ <p>
  TODO: This makes the class a little clunky. It wouldn't be terrible to break the functionality
  TODO: out into multiple classes instead</div>
 </section>
@@ -185,7 +185,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.function.BooleanSupplier)">
 <h3>ConditionalCommand</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ConditionalCommand.html#line-28">ConditionalCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ConditionalCommand.html#line-31">ConditionalCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition)</span></div>
 <div class="block">This makes a "wait" command</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -196,7 +196,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.function.BooleanSupplier,com.technototes.library.command.Command)">
 <h3>ConditionalCommand</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ConditionalCommand.html#line-39">ConditionalCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ConditionalCommand.html#line-43">ConditionalCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition,
  <a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;command)</span></div>
 <div class="block">Make a conditional command</div>
 <dl class="notes">
@@ -209,7 +209,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.function.BooleanSupplier,com.technototes.library.command.Command,com.technototes.library.command.Command)">
 <h3>ConditionalCommand</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ConditionalCommand.html#line-52">ConditionalCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ConditionalCommand.html#line-57">ConditionalCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;condition,
  <a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;trueC,
  <a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;falseC)</span></div>
 <div class="block">Make a conditional command</div>
@@ -232,7 +232,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="execute()">
 <h3>execute</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ConditionalCommand.html#line-60">execute</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ConditionalCommand.html#line-65">execute</a></span>()</div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Command.html#execute()">Command</a></code></span></div>
 <div class="block">Execute the command
  <p>
@@ -246,7 +246,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="isFinished()">
 <h3>isFinished</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ConditionalCommand.html#line-63">isFinished</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/ConditionalCommand.html#line-68">isFinished</a></span>()</div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Command.html#isFinished()">Command</a></code></span></div>
 <div class="block">Return if the command is finished
  <p>

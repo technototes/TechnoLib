@@ -306,72 +306,70 @@
 <span class="source-line-no">293</span><span id="line-293">     * @param s The subsystem in question</span>
 <span class="source-line-no">294</span><span id="line-294">     * @return the default command for the subsystem, or null if there is none</span>
 <span class="source-line-no">295</span><span id="line-295">     */</span>
-<span class="source-line-no">296</span><span id="line-296">    @Nullable</span>
-<span class="source-line-no">297</span><span id="line-297">    public Command getDefault(Subsystem s) {</span>
-<span class="source-line-no">298</span><span id="line-298">        return opMode.getOpModeState() == CommandOpMode.OpModeState.RUN ? defaultMap.get(s) : null;</span>
-<span class="source-line-no">299</span><span id="line-299">    }</span>
-<span class="source-line-no">300</span><span id="line-300"></span>
-<span class="source-line-no">301</span><span id="line-301">    /**</span>
-<span class="source-line-no">302</span><span id="line-302">     * This gets the command currently using the subsystem provided</span>
-<span class="source-line-no">303</span><span id="line-303">     *</span>
-<span class="source-line-no">304</span><span id="line-304">     * @param s The subsystem in question.</span>
-<span class="source-line-no">305</span><span id="line-305">     * @return The Command currently using the subsystem, the default</span>
-<span class="source-line-no">306</span><span id="line-306">     * command for the subsystem, or null if there is no current</span>
-<span class="source-line-no">307</span><span id="line-307">     * command usint the subsystem, nor a default command</span>
-<span class="source-line-no">308</span><span id="line-308">     */</span>
-<span class="source-line-no">309</span><span id="line-309">    @Nullable</span>
-<span class="source-line-no">310</span><span id="line-310">    public Command getCurrent(Subsystem s) {</span>
-<span class="source-line-no">311</span><span id="line-311">        if (requirementMap.get(s) == null) return null;</span>
-<span class="source-line-no">312</span><span id="line-312">        for (Command c : requirementMap.get(s)) {</span>
-<span class="source-line-no">313</span><span id="line-313">            if (c.isRunning()) return c;</span>
-<span class="source-line-no">314</span><span id="line-314">        }</span>
-<span class="source-line-no">315</span><span id="line-315">        return getDefault(s);</span>
-<span class="source-line-no">316</span><span id="line-316">    }</span>
-<span class="source-line-no">317</span><span id="line-317"></span>
-<span class="source-line-no">318</span><span id="line-318">    /**</span>
-<span class="source-line-no">319</span><span id="line-319">     * Register a command to be scheduled. The 'supplier' function is what triggers</span>
-<span class="source-line-no">320</span><span id="line-320">     * the schedule to begin running the command.</span>
-<span class="source-line-no">321</span><span id="line-321">     *</span>
-<span class="source-line-no">322</span><span id="line-322">     * @param command  The command to schedule</span>
-<span class="source-line-no">323</span><span id="line-323">     * @param supplier The function that returns true when the command should be run</span>
-<span class="source-line-no">324</span><span id="line-324">     * @return the CommandScheduler singleton for easy chaining</span>
-<span class="source-line-no">325</span><span id="line-325">     */</span>
-<span class="source-line-no">326</span><span id="line-326">    public CommandScheduler schedule(Command command, BooleanSupplier supplier) {</span>
-<span class="source-line-no">327</span><span id="line-327">        commandMap.put(command, supplier);</span>
-<span class="source-line-no">328</span><span id="line-328">        for (Subsystem s : command.getRequirements()) {</span>
-<span class="source-line-no">329</span><span id="line-329">            requirementMap.putIfAbsent(s, new LinkedHashSet&lt;&gt;());</span>
-<span class="source-line-no">330</span><span id="line-330">            requirementMap.get(s).add(command);</span>
-<span class="source-line-no">331</span><span id="line-331">            register(s);</span>
-<span class="source-line-no">332</span><span id="line-332">        }</span>
-<span class="source-line-no">333</span><span id="line-333">        return this;</span>
-<span class="source-line-no">334</span><span id="line-334">    }</span>
-<span class="source-line-no">335</span><span id="line-335"></span>
-<span class="source-line-no">336</span><span id="line-336">    /**</span>
-<span class="source-line-no">337</span><span id="line-337">     * This is invoked from inside the CommandOpMode method, during the opCode.</span>
-<span class="source-line-no">338</span><span id="line-338">     * It it the core logic of actually scheduling &amp;amp; running the commands.</span>
-<span class="source-line-no">339</span><span id="line-339">     */</span>
-<span class="source-line-no">340</span><span id="line-340">    public void run() {</span>
-<span class="source-line-no">341</span><span id="line-341">        // For each newly scheduled command,</span>
-<span class="source-line-no">342</span><span id="line-342">        // cancel any existing command that is using the new command's subsystem requirements</span>
-<span class="source-line-no">343</span><span id="line-343">        commandMap.forEach((c1, b) -&gt; {</span>
-<span class="source-line-no">344</span><span id="line-344">            if (c1.justStarted()) {</span>
-<span class="source-line-no">345</span><span id="line-345">                for (Subsystem s : c1.getRequirements()) {</span>
-<span class="source-line-no">346</span><span id="line-346">                    for (Command c2 : requirementMap.get(s)) {</span>
-<span class="source-line-no">347</span><span id="line-347">                        if (c1 != c2) {</span>
-<span class="source-line-no">348</span><span id="line-348">                            c2.cancel();</span>
-<span class="source-line-no">349</span><span id="line-349">                        }</span>
-<span class="source-line-no">350</span><span id="line-350">                    }</span>
-<span class="source-line-no">351</span><span id="line-351">                }</span>
-<span class="source-line-no">352</span><span id="line-352">            }</span>
-<span class="source-line-no">353</span><span id="line-353">        });</span>
-<span class="source-line-no">354</span><span id="line-354">        commandMap.forEach((c1, b) -&gt; {</span>
-<span class="source-line-no">355</span><span id="line-355">            if (b.getAsBoolean() || c1.isRunning()) {</span>
-<span class="source-line-no">356</span><span id="line-356">                c1.run();</span>
-<span class="source-line-no">357</span><span id="line-357">            }</span>
-<span class="source-line-no">358</span><span id="line-358">        });</span>
-<span class="source-line-no">359</span><span id="line-359">        registered.forEach(Periodic::periodic);</span>
-<span class="source-line-no">360</span><span id="line-360">    }</span>
-<span class="source-line-no">361</span><span id="line-361">}</span>
+<span class="source-line-no">296</span><span id="line-296">    @Nullable public Command getDefault(Subsystem s) {</span>
+<span class="source-line-no">297</span><span id="line-297">        return opMode.getOpModeState() == CommandOpMode.OpModeState.RUN ? defaultMap.get(s) : null;</span>
+<span class="source-line-no">298</span><span id="line-298">    }</span>
+<span class="source-line-no">299</span><span id="line-299"></span>
+<span class="source-line-no">300</span><span id="line-300">    /**</span>
+<span class="source-line-no">301</span><span id="line-301">     * This gets the command currently using the subsystem provided</span>
+<span class="source-line-no">302</span><span id="line-302">     *</span>
+<span class="source-line-no">303</span><span id="line-303">     * @param s The subsystem in question.</span>
+<span class="source-line-no">304</span><span id="line-304">     * @return The Command currently using the subsystem, the default</span>
+<span class="source-line-no">305</span><span id="line-305">     * command for the subsystem, or null if there is no current</span>
+<span class="source-line-no">306</span><span id="line-306">     * command usint the subsystem, nor a default command</span>
+<span class="source-line-no">307</span><span id="line-307">     */</span>
+<span class="source-line-no">308</span><span id="line-308">    @Nullable public Command getCurrent(Subsystem s) {</span>
+<span class="source-line-no">309</span><span id="line-309">        if (requirementMap.get(s) == null) return null;</span>
+<span class="source-line-no">310</span><span id="line-310">        for (Command c : requirementMap.get(s)) {</span>
+<span class="source-line-no">311</span><span id="line-311">            if (c.isRunning()) return c;</span>
+<span class="source-line-no">312</span><span id="line-312">        }</span>
+<span class="source-line-no">313</span><span id="line-313">        return getDefault(s);</span>
+<span class="source-line-no">314</span><span id="line-314">    }</span>
+<span class="source-line-no">315</span><span id="line-315"></span>
+<span class="source-line-no">316</span><span id="line-316">    /**</span>
+<span class="source-line-no">317</span><span id="line-317">     * Register a command to be scheduled. The 'supplier' function is what triggers</span>
+<span class="source-line-no">318</span><span id="line-318">     * the schedule to begin running the command.</span>
+<span class="source-line-no">319</span><span id="line-319">     *</span>
+<span class="source-line-no">320</span><span id="line-320">     * @param command  The command to schedule</span>
+<span class="source-line-no">321</span><span id="line-321">     * @param supplier The function that returns true when the command should be run</span>
+<span class="source-line-no">322</span><span id="line-322">     * @return the CommandScheduler singleton for easy chaining</span>
+<span class="source-line-no">323</span><span id="line-323">     */</span>
+<span class="source-line-no">324</span><span id="line-324">    public CommandScheduler schedule(Command command, BooleanSupplier supplier) {</span>
+<span class="source-line-no">325</span><span id="line-325">        commandMap.put(command, supplier);</span>
+<span class="source-line-no">326</span><span id="line-326">        for (Subsystem s : command.getRequirements()) {</span>
+<span class="source-line-no">327</span><span id="line-327">            requirementMap.putIfAbsent(s, new LinkedHashSet&lt;&gt;());</span>
+<span class="source-line-no">328</span><span id="line-328">            requirementMap.get(s).add(command);</span>
+<span class="source-line-no">329</span><span id="line-329">            register(s);</span>
+<span class="source-line-no">330</span><span id="line-330">        }</span>
+<span class="source-line-no">331</span><span id="line-331">        return this;</span>
+<span class="source-line-no">332</span><span id="line-332">    }</span>
+<span class="source-line-no">333</span><span id="line-333"></span>
+<span class="source-line-no">334</span><span id="line-334">    /**</span>
+<span class="source-line-no">335</span><span id="line-335">     * This is invoked from inside the CommandOpMode method, during the opCode.</span>
+<span class="source-line-no">336</span><span id="line-336">     * It it the core logic of actually scheduling &amp;amp; running the commands.</span>
+<span class="source-line-no">337</span><span id="line-337">     */</span>
+<span class="source-line-no">338</span><span id="line-338">    public void run() {</span>
+<span class="source-line-no">339</span><span id="line-339">        // For each newly scheduled command,</span>
+<span class="source-line-no">340</span><span id="line-340">        // cancel any existing command that is using the new command's subsystem requirements</span>
+<span class="source-line-no">341</span><span id="line-341">        commandMap.forEach((c1, b) -&gt; {</span>
+<span class="source-line-no">342</span><span id="line-342">            if (c1.justStarted()) {</span>
+<span class="source-line-no">343</span><span id="line-343">                for (Subsystem s : c1.getRequirements()) {</span>
+<span class="source-line-no">344</span><span id="line-344">                    for (Command c2 : requirementMap.get(s)) {</span>
+<span class="source-line-no">345</span><span id="line-345">                        if (c1 != c2) {</span>
+<span class="source-line-no">346</span><span id="line-346">                            c2.cancel();</span>
+<span class="source-line-no">347</span><span id="line-347">                        }</span>
+<span class="source-line-no">348</span><span id="line-348">                    }</span>
+<span class="source-line-no">349</span><span id="line-349">                }</span>
+<span class="source-line-no">350</span><span id="line-350">            }</span>
+<span class="source-line-no">351</span><span id="line-351">        });</span>
+<span class="source-line-no">352</span><span id="line-352">        commandMap.forEach((c1, b) -&gt; {</span>
+<span class="source-line-no">353</span><span id="line-353">            if (b.getAsBoolean() || c1.isRunning()) {</span>
+<span class="source-line-no">354</span><span id="line-354">                c1.run();</span>
+<span class="source-line-no">355</span><span id="line-355">            }</span>
+<span class="source-line-no">356</span><span id="line-356">        });</span>
+<span class="source-line-no">357</span><span id="line-357">        registered.forEach(Periodic::periodic);</span>
+<span class="source-line-no">358</span><span id="line-358">    }</span>
+<span class="source-line-no">359</span><span id="line-359">}</span>
 
 
 

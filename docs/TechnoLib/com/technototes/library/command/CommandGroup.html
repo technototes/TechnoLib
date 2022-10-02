@@ -84,10 +84,12 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="ParallelCommandGroup.html" title="class in com.technototes.library.command">ParallelCommandGroup</a></code>, <code><a href="ParallelDeadlineGroup.html" title="class in com.technototes.library.command">ParallelDeadlineGroup</a></code>, <code><a href="ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></code>, <code><a href="SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-11">CommandGroup</a></span>
+<div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-13">CommandGroup</a></span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="Command.html" title="interface in com.technototes.library.command">Command</a></span></div>
-<div class="block">Root class for all command groups</div>
+<div class="block">Root class for all command groups (Sequential, Parallel, etc...)
+ WARNING: You probably will be better served by the specific CommandGroup subclasses, rather than
+ using this one directly.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -220,21 +222,21 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="commandMap">
 <h3>commandMap</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-15">commandMap</a></span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="Command.html" title="interface in com.technototes.library.command">Command</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-17">commandMap</a></span></div>
 <div class="block">This is a map from the command to whether it has been run</div>
 </section>
 </li>
 <li>
 <section class="detail" id="countCancel">
 <h3>countCancel</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-19">countCancel</a></span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-21">countCancel</a></span></div>
 <div class="block">Should a cancelled command be considered 'finished'</div>
 </section>
 </li>
 <li>
 <section class="detail" id="anyCancelled">
 <h3>anyCancelled</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-23">anyCancelled</a></span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-25">anyCancelled</a></span></div>
 <div class="block">Have *any* of the command list been cancelled</div>
 </section>
 </li>
@@ -249,7 +251,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="&lt;init&gt;(boolean,com.technototes.library.command.Command...)">
 <h3>CommandGroup</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-31">CommandGroup</a></span><wbr><span class="parameters">(boolean&nbsp;countCancel,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-33">CommandGroup</a></span><wbr><span class="parameters">(boolean&nbsp;countCancel,
  <a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;commands)</span></div>
 <div class="block">Create a command group with commands</div>
 <dl class="notes">
@@ -270,7 +272,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="addCommands(com.technototes.library.command.Command...)">
 <h3>addCommands</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-43">addCommands</a></span><wbr><span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;commands)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-45">addCommands</a></span><wbr><span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;commands)</span></div>
 <div class="block">Add a command to the group</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -283,7 +285,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="countCancel()">
 <h3>countCancel</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-56">countCancel</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-58">countCancel</a></span>()</div>
 <div class="block">Specify that this CommandGroup should count a cancellation as 'completed'</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -294,7 +296,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="ignoreCancel()">
 <h3>ignoreCancel</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-66">ignoreCancel</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-68">ignoreCancel</a></span>()</div>
 <div class="block">Specify that this CommandGroup should NOT count cancellation as 'completed'</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -305,7 +307,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="schedule(com.technototes.library.command.Command)">
 <h3>schedule</h3>
-<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-77">schedule</a></span><wbr><span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c)</span></div>
+<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-79">schedule</a></span><wbr><span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c)</span></div>
 <div class="block">This should schedule the command as part of this command group, I think.
  TODO: Is this correct?</div>
 <dl class="notes">
@@ -317,7 +319,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="initialize()">
 <h3>initialize</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-82">initialize</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-84">initialize</a></span>()</div>
 <div class="block">Mark all commands in the group as not yet run</div>
 <dl class="notes">
 <dt>Specified by:</dt>
@@ -328,7 +330,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="execute()">
 <h3>execute</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-88">execute</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-90">execute</a></span>()</div>
 <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Command.html#execute()">Command</a></code></span></div>
 <div class="block">Execute the command
  <p>
@@ -342,7 +344,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="isFinished()">
 <h3>isFinished</h3>
-<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-101">isFinished</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-103">isFinished</a></span>()</div>
 <div class="block">MUST IMPLEMENT IN SUBCLASSES:</div>
 <dl class="notes">
 <dt>Specified by:</dt>
@@ -355,7 +357,7 @@ implements <a href="Command.html" title="interface in com.technototes.library.co
 <li>
 <section class="detail" id="end(boolean)">
 <h3>end</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-109">end</a></span><wbr><span class="parameters">(boolean&nbsp;cancel)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/CommandGroup.html#line-111">end</a></span><wbr><span class="parameters">(boolean&nbsp;cancel)</span></div>
 <div class="block">This stops the command group from executing</div>
 <dl class="notes">
 <dt>Specified by:</dt>

@@ -86,9 +86,9 @@ loadScripts(document, 'script');</script>
 <dd><code><a href="IterativeCommand.html" title="class in com.technototes.library.command">IterativeCommand</a></code></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/command/SequentialCommandGroup.html#line-6">SequentialCommandGroup</a></span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/command/SequentialCommandGroup.html#line-8">SequentialCommandGroup</a></span>
 <span class="extends-implements">extends <a href="CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></span></div>
-<div class="block">Command group to run commands in sequence</div>
+<div class="block">A grouping command which runs a list of commands in sequence</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -132,7 +132,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.technototes.library.command.Command...)" class="member-name-link">SequentialCommandGroup</a><wbr>(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;commands)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Make sequential command group</div>
+<div class="block">Make sequential command group.</div>
 </div>
 </div>
 </section>
@@ -156,7 +156,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#schedule(com.technototes.library.command.Command)" class="member-name-link">schedule</a><wbr>(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">This should schedule the command as part of this command group, I think.</div>
+<div class="block">This allows you to append another command to the Sequential Command Group</div>
 </div>
 </div>
 </div>
@@ -184,7 +184,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="lastCommand">
 <h3>lastCommand</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="Command.html" title="interface in com.technototes.library.command">Command</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/SequentialCommandGroup.html#line-7">lastCommand</a></span></div>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="Command.html" title="interface in com.technototes.library.command">Command</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/SequentialCommandGroup.html#line-9">lastCommand</a></span></div>
 </section>
 </li>
 </ul>
@@ -198,8 +198,9 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(com.technototes.library.command.Command...)">
 <h3>SequentialCommandGroup</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/SequentialCommandGroup.html#line-13">SequentialCommandGroup</a></span><wbr><span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;commands)</span></div>
-<div class="block">Make sequential command group</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/SequentialCommandGroup.html#line-17">SequentialCommandGroup</a></span><wbr><span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>...&nbsp;commands)</span></div>
+<div class="block">Make sequential command group. By default if a command is cancelled, the next commend in
+ the sequence is run.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>commands</code> - The commands to run</dd>
@@ -217,22 +218,20 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="schedule(com.technototes.library.command.Command)">
 <h3>schedule</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/SequentialCommandGroup.html#line-17">schedule</a></span><wbr><span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a href="CommandGroup.html#schedule(com.technototes.library.command.Command)">CommandGroup</a></code></span></div>
-<div class="block">This should schedule the command as part of this command group, I think.
- TODO: Is this correct?</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/SequentialCommandGroup.html#line-26">schedule</a></span><wbr><span class="parameters">(<a href="Command.html" title="interface in com.technototes.library.command">Command</a>&nbsp;c)</span></div>
+<div class="block">This allows you to append another command to the Sequential Command Group</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="CommandGroup.html#schedule(com.technototes.library.command.Command)">schedule</a></code>&nbsp;in class&nbsp;<code><a href="CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>c</code> - The command to add to the command group</dd>
+<dd><code>c</code> - The command to add to the end of the list</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isFinished()">
 <h3>isFinished</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/SequentialCommandGroup.html#line-31">isFinished</a></span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/SequentialCommandGroup.html#line-41">isFinished</a></span>()</div>
 <div class="block">Returns if all the commands are finished</div>
 <dl class="notes">
 <dt>Specified by:</dt>

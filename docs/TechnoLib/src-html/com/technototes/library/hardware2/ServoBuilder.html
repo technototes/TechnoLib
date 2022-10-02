@@ -58,18 +58,17 @@
 <span class="source-line-no">045</span><span id="line-45">    }</span>
 <span class="source-line-no">046</span><span id="line-46"></span>
 <span class="source-line-no">047</span><span id="line-47">    public ServoBuilder pwmRange(double min, double max) {</span>
-<span class="source-line-no">048</span><span id="line-48">        if (product instanceof PwmControl)</span>
-<span class="source-line-no">049</span><span id="line-49">            ((PwmControl) product).setPwmRange(new PwmControl.PwmRange(min, max));</span>
-<span class="source-line-no">050</span><span id="line-50">        else</span>
-<span class="source-line-no">051</span><span id="line-51">            throw new UnsupportedOperationException(</span>
-<span class="source-line-no">052</span><span id="line-52">                    "scaling pwm range only supported on devices that implement pwmcontrol");</span>
-<span class="source-line-no">053</span><span id="line-53">        return this;</span>
-<span class="source-line-no">054</span><span id="line-54">    }</span>
-<span class="source-line-no">055</span><span id="line-55"></span>
-<span class="source-line-no">056</span><span id="line-56">    public ServoBuilder expandedPWM() {</span>
-<span class="source-line-no">057</span><span id="line-57">        return pwmRange(500, 2500);</span>
-<span class="source-line-no">058</span><span id="line-58">    }</span>
-<span class="source-line-no">059</span><span id="line-59">}</span>
+<span class="source-line-no">048</span><span id="line-48">        if (product instanceof PwmControl) ((PwmControl) product).setPwmRange(new PwmControl.PwmRange(min, max));</span>
+<span class="source-line-no">049</span><span id="line-49">        else</span>
+<span class="source-line-no">050</span><span id="line-50">            throw new UnsupportedOperationException(</span>
+<span class="source-line-no">051</span><span id="line-51">                    "scaling pwm range only supported on devices that implement pwmcontrol");</span>
+<span class="source-line-no">052</span><span id="line-52">        return this;</span>
+<span class="source-line-no">053</span><span id="line-53">    }</span>
+<span class="source-line-no">054</span><span id="line-54"></span>
+<span class="source-line-no">055</span><span id="line-55">    public ServoBuilder expandedPWM() {</span>
+<span class="source-line-no">056</span><span id="line-56">        return pwmRange(500, 2500);</span>
+<span class="source-line-no">057</span><span id="line-57">    }</span>
+<span class="source-line-no">058</span><span id="line-58">}</span>
 
 
 

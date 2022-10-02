@@ -100,7 +100,9 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color class-summary class-summary-tab2">Deprecated.</div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Root class for all command groups</div>
+<div class="block">Root class for all command groups (Sequential, Parallel, etc...)
+ WARNING: You probably will be better served by the specific CommandGroup subclasses, rather than
+ using this one directly.</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="CommandScheduler.html" title="class in com.technototes.library.command">CommandScheduler</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
@@ -108,30 +110,30 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="ConditionalCommand.html" title="class in com.technototes.library.command">ConditionalCommand</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Simple class for commands that require a certain condition to be true to run
-
- This encapsulates *two* different capabilities.</div>
+<div class="block">Simple class for commands that require a certain condition to be true to run</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="IterativeCommand.html" title="class in com.technototes.library.command">IterativeCommand</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">&nbsp;</div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="ParallelCommandGroup.html" title="class in com.technototes.library.command">ParallelCommandGroup</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Command group to run commands in parallel until all finish</div>
+<div class="block">Command group to run commands in parallel until all of them finish</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="ParallelDeadlineGroup.html" title="class in com.technototes.library.command">ParallelDeadlineGroup</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Command group to run commands in parallel until one finished</div>
+<div class="block">Command group to run commands in parallel until one particular command completes</div>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Command group to run commands in parallel until one finished</div>
+<div class="block">Command group to run commands in parallel until *one* is finished</div>
 </div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Command group to run commands in sequence</div>
+<div class="block">A grouping command which runs a list of commands in sequence</div>
 </div>
 <div class="col-first even-row-color class-summary class-summary-tab2"><a href="WaitCommand.html" title="class in com.technototes.library.command">WaitCommand</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">&nbsp;</div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">A command to do nothing but wait for a span of time.</div>
+</div>
 </div>
 </div>
 </div>

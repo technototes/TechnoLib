@@ -487,7 +487,9 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/technototes/library/command/CommandGroup.html" class="type-name-link" title="class in com.technototes.library.command">CommandGroup</a> - Class in <a href="com/technototes/library/command/package-summary.html">com.technototes.library.command</a></dt>
 <dd>
-<div class="block">Root class for all command groups</div>
+<div class="block">Root class for all command groups (Sequential, Parallel, etc...)
+ WARNING: You probably will be better served by the specific CommandGroup subclasses, rather than
+ using this one directly.</div>
 </dd>
 <dt><a href="com/technototes/library/command/CommandGroup.html#%3Cinit%3E(boolean,com.technototes.library.command.Command...)" class="member-name-link">CommandGroup(boolean, Command...)</a> - Constructor for class com.technototes.library.command.<a href="com/technototes/library/command/CommandGroup.html" title="class in com.technototes.library.command">CommandGroup</a></dt>
 <dd>
@@ -521,9 +523,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/technototes/library/command/ConditionalCommand.html" class="type-name-link" title="class in com.technototes.library.command">ConditionalCommand</a> - Class in <a href="com/technototes/library/command/package-summary.html">com.technototes.library.command</a></dt>
 <dd>
-<div class="block">Simple class for commands that require a certain condition to be true to run
-
- This encapsulates *two* different capabilities.</div>
+<div class="block">Simple class for commands that require a certain condition to be true to run</div>
 </dd>
 <dt><a href="com/technototes/library/command/ConditionalCommand.html#%3Cinit%3E(java.util.function.BooleanSupplier)" class="member-name-link">ConditionalCommand(BooleanSupplier)</a> - Constructor for class com.technototes.library.command.<a href="com/technototes/library/command/ConditionalCommand.html" title="class in com.technototes.library.command">ConditionalCommand</a></dt>
 <dd>
@@ -1693,14 +1693,12 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/technototes/library/command/ConditionalCommand.html#isFinished()" class="member-name-link">isFinished()</a> - Method in class com.technototes.library.command.<a href="com/technototes/library/command/ConditionalCommand.html" title="class in com.technototes.library.command">ConditionalCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/technototes/library/command/ParallelCommandGroup.html#isFinished()" class="member-name-link">isFinished()</a> - Method in class com.technototes.library.command.<a href="com/technototes/library/command/ParallelCommandGroup.html" title="class in com.technototes.library.command">ParallelCommandGroup</a></dt>
-<dd>
-<div class="block">Is this finished</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="com/technototes/library/command/ParallelDeadlineGroup.html#isFinished()" class="member-name-link">isFinished()</a> - Method in class com.technototes.library.command.<a href="com/technototes/library/command/ParallelDeadlineGroup.html" title="class in com.technototes.library.command">ParallelDeadlineGroup</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/technototes/library/command/ParallelRaceGroup.html#isFinished()" class="member-name-link">isFinished()</a> - Method in class com.technototes.library.command.<a href="com/technototes/library/command/ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></dt>
 <dd>
-<div class="block">Is this finished</div>
+<div class="block">Is this finished?</div>
 </dd>
 <dt><a href="com/technototes/library/command/SequentialCommandGroup.html#isFinished()" class="member-name-link">isFinished()</a> - Method in class com.technototes.library.command.<a href="com/technototes/library/command/SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></dt>
 <dd>
@@ -2174,7 +2172,7 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="com/technototes/library/command/ParallelCommandGroup.html" class="type-name-link" title="class in com.technototes.library.command">ParallelCommandGroup</a> - Class in <a href="com/technototes/library/command/package-summary.html">com.technototes.library.command</a></dt>
 <dd>
-<div class="block">Command group to run commands in parallel until all finish</div>
+<div class="block">Command group to run commands in parallel until all of them finish</div>
 </dd>
 <dt><a href="com/technototes/library/command/ParallelCommandGroup.html#%3Cinit%3E(com.technototes.library.command.Command...)" class="member-name-link">ParallelCommandGroup(Command...)</a> - Constructor for class com.technototes.library.command.<a href="com/technototes/library/command/ParallelCommandGroup.html" title="class in com.technototes.library.command">ParallelCommandGroup</a></dt>
 <dd>
@@ -2182,7 +2180,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/technototes/library/command/ParallelDeadlineGroup.html" class="type-name-link" title="class in com.technototes.library.command">ParallelDeadlineGroup</a> - Class in <a href="com/technototes/library/command/package-summary.html">com.technototes.library.command</a></dt>
 <dd>
-<div class="block">Command group to run commands in parallel until one finished</div>
+<div class="block">Command group to run commands in parallel until one particular command completes</div>
 </dd>
 <dt><a href="com/technototes/library/command/ParallelDeadlineGroup.html#%3Cinit%3E(com.technototes.library.command.Command,com.technototes.library.command.Command...)" class="member-name-link">ParallelDeadlineGroup(Command, Command...)</a> - Constructor for class com.technototes.library.command.<a href="com/technototes/library/command/ParallelDeadlineGroup.html" title="class in com.technototes.library.command">ParallelDeadlineGroup</a></dt>
 <dd>
@@ -2190,7 +2188,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/technototes/library/command/ParallelRaceGroup.html" class="type-name-link" title="class in com.technototes.library.command">ParallelRaceGroup</a> - Class in <a href="com/technototes/library/command/package-summary.html">com.technototes.library.command</a></dt>
 <dd>
-<div class="block">Command group to run commands in parallel until one finished</div>
+<div class="block">Command group to run commands in parallel until *one* is finished</div>
 </dd>
 <dt><a href="com/technototes/library/command/ParallelRaceGroup.html#%3Cinit%3E(com.technototes.library.command.Command...)" class="member-name-link">ParallelRaceGroup(Command...)</a> - Constructor for class com.technototes.library.command.<a href="com/technototes/library/command/ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></dt>
 <dd>
@@ -2527,11 +2525,17 @@ loadScripts(document, 'script');</script>
 <dt><a href="com/technototes/library/command/ParallelCommandGroup.html#schedule(com.technototes.library.command.Command)" class="member-name-link">schedule(Command)</a> - Method in class com.technototes.library.command.<a href="com/technototes/library/command/ParallelCommandGroup.html" title="class in com.technototes.library.command">ParallelCommandGroup</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com/technototes/library/command/ParallelDeadlineGroup.html#schedule(com.technototes.library.command.Command)" class="member-name-link">schedule(Command)</a> - Method in class com.technototes.library.command.<a href="com/technototes/library/command/ParallelDeadlineGroup.html" title="class in com.technototes.library.command">ParallelDeadlineGroup</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Add another command to the group to be run while waiting for the 'deadline' command to finish</div>
+</dd>
 <dt><a href="com/technototes/library/command/ParallelRaceGroup.html#schedule(com.technototes.library.command.Command)" class="member-name-link">schedule(Command)</a> - Method in class com.technototes.library.command.<a href="com/technototes/library/command/ParallelRaceGroup.html" title="class in com.technototes.library.command">ParallelRaceGroup</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Add one more command to the list of commands that will be run at the same time</div>
+</dd>
 <dt><a href="com/technototes/library/command/SequentialCommandGroup.html#schedule(com.technototes.library.command.Command)" class="member-name-link">schedule(Command)</a> - Method in class com.technototes.library.command.<a href="com/technototes/library/command/SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">This allows you to append another command to the Sequential Command Group</div>
+</dd>
 <dt><a href="com/technototes/library/control/CommandInput.html#schedule(com.technototes.library.command.Command)" class="member-name-link">schedule(Command)</a> - Method in interface com.technototes.library.control.<a href="com/technototes/library/control/CommandInput.html" title="interface in com.technototes.library.control">CommandInput</a></dt>
 <dd>
 <div class="block">Schedule the command to run</div>
@@ -2653,11 +2657,11 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/technototes/library/command/SequentialCommandGroup.html" class="type-name-link" title="class in com.technototes.library.command">SequentialCommandGroup</a> - Class in <a href="com/technototes/library/command/package-summary.html">com.technototes.library.command</a></dt>
 <dd>
-<div class="block">Command group to run commands in sequence</div>
+<div class="block">A grouping command which runs a list of commands in sequence</div>
 </dd>
 <dt><a href="com/technototes/library/command/SequentialCommandGroup.html#%3Cinit%3E(com.technototes.library.command.Command...)" class="member-name-link">SequentialCommandGroup(Command...)</a> - Constructor for class com.technototes.library.command.<a href="com/technototes/library/command/SequentialCommandGroup.html" title="class in com.technototes.library.command">SequentialCommandGroup</a></dt>
 <dd>
-<div class="block">Make sequential command group</div>
+<div class="block">Make sequential command group.</div>
 </dd>
 <dt><a href="com/technototes/library/hardware2/HardwareBuilder.html#servo(int)" class="member-name-link">servo(int)</a> - Static method in class com.technototes.library.hardware2.<a href="com/technototes/library/hardware2/HardwareBuilder.html" title="class in com.technototes.library.hardware2">HardwareBuilder</a></dt>
 <dd>
@@ -3240,11 +3244,18 @@ the order they are declared.</div>
 <h2 class="title" id="I:W">W</h2>
 <dl class="index">
 <dt><a href="com/technototes/library/command/WaitCommand.html" class="type-name-link" title="class in com.technototes.library.command">WaitCommand</a> - Class in <a href="com/technototes/library/command/package-summary.html">com.technototes.library.command</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">A command to do nothing but wait for a span of time.</div>
+</dd>
 <dt><a href="com/technototes/library/command/WaitCommand.html#%3Cinit%3E(double)" class="member-name-link">WaitCommand(double)</a> - Constructor for class com.technototes.library.command.<a href="com/technototes/library/command/WaitCommand.html" title="class in com.technototes.library.command">WaitCommand</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Create a wait command for a fixed number of seconds</div>
+</dd>
 <dt><a href="com/technototes/library/command/WaitCommand.html#%3Cinit%3E(java.util.function.DoubleSupplier)" class="member-name-link">WaitCommand(DoubleSupplier)</a> - Constructor for class com.technototes.library.command.<a href="com/technototes/library/command/WaitCommand.html" title="class in com.technototes.library.command">WaitCommand</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Create a wait command for a number of seconds that can be calculated when the commannd is
+ triggered</div>
+</dd>
 <dt><a href="com/technototes/library/command/Command.html#waitUntil(java.util.function.BooleanSupplier)" class="member-name-link">waitUntil(BooleanSupplier)</a> - Method in interface com.technototes.library.command.<a href="com/technototes/library/command/Command.html" title="interface in com.technototes.library.command">Command</a></dt>
 <dd>
 <div class="block">After this command, wait until the condition function is true</div>

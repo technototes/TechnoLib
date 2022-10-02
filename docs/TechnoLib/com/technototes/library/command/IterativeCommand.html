@@ -175,11 +175,14 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.function.Function,T,T,java.util.function.Function)">
 <h3 id="&lt;init&gt;(java.util.function.Function,java.lang.Object,java.lang.Object,java.util.function.Function)">IterativeCommand</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/IterativeCommand.html#line-15">IterativeCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;T,<wbr><a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;&nbsp;func,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/IterativeCommand.html#line-19">IterativeCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;T,<wbr><a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;&nbsp;func,
  T&nbsp;start,
  T&nbsp;end,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;T,<wbr>T&gt;&nbsp;accum)</span></div>
-<div class="block">iterative command for anything</div>
+<div class="block">iterative command for anything
+ <p>
+ TODO: Figure out what this is good for. It looks weirdly specific. I wonder what Alex was
+ doing with it</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
 <dd><code>T</code> - </dd>
@@ -194,7 +197,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.function.Function,T,T,java.util.function.Function,java.util.function.BooleanSupplier)">
 <h3 id="&lt;init&gt;(java.util.function.Function,java.lang.Object,java.lang.Object,java.util.function.Function,java.util.function.BooleanSupplier)">IterativeCommand</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/IterativeCommand.html#line-19">IterativeCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;T,<wbr><a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;&nbsp;func,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/IterativeCommand.html#line-23">IterativeCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;T,<wbr><a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;&nbsp;func,
  T&nbsp;start,
  T&nbsp;end,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;T,<wbr>T&gt;&nbsp;accum,
@@ -204,7 +207,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.function.Function,int)">
 <h3>IterativeCommand</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/IterativeCommand.html#line-29">IterativeCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;&nbsp;func,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/IterativeCommand.html#line-34">IterativeCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;&nbsp;func,
  int&nbsp;loops)</span></div>
 <div class="block">iterative command for an int</div>
 <dl class="notes">
@@ -217,7 +220,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.function.Function,int,java.util.function.BooleanSupplier)">
 <h3>IterativeCommand</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/IterativeCommand.html#line-33">IterativeCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;&nbsp;func,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/IterativeCommand.html#line-38">IterativeCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;&nbsp;func,
  int&nbsp;loops,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;stopCondition)</span></div>
 </section>
@@ -225,7 +228,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.function.Function,java.util.function.BooleanSupplier)">
 <h3>IterativeCommand</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/IterativeCommand.html#line-37">IterativeCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;&nbsp;func,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/command/IterativeCommand.html#line-43">IterativeCommand</a></span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>,<wbr><a href="Command.html" title="interface in com.technototes.library.command">Command</a>&gt;&nbsp;func,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;stopCondition)</span></div>
 </section>
 </li>
