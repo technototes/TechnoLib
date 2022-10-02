@@ -6,6 +6,10 @@ import java.util.function.Function;
 public class IterativeCommand extends SequentialCommandGroup {
     /**
      * iterative command for anything
+     * <p>
+     * TODO: Figure out what this is good for. It looks weirdly specific. I wonder what Alex was
+     * doing with it
+     *
      * @param func
      * @param start
      * @param end
@@ -23,6 +27,7 @@ public class IterativeCommand extends SequentialCommandGroup {
 
     /**
      * iterative command for an int
+     *
      * @param func
      * @param loops
      */
@@ -33,6 +38,7 @@ public class IterativeCommand extends SequentialCommandGroup {
     public IterativeCommand(Function<Integer, Command> func, int loops, BooleanSupplier stopCondition) {
         this(func, 0, loops, i -> i + 1, stopCondition);
     }
+
     // TODO make limitless but 10 will make sure i dont yeet to much
     public IterativeCommand(Function<Integer, Command> func, BooleanSupplier stopCondition) {
         this(func, 0, 10, i -> i + 1, stopCondition);

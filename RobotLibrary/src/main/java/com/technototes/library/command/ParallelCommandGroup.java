@@ -1,11 +1,14 @@
 package com.technototes.library.command;
 
-/** Command group to run commands in parallel until all finish
+/**
+ * Command group to run commands in parallel until all of them finish
+ *
  * @author Alex Stedman
  */
 public class ParallelCommandGroup extends CommandGroup {
 
-    /** Make parallel command group
+    /**
+     * Make parallel command group
      *
      * @param commands The commands for the group
      */
@@ -18,9 +21,8 @@ public class ParallelCommandGroup extends CommandGroup {
         CommandScheduler.getInstance().scheduleWithOther(this, c);
     }
 
-    /** Is this finished
-     *
-     * @return If all of the commands are finished
+    /**
+     * @return True if *all* of the commands are finished
      */
     @Override
     public boolean isFinished() {

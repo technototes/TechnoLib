@@ -1,12 +1,16 @@
 package com.technototes.library.command;
 
-/** Command group to run commands in sequence
+/**
+ * A grouping command which runs a list of commands in sequence
+ *
  * @author Alex Stedman
  */
 public class SequentialCommandGroup extends CommandGroup {
     protected Command lastCommand;
 
-    /** Make sequential command group
+    /**
+     * Make sequential command group. By default if a command is cancelled, the next commend in
+     * the sequence is run.
      *
      * @param commands The commands to run
      */
@@ -14,6 +18,11 @@ public class SequentialCommandGroup extends CommandGroup {
         super(true, commands);
     }
 
+    /**
+     * This allows you to append another command to the Sequential Command Group
+     *
+     * @param c The command to add to the end of the list
+     */
     @Override
     public void schedule(Command c) {
         if (lastCommand == null) {
@@ -24,7 +33,8 @@ public class SequentialCommandGroup extends CommandGroup {
         lastCommand = c;
     }
 
-    /** Returns if all the commands are finished
+    /**
+     * Returns if all the commands are finished
      *
      * @return Is the command group finished
      */

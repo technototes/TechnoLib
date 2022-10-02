@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Root class for all command groups
+ * Root class for all command groups (Sequential, Parallel, etc...)
+ * WARNING: You probably will be better served by the specific CommandGroup subclasses, rather than
+ * using this one directly.
  *
  * @author Alex Stedman
  */

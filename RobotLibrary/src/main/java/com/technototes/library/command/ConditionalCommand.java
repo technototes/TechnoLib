@@ -4,24 +4,27 @@ import androidx.annotation.Nullable;
 
 import java.util.function.BooleanSupplier;
 
-/** Simple class for commands that require a certain condition to be true to run
- *
+/**
+ * Simple class for commands that require a certain condition to be true to run
+ * <p>
  * This encapsulates *two* different capabilities.
  * 1. A ConditionalCommand with only a condition, but no commands, is a a "wait" command.
- *    It will only finish once the condition is true.
+ * It will only finish once the condition is true.
  * 2. A ConditionalCommand with a condition and a true (and optionally false) command
- *    is a generic "if/else" command: If the condition is true, execute the 'true command',
- *    if not true, execute the 'false command' if it is supplied.
- *
+ * is a generic "if/else" command: If the condition is true, execute the 'true command',
+ * if not true, execute the 'false command' if it is supplied.
+ * <p>
  * TODO: This makes the class a little clunky. It wouldn't be terrible to break the functionality
  * TODO: out into multiple classes instead
+ *
  * @author Alex Stedman
  */
 public class ConditionalCommand implements Command {
     private BooleanSupplier supplier;
     @Nullable private Command trueCommand, falseCommand;
 
-    /** This makes a "wait" command
+    /**
+     * This makes a "wait" command
      *
      * @param condition The BooleanSupplier that will be waited upon until true
      */
@@ -31,10 +34,11 @@ public class ConditionalCommand implements Command {
         falseCommand = null;
     }
 
-    /** Make a conditional command
+    /**
+     * Make a conditional command
      *
      * @param condition The condition
-     * @param command The command to run when the condition is true.
+     * @param command   The command to run when the condition is true.
      */
     public ConditionalCommand(BooleanSupplier condition, Command command) {
         supplier = condition;
@@ -43,11 +47,12 @@ public class ConditionalCommand implements Command {
         falseCommand = null;
     }
 
-    /** Make a conditional command
+    /**
+     * Make a conditional command
      *
      * @param condition The condition
-     * @param trueC The command to run when the condition is true
-     * @param falseC The command to run when the condition is false
+     * @param trueC     The command to run when the condition is true
+     * @param falseC    The command to run when the condition is false
      */
     public ConditionalCommand(BooleanSupplier condition, Command trueC, Command falseC) {
         supplier = condition;
