@@ -31,7 +31,7 @@ Nope, in fact its easier than without the library
  - Complex subsystems have already been written for you
  - Plenty of simple things to make your life easier
  - Test implementation so you can see how to make this work
- - ETC.
+
 ## Documentation
 Documentation can be [found here](https://technototes.github.io/)
  
@@ -39,6 +39,6 @@ There are not currently any good 'stand alone' examples. The best place
 for you to get an idea of how this stuff works is in our robot code. It's all
 public on github:
 
- - Freight Frenzy (2021-2022)'s [16750 robot source code](https://github.com/technototes/FreightFrenzy2021/tree/master/OspreyCode/src/main/java/org/firstinspires/ftc/teamcode)
- - Freight Frenzy (2021-2022)'s [20403 robot source code](https://github.com/technototes/FreightFrenzy2021/tree/master/SeagullCode/src/main/java/org/firstinspires/ftc/teamcode)
- - And here's a PowerPlay (2022-2023) based example ["learning" bot](https://github.com/technototes/PowerPlay2022/tree/main/ForTeaching/src/main/java/org/firstinspires/ftc/forteaching/TechnoBot)
+ - Freight Frenzy (2021-2022)'s [16750 robot source code](https://github.com/technototes/FreightFrenzy2021/tree/master/OspreyCode/src/main/java/org/firstinspires/ftc/teamcode) (this is a more advanced usage, written by the library's primary autho)
+ - Freight Frenzy (2021-2022)'s [20403 robot source code](https://github.com/technototes/FreightFrenzy2021/tree/master/SeagullCode/src/main/java/org/firstinspires/ftc/teamcode) (This is a simpler usage, written by students who mostly learned by example)
+ - And here's a PowerPlay (2022-2023) based example ["learning" bot](https://github.com/technototes/PowerPlay2022/tree/main/ForTeaching/src/main/java/org/firstinspires/ftc/forteaching/TechnoBot) (This is a very basic example of a few concepts, include vision)
