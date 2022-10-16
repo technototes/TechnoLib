@@ -235,7 +235,9 @@
                         ></code
                       >
                     </div>
-                    <div class="col-last even-row-color">&nbsp;</div>
+                    <div class="col-last even-row-color">
+                      <div class="block">Not sure what this is for.</div>
+                    </div>
                     <div class="col-first odd-row-color">
                       <code>static @interface&nbsp;</code>
                     </div>
@@ -249,7 +251,9 @@
                         ></code
                       >
                     </div>
-                    <div class="col-last odd-row-color">&nbsp;</div>
+                    <div class="col-last odd-row-color">
+                      <div class="block">Not sure what this is for.</div>
+                    </div>
                     <div class="col-first even-row-color">
                       <code>static class&nbsp;</code>
                     </div>
@@ -267,7 +271,12 @@
                         >&gt;</code
                       >
                     </div>
-                    <div class="col-last even-row-color">&nbsp;</div>
+                    <div class="col-last even-row-color">
+                      <div class="block">
+                        This feels over-engineered, but it's probably for some
+                        obnoxious Java thing, unfortunate.
+                      </div>
+                    </div>
                   </div>
                   <div class="inherited-list">
                     <h2 id="nested-classes-inherited-from-class-java.lang.Enum">
@@ -320,19 +329,25 @@
                         ><a href="#BLUE" class="member-name-link">BLUE</a></code
                       >
                     </div>
-                    <div class="col-last even-row-color">&nbsp;</div>
+                    <div class="col-last even-row-color">
+                      <div class="block">BLUE alliance selector</div>
+                    </div>
                     <div class="col-first odd-row-color">
                       <code
                         ><a href="#NONE" class="member-name-link">NONE</a></code
                       >
                     </div>
-                    <div class="col-last odd-row-color">&nbsp;</div>
+                    <div class="col-last odd-row-color">
+                      <div class="block">NO ALLIANCE SELECTED</div>
+                    </div>
                     <div class="col-first even-row-color">
                       <code
                         ><a href="#RED" class="member-name-link">RED</a></code
                       >
                     </div>
-                    <div class="col-last even-row-color">&nbsp;</div>
+                    <div class="col-last even-row-color">
+                      <div class="block">RED alliance selector</div>
+                    </div>
                   </div>
                 </section>
               </li>
@@ -434,7 +449,10 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Get the alliance set for the OpMode passed in, if
+                            it's set in the annotation
+                          </div>
                         </div>
                         <div
                           class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -702,11 +720,12 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Alliance.html#line-15"
+                              href="../../../../src-html/com/technototes/library/util/Alliance.html#line-18"
                               >RED</a
                             ></span
                           >
                         </div>
+                        <div class="block">RED alliance selector</div>
                       </section>
                     </li>
                     <li>
@@ -722,11 +741,12 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Alliance.html#line-16"
+                              href="../../../../src-html/com/technototes/library/util/Alliance.html#line-22"
                               >BLUE</a
                             ></span
                           >
                         </div>
+                        <div class="block">BLUE alliance selector</div>
                       </section>
                     </li>
                     <li>
@@ -742,11 +762,12 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Alliance.html#line-17"
+                              href="../../../../src-html/com/technototes/library/util/Alliance.html#line-26"
                               >NONE</a
                             ></span
                           >
                         </div>
+                        <div class="block">NO ALLIANCE SELECTED</div>
                       </section>
                     </li>
                   </ul>
@@ -868,7 +889,7 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Alliance.html#line-34"
+                              href="../../../../src-html/com/technototes/library/util/Alliance.html#line-43"
                               >getColor</a
                             ></span
                           >()
@@ -894,7 +915,7 @@
                           >&nbsp;<span class="return-type">T</span>&nbsp;<span
                             class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Alliance.html#line-46"
+                              href="../../../../src-html/com/technototes/library/util/Alliance.html#line-55"
                               >selectOf</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -932,7 +953,7 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Alliance.html#line-71"
+                              href="../../../../src-html/com/technototes/library/util/Alliance.html#line-121"
                               >get</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -945,6 +966,16 @@
                             com.qualcomm.robotcore.eventloop.opmode.OpMode&gt;&nbsp;c)</span
                           >
                         </div>
+                        <div class="block">
+                          Get the alliance set for the OpMode passed in, if it's
+                          set in the annotation
+                        </div>
+                        <dl class="notes">
+                          <dt>Parameters:</dt>
+                          <dd><code>c</code> - The OpMode</dd>
+                          <dt>Returns:</dt>
+                          <dd>The alliance of the opmode</dd>
+                        </dl>
                       </section>
                     </li>
                   </ul>

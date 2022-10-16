@@ -133,6 +133,10 @@
           </div>
           <section class="class-description" id="class-description">
             <dl class="notes">
+              <dt>Type Parameters:</dt>
+              <dd><code>T</code> - The type of object to select</dd>
+            </dl>
+            <dl class="notes">
               <dt>Enclosing class:</dt>
               <dd>
                 <a
@@ -147,7 +151,7 @@
               <span class="modifiers">public static class </span
               ><span class="element-name"
                 ><a
-                  href="../../../../src-html/com/technototes/library/util/Alliance.html#line-50"
+                  href="../../../../src-html/com/technototes/library/util/Alliance.html#line-65"
                   >Alliance.Selector</a
                 >&lt;T&gt;</span
               >
@@ -160,6 +164,11 @@
                   >Object</a
                 ></span
               >
+            </div>
+            <div class="block">
+              This feels over-engineered, but it's probably for some obnoxious
+              Java thing, unfortunate. This lets you pick between two types
+              based on the Alliance
             </div>
           </section>
           <section class="summary">
@@ -192,7 +201,9 @@
                         >&nbsp;blue)</code
                       >
                     </div>
-                    <div class="col-last even-row-color">&nbsp;</div>
+                    <div class="col-last even-row-color">
+                      <div class="block">Create a Selelector for red/blue</div>
+                    </div>
                   </div>
                 </section>
               </li>
@@ -284,7 +295,7 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">Selector factory method</div>
                         </div>
                         <div
                           class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -315,7 +326,9 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Select the red or blue item based on the Alliance
+                          </div>
                         </div>
                         <div
                           class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"
@@ -340,7 +353,9 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Based on Alliance, choose red or blue
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -445,7 +460,7 @@
                           <span class="modifiers">protected</span>&nbsp;<span
                             class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Alliance.Selector.html#line-53"
+                              href="../../../../src-html/com/technototes/library/util/Alliance.Selector.html#line-74"
                               >Selector</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -461,6 +476,14 @@
                             >&nbsp;blue)</span
                           >
                         </div>
+                        <div class="block">
+                          Create a Selelector for red/blue
+                        </div>
+                        <dl class="notes">
+                          <dt>Parameters:</dt>
+                          <dd><code>red</code> -</dd>
+                          <dd><code>blue</code> -</dd>
+                        </dl>
                       </section>
                     </li>
                   </ul>
@@ -487,7 +510,7 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Alliance.Selector.html#line-58"
+                              href="../../../../src-html/com/technototes/library/util/Alliance.Selector.html#line-85"
                               >select</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -498,6 +521,15 @@
                             >&nbsp;a)</span
                           >
                         </div>
+                        <div class="block">
+                          Select the red or blue item based on the Alliance
+                        </div>
+                        <dl class="notes">
+                          <dt>Parameters:</dt>
+                          <dd><code>a</code> - The alliance</dd>
+                          <dt>Returns:</dt>
+                          <dd>The object selected</dd>
+                        </dl>
                       </section>
                     </li>
                     <li>
@@ -514,13 +546,27 @@
                             >&lt;T&gt;</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Alliance.Selector.html#line-62"
+                              href="../../../../src-html/com/technototes/library/util/Alliance.Selector.html#line-97"
                               >of</a
                             ></span
                           ><wbr /><span class="parameters"
                             >(T&nbsp;red, T&nbsp;blue)</span
                           >
                         </div>
+                        <div class="block">Selector factory method</div>
+                        <dl class="notes">
+                          <dt>Type Parameters:</dt>
+                          <dd><code>T</code> - The type of red &amp; blue</dd>
+                          <dt>Parameters:</dt>
+                          <dd>
+                            <code>red</code> - The object to select if red
+                          </dd>
+                          <dd>
+                            <code>blue</code> - The object to select if blue
+                          </dd>
+                          <dt>Returns:</dt>
+                          <dd>The Selector</dd>
+                        </dl>
                       </section>
                     </li>
                     <li>
@@ -539,7 +585,7 @@
                           >&nbsp;<span class="return-type">T</span>&nbsp;<span
                             class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Alliance.Selector.html#line-66"
+                              href="../../../../src-html/com/technototes/library/util/Alliance.Selector.html#line-110"
                               >selectOf</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -550,6 +596,26 @@
                             >&nbsp;alliance, T&nbsp;red, T&nbsp;blue)</span
                           >
                         </div>
+                        <div class="block">
+                          Based on Alliance, choose red or blue
+                        </div>
+                        <dl class="notes">
+                          <dt>Type Parameters:</dt>
+                          <dd>
+                            <code>T</code> - The type of the red &amp; blue
+                            things
+                          </dd>
+                          <dt>Parameters:</dt>
+                          <dd><code>alliance</code> - The alliance</dd>
+                          <dd>
+                            <code>red</code> - The thing to choose for red
+                          </dd>
+                          <dd>
+                            <code>blue</code> - The thing to choose for blue
+                          </dd>
+                          <dt>Returns:</dt>
+                          <dd>The thing (red or blue) selected</dd>
+                        </dl>
                       </section>
                     </li>
                   </ul>
