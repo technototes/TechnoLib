@@ -3084,12 +3084,6 @@ memberSearchIndex = [
     l: 'StringEntry(String, Supplier<String>, int, Color, String, Color)',
     u: '%3Cinit%3E(java.lang.String,java.util.function.Supplier,int,com.technototes.library.util.Color,java.lang.String,com.technototes.library.util.Color)',
   },
-  {
-    p: 'com.technototes.library.subsystem',
-    c: 'SubsystemBase',
-    l: 'SubsystemBase()',
-    u: '%3Cinit%3E()',
-  },
   { p: 'com.technototes.library.logger.entry', c: 'Entry', l: 'supplier' },
   { p: 'com.technototes.library.logger.entry', c: 'Entry', l: 'tag' },
   {

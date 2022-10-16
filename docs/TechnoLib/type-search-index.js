@@ -121,7 +121,6 @@ typeSearchIndex = [
   { p: 'com.technototes.library.control', l: 'Stick' },
   { p: 'com.technototes.library.logger.entry', l: 'StringEntry' },
   { p: 'com.technototes.library.subsystem', l: 'Subsystem' },
-  { p: 'com.technototes.library.subsystem', l: 'SubsystemBase' },
   {
     p: 'com.technototes.library.subsystem.drivebase',
     l: 'TankDrivebaseSubsystem',
