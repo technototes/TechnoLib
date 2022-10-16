@@ -297,8 +297,7 @@ public final class CommandScheduler {
      * @param s The subsystem in question
      * @return the default command for the subsystem, or null if there is none
      */
-    @Nullable
-    public Command getDefault(Subsystem s) {
+    @Nullable public Command getDefault(Subsystem s) {
         return opMode.getOpModeState() == CommandOpMode.OpModeState.RUN ? defaultMap.get(s) : null;
     }
 
@@ -310,8 +309,7 @@ public final class CommandScheduler {
      * command for the subsystem, or null if there is no current
      * command usint the subsystem, nor a default command
      */
-    @Nullable
-    public Command getCurrent(Subsystem s) {
+    @Nullable public Command getCurrent(Subsystem s) {
         if (requirementMap.get(s) == null) return null;
         for (Command c : requirementMap.get(s)) {
             if (c.isRunning()) return c;

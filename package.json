@@ -1,0 +1,16 @@
+{
+  "name": "TechnoLib",
+  "version": "1.0.0",
+  "description": "TechnoLib automation scripts",
+  "main": "build/automation.js",
+  "repository": "https://github.com/technototes/TechnoLib.git",
+  "author": "Kevin Frei <kevinfrei@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "format": "ftool format"
+  },
+  "devDependencies": {
+    "@freik/build-tools": "^3.4.1",
+    "prettier": "^2.7.1"
+  }
+}
