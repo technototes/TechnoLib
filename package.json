@@ -9,7 +9,9 @@
   "scripts": {
     "format": "format && ftool format",
     "build": "./gradlew build",
-    "doc": "./genDocs && ./fixwin && yarn run format"
+    "fulldoc": "yarn run doc && ./fixwin && yarn run format",
+    "doc": "./genDocs",
+    "docs": "./genDocs"
   },
   "devDependencies": {
     "@freik/build-tools": "^3.4.1",
