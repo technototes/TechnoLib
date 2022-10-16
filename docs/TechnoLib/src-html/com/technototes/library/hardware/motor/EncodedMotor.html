@@ -95,204 +95,205 @@
 <span class="source-line-no">074</span><span id="line-74">    /**</span>
 <span class="source-line-no">075</span><span id="line-75">     * Explicitly set the encoder for the motor</span>
 <span class="source-line-no">076</span><span id="line-76">     *</span>
-<span class="source-line-no">077</span><span id="line-77">     * @return The motor (for chaining)</span>
-<span class="source-line-no">078</span><span id="line-78">     */</span>
-<span class="source-line-no">079</span><span id="line-79">    public EncodedMotor&lt;T&gt; setEncoder(Encoder enc) {</span>
-<span class="source-line-no">080</span><span id="line-80">        encoder = enc;</span>
-<span class="source-line-no">081</span><span id="line-81">        return this;</span>
-<span class="source-line-no">082</span><span id="line-82">    }</span>
-<span class="source-line-no">083</span><span id="line-83"></span>
-<span class="source-line-no">084</span><span id="line-84">    /**</span>
-<span class="source-line-no">085</span><span id="line-85">     * Configure the PIDF constants for the motor</span>
-<span class="source-line-no">086</span><span id="line-86">     *</span>
-<span class="source-line-no">087</span><span id="line-87">     * @param p The Proportional coefficient</span>
-<span class="source-line-no">088</span><span id="line-88">     * @param i The Integral coefficient</span>
-<span class="source-line-no">089</span><span id="line-89">     * @param d The Derivative coefficient</span>
-<span class="source-line-no">090</span><span id="line-90">     * @param f The Forward Feedback coefficient</span>
-<span class="source-line-no">091</span><span id="line-91">     * @return The motor (for chaining)</span>
-<span class="source-line-no">092</span><span id="line-92">     */</span>
-<span class="source-line-no">093</span><span id="line-93">    public EncodedMotor&lt;T&gt; setPIDFCoeffecients(double p, double i, double d, double f) {</span>
-<span class="source-line-no">094</span><span id="line-94">        if (getDevice() instanceof DcMotorEx) {</span>
-<span class="source-line-no">095</span><span id="line-95">            ((DcMotorEx) getDevice()).setVelocityPIDFCoefficients(p, i, d, f);</span>
-<span class="source-line-no">096</span><span id="line-96">        }</span>
-<span class="source-line-no">097</span><span id="line-97">        return this;</span>
-<span class="source-line-no">098</span><span id="line-98">    }</span>
-<span class="source-line-no">099</span><span id="line-99"></span>
-<span class="source-line-no">100</span><span id="line-100">    /**</span>
-<span class="source-line-no">101</span><span id="line-101">     * Configure the PIDF constants for the motor</span>
-<span class="source-line-no">102</span><span id="line-102">     *</span>
-<span class="source-line-no">103</span><span id="line-103">     * @param coeffecients The PIDF coefficients to set</span>
-<span class="source-line-no">104</span><span id="line-104">     * @return The motor (for chaining)</span>
-<span class="source-line-no">105</span><span id="line-105">     */</span>
-<span class="source-line-no">106</span><span id="line-106">    public EncodedMotor&lt;T&gt; setPIDFCoeffecients(PIDFCoefficients coeffecients) {</span>
-<span class="source-line-no">107</span><span id="line-107">        return setPIDFCoeffecients(coeffecients.p, coeffecients.i, coeffecients.d, coeffecients.f);</span>
-<span class="source-line-no">108</span><span id="line-108">    }</span>
-<span class="source-line-no">109</span><span id="line-109"></span>
-<span class="source-line-no">110</span><span id="line-110">    /**</span>
-<span class="source-line-no">111</span><span id="line-111">     * Set the runmode for the motor</span>
-<span class="source-line-no">112</span><span id="line-112">     *</span>
-<span class="source-line-no">113</span><span id="line-113">     * @param m The RunMode to set</span>
-<span class="source-line-no">114</span><span id="line-114">     * @return The motor (for chaining)</span>
-<span class="source-line-no">115</span><span id="line-115">     */</span>
-<span class="source-line-no">116</span><span id="line-116">    public EncodedMotor&lt;T&gt; setRunMode(DcMotor.RunMode m) {</span>
-<span class="source-line-no">117</span><span id="line-117">        if (getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(m);</span>
-<span class="source-line-no">118</span><span id="line-118">        return this;</span>
-<span class="source-line-no">119</span><span id="line-119">    }</span>
-<span class="source-line-no">120</span><span id="line-120"></span>
-<span class="source-line-no">121</span><span id="line-121">    /**</span>
-<span class="source-line-no">122</span><span id="line-122">     * Set the Inverted state for the motor. WARNING: THIS IS BACKWARD TO WHAT YOU MIGHT THINK!</span>
-<span class="source-line-no">123</span><span id="line-123">     * True - Motor goes *forward*. False - motor goes *reverse*.</span>
-<span class="source-line-no">124</span><span id="line-124">     *</span>
-<span class="source-line-no">125</span><span id="line-125">     * @param invert true for forward, false for reverse (probably not what you were expecting)</span>
-<span class="source-line-no">126</span><span id="line-126">     * @return The motor (for chaining)</span>
-<span class="source-line-no">127</span><span id="line-127">     */</span>
-<span class="source-line-no">128</span><span id="line-128">    @Override</span>
-<span class="source-line-no">129</span><span id="line-129">    public EncodedMotor&lt;T&gt; setInverted(boolean invert) {</span>
-<span class="source-line-no">130</span><span id="line-130">        getDevice().setDirection(invert ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);</span>
-<span class="source-line-no">131</span><span id="line-131">        return this;</span>
-<span class="source-line-no">132</span><span id="line-132">    }</span>
-<span class="source-line-no">133</span><span id="line-133"></span>
-<span class="source-line-no">134</span><span id="line-134">    /**</span>
-<span class="source-line-no">135</span><span id="line-135">     * Invert the motor (toggle inversion)</span>
-<span class="source-line-no">136</span><span id="line-136">     *</span>
-<span class="source-line-no">137</span><span id="line-137">     * @return The motor (for chaining)</span>
-<span class="source-line-no">138</span><span id="line-138">     */</span>
-<span class="source-line-no">139</span><span id="line-139">    @Override</span>
-<span class="source-line-no">140</span><span id="line-140">    public EncodedMotor&lt;T&gt; invert() {</span>
-<span class="source-line-no">141</span><span id="line-141">        return setInverted(!getInverted());</span>
-<span class="source-line-no">142</span><span id="line-142">    }</span>
-<span class="source-line-no">143</span><span id="line-143"></span>
-<span class="source-line-no">144</span><span id="line-144">    /**</span>
-<span class="source-line-no">145</span><span id="line-145">     * Get the encoder position value</span>
-<span class="source-line-no">146</span><span id="line-146">     *</span>
-<span class="source-line-no">147</span><span id="line-147">     * @return The encoder position value</span>
-<span class="source-line-no">148</span><span id="line-148">     */</span>
-<span class="source-line-no">149</span><span id="line-149">    @Override</span>
-<span class="source-line-no">150</span><span id="line-150">    public double getSensorValue() {</span>
-<span class="source-line-no">151</span><span id="line-151">        return encoder.getSensorValue();</span>
-<span class="source-line-no">152</span><span id="line-152">    }</span>
-<span class="source-line-no">153</span><span id="line-153">    //</span>
-<span class="source-line-no">154</span><span id="line-154">    //    @Override</span>
-<span class="source-line-no">155</span><span id="line-155">    //    public void setPIDValues(double p, double i, double d) {</span>
-<span class="source-line-no">156</span><span id="line-156">    //        coefficients = new PIDCoefficients(p, i, d);</span>
-<span class="source-line-no">157</span><span id="line-157">    //    }</span>
-<span class="source-line-no">158</span><span id="line-158"></span>
-<span class="source-line-no">159</span><span id="line-159">    //    @Override</span>
-<span class="source-line-no">160</span><span id="line-160">    //    public boolean setPositionPID(double val) {</span>
-<span class="source-line-no">161</span><span id="line-161">    //        if (!isAtPosition(val)) {</span>
-<span class="source-line-no">162</span><span id="line-162">    //            setSpeed(MathUtils.constrain(-0.1,(val-getSensorValue())/(coefficients.kP*10000), 0.1)*10);</span>
-<span class="source-line-no">163</span><span id="line-163">    //        } else {</span>
-<span class="source-line-no">164</span><span id="line-164">    //            setSpeed(0);</span>
-<span class="source-line-no">165</span><span id="line-165">    //            return true;</span>
-<span class="source-line-no">166</span><span id="line-166">    //        }</span>
-<span class="source-line-no">167</span><span id="line-167">    //        return false;</span>
-<span class="source-line-no">168</span><span id="line-168">    //    }</span>
-<span class="source-line-no">169</span><span id="line-169"></span>
-<span class="source-line-no">170</span><span id="line-170">    /**</span>
-<span class="source-line-no">171</span><span id="line-171">     * Set the position of the motor</span>
-<span class="source-line-no">172</span><span id="line-172">     *</span>
-<span class="source-line-no">173</span><span id="line-173">     * @param ticks The encoder ticks</span>
-<span class="source-line-no">174</span><span id="line-174">     * @return Is the motor at this position</span>
-<span class="source-line-no">175</span><span id="line-175">     */</span>
-<span class="source-line-no">176</span><span id="line-176">    public boolean setPosition(double ticks) {</span>
-<span class="source-line-no">177</span><span id="line-177">        return setPosition(ticks, 0.5);</span>
-<span class="source-line-no">178</span><span id="line-178">    }</span>
-<span class="source-line-no">179</span><span id="line-179"></span>
-<span class="source-line-no">180</span><span id="line-180">    /**</span>
-<span class="source-line-no">181</span><span id="line-181">     * Set the power for the motor to try to get to the position specified.</span>
-<span class="source-line-no">182</span><span id="line-182">     * This is not particularly useful, unfortunately. You probably want to go look</span>
-<span class="source-line-no">183</span><span id="line-183">     * at the MotorAsServoSubsystem code (which may or may not be in this repo currently)</span>
-<span class="source-line-no">184</span><span id="line-184">     *</span>
-<span class="source-line-no">185</span><span id="line-185">     * @param ticks The encoder ticks to try to go to</span>
-<span class="source-line-no">186</span><span id="line-186">     * @param speed The speed to run the motor at</span>
-<span class="source-line-no">187</span><span id="line-187">     * @return Is the motor at this position (with no deadzone at all)</span>
-<span class="source-line-no">188</span><span id="line-188">     */</span>
-<span class="source-line-no">189</span><span id="line-189">    public boolean setPosition(double ticks, double speed) {</span>
-<span class="source-line-no">190</span><span id="line-190">        if (!isAtPosition(ticks)) {</span>
-<span class="source-line-no">191</span><span id="line-191">            setSpeed(getSensorValue() &lt; ticks ? speed : -speed);</span>
-<span class="source-line-no">192</span><span id="line-192">        } else {</span>
-<span class="source-line-no">193</span><span id="line-193">            setSpeed(0);</span>
-<span class="source-line-no">194</span><span id="line-194">            return true;</span>
-<span class="source-line-no">195</span><span id="line-195">        }</span>
-<span class="source-line-no">196</span><span id="line-196">        return false;</span>
-<span class="source-line-no">197</span><span id="line-197">    }</span>
-<span class="source-line-no">198</span><span id="line-198"></span>
-<span class="source-line-no">199</span><span id="line-199">    /**</span>
-<span class="source-line-no">200</span><span id="line-200">     * Is the motor at the specified position</span>
-<span class="source-line-no">201</span><span id="line-201">     *</span>
-<span class="source-line-no">202</span><span id="line-202">     * @param ticks The position</span>
-<span class="source-line-no">203</span><span id="line-203">     * @return Is the motor here or not</span>
-<span class="source-line-no">204</span><span id="line-204">     */</span>
-<span class="source-line-no">205</span><span id="line-205">    public boolean isAtPosition(double ticks) {</span>
-<span class="source-line-no">206</span><span id="line-206">        return Math.abs(ticks - getSensorValue()) &lt; positionThreshold;</span>
-<span class="source-line-no">207</span><span id="line-207">    }</span>
-<span class="source-line-no">208</span><span id="line-208"></span>
-<span class="source-line-no">209</span><span id="line-209">    /**</span>
-<span class="source-line-no">210</span><span id="line-210">     * Get the encoder object</span>
-<span class="source-line-no">211</span><span id="line-211">     *</span>
-<span class="source-line-no">212</span><span id="line-212">     * @return The encoder</span>
-<span class="source-line-no">213</span><span id="line-213">     */</span>
-<span class="source-line-no">214</span><span id="line-214">    public Encoder getEncoder() {</span>
-<span class="source-line-no">215</span><span id="line-215">        return encoder;</span>
-<span class="source-line-no">216</span><span id="line-216">    }</span>
-<span class="source-line-no">217</span><span id="line-217"></span>
-<span class="source-line-no">218</span><span id="line-218">    /**</span>
-<span class="source-line-no">219</span><span id="line-219">     * Zero the encoder</span>
-<span class="source-line-no">220</span><span id="line-220">     *</span>
-<span class="source-line-no">221</span><span id="line-221">     * @return This</span>
-<span class="source-line-no">222</span><span id="line-222">     */</span>
-<span class="source-line-no">223</span><span id="line-223">    public EncodedMotor&lt;T&gt; tare() {</span>
-<span class="source-line-no">224</span><span id="line-224">        encoder.zeroEncoder();</span>
-<span class="source-line-no">225</span><span id="line-225">        return this;</span>
-<span class="source-line-no">226</span><span id="line-226">    }</span>
-<span class="source-line-no">227</span><span id="line-227"></span>
-<span class="source-line-no">228</span><span id="line-228">    @Override</span>
-<span class="source-line-no">229</span><span id="line-229">    public Double get() {</span>
-<span class="source-line-no">230</span><span id="line-230">        return getSensorValue();</span>
-<span class="source-line-no">231</span><span id="line-231">    }</span>
-<span class="source-line-no">232</span><span id="line-232"></span>
-<span class="source-line-no">233</span><span id="line-233">    /**</span>
-<span class="source-line-no">234</span><span id="line-234">     * Set velocity of motor in tps</span>
-<span class="source-line-no">235</span><span id="line-235">     *</span>
-<span class="source-line-no">236</span><span id="line-236">     * @param tps the speed in encoder ticks per second</span>
-<span class="source-line-no">237</span><span id="line-237">     */</span>
-<span class="source-line-no">238</span><span id="line-238">    public void setVelocity(double tps) {</span>
-<span class="source-line-no">239</span><span id="line-239">        if (getDevice() instanceof DcMotor) {</span>
-<span class="source-line-no">240</span><span id="line-240">            ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_USING_ENCODER);</span>
-<span class="source-line-no">241</span><span id="line-241">            getDevice().setPower(tps);</span>
-<span class="source-line-no">242</span><span id="line-242">        }</span>
-<span class="source-line-no">243</span><span id="line-243">    }</span>
-<span class="source-line-no">244</span><span id="line-244"></span>
-<span class="source-line-no">245</span><span id="line-245">    public double getVelocity() {</span>
-<span class="source-line-no">246</span><span id="line-246">        return getDevice().getPower();</span>
-<span class="source-line-no">247</span><span id="line-247">    }</span>
-<span class="source-line-no">248</span><span id="line-248"></span>
-<span class="source-line-no">249</span><span id="line-249">    @Override</span>
-<span class="source-line-no">250</span><span id="line-250">    public double getSpeed() {</span>
-<span class="source-line-no">251</span><span id="line-251">        return getDevice().getPower();</span>
-<span class="source-line-no">252</span><span id="line-252">    }</span>
-<span class="source-line-no">253</span><span id="line-253"></span>
-<span class="source-line-no">254</span><span id="line-254">    @Override</span>
-<span class="source-line-no">255</span><span id="line-255">    public void setSpeed(double speed) {</span>
-<span class="source-line-no">256</span><span id="line-256">        // if(getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);</span>
-<span class="source-line-no">257</span><span id="line-257">        super.setSpeed(speed);</span>
-<span class="source-line-no">258</span><span id="line-258">    }</span>
-<span class="source-line-no">259</span><span id="line-259"></span>
-<span class="source-line-no">260</span><span id="line-260">    @Override</span>
-<span class="source-line-no">261</span><span id="line-261">    public EncodedMotor&lt;T&gt; brake() {</span>
-<span class="source-line-no">262</span><span id="line-262">        return (EncodedMotor&lt;T&gt;) super.brake();</span>
-<span class="source-line-no">263</span><span id="line-263">    }</span>
-<span class="source-line-no">264</span><span id="line-264"></span>
-<span class="source-line-no">265</span><span id="line-265">    @Override</span>
-<span class="source-line-no">266</span><span id="line-266">    public EncodedMotor&lt;T&gt; coast() {</span>
-<span class="source-line-no">267</span><span id="line-267">        return (EncodedMotor&lt;T&gt;) super.coast();</span>
-<span class="source-line-no">268</span><span id="line-268">    }</span>
-<span class="source-line-no">269</span><span id="line-269"></span>
-<span class="source-line-no">270</span><span id="line-270">    @Override</span>
-<span class="source-line-no">271</span><span id="line-271">    public EncodedMotor&lt;T&gt; setLimits(double mi, double ma) {</span>
-<span class="source-line-no">272</span><span id="line-272">        return (EncodedMotor&lt;T&gt;) super.setLimits(mi, ma);</span>
-<span class="source-line-no">273</span><span id="line-273">    }</span>
-<span class="source-line-no">274</span><span id="line-274">}</span>
+<span class="source-line-no">077</span><span id="line-77">     * @param enc The encoder</span>
+<span class="source-line-no">078</span><span id="line-78">     * @return The motor (for chaining)</span>
+<span class="source-line-no">079</span><span id="line-79">     */</span>
+<span class="source-line-no">080</span><span id="line-80">    public EncodedMotor&lt;T&gt; setEncoder(Encoder enc) {</span>
+<span class="source-line-no">081</span><span id="line-81">        encoder = enc;</span>
+<span class="source-line-no">082</span><span id="line-82">        return this;</span>
+<span class="source-line-no">083</span><span id="line-83">    }</span>
+<span class="source-line-no">084</span><span id="line-84"></span>
+<span class="source-line-no">085</span><span id="line-85">    /**</span>
+<span class="source-line-no">086</span><span id="line-86">     * Configure the PIDF constants for the motor</span>
+<span class="source-line-no">087</span><span id="line-87">     *</span>
+<span class="source-line-no">088</span><span id="line-88">     * @param p The Proportional coefficient</span>
+<span class="source-line-no">089</span><span id="line-89">     * @param i The Integral coefficient</span>
+<span class="source-line-no">090</span><span id="line-90">     * @param d The Derivative coefficient</span>
+<span class="source-line-no">091</span><span id="line-91">     * @param f The Forward Feedback coefficient</span>
+<span class="source-line-no">092</span><span id="line-92">     * @return The motor (for chaining)</span>
+<span class="source-line-no">093</span><span id="line-93">     */</span>
+<span class="source-line-no">094</span><span id="line-94">    public EncodedMotor&lt;T&gt; setPIDFCoeffecients(double p, double i, double d, double f) {</span>
+<span class="source-line-no">095</span><span id="line-95">        if (getDevice() instanceof DcMotorEx) {</span>
+<span class="source-line-no">096</span><span id="line-96">            ((DcMotorEx) getDevice()).setVelocityPIDFCoefficients(p, i, d, f);</span>
+<span class="source-line-no">097</span><span id="line-97">        }</span>
+<span class="source-line-no">098</span><span id="line-98">        return this;</span>
+<span class="source-line-no">099</span><span id="line-99">    }</span>
+<span class="source-line-no">100</span><span id="line-100"></span>
+<span class="source-line-no">101</span><span id="line-101">    /**</span>
+<span class="source-line-no">102</span><span id="line-102">     * Configure the PIDF constants for the motor</span>
+<span class="source-line-no">103</span><span id="line-103">     *</span>
+<span class="source-line-no">104</span><span id="line-104">     * @param coeffecients The PIDF coefficients to set</span>
+<span class="source-line-no">105</span><span id="line-105">     * @return The motor (for chaining)</span>
+<span class="source-line-no">106</span><span id="line-106">     */</span>
+<span class="source-line-no">107</span><span id="line-107">    public EncodedMotor&lt;T&gt; setPIDFCoeffecients(PIDFCoefficients coeffecients) {</span>
+<span class="source-line-no">108</span><span id="line-108">        return setPIDFCoeffecients(coeffecients.p, coeffecients.i, coeffecients.d, coeffecients.f);</span>
+<span class="source-line-no">109</span><span id="line-109">    }</span>
+<span class="source-line-no">110</span><span id="line-110"></span>
+<span class="source-line-no">111</span><span id="line-111">    /**</span>
+<span class="source-line-no">112</span><span id="line-112">     * Set the runmode for the motor</span>
+<span class="source-line-no">113</span><span id="line-113">     *</span>
+<span class="source-line-no">114</span><span id="line-114">     * @param m The RunMode to set</span>
+<span class="source-line-no">115</span><span id="line-115">     * @return The motor (for chaining)</span>
+<span class="source-line-no">116</span><span id="line-116">     */</span>
+<span class="source-line-no">117</span><span id="line-117">    public EncodedMotor&lt;T&gt; setRunMode(DcMotor.RunMode m) {</span>
+<span class="source-line-no">118</span><span id="line-118">        if (getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(m);</span>
+<span class="source-line-no">119</span><span id="line-119">        return this;</span>
+<span class="source-line-no">120</span><span id="line-120">    }</span>
+<span class="source-line-no">121</span><span id="line-121"></span>
+<span class="source-line-no">122</span><span id="line-122">    /**</span>
+<span class="source-line-no">123</span><span id="line-123">     * Set the Inverted state for the motor. WARNING: THIS IS BACKWARD TO WHAT YOU MIGHT THINK!</span>
+<span class="source-line-no">124</span><span id="line-124">     * True - Motor goes *forward*. False - motor goes *reverse*.</span>
+<span class="source-line-no">125</span><span id="line-125">     *</span>
+<span class="source-line-no">126</span><span id="line-126">     * @param invert true for forward, false for reverse (probably not what you were expecting)</span>
+<span class="source-line-no">127</span><span id="line-127">     * @return The motor (for chaining)</span>
+<span class="source-line-no">128</span><span id="line-128">     */</span>
+<span class="source-line-no">129</span><span id="line-129">    @Override</span>
+<span class="source-line-no">130</span><span id="line-130">    public EncodedMotor&lt;T&gt; setInverted(boolean invert) {</span>
+<span class="source-line-no">131</span><span id="line-131">        getDevice().setDirection(invert ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);</span>
+<span class="source-line-no">132</span><span id="line-132">        return this;</span>
+<span class="source-line-no">133</span><span id="line-133">    }</span>
+<span class="source-line-no">134</span><span id="line-134"></span>
+<span class="source-line-no">135</span><span id="line-135">    /**</span>
+<span class="source-line-no">136</span><span id="line-136">     * Invert the motor (toggle inversion)</span>
+<span class="source-line-no">137</span><span id="line-137">     *</span>
+<span class="source-line-no">138</span><span id="line-138">     * @return The motor (for chaining)</span>
+<span class="source-line-no">139</span><span id="line-139">     */</span>
+<span class="source-line-no">140</span><span id="line-140">    @Override</span>
+<span class="source-line-no">141</span><span id="line-141">    public EncodedMotor&lt;T&gt; invert() {</span>
+<span class="source-line-no">142</span><span id="line-142">        return setInverted(!getInverted());</span>
+<span class="source-line-no">143</span><span id="line-143">    }</span>
+<span class="source-line-no">144</span><span id="line-144"></span>
+<span class="source-line-no">145</span><span id="line-145">    /**</span>
+<span class="source-line-no">146</span><span id="line-146">     * Get the encoder position value</span>
+<span class="source-line-no">147</span><span id="line-147">     *</span>
+<span class="source-line-no">148</span><span id="line-148">     * @return The encoder position value</span>
+<span class="source-line-no">149</span><span id="line-149">     */</span>
+<span class="source-line-no">150</span><span id="line-150">    @Override</span>
+<span class="source-line-no">151</span><span id="line-151">    public double getSensorValue() {</span>
+<span class="source-line-no">152</span><span id="line-152">        return encoder.getSensorValue();</span>
+<span class="source-line-no">153</span><span id="line-153">    }</span>
+<span class="source-line-no">154</span><span id="line-154">    //</span>
+<span class="source-line-no">155</span><span id="line-155">    //    @Override</span>
+<span class="source-line-no">156</span><span id="line-156">    //    public void setPIDValues(double p, double i, double d) {</span>
+<span class="source-line-no">157</span><span id="line-157">    //        coefficients = new PIDCoefficients(p, i, d);</span>
+<span class="source-line-no">158</span><span id="line-158">    //    }</span>
+<span class="source-line-no">159</span><span id="line-159"></span>
+<span class="source-line-no">160</span><span id="line-160">    //    @Override</span>
+<span class="source-line-no">161</span><span id="line-161">    //    public boolean setPositionPID(double val) {</span>
+<span class="source-line-no">162</span><span id="line-162">    //        if (!isAtPosition(val)) {</span>
+<span class="source-line-no">163</span><span id="line-163">    //            setSpeed(MathUtils.constrain(-0.1,(val-getSensorValue())/(coefficients.kP*10000), 0.1)*10);</span>
+<span class="source-line-no">164</span><span id="line-164">    //        } else {</span>
+<span class="source-line-no">165</span><span id="line-165">    //            setSpeed(0);</span>
+<span class="source-line-no">166</span><span id="line-166">    //            return true;</span>
+<span class="source-line-no">167</span><span id="line-167">    //        }</span>
+<span class="source-line-no">168</span><span id="line-168">    //        return false;</span>
+<span class="source-line-no">169</span><span id="line-169">    //    }</span>
+<span class="source-line-no">170</span><span id="line-170"></span>
+<span class="source-line-no">171</span><span id="line-171">    /**</span>
+<span class="source-line-no">172</span><span id="line-172">     * Set the position of the motor</span>
+<span class="source-line-no">173</span><span id="line-173">     *</span>
+<span class="source-line-no">174</span><span id="line-174">     * @param ticks The encoder ticks</span>
+<span class="source-line-no">175</span><span id="line-175">     * @return Is the motor at this position</span>
+<span class="source-line-no">176</span><span id="line-176">     */</span>
+<span class="source-line-no">177</span><span id="line-177">    public boolean setPosition(double ticks) {</span>
+<span class="source-line-no">178</span><span id="line-178">        return setPosition(ticks, 0.5);</span>
+<span class="source-line-no">179</span><span id="line-179">    }</span>
+<span class="source-line-no">180</span><span id="line-180"></span>
+<span class="source-line-no">181</span><span id="line-181">    /**</span>
+<span class="source-line-no">182</span><span id="line-182">     * Set the power for the motor to try to get to the position specified.</span>
+<span class="source-line-no">183</span><span id="line-183">     * This is not particularly useful, unfortunately. You probably want to go look</span>
+<span class="source-line-no">184</span><span id="line-184">     * at the MotorAsServoSubsystem code (which may or may not be in this repo currently)</span>
+<span class="source-line-no">185</span><span id="line-185">     *</span>
+<span class="source-line-no">186</span><span id="line-186">     * @param ticks The encoder ticks to try to go to</span>
+<span class="source-line-no">187</span><span id="line-187">     * @param speed The speed to run the motor at</span>
+<span class="source-line-no">188</span><span id="line-188">     * @return Is the motor at this position (with no deadzone at all)</span>
+<span class="source-line-no">189</span><span id="line-189">     */</span>
+<span class="source-line-no">190</span><span id="line-190">    public boolean setPosition(double ticks, double speed) {</span>
+<span class="source-line-no">191</span><span id="line-191">        if (!isAtPosition(ticks)) {</span>
+<span class="source-line-no">192</span><span id="line-192">            setSpeed(getSensorValue() &lt; ticks ? speed : -speed);</span>
+<span class="source-line-no">193</span><span id="line-193">        } else {</span>
+<span class="source-line-no">194</span><span id="line-194">            setSpeed(0);</span>
+<span class="source-line-no">195</span><span id="line-195">            return true;</span>
+<span class="source-line-no">196</span><span id="line-196">        }</span>
+<span class="source-line-no">197</span><span id="line-197">        return false;</span>
+<span class="source-line-no">198</span><span id="line-198">    }</span>
+<span class="source-line-no">199</span><span id="line-199"></span>
+<span class="source-line-no">200</span><span id="line-200">    /**</span>
+<span class="source-line-no">201</span><span id="line-201">     * Is the motor at the specified position</span>
+<span class="source-line-no">202</span><span id="line-202">     *</span>
+<span class="source-line-no">203</span><span id="line-203">     * @param ticks The position</span>
+<span class="source-line-no">204</span><span id="line-204">     * @return Is the motor here or not</span>
+<span class="source-line-no">205</span><span id="line-205">     */</span>
+<span class="source-line-no">206</span><span id="line-206">    public boolean isAtPosition(double ticks) {</span>
+<span class="source-line-no">207</span><span id="line-207">        return Math.abs(ticks - getSensorValue()) &lt; positionThreshold;</span>
+<span class="source-line-no">208</span><span id="line-208">    }</span>
+<span class="source-line-no">209</span><span id="line-209"></span>
+<span class="source-line-no">210</span><span id="line-210">    /**</span>
+<span class="source-line-no">211</span><span id="line-211">     * Get the encoder object</span>
+<span class="source-line-no">212</span><span id="line-212">     *</span>
+<span class="source-line-no">213</span><span id="line-213">     * @return The encoder</span>
+<span class="source-line-no">214</span><span id="line-214">     */</span>
+<span class="source-line-no">215</span><span id="line-215">    public Encoder getEncoder() {</span>
+<span class="source-line-no">216</span><span id="line-216">        return encoder;</span>
+<span class="source-line-no">217</span><span id="line-217">    }</span>
+<span class="source-line-no">218</span><span id="line-218"></span>
+<span class="source-line-no">219</span><span id="line-219">    /**</span>
+<span class="source-line-no">220</span><span id="line-220">     * Zero the encoder</span>
+<span class="source-line-no">221</span><span id="line-221">     *</span>
+<span class="source-line-no">222</span><span id="line-222">     * @return This</span>
+<span class="source-line-no">223</span><span id="line-223">     */</span>
+<span class="source-line-no">224</span><span id="line-224">    public EncodedMotor&lt;T&gt; tare() {</span>
+<span class="source-line-no">225</span><span id="line-225">        encoder.zeroEncoder();</span>
+<span class="source-line-no">226</span><span id="line-226">        return this;</span>
+<span class="source-line-no">227</span><span id="line-227">    }</span>
+<span class="source-line-no">228</span><span id="line-228"></span>
+<span class="source-line-no">229</span><span id="line-229">    @Override</span>
+<span class="source-line-no">230</span><span id="line-230">    public Double get() {</span>
+<span class="source-line-no">231</span><span id="line-231">        return getSensorValue();</span>
+<span class="source-line-no">232</span><span id="line-232">    }</span>
+<span class="source-line-no">233</span><span id="line-233"></span>
+<span class="source-line-no">234</span><span id="line-234">    /**</span>
+<span class="source-line-no">235</span><span id="line-235">     * Set velocity of motor in tps</span>
+<span class="source-line-no">236</span><span id="line-236">     *</span>
+<span class="source-line-no">237</span><span id="line-237">     * @param tps the speed in encoder ticks per second</span>
+<span class="source-line-no">238</span><span id="line-238">     */</span>
+<span class="source-line-no">239</span><span id="line-239">    public void setVelocity(double tps) {</span>
+<span class="source-line-no">240</span><span id="line-240">        if (getDevice() instanceof DcMotor) {</span>
+<span class="source-line-no">241</span><span id="line-241">            ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_USING_ENCODER);</span>
+<span class="source-line-no">242</span><span id="line-242">            getDevice().setPower(tps);</span>
+<span class="source-line-no">243</span><span id="line-243">        }</span>
+<span class="source-line-no">244</span><span id="line-244">    }</span>
+<span class="source-line-no">245</span><span id="line-245"></span>
+<span class="source-line-no">246</span><span id="line-246">    public double getVelocity() {</span>
+<span class="source-line-no">247</span><span id="line-247">        return getDevice().getPower();</span>
+<span class="source-line-no">248</span><span id="line-248">    }</span>
+<span class="source-line-no">249</span><span id="line-249"></span>
+<span class="source-line-no">250</span><span id="line-250">    @Override</span>
+<span class="source-line-no">251</span><span id="line-251">    public double getSpeed() {</span>
+<span class="source-line-no">252</span><span id="line-252">        return getDevice().getPower();</span>
+<span class="source-line-no">253</span><span id="line-253">    }</span>
+<span class="source-line-no">254</span><span id="line-254"></span>
+<span class="source-line-no">255</span><span id="line-255">    @Override</span>
+<span class="source-line-no">256</span><span id="line-256">    public void setSpeed(double speed) {</span>
+<span class="source-line-no">257</span><span id="line-257">        // if(getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);</span>
+<span class="source-line-no">258</span><span id="line-258">        super.setSpeed(speed);</span>
+<span class="source-line-no">259</span><span id="line-259">    }</span>
+<span class="source-line-no">260</span><span id="line-260"></span>
+<span class="source-line-no">261</span><span id="line-261">    @Override</span>
+<span class="source-line-no">262</span><span id="line-262">    public EncodedMotor&lt;T&gt; brake() {</span>
+<span class="source-line-no">263</span><span id="line-263">        return (EncodedMotor&lt;T&gt;) super.brake();</span>
+<span class="source-line-no">264</span><span id="line-264">    }</span>
+<span class="source-line-no">265</span><span id="line-265"></span>
+<span class="source-line-no">266</span><span id="line-266">    @Override</span>
+<span class="source-line-no">267</span><span id="line-267">    public EncodedMotor&lt;T&gt; coast() {</span>
+<span class="source-line-no">268</span><span id="line-268">        return (EncodedMotor&lt;T&gt;) super.coast();</span>
+<span class="source-line-no">269</span><span id="line-269">    }</span>
+<span class="source-line-no">270</span><span id="line-270"></span>
+<span class="source-line-no">271</span><span id="line-271">    @Override</span>
+<span class="source-line-no">272</span><span id="line-272">    public EncodedMotor&lt;T&gt; setLimits(double mi, double ma) {</span>
+<span class="source-line-no">273</span><span id="line-273">        return (EncodedMotor&lt;T&gt;) super.setLimits(mi, ma);</span>
+<span class="source-line-no">274</span><span id="line-274">    }</span>
+<span class="source-line-no">275</span><span id="line-275">}</span>
 
 
 

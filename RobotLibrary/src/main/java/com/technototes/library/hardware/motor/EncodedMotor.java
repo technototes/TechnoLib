@@ -74,6 +74,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     /**
      * Explicitly set the encoder for the motor
      *
+     * @param enc The encoder
      * @return The motor (for chaining)
      */
     public EncodedMotor<T> setEncoder(Encoder enc) {
