@@ -8,27 +8,58 @@ import com.qualcomm.robotcore.hardware.DigitalChannel;
  */
 @Deprecated
 public class DigitalBuilder extends HardwareBuilder<DigitalChannel> {
+    /**
+     * Don't use this in the future
+     *
+     * @param name undoc
+     */
     public DigitalBuilder(String name) {
         super(name);
     }
 
+    /**
+     * Don't use this in the future
+     *
+     * @param device undoc
+     */
     public DigitalBuilder(DigitalChannel device) {
         super(device);
     }
 
+    /**
+     * Don't use this in the future
+     *
+     * @param port undoc
+     */
     public DigitalBuilder(int port) {
         super(port);
     }
 
+    /**
+     * Don't use this in the future
+     *
+     * @param mode undoc
+     * @return undoc
+     */
     public DigitalBuilder mode(DigitalChannel.Mode mode) {
         product.setMode(mode);
         return this;
     }
 
+    /**
+     * Don't use this in the future
+     *
+     * @return undoc
+     */
     public DigitalBuilder input() {
         return mode(DigitalChannel.Mode.INPUT);
     }
 
+    /**
+     * Don't use this in the future
+     *
+     * @return undoc
+     */
     public DigitalBuilder output() {
         return mode(DigitalChannel.Mode.OUTPUT);
     }

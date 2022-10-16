@@ -8,10 +8,20 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
  */
 @Deprecated
 public class DistanceBuilder extends HardwareBuilder<DistanceSensor> {
+    /**
+     * Deprecated
+     *
+     * @param name deprecated
+     */
     public DistanceBuilder(String name) {
         super(name);
     }
 
+    /**
+     * Deprecated
+     *
+     * @param device deprecated
+     */
     public DistanceBuilder(DistanceSensor device) {
         super(device);
     }

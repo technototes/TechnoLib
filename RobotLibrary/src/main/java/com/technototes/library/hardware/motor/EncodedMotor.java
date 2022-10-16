@@ -9,34 +9,49 @@ import com.technototes.library.hardware.Sensored;
 import com.technototes.library.hardware.sensor.encoder.Encoder;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
 
-/** Class for encoded motors
- * @author Alex Stedman
+/**
+ * Class for encoded motors
+ *
  * @param <T> The qualcomm motor device interface
+ * @author Alex Stedman
  */
 @SuppressWarnings("unused")
 public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements Sensored {
 
-    /** Deadzone for going to positions with encoder
-     *
+    /**
+     * Deadzone for going to positions with encoder
      */
     public double positionThreshold = 50;
 
     private Encoder encoder;
 
-    /** Make encoded motor
+    /**
+     * Make encoded motor
      *
      * @param device The dcmotor object
+     * @param e      The encoder for the motor
      */
     public EncodedMotor(T device, Encoder e) {
         super(device);
         encoder = e;
     }
 
+    /**
+     * Make encoded motor
+     *
+     * @param device The name of the motor
+     * @param e      The encoder for the motor
+     */
     public EncodedMotor(String device, Encoder e) {
         super(device);
         encoder = e;
     }
 
+    /**
+     * Make encoded motor, with the default encoder configured
+     *
+     * @param device The dcmotor object
+     */
     public EncodedMotor(T device) {
         super(device);
         if (device instanceof DcMotorEx) {
@@ -44,7 +59,8 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
         }
     }
 
-    /** Make encoded motor
+    /**
+     * Make encoded motor, with the default encoder configured
      *
      * @param deviceName The dcmotor device name in hardware map
      */
@@ -55,11 +71,25 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
         }
     }
 
+    /**
+     * Explicitly set the encoder for the motor
+     *
+     * @return The motor (for chaining)
+     */
     public EncodedMotor<T> setEncoder(Encoder enc) {
         encoder = enc;
         return this;
     }
 
+    /**
+     * Configure the PIDF constants for the motor
+     *
+     * @param p The Proportional coefficient
+     * @param i The Integral coefficient
+     * @param d The Derivative coefficient
+     * @param f The Forward Feedback coefficient
+     * @return The motor (for chaining)
+     */
     public EncodedMotor<T> setPIDFCoeffecients(double p, double i, double d, double f) {
         if (getDevice() instanceof DcMotorEx) {
             ((DcMotorEx) getDevice()).setVelocityPIDFCoefficients(p, i, d, f);
@@ -67,26 +97,55 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
         return this;
     }
 
+    /**
+     * Configure the PIDF constants for the motor
+     *
+     * @param coeffecients The PIDF coefficients to set
+     * @return The motor (for chaining)
+     */
     public EncodedMotor<T> setPIDFCoeffecients(PIDFCoefficients coeffecients) {
         return setPIDFCoeffecients(coeffecients.p, coeffecients.i, coeffecients.d, coeffecients.f);
     }
 
+    /**
+     * Set the runmode for the motor
+     *
+     * @param m The RunMode to set
+     * @return The motor (for chaining)
+     */
     public EncodedMotor<T> setRunMode(DcMotor.RunMode m) {
         if (getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(m);
         return this;
     }
 
+    /**
+     * Set the Inverted state for the motor. WARNING: THIS IS BACKWARD TO WHAT YOU MIGHT THINK!
+     * True - Motor goes *forward*. False - motor goes *reverse*.
+     *
+     * @param invert true for forward, false for reverse (probably not what you were expecting)
+     * @return The motor (for chaining)
+     */
     @Override
     public EncodedMotor<T> setInverted(boolean invert) {
         getDevice().setDirection(invert ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);
         return this;
     }
 
+    /**
+     * Invert the motor (toggle inversion)
+     *
+     * @return The motor (for chaining)
+     */
     @Override
     public EncodedMotor<T> invert() {
         return setInverted(!getInverted());
     }
 
+    /**
+     * Get the encoder position value
+     *
+     * @return The encoder position value
+     */
     @Override
     public double getSensorValue() {
         return encoder.getSensorValue();
@@ -108,7 +167,8 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     //        return false;
     //    }
 
-    /** Set the position of the motor
+    /**
+     * Set the position of the motor
      *
      * @param ticks The encoder ticks
      * @return Is the motor at this position
@@ -116,11 +176,15 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     public boolean setPosition(double ticks) {
         return setPosition(ticks, 0.5);
     }
-    /** Set the position of the motor
+
+    /**
+     * Set the power for the motor to try to get to the position specified.
+     * This is not particularly useful, unfortunately. You probably want to go look
+     * at the MotorAsServoSubsystem code (which may or may not be in this repo currently)
      *
-     * @param ticks The encoder ticks
+     * @param ticks The encoder ticks to try to go to
      * @param speed The speed to run the motor at
-     * @return Is the motor at this position
+     * @return Is the motor at this position (with no deadzone at all)
      */
     public boolean setPosition(double ticks, double speed) {
         if (!isAtPosition(ticks)) {
@@ -132,7 +196,8 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
         return false;
     }
 
-    /** Is the motor at the specified position
+    /**
+     * Is the motor at the specified position
      *
      * @param ticks The position
      * @return Is the motor here or not
@@ -141,7 +206,8 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
         return Math.abs(ticks - getSensorValue()) < positionThreshold;
     }
 
-    /** Get the encoder object
+    /**
+     * Get the encoder object
      *
      * @return The encoder
      */
@@ -149,7 +215,9 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
         return encoder;
     }
 
-    /** Zero the encoder
+    /**
+     * Zero the encoder
+     *
      * @return This
      */
     public EncodedMotor<T> tare() {
@@ -162,7 +230,8 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
         return getSensorValue();
     }
 
-    /** Set velocity of motor in tps
+    /**
+     * Set velocity of motor in tps
      *
      * @param tps the speed in encoder ticks per second
      */
