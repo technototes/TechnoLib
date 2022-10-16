@@ -6,7 +6,7 @@ package com.technototes.library.general;
  * You must have "setEnabled" and "isEnabled" functions. Everything else has
  * functional implementations in the interface
  *
- * @param <T>
+ * @param <T> An Enable-able interface/class type
  */
 public interface Enablable<T extends Enablable<T>> {
     /**

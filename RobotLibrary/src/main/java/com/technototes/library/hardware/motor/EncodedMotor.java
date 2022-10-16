@@ -122,13 +122,15 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     /**
      * Set the Inverted state for the motor. WARNING: THIS IS BACKWARD TO WHAT YOU MIGHT THINK!
      * True - Motor goes *forward*. False - motor goes *reverse*.
+     * <p>
+     * This is overridden so it can return an EncodedMotor, and not just a Motor
      *
      * @param invert true for forward, false for reverse (probably not what you were expecting)
      * @return The motor (for chaining)
      */
     @Override
     public EncodedMotor<T> setInverted(boolean invert) {
-        getDevice().setDirection(invert ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);
+        super.setInverted(invert);
         return this;
     }
 
@@ -243,15 +245,30 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
         }
     }
 
+    /**
+     * Get the power for the motor (Velocity, I guess?)
+     *
+     * @return the power for the motor
+     */
     public double getVelocity() {
         return getDevice().getPower();
     }
 
+    /**
+     * Gets the power set for the motor
+     *
+     * @return THe power for the motor
+     */
     @Override
     public double getSpeed() {
         return getDevice().getPower();
     }
 
+    /**
+     * Sets the (clipped) speed for the motor
+     *
+     * @param speed The speed of the motor
+     */
     @Override
     public void setSpeed(double speed) {
         // if(getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

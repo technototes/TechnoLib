@@ -39,17 +39,36 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T>
         super(deviceName);
     }
 
+    /**
+     * Sets the min &amp; max values for the motor power (still clipped to -1/1)
+     *
+     * @param mi The minimum value
+     * @param ma The maximum value
+     * @return The Motor (for chaining)
+     */
     public Motor<T> setLimits(double mi, double ma) {
         min = Range.clip(mi, -1, 1);
         max = Range.clip(ma, -1, 1);
         return this;
     }
 
+    /**
+     * Returns whether the motor is inverted. WARNING: THIS RETURNS TRUE FOR A "FORWARD" SETTING!
+     *
+     * @return True for inverted (forward) false for not inverted (reverse)
+     */
     @Override
     public boolean getInverted() {
         return invert;
     }
 
+    /**
+     * Set the Inverted state for the motor. WARNING: THIS IS BACKWARD TO WHAT YOU MIGHT THINK!
+     * True - Motor goes *forward*. False - motor goes *reverse*.
+     *
+     * @param inv true for forward, false for reverse (probably not what you were expecting)
+     * @return The motor (for chaining)
+     */
     @Override
     public Motor<T> setInverted(boolean inv) {
         getDevice().setDirection(inv ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);
@@ -57,11 +76,21 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T>
         return this;
     }
 
+    /**
+     * Invert the motor (toggle inversion)
+     *
+     * @return The motor (for chaining)
+     */
     @Override
     public Motor<T> invert() {
         return setInverted(!getInverted());
     }
 
+    /**
+     * Gets the power value for the motor
+     *
+     * @return the power value (as a double)
+     */
     public double getSpeed() {
         return device.getPower();
     }
@@ -75,18 +104,33 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T>
         device.setPower(Range.clip(speed, min, max));
     }
 
+    /**
+     * Configure the motor to *brake* when the power is set to zero.
+     *
+     * @return The Motor device (for chaining)
+     */
     public Motor<T> brake() {
         if (getDevice() instanceof DcMotor)
             ((DcMotor) getDevice()).setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         return this;
     }
 
+    /**
+     * Configure the motor to *float* when the power is set to zero.
+     *
+     * @return The Motor device (for chaining)
+     */
     public Motor<T> coast() {
         if (getDevice() instanceof DcMotor)
             ((DcMotor) getDevice()).setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         return this;
     }
 
+    /**
+     * Gets the *speed* of the motor when it's used as a DoubleSupplier
+     *
+     * @return The speed of the motor
+     */
     @Override
     public Double get() {
         return getSpeed();

@@ -453,7 +453,10 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Configure the motor to *brake* when the power is set
+                            to zero.
+                          </div>
                         </div>
                         <div
                           class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -482,7 +485,10 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Configure the motor to *float* when the power is set
+                            to zero.
+                          </div>
                         </div>
                         <div
                           class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -507,7 +513,10 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Gets the *speed* of the motor when it's used as a
+                            DoubleSupplier
+                          </div>
                         </div>
                         <div
                           class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -574,7 +583,9 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Gets the power set for the motor
+                          </div>
                         </div>
                         <div
                           class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -593,7 +604,9 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Get the power for the motor (Velocity, I guess?)
+                          </div>
                         </div>
                         <div
                           class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -748,7 +761,10 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Sets the min &amp; max values for the motor power
+                            (still clipped to -1/1)
+                          </div>
                         </div>
                         <div
                           class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -912,7 +928,9 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          <div class="block">Set speed of motor</div>
+                          <div class="block">
+                            Sets the (clipped) speed for the motor
+                          </div>
                         </div>
                         <div
                           class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -1459,7 +1477,7 @@
                             >&gt;</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-129"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-131"
                               >setInverted</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -1470,7 +1488,12 @@
                           Set the Inverted state for the motor. WARNING: THIS IS
                           BACKWARD TO WHAT YOU MIGHT THINK! True - Motor goes
                           *forward*. False - motor goes *reverse*.
+                          <p>
+                            This is overridden so it can return an EncodedMotor,
+                            and not just a Motor
+                          </p>
                         </div>
+
                         <dl class="notes">
                           <dt>Specified by:</dt>
                           <dd>
@@ -1540,7 +1563,7 @@
                             >&gt;</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-140"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-142"
                               >invert</a
                             ></span
                           >()
@@ -1600,7 +1623,7 @@
                             >double</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-150"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-152"
                               >getSensorValue</a
                             ></span
                           >()
@@ -1635,7 +1658,7 @@
                             >boolean</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-177"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-179"
                               >setPosition</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -1660,7 +1683,7 @@
                             >boolean</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-190"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-192"
                               >setPosition</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -1700,7 +1723,7 @@
                             >boolean</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-206"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-208"
                               >isAtPosition</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -1731,7 +1754,7 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-215"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-217"
                               >getEncoder</a
                             ></span
                           >()
@@ -1760,7 +1783,7 @@
                             >&gt;</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-224"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-226"
                               >tare</a
                             ></span
                           >()
@@ -1786,10 +1809,21 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-229"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-231"
                               >get</a
                             ></span
                           >()
+                        </div>
+                        <div class="block">
+                          <span class="descfrm-type-label"
+                            >Description copied from class:&nbsp;<code
+                              ><a href="Motor.html#get()">Motor</a></code
+                            ></span
+                          >
+                        </div>
+                        <div class="block">
+                          Gets the *speed* of the motor when it's used as a
+                          DoubleSupplier
                         </div>
                         <dl class="notes">
                           <dt>Specified by:</dt>
@@ -1833,6 +1867,8 @@
                               com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</code
                             >
                           </dd>
+                          <dt>Returns:</dt>
+                          <dd>The speed of the motor</dd>
                         </dl>
                       </section>
                     </li>
@@ -1845,7 +1881,7 @@
                             >void</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-239"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-241"
                               >setVelocity</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -1871,11 +1907,18 @@
                             >double</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-246"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-253"
                               >getVelocity</a
                             ></span
                           >()
                         </div>
+                        <div class="block">
+                          Get the power for the motor (Velocity, I guess?)
+                        </div>
+                        <dl class="notes">
+                          <dt>Returns:</dt>
+                          <dd>the power for the motor</dd>
+                        </dl>
                       </section>
                     </li>
                     <li>
@@ -1887,10 +1930,13 @@
                             >double</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-250"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-262"
                               >getSpeed</a
                             ></span
                           >()
+                        </div>
+                        <div class="block">
+                          Gets the power set for the motor
                         </div>
                         <dl class="notes">
                           <dt>Overrides:</dt>
@@ -1913,6 +1959,8 @@
                               com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</code
                             >
                           </dd>
+                          <dt>Returns:</dt>
+                          <dd>THe power for the motor</dd>
                         </dl>
                       </section>
                     </li>
@@ -1925,7 +1973,7 @@
                             >void</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-255"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-272"
                               >setSpeed</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -1933,15 +1981,8 @@
                           >
                         </div>
                         <div class="block">
-                          <span class="descfrm-type-label"
-                            >Description copied from class:&nbsp;<code
-                              ><a href="Motor.html#setSpeed(double)"
-                                >Motor</a
-                              ></code
-                            ></span
-                          >
+                          Sets the (clipped) speed for the motor
                         </div>
-                        <div class="block">Set speed of motor</div>
                         <dl class="notes">
                           <dt>Overrides:</dt>
                           <dd>
@@ -1985,10 +2026,21 @@
                             >&gt;</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-261"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-278"
                               >brake</a
                             ></span
                           >()
+                        </div>
+                        <div class="block">
+                          <span class="descfrm-type-label"
+                            >Description copied from class:&nbsp;<code
+                              ><a href="Motor.html#brake()">Motor</a></code
+                            ></span
+                          >
+                        </div>
+                        <div class="block">
+                          Configure the motor to *brake* when the power is set
+                          to zero.
                         </div>
                         <dl class="notes">
                           <dt>Overrides:</dt>
@@ -2008,6 +2060,8 @@
                               com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</code
                             >
                           </dd>
+                          <dt>Returns:</dt>
+                          <dd>The Motor device (for chaining)</dd>
                         </dl>
                       </section>
                     </li>
@@ -2028,10 +2082,21 @@
                             >&gt;</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-266"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-283"
                               >coast</a
                             ></span
                           >()
+                        </div>
+                        <div class="block">
+                          <span class="descfrm-type-label"
+                            >Description copied from class:&nbsp;<code
+                              ><a href="Motor.html#coast()">Motor</a></code
+                            ></span
+                          >
+                        </div>
+                        <div class="block">
+                          Configure the motor to *float* when the power is set
+                          to zero.
                         </div>
                         <dl class="notes">
                           <dt>Overrides:</dt>
@@ -2051,6 +2116,8 @@
                               com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</code
                             >
                           </dd>
+                          <dt>Returns:</dt>
+                          <dd>The Motor device (for chaining)</dd>
                         </dl>
                       </section>
                     </li>
@@ -2071,12 +2138,25 @@
                             >&gt;</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-271"
+                              href="../../../../../src-html/com/technototes/library/hardware/motor/EncodedMotor.html#line-288"
                               >setLimits</a
                             ></span
                           ><wbr /><span class="parameters"
                             >(double&nbsp;mi, double&nbsp;ma)</span
                           >
+                        </div>
+                        <div class="block">
+                          <span class="descfrm-type-label"
+                            >Description copied from class:&nbsp;<code
+                              ><a href="Motor.html#setLimits(double,double)"
+                                >Motor</a
+                              ></code
+                            ></span
+                          >
+                        </div>
+                        <div class="block">
+                          Sets the min &amp; max values for the motor power
+                          (still clipped to -1/1)
                         </div>
                         <dl class="notes">
                           <dt>Overrides:</dt>
@@ -2099,6 +2179,11 @@
                               com.qualcomm.robotcore.hardware.DcMotorSimple&gt;</code
                             >
                           </dd>
+                          <dt>Parameters:</dt>
+                          <dd><code>mi</code> - The minimum value</dd>
+                          <dd><code>ma</code> - The maximum value</dd>
+                          <dt>Returns:</dt>
+                          <dd>The Motor (for chaining)</dd>
                         </dl>
                       </section>
                     </li>

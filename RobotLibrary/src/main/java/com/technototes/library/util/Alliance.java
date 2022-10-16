@@ -8,20 +8,41 @@ import java.lang.annotation.Target;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+/**
+ * An enumeration to specify which alliance the bot is on (Red, Blue, or None)
+ */
 public enum Alliance {
     RED(Color.RED),
     BLUE(Color.BLUE),
     NONE(Color.BLACK);
     Color color;
 
+    /**
+     * Simple constructor from a Color
+     *
+     * @param c
+     */
     Alliance(Color c) {
         color = c;
     }
 
+    /**
+     * Get the alliance color (Red, Blue, or Black)
+     *
+     * @return The *color* for the alliance
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * Select either 'a' or 'b' depending on alliance
+     *
+     * @param a   The item to select if we're red
+     * @param b   The item to select if we're blue
+     * @param <T> The type of a &amp; b
+     * @return a for Red, b for Blue
+     */
     public <T> T selectOf(T a, T b) {
         return Selector.selectOf(this, a, b);
     }
@@ -55,9 +76,11 @@ public enum Alliance {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(TYPE)
-    public @interface Red {}
+    public @interface Red {
+    }
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(TYPE)
-    public @interface Blue {}
+    public @interface Blue {
+    }
 }
