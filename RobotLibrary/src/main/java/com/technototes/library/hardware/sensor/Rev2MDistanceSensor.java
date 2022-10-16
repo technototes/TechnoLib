@@ -4,9 +4,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 
-/** Class for range sensors
+/**
+ * Class for range sensors
+ *
  * @author Alex Stedman
  */
+@Deprecated
 @SuppressWarnings("unused")
 public class Rev2MDistanceSensor extends Sensor<DistanceSensor> implements IDistanceSensor {
 

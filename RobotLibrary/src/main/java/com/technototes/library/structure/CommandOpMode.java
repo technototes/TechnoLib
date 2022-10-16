@@ -11,12 +11,14 @@ import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.hardware2.HardwareBuilder;
 import com.technototes.library.logger.Logger;
 
-/** Class for command based op modes
+/**
+ * Class for command based op modes
+ *
  * @author Alex Stedman
  */
 public abstract class CommandOpMode extends LinearOpMode {
-    /*** Command gamepad object
-     *
+    /**
+     * Command gamepad objects
      */
     public CommandGamepad driverGamepad, codriverGamepad;
 
@@ -30,7 +32,8 @@ public abstract class CommandOpMode extends LinearOpMode {
 
     private boolean terminated = false;
 
-    /** Get op mode state
+    /**
+     * Get op mode state
      *
      * @return Current op mode state
      */
@@ -38,7 +41,8 @@ public abstract class CommandOpMode extends LinearOpMode {
         return opModeState;
     }
 
-    /** Get the op mode's logger
+    /**
+     * Get the op mode's logger
      *
      * @return The logger
      */
@@ -46,7 +50,8 @@ public abstract class CommandOpMode extends LinearOpMode {
         return logger;
     }
 
-    /** Get the opmode runtime
+    /**
+     * Get the opmode runtime
      *
      * @return Runtime in seconds
      */
@@ -95,45 +100,52 @@ public abstract class CommandOpMode extends LinearOpMode {
         opModeTimer.reset();
     }
 
-    /** Runs once when op mode is initialized
-     *
+    /**
+     * Runs once when op mode is initialized
      */
-    public void uponInit() {}
+    public void uponInit() {
+    }
 
-    /** Runs constantly when op mode is initialized, yet not started
-     *
+    /**
+     * Runs constantly when op mode is initialized, yet not started
      */
-    public void initLoop() {}
+    public void initLoop() {
+    }
 
-    /** Runs once when op mode is started
-     *
+    /**
+     * Runs once when op mode is started
      */
-    public void uponStart() {}
+    public void uponStart() {
+    }
 
-    /** Runs constantly when op mode is started
-     *
+    /**
+     * Runs constantly when op mode is started
      */
-    public void runLoop() {}
+    public void runLoop() {
+    }
 
-    /** Runs once when op mode is ended
-     *
+    /**
+     * Runs once when op mode is ended
      */
-    public void end() {}
+    public void end() {
+    }
 
-    /** Runs constantly during all periods
-     *
+    /**
+     * Runs constantly during all periods
      */
-    public void universalLoop() {}
+    public void universalLoop() {
+    }
 
-    /** Enum for op mode state
-     *
+    /**
+     * Enum for op mode state
      */
     public enum OpModeState {
         INIT,
         RUN,
         END;
 
-        /** Check if other states are this state
+        /**
+         * Check if other states are this state
          *
          * @param states The other states
          * @return The above condition
