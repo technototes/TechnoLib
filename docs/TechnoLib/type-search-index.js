@@ -50,6 +50,7 @@ typeSearchIndex = [
   { p: 'com.technototes.library.logger', l: 'LogConfig.Disabled' },
   { p: 'com.technototes.library.hardware2', l: 'DistanceBuilder' },
   { p: 'com.technototes.library.subsystem.drivebase', l: 'DrivebaseSubsystem' },
+  { p: 'com.technototes.library.hardware', l: 'DummyDevice' },
   { p: 'com.technototes.library.general', l: 'Enablable' },
   { p: 'com.technototes.library.hardware.motor', l: 'EncodedMotor' },
   { p: 'com.technototes.library.hardware.motor', l: 'EncodedMotorGroup' },

@@ -259,6 +259,7 @@ memberSearchIndex = [
     l: 'CIRCLE',
   },
   { p: 'com.technototes.library.command', c: 'Command', l: 'clear()' },
+  { p: 'com.technototes.library.hardware', c: 'DummyDevice', l: 'close()' },
   {
     p: 'com.technototes.library.util',
     c: 'MathUtils',
@@ -670,6 +671,12 @@ memberSearchIndex = [
   },
   { p: 'com.technototes.library.util', c: 'Characters', l: 'DUCK' },
   {
+    p: 'com.technototes.library.hardware',
+    c: 'DummyDevice',
+    l: 'DummyDevice(T)',
+    u: '%3Cinit%3E(T)',
+  },
+  {
     p: 'com.technototes.library.logger',
     c: 'LogConfig.Run',
     l: 'duringInit()',
@@ -843,6 +850,7 @@ memberSearchIndex = [
   },
   { p: 'com.technototes.library.command', c: 'Command', l: 'get()' },
   { p: 'com.technototes.library.control', c: 'Binding', l: 'get()' },
+  { p: 'com.technototes.library.hardware', c: 'DummyDevice', l: 'get()' },
   {
     p: 'com.technototes.library.hardware.motor',
     c: 'EncodedMotor',
@@ -949,6 +957,11 @@ memberSearchIndex = [
   },
   { p: 'com.technototes.library.util', c: 'Alliance', l: 'getColor()' },
   {
+    p: 'com.technototes.library.hardware',
+    c: 'DummyDevice',
+    l: 'getConnectionInfo()',
+  },
+  {
     p: 'com.technototes.library.hardware.sensor.encoder',
     c: 'MotorEncoder',
     l: 'getCorrectedVelocity()',
@@ -1001,6 +1014,11 @@ memberSearchIndex = [
     p: 'com.technototes.library.subsystem',
     c: 'DeviceSubsystem',
     l: 'getDevice()',
+  },
+  {
+    p: 'com.technototes.library.hardware',
+    c: 'DummyDevice',
+    l: 'getDeviceName()',
   },
   {
     p: 'com.technototes.library.util',
@@ -1131,6 +1149,11 @@ memberSearchIndex = [
     p: 'com.technototes.library.structure',
     c: 'CommandOpMode',
     l: 'getLogger()',
+  },
+  {
+    p: 'com.technototes.library.hardware',
+    c: 'DummyDevice',
+    l: 'getManufacturer()',
   },
   {
     p: 'com.technototes.library.hardware2',
@@ -1322,6 +1345,11 @@ memberSearchIndex = [
     p: 'com.technototes.library.hardware.motor',
     c: 'EncodedMotor',
     l: 'getVelocity()',
+  },
+  {
+    p: 'com.technototes.library.hardware',
+    c: 'DummyDevice',
+    l: 'getVersion()',
   },
   { p: 'com.technototes.library', c: 'RobotLibrary', l: 'getVersion()' },
   { p: 'com.technototes.library.hardware', c: 'Speaker', l: 'getVolume()' },
@@ -2255,6 +2283,11 @@ memberSearchIndex = [
     l: 'RESET',
   },
   { p: 'com.technototes.library.util', c: 'SmartConsumer', l: 'reset()' },
+  {
+    p: 'com.technototes.library.hardware',
+    c: 'DummyDevice',
+    l: 'resetDeviceConfigurationForOpMode()',
+  },
   {
     p: 'com.technototes.library.command',
     c: 'CommandScheduler',

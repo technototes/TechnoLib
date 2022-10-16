@@ -129,14 +129,12 @@ public enum Alliance {
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(TYPE)
-    public @interface Red {
-    }
+    public @interface Red {}
 
     /**
      * Not sure what this is for. Something for annotation processing? No idea :/
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(TYPE)
-    public @interface Blue {
-    }
+    public @interface Blue {}
 }

@@ -103,38 +103,32 @@ public abstract class CommandOpMode extends LinearOpMode {
     /**
      * Runs once when op mode is initialized
      */
-    public void uponInit() {
-    }
+    public void uponInit() {}
 
     /**
      * Runs constantly when op mode is initialized, yet not started
      */
-    public void initLoop() {
-    }
+    public void initLoop() {}
 
     /**
      * Runs once when op mode is started
      */
-    public void uponStart() {
-    }
+    public void uponStart() {}
 
     /**
      * Runs constantly when op mode is started
      */
-    public void runLoop() {
-    }
+    public void runLoop() {}
 
     /**
      * Runs once when op mode is ended
      */
-    public void end() {
-    }
+    public void end() {}
 
     /**
      * Runs constantly during all periods
      */
-    public void universalLoop() {
-    }
+    public void universalLoop() {}
 
     /**
      * Enum for op mode state

@@ -7,7 +7,9 @@
   "author": "Kevin Frei <kevinfrei@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "format": "ftool format"
+    "format": "format && ftool format",
+    "build": "./gradlew build",
+    "doc": "./genDocs && ./fixwin && yarn run format"
   },
   "devDependencies": {
     "@freik/build-tools": "^3.4.1",
