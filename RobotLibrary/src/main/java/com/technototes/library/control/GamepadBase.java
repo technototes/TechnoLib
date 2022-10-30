@@ -72,11 +72,11 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
         leftStick = new GamepadStick<>(leftStickX, leftStickY, leftStickButton);
         rightStick = new GamepadStick<>(rightStickX, rightStickY, rightStickButton);
         dpad = new GamepadDpad<>(dpadUp, dpadDown, dpadLeft, dpadRight);
-        periodics = new Periodic[]{
-                a, b, x, y, start, back, leftBumper, rightBumper, leftTrigger, rightTrigger, leftStick, rightStick, dpad
+        periodics = new Periodic[] {
+            a, b, x, y, start, back, leftBumper, rightBumper, leftTrigger, rightTrigger, leftStick, rightStick, dpad
         };
-        enablables = new Enablable[]{
-                a, b, x, y, start, back, leftBumper, rightBumper, leftTrigger, rightTrigger, leftStick, rightStick, dpad
+        enablables = new Enablable[] {
+            a, b, x, y, start, back, leftBumper, rightBumper, leftTrigger, rightTrigger, leftStick, rightStick, dpad
         };
     }
 
