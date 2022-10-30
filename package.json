@@ -14,7 +14,7 @@
     "docs": "./genDocs"
   },
   "devDependencies": {
-    "@freik/build-tools": "^3.4.1",
+    "@freik/build-tools": "^3.4.2",
     "prettier": "^2.7.1"
   }
 }
