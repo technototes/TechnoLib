@@ -14,18 +14,51 @@ import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 @Deprecated
 public class IMUBuilder extends HardwareBuilder<BNO055IMU> {
 
+    /**
+     * This is duplicated in the IMU class
+     */
     public enum AxesSigns {
+        /**
+         * deprecated
+         */
         PPP(0b000),
+        /**
+         * deprecated
+         */
         PPN(0b001),
+        /**
+         * deprecated
+         */
         PNP(0b010),
+        /**
+         * deprecated
+         */
         PNN(0b011),
+        /**
+         * deprecated
+         */
         NPP(0b100),
+        /**
+         * deprecated
+         */
         NPN(0b101),
+        /**
+         * deprecated
+         */
         NNP(0b110),
+        /**
+         * deprecated
+         */
         NNN(0b111);
 
+        /**
+         * deprecated
+         */
         public final int bVal;
 
+        /**
+         * deprecated
+         */
         AxesSigns(int bVal) {
             this.bVal = bVal;
         }
@@ -33,31 +66,64 @@ public class IMUBuilder extends HardwareBuilder<BNO055IMU> {
 
     private BNO055IMU.Parameters parameters;
 
+    /**
+     * deprecated
+     *
+     * @param name Deprecated
+     */
     public IMUBuilder(String name) {
         super(name);
         parameters = new BNO055IMU.Parameters();
     }
 
+    /**
+     * Deprecated
+     *
+     * @param device Deprecated
+     */
     public IMUBuilder(BNO055IMUImpl device) {
         super(device);
         parameters = new BNO055IMU.Parameters();
     }
 
+    /**
+     * Deprecated
+     *
+     * @param consumer Deprecated
+     * @return Deprecated
+     */
     public IMUBuilder parameter(Consumer<BNO055IMU.Parameters> consumer) {
         consumer.accept(parameters);
         return this;
     }
 
+    /**
+     * Deprecated
+     *
+     * @return Deprecated
+     */
     public IMUBuilder degrees() {
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         return this;
     }
 
+    /**
+     * Deprecated
+     *
+     * @return Deprecated
+     */
     public IMUBuilder radians() {
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
         return this;
     }
 
+    /**
+     * Deprecated
+     *
+     * @param order Deprecated
+     * @param signs Deprecated
+     * @return Deprecated
+     */
     public IMUBuilder remap(AxesOrder order, AxesSigns signs) {
         try {
             // the indices correspond with the 2-bit encodings specified in the datasheet
@@ -92,6 +158,12 @@ public class IMUBuilder extends HardwareBuilder<BNO055IMU> {
         return this;
     }
 
+    /**
+     * Deprecated
+     *
+     * @param <U> Deprecated
+     * @return Deprecated
+     */
     @Override
     public <U extends BNO055IMU> U build() {
         product.initialize(parameters);

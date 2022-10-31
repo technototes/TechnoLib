@@ -131,21 +131,69 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
      * Button enum for all buttons on gamepad
      */
     public enum Button {
+        /**
+         * XBox A button
+         */
         A,
+        /**
+         * XBox B button
+         */
         B,
+        /**
+         * XBox X button
+         */
         X,
+        /**
+         * XBox Y button
+         */
         Y,
+        /**
+         * PS4 Cross (X) button
+         */
         CROSS,
+        /**
+         * PS4 Circle (O) button
+         */
         CIRCLE,
+        /**
+         * PS4 Square button
+         */
         SQUARE,
+        /**
+         * PS4 Triangle button
+         */
         TRIANGLE,
+        /**
+         * PS4 Share button
+         */
         SHARE,
+        /**
+         * PS4 Options button
+         */
         OPTIONS,
+        /**
+         * PS4/XBox Start button
+         */
         START,
+        /**
+         * PS4/XBox Back button
+         */
         BACK,
+        /**
+         * Left bumper button
+         */
         LEFT_BUMPER,
+        /**
+         * Right bumper button
+         */
         RIGHT_BUMPER,
+        /**
+         * Button when clicking the left stick
+         */
         LEFT_STICK_BUTTON,
+        /**
+         * Button which clicking the right stick
+         */
         RIGHT_STICK_BUTTON
     }
 
@@ -153,11 +201,29 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
      * Axis enum for all axis on gamepad
      */
     public enum Axis {
+        /**
+         * Left stick's horizontal axis
+         */
         LEFT_STICK_X,
+        /**
+         * Left stick's vertical axis
+         */
         LEFT_STICK_Y,
+        /**
+         * Right stick's horizontal axis
+         */
         RIGHT_STICK_X,
+        /**
+         * Right stick's vertical axis
+         */
         RIGHT_STICK_Y,
+        /**
+         * Left Trigger's axis
+         */
         LEFT_TRIGGER,
+        /**
+         * Right Trigger's axis
+         */
         RIGHT_TRIGGER
     }
 
@@ -311,18 +377,30 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
     }
 
     /**
-     * @param b
-     * @return
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
+     * Great a ButtonBase type from the given BooleanSupplier
+     *
+     * @param b the function to wrap in a ButtonBase
+     * @return the T (extends ButtonBase) which the ButtonBase will wrap
+     * @throws InstantiationException    Couldn't create the target type
+     * @throws IllegalAccessException    Couldn't access the constructor
+     * @throws NoSuchMethodException     Couldn't find a constructor with a BooleanSupplier parameter
+     * @throws InvocationTargetException Couldn't invoke the constructor for other reasons
      */
     public T buttonInstance(BooleanSupplier b)
             throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         return buttonClass.getConstructor(BooleanSupplier.class).newInstance(b);
     }
 
+    /**
+     * Returns the U (extended from AxisBase) type wrapped around a simple DoubleSupplier
+     *
+     * @param d The function to call
+     * @return A U (of AxisBase type) that's wrapped around the DoubleSupplier d provided
+     * @throws InstantiationException    Couldn't create the target type
+     * @throws IllegalAccessException    Couldn't access the constructor
+     * @throws NoSuchMethodException     Couldn't find a constructor with a BooleanSupplier parameter
+     * @throws InvocationTargetException Couldn't invoke the constructor for other reasons
+     */
     public U axisInstance(DoubleSupplier d)
             throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         return axisClass.getConstructor(DoubleSupplier.class).newInstance(d);

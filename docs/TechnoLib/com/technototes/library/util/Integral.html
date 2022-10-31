@@ -133,7 +133,7 @@
               <span class="modifiers">public class </span
               ><span class="element-name"
                 ><a
-                  href="../../../../src-html/com/technototes/library/util/Integral.html#line-5"
+                  href="../../../../src-html/com/technototes/library/util/Integral.html#line-8"
                   >Integral</a
                 ></span
               >
@@ -146,6 +146,9 @@
                   >Object</a
                 ></span
               >
+            </div>
+            <div class="block">
+              A simple Observation-based integral calculator over time
             </div>
           </section>
           <section class="summary">
@@ -165,7 +168,9 @@
                         >()</code
                       >
                     </div>
-                    <div class="col-last even-row-color">&nbsp;</div>
+                    <div class="col-last even-row-color">
+                      <div class="block">Initialize it with a value of 0</div>
+                    </div>
                     <div class="col-constructor-name odd-row-color">
                       <code
                         ><a href="#%3Cinit%3E(double)" class="member-name-link"
@@ -173,7 +178,9 @@
                         ><wbr />(double&nbsp;c)</code
                       >
                     </div>
-                    <div class="col-last odd-row-color">&nbsp;</div>
+                    <div class="col-last odd-row-color">
+                      <div class="block">Initialize it with the value c</div>
+                    </div>
                   </div>
                 </section>
               </li>
@@ -249,7 +256,7 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">Get the current accumulation</div>
                         </div>
                         <div
                           class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -274,7 +281,7 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">Set the value to C</div>
                         </div>
                         <div
                           class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -293,7 +300,10 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Update the accumulated value for the number of
+                            seconds since last update
+                          </div>
                         </div>
                         <div
                           class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -317,7 +327,7 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">Set the value to zero</div>
                         </div>
                       </div>
                     </div>
@@ -418,13 +428,18 @@
                           <span class="modifiers">public</span>&nbsp;<span
                             class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Integral.html#line-9"
+                              href="../../../../src-html/com/technototes/library/util/Integral.html#line-17"
                               >Integral</a
                             ></span
                           ><wbr /><span class="parameters"
                             >(double&nbsp;c)</span
                           >
                         </div>
+                        <div class="block">Initialize it with the value c</div>
+                        <dl class="notes">
+                          <dt>Parameters:</dt>
+                          <dd><code>c</code> - Initial value</dd>
+                        </dl>
                       </section>
                     </li>
                     <li>
@@ -434,11 +449,12 @@
                           <span class="modifiers">public</span>&nbsp;<span
                             class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Integral.html#line-14"
+                              href="../../../../src-html/com/technototes/library/util/Integral.html#line-25"
                               >Integral</a
                             ></span
                           >()
                         </div>
+                        <div class="block">Initialize it with a value of 0</div>
                       </section>
                     </li>
                   </ul>
@@ -462,13 +478,20 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Integral.html#line-18"
+                              href="../../../../src-html/com/technototes/library/util/Integral.html#line-35"
                               >set</a
                             ></span
                           ><wbr /><span class="parameters"
                             >(double&nbsp;c)</span
                           >
                         </div>
+                        <div class="block">Set the value to C</div>
+                        <dl class="notes">
+                          <dt>Parameters:</dt>
+                          <dd><code>c</code> - the value</dd>
+                          <dt>Returns:</dt>
+                          <dd>this</dd>
+                        </dl>
                       </section>
                     </li>
                     <li>
@@ -484,11 +507,16 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Integral.html#line-23"
+                              href="../../../../src-html/com/technototes/library/util/Integral.html#line-45"
                               >zero</a
                             ></span
                           >()
                         </div>
+                        <div class="block">Set the value to zero</div>
+                        <dl class="notes">
+                          <dt>Returns:</dt>
+                          <dd>this</dd>
+                        </dl>
                       </section>
                     </li>
                     <li>
@@ -500,13 +528,26 @@
                             >double</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Integral.html#line-27"
+                              href="../../../../src-html/com/technototes/library/util/Integral.html#line-55"
                               >update</a
                             ></span
                           ><wbr /><span class="parameters"
                             >(double&nbsp;change)</span
                           >
                         </div>
+                        <div class="block">
+                          Update the accumulated value for the number of seconds
+                          since last update
+                        </div>
+                        <dl class="notes">
+                          <dt>Parameters:</dt>
+                          <dd>
+                            <code>change</code> - the value that was observed
+                            since last integration
+                          </dd>
+                          <dt>Returns:</dt>
+                          <dd>the current accumulations</dd>
+                        </dl>
                       </section>
                     </li>
                     <li>
@@ -518,11 +559,16 @@
                             >double</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/util/Integral.html#line-33"
+                              href="../../../../src-html/com/technototes/library/util/Integral.html#line-66"
                               >getValue</a
                             ></span
                           >()
                         </div>
+                        <div class="block">Get the current accumulation</div>
+                        <dl class="notes">
+                          <dt>Returns:</dt>
+                          <dd>the current accumulation</dd>
+                        </dl>
                       </section>
                     </li>
                   </ul>

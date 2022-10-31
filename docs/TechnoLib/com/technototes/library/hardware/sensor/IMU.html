@@ -181,7 +181,10 @@
                 ></span
               >
             </div>
-            <div class="block">Class for imus</div>
+            <div class="block">
+              Class for the BNO055 (Inertial Movement Units) that implements the
+              IGyro interface
+            </div>
           </section>
           <section class="summary">
             <ul class="summary-list">
@@ -207,7 +210,11 @@
                         ></code
                       >
                     </div>
-                    <div class="col-last even-row-color">&nbsp;</div>
+                    <div class="col-last even-row-color">
+                      <div class="block">
+                        The direction of the axes signs when remapping the axes
+                      </div>
+                    </div>
                   </div>
                 </section>
               </li>
@@ -376,7 +383,9 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Gets the Angular orientation of the IMU
+                          </div>
                         </div>
                         <div
                           class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -399,7 +408,9 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Gets the angular velocity (in default units)
+                          </div>
                         </div>
                         <div
                           class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -439,7 +450,9 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Get the gyro heading in the provided units
+                          </div>
                         </div>
                         <div
                           class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -460,7 +473,9 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Gets the gyro heading in degrees
+                          </div>
                         </div>
                         <div
                           class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -481,7 +496,9 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Gets the gyro heading in radians
+                          </div>
                         </div>
                         <div
                           class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -506,7 +523,7 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">Initialize the IMU</div>
                         </div>
                         <div
                           class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -563,7 +580,10 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Remaps the axes for the IMU in the order and sign
+                            provided
+                          </div>
                         </div>
                         <div
                           class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -584,7 +604,9 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Sets the current heading to be 'new heading'
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -718,7 +740,7 @@
                           <span class="modifiers">public</span>&nbsp;<span
                             class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-42"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-78"
                               >IMU</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -742,7 +764,7 @@
                           <span class="modifiers">public</span>&nbsp;<span
                             class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-53"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-90"
                               >IMU</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -785,7 +807,7 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-64"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-102"
                               >degrees</a
                             ></span
                           >()
@@ -810,7 +832,7 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-72"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-112"
                               >radians</a
                             ></span
                           >()
@@ -818,7 +840,7 @@
                         <div class="block">Set angle format to radians</div>
                         <dl class="notes">
                           <dt>Returns:</dt>
-                          <dd>this</dd>
+                          <dd>this (for chaining)</dd>
                         </dl>
                       </section>
                     </li>
@@ -835,11 +857,16 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-77"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-122"
                               >initialize</a
                             ></span
                           >()
                         </div>
+                        <div class="block">Initialize the IMU</div>
+                        <dl class="notes">
+                          <dt>Returns:</dt>
+                          <dd>the IMU (for chaining)</dd>
+                        </dl>
                       </section>
                     </li>
                     <li>
@@ -851,7 +878,7 @@
                             >double</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-86"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-132"
                               >gyroHeading</a
                             ></span
                           >()
@@ -889,13 +916,22 @@
                             >double</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-91"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-143"
                               >gyroHeading</a
                             ></span
                           ><wbr /><span class="parameters"
                             >(org.firstinspires.ftc.robotcore.external.navigation.AngleUnit&nbsp;unit)</span
                           >
                         </div>
+                        <div class="block">
+                          Get the gyro heading in the provided units
+                        </div>
+                        <dl class="notes">
+                          <dt>Parameters:</dt>
+                          <dd><code>unit</code> - the unit desired</dd>
+                          <dt>Returns:</dt>
+                          <dd>The heading in 'unit' units</dd>
+                        </dl>
                       </section>
                     </li>
                     <li>
@@ -907,10 +943,13 @@
                             >double</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-95"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-152"
                               >gyroHeadingInDegrees</a
                             ></span
                           >()
+                        </div>
+                        <div class="block">
+                          Gets the gyro heading in degrees
                         </div>
                         <dl class="notes">
                           <dt>Specified by:</dt>
@@ -927,6 +966,8 @@
                               ></code
                             >
                           </dd>
+                          <dt>Returns:</dt>
+                          <dd>the heading</dd>
                         </dl>
                       </section>
                     </li>
@@ -939,10 +980,13 @@
                             >double</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-100"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-162"
                               >gyroHeadingInRadians</a
                             ></span
                           >()
+                        </div>
+                        <div class="block">
+                          Gets the gyro heading in radians
                         </div>
                         <dl class="notes">
                           <dt>Specified by:</dt>
@@ -959,6 +1003,8 @@
                               ></code
                             >
                           </dd>
+                          <dt>Returns:</dt>
+                          <dd>the heading</dd>
                         </dl>
                       </section>
                     </li>
@@ -971,12 +1017,15 @@
                             >void</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-105"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-172"
                               >setHeading</a
                             ></span
                           ><wbr /><span class="parameters"
                             >(double&nbsp;newHeading)</span
                           >
+                        </div>
+                        <div class="block">
+                          Sets the current heading to be 'new heading'
                         </div>
                         <dl class="notes">
                           <dt>Specified by:</dt>
@@ -992,6 +1041,11 @@
                                 >IGyro</a
                               ></code
                             >
+                          </dd>
+                          <dt>Parameters:</dt>
+                          <dd>
+                            <code>newHeading</code> - The new heading (in
+                            default units)
                           </dd>
                         </dl>
                       </section>
@@ -1012,7 +1066,7 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-110"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-184"
                               >remapAxes</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -1024,6 +1078,17 @@
                             >&nbsp;signs)</span
                           >
                         </div>
+                        <div class="block">
+                          Remaps the axes for the IMU in the order and sign
+                          provided
+                        </div>
+                        <dl class="notes">
+                          <dt>Parameters:</dt>
+                          <dd><code>order</code> - The axis order desired</dd>
+                          <dd><code>signs</code> - The signs desired</dd>
+                          <dt>Returns:</dt>
+                          <dd>this (for chaining)</dd>
+                        </dl>
                       </section>
                     </li>
                     <li>
@@ -1035,11 +1100,18 @@
                             >org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-144"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-223"
                               >getAngularVelocity</a
                             ></span
                           >()
                         </div>
+                        <div class="block">
+                          Gets the angular velocity (in default units)
+                        </div>
+                        <dl class="notes">
+                          <dt>Returns:</dt>
+                          <dd>The Angular Velocity</dd>
+                        </dl>
                       </section>
                     </li>
                     <li>
@@ -1051,11 +1123,18 @@
                             >org.firstinspires.ftc.robotcore.external.navigation.Orientation</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-148"
+                              href="../../../../../src-html/com/technototes/library/hardware/sensor/IMU.html#line-232"
                               >getAngularOrientation</a
                             ></span
                           >()
                         </div>
+                        <div class="block">
+                          Gets the Angular orientation of the IMU
+                        </div>
+                        <dl class="notes">
+                          <dt>Returns:</dt>
+                          <dd>the Orientation of the IMU</dd>
+                        </dl>
                       </section>
                     </li>
                   </ul>

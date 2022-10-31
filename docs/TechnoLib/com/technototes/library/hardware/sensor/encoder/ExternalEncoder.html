@@ -180,7 +180,7 @@
               <span class="modifiers">public class </span
               ><span class="element-name"
                 ><a
-                  href="../../../../../../src-html/com/technototes/library/hardware/sensor/encoder/ExternalEncoder.html#line-7"
+                  href="../../../../../../src-html/com/technototes/library/hardware/sensor/encoder/ExternalEncoder.html#line-10"
                   >ExternalEncoder</a
                 ></span
               >
@@ -197,6 +197,10 @@
                   >Encoder</a
                 ></span
               >
+            </div>
+            <div class="block">
+              A wrapper around an AnalogInput that enables "zeroing" for
+              usefulness
             </div>
           </section>
           <section class="summary">
@@ -242,7 +246,11 @@
                         ><wbr />(com.qualcomm.robotcore.hardware.AnalogInput&nbsp;device)</code
                       >
                     </div>
-                    <div class="col-last even-row-color">&nbsp;</div>
+                    <div class="col-last even-row-color">
+                      <div class="block">
+                        Create an ExternalEncoder from an arbitrary AnalogInput
+                      </div>
+                    </div>
                     <div class="col-constructor-name odd-row-color">
                       <code
                         ><a
@@ -257,7 +265,12 @@
                         >&nbsp;deviceName)</code
                       >
                     </div>
-                    <div class="col-last odd-row-color">&nbsp;</div>
+                    <div class="col-last odd-row-color">
+                      <div class="block">
+                        Create an ExternalEncoder from an arbitrary AnalogInput
+                        device
+                      </div>
+                    </div>
                   </div>
                 </section>
               </li>
@@ -335,7 +348,9 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          <div class="block">Get the sensor value</div>
+                          <div class="block">
+                            Get the sensor value (relative to the assigned zero)
+                          </div>
                         </div>
                         <div
                           class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -354,7 +369,9 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          <div class="block">zero the encoder</div>
+                          <div class="block">
+                            Set the current device value as "zero"
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -509,13 +526,21 @@
                           <span class="modifiers">public</span>&nbsp;<span
                             class="element-name"
                             ><a
-                              href="../../../../../../src-html/com/technototes/library/hardware/sensor/encoder/ExternalEncoder.html#line-10"
+                              href="../../../../../../src-html/com/technototes/library/hardware/sensor/encoder/ExternalEncoder.html#line-18"
                               >ExternalEncoder</a
                             ></span
                           ><wbr /><span class="parameters"
                             >(com.qualcomm.robotcore.hardware.AnalogInput&nbsp;device)</span
                           >
                         </div>
+                        <div class="block">
+                          Create an ExternalEncoder from an arbitrary
+                          AnalogInput
+                        </div>
+                        <dl class="notes">
+                          <dt>Parameters:</dt>
+                          <dd><code>device</code> - the AnalogInput device</dd>
+                        </dl>
                       </section>
                     </li>
                     <li>
@@ -528,7 +553,7 @@
                           <span class="modifiers">public</span>&nbsp;<span
                             class="element-name"
                             ><a
-                              href="../../../../../../src-html/com/technototes/library/hardware/sensor/encoder/ExternalEncoder.html#line-14"
+                              href="../../../../../../src-html/com/technototes/library/hardware/sensor/encoder/ExternalEncoder.html#line-27"
                               >ExternalEncoder</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -540,6 +565,17 @@
                             >&nbsp;deviceName)</span
                           >
                         </div>
+                        <div class="block">
+                          Create an ExternalEncoder from an arbitrary
+                          AnalogInput device
+                        </div>
+                        <dl class="notes">
+                          <dt>Parameters:</dt>
+                          <dd>
+                            <code>deviceName</code> - the name of the
+                            AnalogInput device
+                          </dd>
+                        </dl>
                       </section>
                     </li>
                   </ul>
@@ -559,21 +595,14 @@
                             >void</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../../src-html/com/technototes/library/hardware/sensor/encoder/ExternalEncoder.html#line-18"
+                              href="../../../../../../src-html/com/technototes/library/hardware/sensor/encoder/ExternalEncoder.html#line-34"
                               >zeroEncoder</a
                             ></span
                           >()
                         </div>
                         <div class="block">
-                          <span class="descfrm-type-label"
-                            >Description copied from interface:&nbsp;<code
-                              ><a href="Encoder.html#zeroEncoder()"
-                                >Encoder</a
-                              ></code
-                            ></span
-                          >
+                          Set the current device value as "zero"
                         </div>
-                        <div class="block">zero the encoder</div>
                         <dl class="notes">
                           <dt>Specified by:</dt>
                           <dd>
@@ -601,21 +630,14 @@
                             >double</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../../../src-html/com/technototes/library/hardware/sensor/encoder/ExternalEncoder.html#line-23"
+                              href="../../../../../../src-html/com/technototes/library/hardware/sensor/encoder/ExternalEncoder.html#line-44"
                               >getSensorValue</a
                             ></span
                           >()
                         </div>
                         <div class="block">
-                          <span class="descfrm-type-label"
-                            >Description copied from interface:&nbsp;<code
-                              ><a href="../../Sensored.html#getSensorValue()"
-                                >Sensored</a
-                              ></code
-                            ></span
-                          >
+                          Get the sensor value (relative to the assigned zero)
                         </div>
-                        <div class="block">Get the sensor value</div>
                         <dl class="notes">
                           <dt>Specified by:</dt>
                           <dd>
@@ -632,7 +654,7 @@
                             >
                           </dd>
                           <dt>Returns:</dt>
-                          <dd>The value</dd>
+                          <dd>the value of the input</dd>
                         </dl>
                       </section>
                     </li>

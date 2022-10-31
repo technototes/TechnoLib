@@ -23,38 +23,71 @@
 <span class="source-line-no">002</span><span id="line-2"></span>
 <span class="source-line-no">003</span><span id="line-3">import com.qualcomm.robotcore.util.ElapsedTime;</span>
 <span class="source-line-no">004</span><span id="line-4"></span>
-<span class="source-line-no">005</span><span id="line-5">public class Integral {</span>
-<span class="source-line-no">006</span><span id="line-6">    private double accumulator;</span>
-<span class="source-line-no">007</span><span id="line-7">    private ElapsedTime deltaTime;</span>
-<span class="source-line-no">008</span><span id="line-8"></span>
-<span class="source-line-no">009</span><span id="line-9">    public Integral(double c) {</span>
-<span class="source-line-no">010</span><span id="line-10">        accumulator = c;</span>
-<span class="source-line-no">011</span><span id="line-11">        deltaTime = new ElapsedTime();</span>
-<span class="source-line-no">012</span><span id="line-12">    }</span>
-<span class="source-line-no">013</span><span id="line-13"></span>
-<span class="source-line-no">014</span><span id="line-14">    public Integral() {</span>
-<span class="source-line-no">015</span><span id="line-15">        this(0);</span>
-<span class="source-line-no">016</span><span id="line-16">    }</span>
-<span class="source-line-no">017</span><span id="line-17"></span>
-<span class="source-line-no">018</span><span id="line-18">    public Integral set(double c) {</span>
-<span class="source-line-no">019</span><span id="line-19">        accumulator = c;</span>
-<span class="source-line-no">020</span><span id="line-20">        return this;</span>
-<span class="source-line-no">021</span><span id="line-21">    }</span>
-<span class="source-line-no">022</span><span id="line-22"></span>
-<span class="source-line-no">023</span><span id="line-23">    public Integral zero() {</span>
-<span class="source-line-no">024</span><span id="line-24">        return set(0);</span>
-<span class="source-line-no">025</span><span id="line-25">    }</span>
-<span class="source-line-no">026</span><span id="line-26"></span>
-<span class="source-line-no">027</span><span id="line-27">    public double update(double change) {</span>
-<span class="source-line-no">028</span><span id="line-28">        accumulator += change * deltaTime.seconds();</span>
-<span class="source-line-no">029</span><span id="line-29">        deltaTime.reset();</span>
-<span class="source-line-no">030</span><span id="line-30">        return accumulator;</span>
-<span class="source-line-no">031</span><span id="line-31">    }</span>
-<span class="source-line-no">032</span><span id="line-32"></span>
-<span class="source-line-no">033</span><span id="line-33">    public double getValue() {</span>
-<span class="source-line-no">034</span><span id="line-34">        return accumulator;</span>
-<span class="source-line-no">035</span><span id="line-35">    }</span>
-<span class="source-line-no">036</span><span id="line-36">}</span>
+<span class="source-line-no">005</span><span id="line-5">/**</span>
+<span class="source-line-no">006</span><span id="line-6"> * A simple Observation-based integral calculator over time</span>
+<span class="source-line-no">007</span><span id="line-7"> */</span>
+<span class="source-line-no">008</span><span id="line-8">public class Integral {</span>
+<span class="source-line-no">009</span><span id="line-9">    private double accumulator;</span>
+<span class="source-line-no">010</span><span id="line-10">    private ElapsedTime deltaTime;</span>
+<span class="source-line-no">011</span><span id="line-11"></span>
+<span class="source-line-no">012</span><span id="line-12">    /**</span>
+<span class="source-line-no">013</span><span id="line-13">     * Initialize it with the value c</span>
+<span class="source-line-no">014</span><span id="line-14">     *</span>
+<span class="source-line-no">015</span><span id="line-15">     * @param c Initial value</span>
+<span class="source-line-no">016</span><span id="line-16">     */</span>
+<span class="source-line-no">017</span><span id="line-17">    public Integral(double c) {</span>
+<span class="source-line-no">018</span><span id="line-18">        accumulator = c;</span>
+<span class="source-line-no">019</span><span id="line-19">        deltaTime = new ElapsedTime();</span>
+<span class="source-line-no">020</span><span id="line-20">    }</span>
+<span class="source-line-no">021</span><span id="line-21"></span>
+<span class="source-line-no">022</span><span id="line-22">    /**</span>
+<span class="source-line-no">023</span><span id="line-23">     * Initialize it with a value of 0</span>
+<span class="source-line-no">024</span><span id="line-24">     */</span>
+<span class="source-line-no">025</span><span id="line-25">    public Integral() {</span>
+<span class="source-line-no">026</span><span id="line-26">        this(0);</span>
+<span class="source-line-no">027</span><span id="line-27">    }</span>
+<span class="source-line-no">028</span><span id="line-28"></span>
+<span class="source-line-no">029</span><span id="line-29">    /**</span>
+<span class="source-line-no">030</span><span id="line-30">     * Set the value to C</span>
+<span class="source-line-no">031</span><span id="line-31">     *</span>
+<span class="source-line-no">032</span><span id="line-32">     * @param c the value</span>
+<span class="source-line-no">033</span><span id="line-33">     * @return this</span>
+<span class="source-line-no">034</span><span id="line-34">     */</span>
+<span class="source-line-no">035</span><span id="line-35">    public Integral set(double c) {</span>
+<span class="source-line-no">036</span><span id="line-36">        accumulator = c;</span>
+<span class="source-line-no">037</span><span id="line-37">        return this;</span>
+<span class="source-line-no">038</span><span id="line-38">    }</span>
+<span class="source-line-no">039</span><span id="line-39"></span>
+<span class="source-line-no">040</span><span id="line-40">    /**</span>
+<span class="source-line-no">041</span><span id="line-41">     * Set the value to zero</span>
+<span class="source-line-no">042</span><span id="line-42">     *</span>
+<span class="source-line-no">043</span><span id="line-43">     * @return this</span>
+<span class="source-line-no">044</span><span id="line-44">     */</span>
+<span class="source-line-no">045</span><span id="line-45">    public Integral zero() {</span>
+<span class="source-line-no">046</span><span id="line-46">        return set(0);</span>
+<span class="source-line-no">047</span><span id="line-47">    }</span>
+<span class="source-line-no">048</span><span id="line-48"></span>
+<span class="source-line-no">049</span><span id="line-49">    /**</span>
+<span class="source-line-no">050</span><span id="line-50">     * Update the accumulated value for the number of seconds since last update</span>
+<span class="source-line-no">051</span><span id="line-51">     *</span>
+<span class="source-line-no">052</span><span id="line-52">     * @param change the value that was observed since last integration</span>
+<span class="source-line-no">053</span><span id="line-53">     * @return the current accumulations</span>
+<span class="source-line-no">054</span><span id="line-54">     */</span>
+<span class="source-line-no">055</span><span id="line-55">    public double update(double change) {</span>
+<span class="source-line-no">056</span><span id="line-56">        accumulator += change * deltaTime.seconds();</span>
+<span class="source-line-no">057</span><span id="line-57">        deltaTime.reset();</span>
+<span class="source-line-no">058</span><span id="line-58">        return accumulator;</span>
+<span class="source-line-no">059</span><span id="line-59">    }</span>
+<span class="source-line-no">060</span><span id="line-60"></span>
+<span class="source-line-no">061</span><span id="line-61">    /**</span>
+<span class="source-line-no">062</span><span id="line-62">     * Get the current accumulation</span>
+<span class="source-line-no">063</span><span id="line-63">     *</span>
+<span class="source-line-no">064</span><span id="line-64">     * @return the current accumulation</span>
+<span class="source-line-no">065</span><span id="line-65">     */</span>
+<span class="source-line-no">066</span><span id="line-66">    public double getValue() {</span>
+<span class="source-line-no">067</span><span id="line-67">        return accumulator;</span>
+<span class="source-line-no">068</span><span id="line-68">    }</span>
+<span class="source-line-no">069</span><span id="line-69">}</span>
 
 
 

@@ -1018,7 +1018,10 @@
                         <div
                           class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Returns the U (extended from AxisBase) type wrapped
+                            around a simple DoubleSupplier
+                          </div>
                         </div>
                         <div
                           class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -1050,7 +1053,10 @@
                         <div
                           class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
                         >
-                          &nbsp;
+                          <div class="block">
+                            Great a ButtonBase type from the given
+                            BooleanSupplier
+                          </div>
                         </div>
                         <div
                           class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"
@@ -2575,7 +2581,7 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-170"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-236"
                               >getButton</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -2616,7 +2622,7 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-215"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-281"
                               >getAxis</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -2651,7 +2657,7 @@
                             >boolean</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-240"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-306"
                               >getButtonAsBoolean</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -2688,7 +2694,7 @@
                             >double</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-250"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-316"
                               >getAxisAsDouble</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -2723,7 +2729,7 @@
                             >boolean</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-260"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-326"
                               >getAxisAsBoolean</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -2767,7 +2773,7 @@
                             >&gt;</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-269"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-335"
                               >getLeftStick</a
                             ></span
                           >()
@@ -2800,7 +2806,7 @@
                             >&gt;</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-278"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-344"
                               >getRightStick</a
                             ></span
                           >()
@@ -2829,7 +2835,7 @@
                             >&gt;</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-287"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-353"
                               >getDpad</a
                             ></span
                           >()
@@ -2850,7 +2856,7 @@
                             >void</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-294"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-360"
                               >periodic</a
                             ></span
                           >()
@@ -2886,7 +2892,7 @@
                             >com.qualcomm.robotcore.hardware.Gamepad</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-309"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-375"
                               >getGamepad</a
                             ></span
                           >()
@@ -2916,7 +2922,7 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-321"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-389"
                               >buttonInstance</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -2955,10 +2961,20 @@
                             ></span
                           >
                         </div>
+                        <div class="block">
+                          Great a ButtonBase type from the given BooleanSupplier
+                        </div>
                         <dl class="notes">
                           <dt>Parameters:</dt>
-                          <dd><code>b</code> -</dd>
+                          <dd>
+                            <code>b</code> - the function to wrap in a
+                            ButtonBase
+                          </dd>
                           <dt>Returns:</dt>
+                          <dd>
+                            the T (extends ButtonBase) which the ButtonBase will
+                            wrap
+                          </dd>
                           <dt>Throws:</dt>
                           <dd>
                             <code
@@ -2969,6 +2985,7 @@
                                 >InstantiationException</a
                               ></code
                             >
+                            - Couldn't create the target type
                           </dd>
                           <dd>
                             <code
@@ -2979,6 +2996,7 @@
                                 >IllegalAccessException</a
                               ></code
                             >
+                            - Couldn't access the constructor
                           </dd>
                           <dd>
                             <code
@@ -2989,6 +3007,8 @@
                                 >NoSuchMethodException</a
                               ></code
                             >
+                            - Couldn't find a constructor with a BooleanSupplier
+                            parameter
                           </dd>
                           <dd>
                             <code
@@ -2999,6 +3019,7 @@
                                 >InvocationTargetException</a
                               ></code
                             >
+                            - Couldn't invoke the constructor for other reasons
                           </dd>
                         </dl>
                       </section>
@@ -3019,7 +3040,7 @@
                             ></span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-326"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-404"
                               >axisInstance</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -3058,7 +3079,18 @@
                             ></span
                           >
                         </div>
+                        <div class="block">
+                          Returns the U (extended from AxisBase) type wrapped
+                          around a simple DoubleSupplier
+                        </div>
                         <dl class="notes">
+                          <dt>Parameters:</dt>
+                          <dd><code>d</code> - The function to call</dd>
+                          <dt>Returns:</dt>
+                          <dd>
+                            A U (of AxisBase type) that's wrapped around the
+                            DoubleSupplier d provided
+                          </dd>
                           <dt>Throws:</dt>
                           <dd>
                             <code
@@ -3069,6 +3101,7 @@
                                 >InstantiationException</a
                               ></code
                             >
+                            - Couldn't create the target type
                           </dd>
                           <dd>
                             <code
@@ -3079,6 +3112,7 @@
                                 >IllegalAccessException</a
                               ></code
                             >
+                            - Couldn't access the constructor
                           </dd>
                           <dd>
                             <code
@@ -3089,6 +3123,8 @@
                                 >NoSuchMethodException</a
                               ></code
                             >
+                            - Couldn't find a constructor with a BooleanSupplier
+                            parameter
                           </dd>
                           <dd>
                             <code
@@ -3099,6 +3135,7 @@
                                 >InvocationTargetException</a
                               ></code
                             >
+                            - Couldn't invoke the constructor for other reasons
                           </dd>
                         </dl>
                       </section>
@@ -3112,7 +3149,7 @@
                             >void</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-338"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-416"
                               >rumbleBlips</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -3135,7 +3172,7 @@
                             >void</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-345"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-423"
                               >rumbleBlip</a
                             ></span
                           >()
@@ -3152,7 +3189,7 @@
                             >void</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-354"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-432"
                               >rumble</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -3180,7 +3217,7 @@
                             >boolean</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-363"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-441"
                               >isRumbling</a
                             ></span
                           >()
@@ -3201,7 +3238,7 @@
                             >void</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-370"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-448"
                               >stopRumble</a
                             ></span
                           >()
@@ -3218,7 +3255,7 @@
                             >void</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-377"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-455"
                               >rumble</a
                             ></span
                           >()
@@ -3249,7 +3286,7 @@
                             >&gt;</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-387"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-465"
                               >setEnabled</a
                             ></span
                           ><wbr /><span class="parameters"
@@ -3305,7 +3342,7 @@
                             >boolean</span
                           >&nbsp;<span class="element-name"
                             ><a
-                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-399"
+                              href="../../../../src-html/com/technototes/library/control/GamepadBase.html#line-477"
                               >isEnabled</a
                             ></span
                           >()
