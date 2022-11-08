@@ -44,4 +44,13 @@ public interface HardwareDeviceGroup<T extends HardwareDevice> {
      */
     @Deprecated
     default void propogate(double value) {}
+
+    /**
+     * Propagate actions across the followers
+     * <p>
+     * Note to self: Alex couldn't spell :)
+     *
+     * @param value the value to propagate
+     */
+    default void propagate(double value) {}
 }
