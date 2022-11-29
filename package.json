@@ -7,14 +7,27 @@
   "author": "Kevin Frei <kevinfrei@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "format": "format && ftool format",
-    "build": "./gradlew build",
-    "fulldoc": "yarn run doc && ./fixwin && yarn run format",
-    "doc": "./genDocs",
-    "docs": "./genDocs"
+    "format": "run-script-os",
+    "format:win32": ".\\gradlew spotlessApply && ftool format",
+    "format:default": "./gradlew spotlessApply && ftool format",
+    "build": "run-script-os",
+    "build:win32": ".\\gradlew build",
+    "build:default": "./gradlew build",
+    "fulldoc": "run-script-os",
+    "fulldoc:win32": "yarn run doc && yarn run fixdocs && yarn run format",
+    "fulldoc:default": "yarn run doc && yarn run fixdocs && yarn run format",
+    "docs": "yarn run doc",
+    "doc": "run-script-os",
+    "doc:win32": ".\\gradlew javadoc",
+    "doc:default": "./gradlew javadoc",
+    "fixdocs": "nodedos2unix docs/**/COPYRIGHT docs/**/LICENSE docs/**/element-list docs/**/*.html docs/**/*.js docs/**/*.css"
   },
   "devDependencies": {
     "@freik/build-tools": "^3.4.2",
     "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "@freik/dos2unix": "^0.1.0",
+    "run-script-os": "^1.1.6"
   }
 }
