@@ -1,5 +1,5 @@
 {
-  "name": "TechnoLib",
+  "name": "technolib",
   "version": "1.0.0",
   "description": "TechnoLib automation scripts",
   "main": "build/automation.js",
@@ -10,7 +10,9 @@
     "build": "run-script-os",
     "build:win32": ".\\gradlew build",
     "build:default": "./gradlew build",
-    "fulldoc": "yarn run doc && yarn run fmtdoc",
+    "fulldoc": "run-script-os",
+    "fulldoc:win32": "yarn run doc && yarn run fixdocs && yarn run format",
+    "fulldoc:default": "yarn run doc && yarn run fixdocs && yarn run format",
     "docs": "yarn run doc",
     "doc": "run-script-os",
     "doc:win32": ".\\gradlew javadoc",
