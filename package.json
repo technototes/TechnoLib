@@ -23,11 +23,10 @@
     "fixdocs": "nodedos2unix docs/**/COPYRIGHT docs/**/LICENSE docs/**/element-list docs/**/*.html docs/**/*.js docs/**/*.css"
   },
   "devDependencies": {
-    "@freik/build-tools": "^3.4.2",
-    "prettier": "^2.7.1"
-  },
-  "dependencies": {
+    "@freik/build-tools": "^3.4.4",
     "@freik/dos2unix": "^0.1.0",
-    "run-script-os": "^1.1.6"
+    "prettier": "^2.7.1",
+    "run-script-os": "^1.1.6",
+    "typescript": "^4.9.3"
   }
 }
