@@ -3,15 +3,12 @@ package com.technototes.path.subsystem;
 import static com.technototes.path.subsystem.DeadWheelConstants.*;
 
 import androidx.annotation.NonNull;
-
-import java.util.Arrays;
-import java.util.List;
-
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer;
-
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
 import com.technototes.library.subsystem.Subsystem;
+import java.util.Arrays;
+import java.util.List;
 
 /*
  * Sample tracking wheel localizer implementation assuming the standard configuration:
@@ -33,12 +30,19 @@ public class ThreeDeadWheelLocalizer extends ThreeTrackingWheelLocalizer impleme
 
     protected boolean encoderOverflow;
 
-    public ThreeDeadWheelLocalizer(MotorEncoder l, MotorEncoder r, MotorEncoder f, DeadWheelConstants constants) {
-        super(Arrays.asList(
+    public ThreeDeadWheelLocalizer(
+        MotorEncoder l,
+        MotorEncoder r,
+        MotorEncoder f,
+        DeadWheelConstants constants
+    ) {
+        super(
+            Arrays.asList(
                 new Pose2d(0, constants.getDouble(LateralDistance.class) / 2, 0), // left
                 new Pose2d(0, -constants.getDouble(LateralDistance.class) / 2, 0), // right
                 new Pose2d(constants.getDouble(ForwardOffset.class), 0, Math.toRadians(90)) // front
-                ));
+            )
+        );
         leftEncoder = l;
         rightEncoder = r;
         frontEncoder = f;
@@ -52,27 +56,31 @@ public class ThreeDeadWheelLocalizer extends ThreeTrackingWheelLocalizer impleme
     }
 
     public double encoderTicksToInches(double ticks) {
-        return getWheelRadius() * 2 * Math.PI * getGearRatio() * ticks / getTicksPerRev();
+        return (getWheelRadius() * 2 * Math.PI * getGearRatio() * ticks / getTicksPerRev());
     }
 
-    @NonNull @Override
+    @NonNull
+    @Override
     public List<Double> getWheelPositions() {
         return Arrays.asList(
-                encoderTicksToInches(leftEncoder.getCurrentPosition()),
-                encoderTicksToInches(rightEncoder.getCurrentPosition()),
-                encoderTicksToInches(frontEncoder.getCurrentPosition()));
+            encoderTicksToInches(leftEncoder.getCurrentPosition()),
+            encoderTicksToInches(rightEncoder.getCurrentPosition()),
+            encoderTicksToInches(frontEncoder.getCurrentPosition())
+        );
     }
 
-    @NonNull @Override
+    @NonNull
+    @Override
     public List<Double> getWheelVelocities() {
         // TODO: If your encoder velocity can exceed 32767 counts / second (such as the REV Through Bore and other
         //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
         //  compensation method
 
         return Arrays.asList(
-                encoderTicksToInches(leftEncoder.getCorrectedVelocity()),
-                encoderTicksToInches(rightEncoder.getCorrectedVelocity()),
-                encoderTicksToInches(frontEncoder.getCorrectedVelocity()));
+            encoderTicksToInches(leftEncoder.getCorrectedVelocity()),
+            encoderTicksToInches(rightEncoder.getCorrectedVelocity()),
+            encoderTicksToInches(frontEncoder.getCorrectedVelocity())
+        );
     }
 
     public double getTicksPerRev() {

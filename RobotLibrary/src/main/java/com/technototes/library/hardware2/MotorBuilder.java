@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
  * it's in all the documentation, so just read it, see it in the examples, and you're done.
  */
 public class MotorBuilder extends HardwareBuilder<DcMotorEx> {
+
     public MotorBuilder(String name) {
         super(name);
     }

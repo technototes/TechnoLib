@@ -1,5 +1,8 @@
 package com.technototes.library.command;
 
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.technototes.library.subsystem.DeviceSubsystem;
+import com.technototes.library.subsystem.Subsystem;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -9,11 +12,6 @@ import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-import com.technototes.library.subsystem.DeviceSubsystem;
-import com.technototes.library.subsystem.Subsystem;
-
 /**
  * The root Command class
  *
@@ -21,7 +19,6 @@ import com.technototes.library.subsystem.Subsystem;
  */
 @FunctionalInterface
 public interface Command extends Runnable, Supplier<Command.CommandState> {
-
     // These are *static* fields of the Command interface, because interfaces aren't allowed
     // to have member fields (because they're interfaces...)
 
@@ -220,7 +217,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
             case INITIALIZING:
                 initialize();
                 setState(CommandState.EXECUTING);
-                // no return for fallthrough
+            // no return for fallthrough
             case EXECUTING:
                 execute();
                 if (isFinished()) setState(CommandState.FINISHED);
@@ -267,7 +264,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         /**
          * The command has been cancelled
          */
-        CANCELLED
+        CANCELLED,
     }
 
     /**
@@ -316,7 +313,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
      * @return True if the command has finished, or has been cancelled
      */
     default boolean justFinished() {
-        return getState() == CommandState.FINISHED || getState() == CommandState.CANCELLED;
+        return (getState() == CommandState.FINISHED || getState() == CommandState.CANCELLED);
     }
 
     /**

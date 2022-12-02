@@ -4,6 +4,7 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.LOCAL_VARIABLE;
 import static java.lang.annotation.ElementType.METHOD;
 
+import com.technototes.library.util.Color;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Repeatable;
@@ -11,15 +12,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.technototes.library.util.Color;
-
 /** The root annotation for annotation logging, also doubles as a basic string log
  * @author Alex Stedman
  */
 @Documented
 @Repeatable(Log.Logs.class)
 @Retention(RetentionPolicy.RUNTIME)
-@Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+@Target(value = { FIELD, LOCAL_VARIABLE, METHOD })
 public @interface Log {
     /** Store index for this annotation (position in telemetry)
      *
@@ -59,7 +58,7 @@ public @interface Log {
 
     @Documented
     @Retention(RetentionPolicy.RUNTIME)
-    @Target({ElementType.FIELD, ElementType.METHOD})
+    @Target({ ElementType.FIELD, ElementType.METHOD })
     @interface Logs {
         Log[] value();
     }
@@ -68,7 +67,7 @@ public @interface Log {
      *
      */
     @Retention(RetentionPolicy.RUNTIME)
-    @Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+    @Target(value = { FIELD, LOCAL_VARIABLE, METHOD })
     @interface Number {
         /** Store index for this annotation (position in telemetry)
          *
@@ -87,11 +86,13 @@ public @interface Log {
          * @return The name as a string
          */
         String name() default "";
+
         /** The color for the tag for the number
          *
          * @return The color
          */
         Color color() default Color.NO_COLOR;
+
         /** The color for the number
          *
          * @return The color
@@ -103,7 +104,7 @@ public @interface Log {
      *
      */
     @Retention(RetentionPolicy.RUNTIME)
-    @Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+    @Target(value = { FIELD, LOCAL_VARIABLE, METHOD })
     @interface NumberBar {
         /** Store index for this annotation (position in telemetry)
          *
@@ -122,11 +123,13 @@ public @interface Log {
          * @return The min
          */
         double min() default -1;
+
         /** Store the max for the number bar to scale to
          *
          * @return The max
          */
         double max() default 1;
+
         /** Store the scale for the number bar to scale to
          *
          * @return The scale
@@ -138,21 +141,25 @@ public @interface Log {
          * @return The name as a string
          */
         String name() default "";
+
         /** The color for the tag for the bar
          *
          * @return The color
          */
         Color color() default Color.NO_COLOR;
+
         /** The color for the filled in bar color
          *
          * @return The color
          */
         Color completeBarColor() default Color.NO_COLOR;
+
         /** The color for the not filled in bar color
          *
          * @return The color
          */
         Color incompleteBarColor() default Color.NO_COLOR;
+
         /** The color for the bar outlines
          *
          * @return The color
@@ -161,7 +168,7 @@ public @interface Log {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
-    @Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+    @Target(value = { FIELD, LOCAL_VARIABLE, METHOD })
     @interface NumberSlider {
         /** Store index for this annotation (position in telemetry)
          *
@@ -180,11 +187,13 @@ public @interface Log {
          * @return The min
          */
         double min() default -1;
+
         /** Store the max for the number bar to scale to
          *
          * @return The max
          */
         double max() default 1;
+
         /** Store the scale for the number bar to scale to
          *
          * @return The scale
@@ -196,21 +205,25 @@ public @interface Log {
          * @return The name as a string
          */
         String name() default "";
+
         /** The color for the tag for the slider
          *
          * @return The color
          */
         Color color() default Color.NO_COLOR;
+
         /** The color for the slider background
          *
          * @return The color
          */
         Color sliderBackground() default Color.NO_COLOR;
+
         /** The color for the slider outline
          *
          * @return The color
          */
         Color outline() default Color.NO_COLOR;
+
         /** The color for the slider slide
          *
          * @return The color
@@ -219,7 +232,7 @@ public @interface Log {
     }
 
     @Retention(RetentionPolicy.RUNTIME)
-    @Target(value = {FIELD, LOCAL_VARIABLE, METHOD})
+    @Target(value = { FIELD, LOCAL_VARIABLE, METHOD })
     @interface Boolean {
         /** Store index for this annotation (position in telemetry)
          *
@@ -244,6 +257,7 @@ public @interface Log {
          * @return The String format
          */
         String trueFormat() default "%s";
+
         /** The color for the true String
          *
          * @return The color
@@ -255,11 +269,13 @@ public @interface Log {
          * @return The string
          */
         String falseValue() default "false";
+
         /** The format for when the boolean returns false
          *
          * @return The String format
          */
         String falseFormat() default "%s";
+
         /** The color for the false String
          *
          * @return The color
@@ -271,6 +287,7 @@ public @interface Log {
          * @return The name as a string
          */
         String name() default "";
+
         /** The color for the tag for the boolean
          *
          * @return The color

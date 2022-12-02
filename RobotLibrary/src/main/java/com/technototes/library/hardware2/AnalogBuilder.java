@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.AnalogSensor;
  * it's in all the documentation, so just read it, see it in the examples, and you're done.
  */
 public class AnalogBuilder extends HardwareBuilder<AnalogSensor> {
+
     public AnalogBuilder(String name) {
         super(name);
     }

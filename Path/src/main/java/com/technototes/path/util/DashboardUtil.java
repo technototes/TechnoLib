@@ -1,16 +1,16 @@
 package com.technototes.path.util;
 
-import java.util.List;
-
 import com.acmerobotics.dashboard.canvas.Canvas;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.path.Path;
+import java.util.List;
 
 /**
  * Set of helper functions for drawing Road Runner paths and trajectories on dashboard canvases.
  */
 public class DashboardUtil {
+
     private static final double DEFAULT_RESOLUTION = 2.0; // distance units; presumed inches
     private static final double ROBOT_RADIUS = 9; // in
 

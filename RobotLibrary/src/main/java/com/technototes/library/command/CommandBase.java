@@ -7,6 +7,7 @@ package com.technototes.library.command;
  */
 @Deprecated
 public abstract class CommandBase implements Command {
+
     /**
      * Execute the command
      */

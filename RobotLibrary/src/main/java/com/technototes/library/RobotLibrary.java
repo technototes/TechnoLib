@@ -6,6 +6,7 @@ package com.technototes.library;
  */
 @SuppressWarnings("unused")
 public class RobotLibrary {
+
     /** Get library version
      *
      * @return Library version

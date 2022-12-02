@@ -6,6 +6,7 @@ package com.technototes.library.command;
  * @author Alex Stedman
  */
 public class ParallelRaceGroup extends CommandGroup {
+
     /**
      * Make parallel race group
      *

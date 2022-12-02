@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
  * it's in all the documentation, so just read it, see it in the examples, and you're done.
  */
 public class CRServoBuilder extends HardwareBuilder<CRServo> {
+
     public CRServoBuilder(String name) {
         super(name);
     }

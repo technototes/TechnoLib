@@ -1,13 +1,11 @@
 package com.technototes.library.control;
 
+import com.qualcomm.robotcore.hardware.Gamepad;
+import com.technototes.library.general.Enablable;
+import com.technototes.library.general.Periodic;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
-
-import com.qualcomm.robotcore.hardware.Gamepad;
-
-import com.technototes.library.general.Enablable;
-import com.technototes.library.general.Periodic;
 
 /**
  * A class to extend gamepads from, it does the internal processing for you.
@@ -16,7 +14,9 @@ import com.technototes.library.general.Periodic;
  * @param <U> The class for the axis components on the gamepad
  * @author Alex Stedman
  */
-public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Periodic, Enablable<GamepadBase<T, U>> {
+public class GamepadBase<T extends ButtonBase, U extends AxisBase>
+    implements Periodic, Enablable<GamepadBase<T, U>> {
+
     private boolean enabled = true;
     // normal gamepad
     private Gamepad gamepad;
@@ -72,18 +72,43 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
         leftStick = new GamepadStick<>(leftStickX, leftStickY, leftStickButton);
         rightStick = new GamepadStick<>(rightStickX, rightStickY, rightStickButton);
         dpad = new GamepadDpad<>(dpadUp, dpadDown, dpadLeft, dpadRight);
-        periodics = new Periodic[] {
-            a, b, x, y, start, back, leftBumper, rightBumper, leftTrigger, rightTrigger, leftStick, rightStick, dpad
-        };
-        enablables = new Enablable[] {
-            a, b, x, y, start, back, leftBumper, rightBumper, leftTrigger, rightTrigger, leftStick, rightStick, dpad
-        };
+        periodics =
+            new Periodic[] {
+                a,
+                b,
+                x,
+                y,
+                start,
+                back,
+                leftBumper,
+                rightBumper,
+                leftTrigger,
+                rightTrigger,
+                leftStick,
+                rightStick,
+                dpad,
+            };
+        enablables =
+            new Enablable[] {
+                a,
+                b,
+                x,
+                y,
+                start,
+                back,
+                leftBumper,
+                rightBumper,
+                leftTrigger,
+                rightTrigger,
+                leftStick,
+                rightStick,
+                dpad,
+            };
     }
 
     // to actually instantiate the objects
     private void setComponents(Gamepad g)
-            throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-
+        throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         // buttons
         // a=new T();
         a = buttonInstance(() -> g.a);
@@ -194,7 +219,7 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
         /**
          * Button which clicking the right stick
          */
-        RIGHT_STICK_BUTTON
+        RIGHT_STICK_BUTTON,
     }
 
     /**
@@ -224,7 +249,7 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
         /**
          * Right Trigger's axis
          */
-        RIGHT_TRIGGER
+        RIGHT_TRIGGER,
     }
 
     /**
@@ -387,7 +412,7 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
      * @throws InvocationTargetException Couldn't invoke the constructor for other reasons
      */
     public T buttonInstance(BooleanSupplier b)
-            throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         return buttonClass.getConstructor(BooleanSupplier.class).newInstance(b);
     }
 
@@ -402,7 +427,7 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
      * @throws InvocationTargetException Couldn't invoke the constructor for other reasons
      */
     public U axisInstance(DoubleSupplier d)
-            throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         return axisClass.getConstructor(DoubleSupplier.class).newInstance(d);
     }
 

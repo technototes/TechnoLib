@@ -1,8 +1,7 @@
 package com.technototes.library.logger.entry;
 
-import java.util.function.Supplier;
-
 import com.technototes.library.util.Color;
+import java.util.function.Supplier;
 
 /**
  * The root class for logging entries

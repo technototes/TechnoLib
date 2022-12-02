@@ -1,14 +1,11 @@
 package com.technototes.vision.hardware;
 
-import java.util.Arrays;
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-
-import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvSwitchableWebcam;
-
 import com.technototes.library.hardware.DummyDevice;
 import com.technototes.library.hardware.HardwareDevice;
+import java.util.Arrays;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvSwitchableWebcam;
 
 /**
  * A webcam device interface that allows you to switch between multiple cameras!
@@ -34,9 +31,12 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice
      * @param device The list of names of cameras as configured in the Robot configuration
      */
     public SwitchableWebcam(String... device) {
-        this(Arrays.stream(device)
-                .map((s) -> hardwareMap.get(WebcamName.class, s))
-                .toArray(WebcamName[]::new));
+        this(
+            Arrays
+                .stream(device)
+                .map(s -> hardwareMap.get(WebcamName.class, s))
+                .toArray(WebcamName[]::new)
+        );
     }
 
     /**
@@ -56,13 +56,18 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice
      */
     @Override
     public OpenCvSwitchableWebcam createCamera() {
-        return OpenCvCameraFactory.getInstance()
-                .createSwitchableWebcam(
-                        hardwareMap
-                                .appContext
-                                .getResources()
-                                .getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName()),
-                        getDevice().get());
+        return OpenCvCameraFactory
+            .getInstance()
+            .createSwitchableWebcam(
+                hardwareMap.appContext
+                    .getResources()
+                    .getIdentifier(
+                        "cameraMonitorViewId",
+                        "id",
+                        hardwareMap.appContext.getPackageName()
+                    ),
+                getDevice().get()
+            );
     }
 
     /**

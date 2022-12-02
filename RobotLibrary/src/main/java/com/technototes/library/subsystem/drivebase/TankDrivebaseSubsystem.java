@@ -2,7 +2,6 @@ package com.technototes.library.subsystem.drivebase;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
-
 import com.technototes.library.hardware.motor.Motor;
 
 /** Class for drivebase subsystems
@@ -10,6 +9,7 @@ import com.technototes.library.hardware.motor.Motor;
  * @param <T> The type of motor for the drivebase
  */
 public class TankDrivebaseSubsystem<T extends DcMotorSimple> extends DrivebaseSubsystem<T> {
+
     /** Drive motors
      *
      */

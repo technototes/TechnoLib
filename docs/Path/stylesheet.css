@@ -56,13 +56,13 @@ h3 {
   font-size: 16px;
 }
 h4 {
-  font-size: 15px;
+  font-size: 13px;
 }
 h5 {
-  font-size: 14px;
+  font-size: 12px;
 }
 h6 {
-  font-size: 13px;
+  font-size: 11px;
 }
 ul {
   list-style-type: disc;
@@ -70,9 +70,6 @@ ul {
 code,
 tt {
   font-family: 'DejaVu Sans Mono', monospace;
-}
-:not(h1, h2, h3, h4, h5, h6) > code,
-:not(h1, h2, h3, h4, h5, h6) > tt {
   font-size: 14px;
   padding-top: 4px;
   margin-top: 8px;
@@ -291,7 +288,7 @@ dl.notes > dt {
   color: #4e4e4e;
 }
 dl.notes > dd {
-  margin: 5px 10px 10px 0;
+  margin: 5px 0 10px 0;
   font-size: 14px;
   font-family: 'DejaVu Serif', Georgia, 'Times New Roman', Times, serif;
 }
@@ -344,29 +341,17 @@ ul.summary-list > li {
   margin-top: 0;
   margin-bottom: 1px;
 }
-ul.see-list,
-ul.see-list-long {
-  padding-left: 0;
-  list-style: none;
-}
-ul.see-list li {
-  display: inline;
-}
-ul.see-list li:not(:last-child):after,
-ul.see-list-long li:not(:last-child):after {
-  content: ', ';
-  white-space: pre-wrap;
-}
 /*
  * Styles for tables.
  */
-.summary-table,
-.details-table {
+.summary-table {
   width: 100%;
   border-spacing: 0;
   border-left: 1px solid #eee;
   border-right: 1px solid #eee;
   border-bottom: 1px solid #eee;
+}
+.summary-table {
   padding: 0;
 }
 .caption {
@@ -377,10 +362,10 @@ ul.see-list-long li:not(:last-child):after {
   font-weight: bold;
   clear: none;
   overflow: hidden;
-  padding: 0;
+  padding: 0px;
   padding-top: 10px;
   padding-left: 1px;
-  margin: 0;
+  margin: 0px;
   white-space: pre;
 }
 .caption a:link,
@@ -403,10 +388,7 @@ ul.see-list-long li:not(:last-child):after {
   border: none;
   height: 16px;
 }
-div.table-tabs {
-  padding: 10px 0 0 1px;
-  margin: 0;
-}
+
 div.table-tabs > button {
   border: none;
   cursor: pointer;
@@ -428,16 +410,14 @@ div.table-tabs > button.table-tab {
 }
 .three-column-summary {
   display: grid;
-  grid-template-columns: minmax(10%, max-content) minmax(15%, max-content) minmax(
-      15%,
-      auto
-    );
+  grid-template-columns: minmax(10%, max-content) minmax(15%, max-content) minmax(15%, auto);
 }
 .four-column-summary {
   display: grid;
-  grid-template-columns:
-    minmax(10%, max-content) minmax(10%, max-content) minmax(10%, max-content)
-    minmax(10%, auto);
+  grid-template-columns: minmax(10%, max-content) minmax(10%, max-content) minmax(10%, max-content) minmax(
+      10%,
+      auto
+    );
 }
 @media screen and (max-width: 600px) {
   .two-column-summary {
@@ -460,8 +440,7 @@ div.table-tabs > button.table-tab {
     grid-template-columns: minmax(15%, max-content) minmax(15%, auto);
   }
 }
-.summary-table > div,
-.details-table > div {
+.summary-table > div {
   text-align: left;
   padding: 8px 3px 3px 7px;
 }
@@ -469,7 +448,7 @@ div.table-tabs > button.table-tab {
 .col-second,
 .col-last,
 .col-constructor-name,
-.col-summary-item-name {
+.col-deprecated-item-name {
   vertical-align: top;
   padding-right: 0;
   padding-top: 8px;
@@ -487,7 +466,7 @@ div.table-tabs > button.table-tab {
 .col-second,
 .col-last,
 .col-constructor-name,
-.col-summary-item-name,
+.col-deprecated-item-name,
 .col-last {
   font-size: 13px;
 }
@@ -510,8 +489,8 @@ div.table-tabs > button.table-tab {
 .col-second a:visited,
 .col-constructor-name a:link,
 .col-constructor-name a:visited,
-.col-summary-item-name a:link,
-.col-summary-item-name a:visited,
+.col-deprecated-item-name a:link,
+.col-deprecated-item-name a:visited,
 .constant-values-container a:link,
 .constant-values-container a:visited,
 .all-classes-container a:link,
@@ -601,13 +580,12 @@ h1.hidden {
 .package-hierarchy-label,
 .type-name-label,
 .type-name-link,
-.search-tag-link,
-.preview-label {
+.search-tag-link {
   font-weight: bold;
 }
 .deprecation-comment,
 .help-footnote,
-.preview-comment {
+.interface-name {
   font-style: italic;
 }
 .deprecation-block {
@@ -621,18 +599,9 @@ h1.hidden {
   margin-right: 10px;
   display: inline-block;
 }
-.preview-block {
-  font-size: 14px;
-  font-family: 'DejaVu Serif', Georgia, 'Times New Roman', Times, serif;
-  border-style: solid;
-  border-width: thin;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
-  margin-right: 10px;
-  display: inline-block;
-}
-div.block div.deprecation-comment {
+div.block div.deprecation-comment,
+div.block div.block span.emphasized-phrase,
+div.block div.block span.interface-name {
   font-style: normal;
 }
 /*
@@ -678,7 +647,7 @@ ul.ui-autocomplete li {
 .result-highlight {
   font-weight: bold;
 }
-#search-input {
+#search {
   background-image: url('resources/glass.png');
   background-size: 13px;
   background-repeat: no-repeat;
@@ -688,7 +657,7 @@ ul.ui-autocomplete li {
   right: -18px;
   width: 400px;
 }
-#reset-button {
+#reset {
   background-color: rgb(255, 255, 255);
   background-image: url('resources/x.png');
   background-position: center;
@@ -728,7 +697,7 @@ ul.ui-autocomplete li {
 .inherited-list {
   margin: 10px 0 10px 0;
 }
-section.class-description {
+section.description {
   line-height: 1.4;
 }
 .summary section[class$='-summary'],
@@ -750,18 +719,6 @@ section[class$='-details'] .detail {
 }
 ul.help-section-list {
   margin: 0;
-}
-ul.help-subtoc > li {
-  display: inline-block;
-  padding-right: 5px;
-  font-size: smaller;
-}
-ul.help-subtoc > li::before {
-  content: '\2022';
-  padding-right: 2px;
-}
-span.help-note {
-  font-style: italic;
 }
 /*
  * Indicator icon for external links.
@@ -890,12 +847,12 @@ table.striped > tbody > tr > th {
  * Tweak font sizes and paddings for small screens.
  */
 @media screen and (max-width: 1050px) {
-  #search-input {
+  #search {
     width: 300px;
   }
 }
 @media screen and (max-width: 800px) {
-  #search-input {
+  #search {
     width: 200px;
   }
   .top-nav,
@@ -930,7 +887,7 @@ table.striped > tbody > tr > th {
   }
 }
 @media screen and (max-width: 500px) {
-  #search-input {
+  #search {
     width: 150px;
   }
   .top-nav,

@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.ColorRangeSensor;
  * it's in all the documentation, so just read it, see it in the examples, and you're done.
  */
 public class ColorRangeBuilder extends HardwareBuilder<ColorRangeSensor> {
+
     public ColorRangeBuilder(String name) {
         super(name);
     }

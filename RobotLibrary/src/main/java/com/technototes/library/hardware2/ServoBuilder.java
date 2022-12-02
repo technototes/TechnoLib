@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * it's in all the documentation, so just read it, see it in the examples, and you're done.
  */
 public class ServoBuilder extends HardwareBuilder<Servo> {
+
     public ServoBuilder(String name) {
         super(name);
     }
@@ -44,10 +45,11 @@ public class ServoBuilder extends HardwareBuilder<Servo> {
     }
 
     public ServoBuilder pwmRange(double min, double max) {
-        if (product instanceof PwmControl) ((PwmControl) product).setPwmRange(new PwmControl.PwmRange(min, max));
-        else
-            throw new UnsupportedOperationException(
-                    "scaling pwm range only supported on devices that implement pwmcontrol");
+        if (product instanceof PwmControl) ((PwmControl) product).setPwmRange(
+                new PwmControl.PwmRange(min, max)
+            ); else throw new UnsupportedOperationException(
+            "scaling pwm range only supported on devices that implement pwmcontrol"
+        );
         return this;
     }
 

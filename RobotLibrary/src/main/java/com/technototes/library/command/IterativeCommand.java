@@ -4,6 +4,7 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 
 public class IterativeCommand extends SequentialCommandGroup {
+
     /**
      * iterative command for anything
      * <p>
@@ -21,7 +22,12 @@ public class IterativeCommand extends SequentialCommandGroup {
     }
 
     public <T> IterativeCommand(
-            Function<T, Command> func, T start, T end, Function<T, T> accum, BooleanSupplier stopCondition) {
+        Function<T, Command> func,
+        T start,
+        T end,
+        Function<T, T> accum,
+        BooleanSupplier stopCondition
+    ) {
         for (T t = start; !t.equals(end); t = accum.apply(t)) addCommands(func.apply(t));
     }
 
@@ -35,7 +41,11 @@ public class IterativeCommand extends SequentialCommandGroup {
         this(func, 0, loops, i -> i + 1);
     }
 
-    public IterativeCommand(Function<Integer, Command> func, int loops, BooleanSupplier stopCondition) {
+    public IterativeCommand(
+        Function<Integer, Command> func,
+        int loops,
+        BooleanSupplier stopCondition
+    ) {
         this(func, 0, loops, i -> i + 1, stopCondition);
     }
 

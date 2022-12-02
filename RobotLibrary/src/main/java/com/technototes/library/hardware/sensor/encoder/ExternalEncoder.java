@@ -1,13 +1,13 @@
 package com.technototes.library.hardware.sensor.encoder;
 
 import com.qualcomm.robotcore.hardware.AnalogInput;
-
 import com.technototes.library.hardware.sensor.Sensor;
 
 /**
  * A wrapper around an AnalogInput that enables "zeroing" for usefulness
  */
 public class ExternalEncoder extends Sensor<AnalogInput> implements Encoder {
+
     private double zero = 0;
 
     /**

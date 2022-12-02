@@ -13,7 +13,7 @@ public interface Binding<T extends BooleanSupplier> extends BooleanSupplier {
     enum Type {
         NONE_ACTIVE,
         SOME_ACTIVE,
-        ALL_ACTIVE
+        ALL_ACTIVE,
     }
 
     T[] getSuppliers();

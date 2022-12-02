@@ -2,11 +2,10 @@ package com.technototes.library.util;
 
 import static java.lang.annotation.ElementType.TYPE;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 /**
  * An enumeration to specify which alliance the bot is on (Red, Blue, or None)
@@ -24,6 +23,7 @@ public enum Alliance {
      * NO ALLIANCE SELECTED
      */
     NONE(Color.BLACK);
+
     Color color;
 
     /**
@@ -63,6 +63,7 @@ public enum Alliance {
      * @param <T> The type of object to select
      */
     public static class Selector<T> {
+
         private final T r, b;
 
         /**
@@ -129,12 +130,14 @@ public enum Alliance {
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(TYPE)
-    public @interface Red {}
+    public @interface Red {
+    }
 
     /**
      * Not sure what this is for. Something for annotation processing? No idea :/
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(TYPE)
-    public @interface Blue {}
+    public @interface Blue {
+    }
 }

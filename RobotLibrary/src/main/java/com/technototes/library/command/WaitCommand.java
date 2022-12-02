@@ -9,6 +9,7 @@ import java.util.function.DoubleSupplier;
  * @author Alex Stedman
  */
 public class WaitCommand implements Command {
+
     /**
      * @return the number of seconds the command will wait
      */

@@ -1,12 +1,6 @@
 package com.technototes.path.subsystem;
 
 import androidx.annotation.NonNull;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.drive.DriveSignal;
 import com.acmerobotics.roadrunner.drive.TankDrive;
@@ -28,7 +22,6 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
-
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.hardware.motor.EncodedMotorGroup;
 import com.technototes.library.hardware.sensor.IMU;
@@ -38,6 +31,10 @@ import com.technototes.path.trajectorysequence.TrajectorySequence;
 import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
 import com.technototes.path.trajectorysequence.TrajectorySequenceRunner;
 import com.technototes.path.util.LynxModuleUtil;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
 
@@ -68,13 +65,18 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
     private VoltageSensor batteryVoltageSensor;
 
     public TankDrivebaseSubsystem(
-            EncodedMotorGroup<DcMotorEx> left,
-            EncodedMotorGroup<DcMotorEx> right,
-            IMU i,
-            TankConstants c,
-            Localizer localizer) {
-        super(c.getDouble(KV.class), c.getDouble(KA.class), c.getDouble(KStatic.class), c.getDouble(TrackWidth.class));
-
+        EncodedMotorGroup<DcMotorEx> left,
+        EncodedMotorGroup<DcMotorEx> right,
+        IMU i,
+        TankConstants c,
+        Localizer localizer
+    ) {
+        super(
+            c.getDouble(KV.class),
+            c.getDouble(KA.class),
+            c.getDouble(KStatic.class),
+            c.getDouble(TrackWidth.class)
+        );
         TICKS_PER_REV = c.getDouble(TicksPerRev.class);
         MAX_RPM = c.getDouble(MaxRPM.class);
 
@@ -104,15 +106,20 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
 
         POSE_HISTORY_LIMIT = c.getInt(PoseLimit.class);
 
-        follower = new TankPIDVAFollower(AXIAL_PID, CROSS_TRACK_PID, new Pose2d(0.5, 0.5, Math.toRadians(5.0)), 0.5);
+        follower =
+            new TankPIDVAFollower(
+                AXIAL_PID,
+                CROSS_TRACK_PID,
+                new Pose2d(0.5, 0.5, Math.toRadians(5.0)),
+                0.5
+            );
 
         VEL_CONSTRAINT = getVelocityConstraint(MAX_VEL, MAX_ANG_VEL, TRACK_WIDTH);
         ACCEL_CONSTRAINT = getAccelerationConstraint(MAX_ACCEL);
 
         LynxModuleUtil.ensureMinimumFirmwareVersion(HardwareDevice.hardwareMap);
 
-        batteryVoltageSensor =
-                HardwareDevice.hardwareMap.voltageSensor.iterator().next();
+        batteryVoltageSensor = HardwareDevice.hardwareMap.voltageSensor.iterator().next();
 
         for (LynxModule module : HardwareDevice.hardwareMap.getAll(LynxModule.class)) {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
@@ -129,9 +136,17 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
 
         motors = new ArrayList<>();
         leftMotors =
-                left.getAllDeviceList().stream().map(HardwareDevice::getDevice).collect(Collectors.toList());
+            left
+                .getAllDeviceList()
+                .stream()
+                .map(HardwareDevice::getDevice)
+                .collect(Collectors.toList());
         rightMotors =
-                right.getAllDeviceList().stream().map(HardwareDevice::getDevice).collect(Collectors.toList());
+            right
+                .getAllDeviceList()
+                .stream()
+                .map(HardwareDevice::getDevice)
+                .collect(Collectors.toList());
         motors.addAll(leftMotors);
         motors.addAll(rightMotors);
 
@@ -172,12 +187,19 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
     }
 
     public TrajectorySequenceBuilder trajectorySequenceBuilder(Pose2d startPose) {
-        return new TrajectorySequenceBuilder(startPose, VEL_CONSTRAINT, ACCEL_CONSTRAINT, MAX_ANG_VEL, MAX_ANG_ACCEL);
+        return new TrajectorySequenceBuilder(
+            startPose,
+            VEL_CONSTRAINT,
+            ACCEL_CONSTRAINT,
+            MAX_ANG_VEL,
+            MAX_ANG_ACCEL
+        );
     }
 
     public void turnAsync(double angle) {
         trajectorySequenceRunner.followTrajectorySequenceAsync(
-                trajectorySequenceBuilder(getPoseEstimate()).turn(angle).build());
+            trajectorySequenceBuilder(getPoseEstimate()).turn(angle).build()
+        );
     }
 
     public void turn(double angle) {
@@ -186,9 +208,9 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
     }
 
     public void followTrajectoryAsync(Trajectory trajectory) {
-        trajectorySequenceRunner.followTrajectorySequenceAsync(trajectorySequenceBuilder(trajectory.start())
-                .addTrajectory(trajectory)
-                .build());
+        trajectorySequenceRunner.followTrajectorySequenceAsync(
+            trajectorySequenceBuilder(trajectory.start()).addTrajectory(trajectory).build()
+        );
     }
 
     public void followTrajectory(Trajectory trajectory) {
@@ -237,10 +259,11 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
 
     public void setPIDFCoefficients(DcMotor.RunMode runMode, PIDFCoefficients coefficients) {
         PIDFCoefficients compensatedCoefficients = new PIDFCoefficients(
-                coefficients.p,
-                coefficients.i,
-                coefficients.d,
-                coefficients.f * 12 / batteryVoltageSensor.getVoltage());
+            coefficients.p,
+            coefficients.i,
+            coefficients.d,
+            coefficients.f * 12 / batteryVoltageSensor.getVoltage()
+        );
         for (DcMotorEx motor : motors) {
             motor.setPIDFCoefficients(runMode, compensatedCoefficients);
         }
@@ -251,23 +274,40 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
 
         if (Math.abs(drivePower.getX()) + Math.abs(drivePower.getHeading()) > 1) {
             // re-normalize the powers according to the weights
-            double denom = VX_WEIGHT * Math.abs(drivePower.getX()) + OMEGA_WEIGHT * Math.abs(drivePower.getHeading());
+            double denom =
+                VX_WEIGHT *
+                Math.abs(drivePower.getX()) +
+                OMEGA_WEIGHT *
+                Math.abs(drivePower.getHeading());
 
-            vel = new Pose2d(VX_WEIGHT * drivePower.getX(), 0, OMEGA_WEIGHT * drivePower.getHeading()).div(denom);
+            vel =
+                new Pose2d(VX_WEIGHT * drivePower.getX(), 0, OMEGA_WEIGHT * drivePower.getHeading())
+                    .div(denom);
         }
 
         setDrivePower(vel);
     }
 
-    @NonNull @Override
+    @NonNull
+    @Override
     public List<Double> getWheelPositions() {
         double leftSum = 0, rightSum = 0;
         for (DcMotorEx leftMotor : leftMotors) {
-            leftSum += TankConstants.encoderTicksToInches(
-                    leftMotor.getCurrentPosition(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV);
+            leftSum +=
+                TankConstants.encoderTicksToInches(
+                    leftMotor.getCurrentPosition(),
+                    WHEEL_RADIUS,
+                    GEAR_RATIO,
+                    TICKS_PER_REV
+                );
             for (DcMotorEx rightMotor : rightMotors) {
-                rightSum += TankConstants.encoderTicksToInches(
-                        rightMotor.getCurrentPosition(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV);
+                rightSum +=
+                    TankConstants.encoderTicksToInches(
+                        rightMotor.getCurrentPosition(),
+                        WHEEL_RADIUS,
+                        GEAR_RATIO,
+                        TICKS_PER_REV
+                    );
             }
         }
         return Arrays.asList(leftSum / leftMotors.size(), rightSum / rightMotors.size());
@@ -276,12 +316,22 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
     public List<Double> getWheelVelocities() {
         double leftSum = 0, rightSum = 0;
         for (DcMotorEx leftMotor : leftMotors) {
-            leftSum += TankConstants.encoderTicksToInches(
-                    leftMotor.getVelocity(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV);
+            leftSum +=
+                TankConstants.encoderTicksToInches(
+                    leftMotor.getVelocity(),
+                    WHEEL_RADIUS,
+                    GEAR_RATIO,
+                    TICKS_PER_REV
+                );
         }
         for (DcMotorEx rightMotor : rightMotors) {
-            rightSum += TankConstants.encoderTicksToInches(
-                    rightMotor.getVelocity(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV);
+            rightSum +=
+                TankConstants.encoderTicksToInches(
+                    rightMotor.getVelocity(),
+                    WHEEL_RADIUS,
+                    GEAR_RATIO,
+                    TICKS_PER_REV
+                );
         }
         return Arrays.asList(leftSum / leftMotors.size(), rightSum / rightMotors.size());
     }
@@ -325,9 +375,16 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
     }
 
     public static TrajectoryVelocityConstraint getVelocityConstraint(
-            double maxVel, double maxAngularVel, double trackWidth) {
-        return new MinVelocityConstraint(Arrays.asList(
-                new AngularVelocityConstraint(maxAngularVel), new TankVelocityConstraint(maxVel, trackWidth)));
+        double maxVel,
+        double maxAngularVel,
+        double trackWidth
+    ) {
+        return new MinVelocityConstraint(
+            Arrays.asList(
+                new AngularVelocityConstraint(maxAngularVel),
+                new TankVelocityConstraint(maxVel, trackWidth)
+            )
+        );
     }
 
     public static TrajectoryAccelerationConstraint getAccelerationConstraint(double maxAccel) {

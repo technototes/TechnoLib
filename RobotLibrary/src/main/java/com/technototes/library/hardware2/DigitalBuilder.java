@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DigitalChannel;
  * it's in all the documentation, so just read it, see it in the examples, and you're done.
  */
 public class DigitalBuilder extends HardwareBuilder<DigitalChannel> {
+
     /**
      * Don't use this in the future
      *

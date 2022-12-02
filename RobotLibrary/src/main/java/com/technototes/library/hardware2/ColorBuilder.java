@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
  * it's in all the documentation, so just read it, see it in the examples, and you're done.
  */
 public class ColorBuilder extends HardwareBuilder<ColorSensor> {
+
     public ColorBuilder(String name) {
         super(name);
     }

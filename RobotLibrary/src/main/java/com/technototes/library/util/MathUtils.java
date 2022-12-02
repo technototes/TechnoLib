@@ -4,6 +4,7 @@ package com.technototes.library.util;
  * @author Alex Stedman
  */
 public class MathUtils {
+
     /** Get the max of supplied doubles
      *
      * @param args The doubles
@@ -16,6 +17,7 @@ public class MathUtils {
         }
         return max;
     }
+
     /** Get the max of supplied ints
      *
      * @param args The ints
@@ -52,6 +54,7 @@ public class MathUtils {
     public static int constrain(int min, int num, int max) {
         return num < min ? min : (num > max ? max : num);
     }
+
     /** Constrain the supplied double
      *
      * @param min The minimum of the constraint
@@ -77,7 +80,13 @@ public class MathUtils {
         return true;
     }
 
-    public static double map(double x, double in_min, double in_max, double out_min, double out_max) {
+    public static double map(
+        double x,
+        double in_min,
+        double in_max,
+        double out_min,
+        double out_max
+    ) {
         return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
 

@@ -4,6 +4,7 @@ package com.technototes.library.control;
  * @author Alex Stedman
  */
 public class CommandBinding extends CommandButton implements Binding<CommandInput> {
+
     private CommandInput[] inputs;
     private Type defaultType;
 

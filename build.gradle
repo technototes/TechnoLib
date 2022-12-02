@@ -13,10 +13,6 @@ buildscript {
     }
 }
 
-plugins {
-    id "com.diffplug.spotless" version "6.11.0"
-}
-
 allprojects {
     repositories {
         mavenCentral()
@@ -26,14 +22,4 @@ allprojects {
 
 repositories {
     mavenCentral()
-}
-
-spotless {
-    java {
-        target '**/*.java'
-        removeUnusedImports()
-        palantirJavaFormat("2.27.0")
-        importOrder('android', 'java', 'org.firstinspires', 'org', 'com', 'com.technototes')
-        formatAnnotations()
-    }
 }

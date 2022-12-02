@@ -3,7 +3,6 @@ package com.technototes.library.hardware.servo;
 import com.qualcomm.robotcore.hardware.PwmControl;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.util.Range;
-
 import com.technototes.library.general.Invertable;
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.hardware.Sensored;
@@ -18,8 +17,9 @@ import com.technototes.library.hardware.Sensored;
  */
 @Deprecated
 @SuppressWarnings("unused")
-public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
-        implements Sensored, Invertable<Servo> {
+public class Servo
+    extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
+    implements Sensored, Invertable<Servo> {
 
     private boolean inverted = false;
 
@@ -53,8 +53,9 @@ public class Servo extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
     }
 
     public Servo scalePWM(double min, double max) {
-        if (getDevice() instanceof ServoImplEx)
-            ((ServoImplEx) getDevice()).setPwmRange(new PwmControl.PwmRange(min, max));
+        if (getDevice() instanceof ServoImplEx) ((ServoImplEx) getDevice()).setPwmRange(
+                new PwmControl.PwmRange(min, max)
+            );
         return this;
     }
 

@@ -1,8 +1,7 @@
 package com.technototes.library.hardware.sensor;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /**
  * Class for range sensors

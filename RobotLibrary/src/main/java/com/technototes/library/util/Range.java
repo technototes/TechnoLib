@@ -1,6 +1,7 @@
 package com.technototes.library.util;
 
 public class Range {
+
     public double min, max;
 
     public Range(double mi, double ma) {

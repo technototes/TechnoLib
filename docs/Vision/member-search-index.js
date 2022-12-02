@@ -1,63 +1,26 @@
 memberSearchIndex = [
-  {
-    p: 'com.technototes.vision.subsystem',
-    c: 'PipelineSubsystem',
-    l: 'camera',
-  },
+  { p: 'com.technototes.vision.subsystem', c: 'PipelineSubsystem', l: 'camera' },
   {
     p: 'com.technototes.vision.hardware',
     c: 'Camera',
     l: 'Camera(String)',
     u: '%3Cinit%3E(java.lang.String)',
   },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'Camera',
-    l: 'Camera(U)',
-    u: '%3Cinit%3E(U)',
-  },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'Camera',
-    l: 'closeCameraDevice()',
-  },
+  { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'Camera(U)', u: '%3Cinit%3E(U)' },
+  { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'closeCameraDevice()' },
   {
     p: 'com.technototes.vision.hardware',
     c: 'Camera',
     l: 'closeCameraDeviceAsync(OpenCvCamera.AsyncCameraCloseListener)',
     u: 'closeCameraDeviceAsync(org.openftc.easyopencv.OpenCvCamera.AsyncCameraCloseListener)',
   },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'InternalCamera',
-    l: 'createCamera()',
-  },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'SwitchableWebcam',
-    l: 'createCamera()',
-  },
+  { p: 'com.technototes.vision.hardware', c: 'InternalCamera', l: 'createCamera()' },
+  { p: 'com.technototes.vision.hardware', c: 'SwitchableWebcam', l: 'createCamera()' },
   { p: 'com.technototes.vision.hardware', c: 'Webcam', l: 'createCamera()' },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'SwitchableWebcam',
-    l: 'getActiveCamera()',
-  },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'InternalCamera',
-    l: 'getCameraDirection()',
-  },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'Camera',
-    l: 'getCurrentPipelineMaxFps()',
-  },
-  {
-    p: 'com.technototes.vision.subsystem',
-    c: 'PipelineSubsystem',
-    l: 'getDevice()',
-  },
+  { p: 'com.technototes.vision.hardware', c: 'SwitchableWebcam', l: 'getActiveCamera()' },
+  { p: 'com.technototes.vision.hardware', c: 'InternalCamera', l: 'getCameraDirection()' },
+  { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'getCurrentPipelineMaxFps()' },
+  { p: 'com.technototes.vision.subsystem', c: 'PipelineSubsystem', l: 'getDevice()' },
   { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'getFps()' },
   {
     p: 'com.technototes.vision.hardware',
@@ -67,21 +30,9 @@ memberSearchIndex = [
   },
   { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'getFrameCount()' },
   { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'getOpenCvCamera()' },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'Camera',
-    l: 'getOverheadTimeMs()',
-  },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'Camera',
-    l: 'getPipelineTimeMs()',
-  },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'Camera',
-    l: 'getTotalFrameTimeMs()',
-  },
+  { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'getOverheadTimeMs()' },
+  { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'getPipelineTimeMs()' },
+  { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'getTotalFrameTimeMs()' },
   {
     p: 'com.technototes.vision.hardware',
     c: 'InternalCamera',
@@ -94,11 +45,7 @@ memberSearchIndex = [
     l: 'InternalCamera(OpenCvInternalCamera.CameraDirection)',
     u: '%3Cinit%3E(org.openftc.easyopencv.OpenCvInternalCamera.CameraDirection)',
   },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'Camera',
-    l: 'openCameraDevice()',
-  },
+  { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'openCameraDevice()' },
   {
     p: 'com.technototes.vision.hardware',
     c: 'Camera',
@@ -162,11 +109,7 @@ memberSearchIndex = [
     l: 'setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy)',
     u: 'setViewportRenderingPolicy(org.openftc.easyopencv.OpenCvCamera.ViewportRenderingPolicy)',
   },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'Camera',
-    l: 'showFpsMeterOnViewport(boolean)',
-  },
+  { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'showFpsMeterOnViewport(boolean)' },
   {
     p: 'com.technototes.vision.hardware',
     c: 'Camera',
@@ -197,17 +140,9 @@ memberSearchIndex = [
     l: 'startStreaming(int, int, OpenCvCameraRotation)',
     u: 'startStreaming(int,int,org.openftc.easyopencv.OpenCvCameraRotation)',
   },
-  {
-    p: 'com.technototes.vision.hardware',
-    c: 'Camera',
-    l: 'stopRecordingPipeline()',
-  },
+  { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'stopRecordingPipeline()' },
   { p: 'com.technototes.vision.hardware', c: 'Camera', l: 'stopStreaming()' },
-  {
-    p: 'com.technototes.vision.subsystem',
-    c: 'PipelineSubsystem',
-    l: 'stopStreaming()',
-  },
+  { p: 'com.technototes.vision.subsystem', c: 'PipelineSubsystem', l: 'stopStreaming()' },
   {
     p: 'com.technototes.vision.hardware',
     c: 'SwitchableWebcam',

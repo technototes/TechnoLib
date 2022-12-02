@@ -1,12 +1,13 @@
 package com.technototes.library.command;
 
+import com.technototes.library.subsystem.Subsystem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.technototes.library.subsystem.Subsystem;
-
 public class RequirementCommandTest {
+
     public static class DummySubsystem implements Subsystem {
+
         public void method1() {
             System.out.print(1);
         }
@@ -41,7 +42,14 @@ public class RequirementCommandTest {
 
         for (i[0] = 0; i[0] < 100; i[0]++) {
             CommandScheduler.getInstance().run();
-            System.out.println(" - " + command1.getState() + " - " + command2.getState() + " - " + command3.getState());
+            System.out.println(
+                " - " +
+                command1.getState() +
+                " - " +
+                command2.getState() +
+                " - " +
+                command3.getState()
+            );
         }
     }
 }

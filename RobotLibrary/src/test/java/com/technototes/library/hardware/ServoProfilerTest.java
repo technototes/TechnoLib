@@ -1,13 +1,12 @@
 package com.technototes.library.hardware;
 
-import org.junit.jupiter.api.Test;
-
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.hardware.servo.ServoProfiler;
+import org.junit.jupiter.api.Test;
 
 public class ServoProfilerTest {
+
     public ServoProfiler servoController;
     public Servo servo;
     public ElapsedTime time;
@@ -20,7 +19,9 @@ public class ServoProfilerTest {
         time.reset();
         servoController.setTargetPosition(0.7);
         while (!servoController.isAtTarget()) {
-            System.out.println(time.seconds() + ": " + servoController.update().getCurrentPosition());
+            System.out.println(
+                time.seconds() + ": " + servoController.update().getCurrentPosition()
+            );
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {

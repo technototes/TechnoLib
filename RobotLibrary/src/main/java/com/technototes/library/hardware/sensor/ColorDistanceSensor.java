@@ -1,10 +1,11 @@
 package com.technototes.library.hardware.sensor;
 
+import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-import com.qualcomm.robotcore.hardware.ColorRangeSensor;
-
-public class ColorDistanceSensor extends Sensor<ColorRangeSensor> implements IDistanceSensor, IColorSensor {
+public class ColorDistanceSensor
+    extends Sensor<ColorRangeSensor>
+    implements IDistanceSensor, IColorSensor {
 
     private DistanceUnit distanceUnit;
 

@@ -6,6 +6,7 @@ package com.technototes.library.control;
  * @param <U> The class for the gamepad buttons
  */
 public class GamepadStick<T extends AxisBase, U extends ButtonBase> implements Stick {
+
     private boolean enabled = true;
     /** The objects for the stick axis
      *

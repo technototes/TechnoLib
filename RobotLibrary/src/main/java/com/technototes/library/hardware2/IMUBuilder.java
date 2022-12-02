@@ -1,11 +1,9 @@
 package com.technototes.library.hardware2;
 
-import java.util.function.Consumer;
-
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.BNO055IMUImpl;
+import java.util.function.Consumer;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 
 /**
  * TODO: Remove this. I don't believe this adds much value. Yeah, HardwareMap.get is weird, but

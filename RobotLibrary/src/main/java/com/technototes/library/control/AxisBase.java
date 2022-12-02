@@ -1,13 +1,13 @@
 package com.technototes.library.control;
 
-import java.util.function.DoubleSupplier;
-
 import com.technototes.library.general.Periodic;
+import java.util.function.DoubleSupplier;
 
 /** The class to extend custom gamepad axis from
  * @author Alex Stedman
  */
 public class AxisBase extends ButtonBase implements DoubleSupplier, Periodic {
+
     /** The default trigger threshold
      *
      */
@@ -23,6 +23,7 @@ public class AxisBase extends ButtonBase implements DoubleSupplier, Periodic {
     public AxisBase(DoubleSupplier d) {
         this(d, DEFAULT_TRIGGER_THRESHOLD);
     }
+
     /** Make a GamepadAxis with the supplier and the threshold for the stick to behave as a button
      *
      * @param d The supplier to make the axis around

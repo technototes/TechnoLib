@@ -1,8 +1,7 @@
 package com.technototes.library.hardware2;
 
-import java.util.function.UnaryOperator;
-
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import java.util.function.UnaryOperator;
 
 /**
  * TODO: Remove this. I don't believe this adds much value. Yeah, HardwareMap.get is weird, but

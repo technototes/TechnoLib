@@ -1,23 +1,24 @@
 package com.technototes.library.logger.entry;
 
-import java.util.function.Supplier;
-
 import com.technototes.library.logger.Logger;
 import com.technototes.library.util.Color;
+import java.util.function.Supplier;
 
 public class NumberBarEntry extends NumberSliderEntry {
+
     // primary is bar color, secondary is outline, tertiary is incomplete bar
     public NumberBarEntry(
-            String n,
-            Supplier<Number> s,
-            int x,
-            Number mi,
-            Number ma,
-            Number sc,
-            Color c,
-            Color pri,
-            Color sec,
-            Color tert) {
+        String n,
+        Supplier<Number> s,
+        int x,
+        Number mi,
+        Number ma,
+        Number sc,
+        Color c,
+        Color pri,
+        Color sec,
+        Color tert
+    ) {
         super(n, s, x, mi, ma, sc, c, pri, sec, tert);
     }
 

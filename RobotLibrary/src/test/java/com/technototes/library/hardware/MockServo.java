@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoController;
 
 public class MockServo implements Servo {
+
     public MockServo() {}
 
     @Override

@@ -1,10 +1,11 @@
 {
-  "printWidth": 80,
+  "printWidth": 100,
   "trailingComma": "all",
   "singleQuote": true,
   "proseWrap": "always",
   "tabWidth": 2,
   "useTabs": false,
+  "endOfLine": "lf",
   "overrides": [
     {
       "files": ".prettierrc",
@@ -13,6 +14,10 @@
     {
       "files": "*.json",
       "options": { "parser": "json" }
+    },
+    {
+      "files": "*.java",
+      "options": { "tabWidth": 4 }
     }
   ]
 }

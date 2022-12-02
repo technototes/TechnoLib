@@ -3,7 +3,6 @@ package com.technototes.library.hardware.sensor.encoder;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.Sensor;
 
@@ -12,6 +11,7 @@ import com.technototes.library.hardware.sensor.Sensor;
  * slot's motor direction
  */
 public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder {
+
     private static final int CPS_STEP = 0x10000;
     public int offset = 0;
 
@@ -88,7 +88,10 @@ public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder {
     }
 
     private int getMultiplier() {
-        return getDirection().getMultiplier() * (motor.getDirection() == DcMotorSimple.Direction.FORWARD ? 1 : -1);
+        return (
+            getDirection().getMultiplier() *
+            (motor.getDirection() == DcMotorSimple.Direction.FORWARD ? 1 : -1)
+        );
     }
 
     /**

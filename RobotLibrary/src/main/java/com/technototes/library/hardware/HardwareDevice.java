@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 @Deprecated
 @SuppressWarnings("unused")
 public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.HardwareDevice> {
+
     /**
      * Hardware map object for stuff
      */
@@ -35,7 +36,12 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
      */
     @SuppressWarnings("unchecked cast")
     protected HardwareDevice(String deviceName) {
-        this(hardwareMap.get((Class<T>) com.qualcomm.robotcore.hardware.HardwareDevice.class /*T.class*/, deviceName));
+        this(
+            hardwareMap.get(
+                (Class<T>) com.qualcomm.robotcore.hardware.HardwareDevice.class/*T.class*/,
+                deviceName
+            )
+        );
     }
 
     /**

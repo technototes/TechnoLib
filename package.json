@@ -7,24 +7,17 @@
   "author": "Kevin Frei <kevinfrei@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "format": "run-script-os",
-    "format:win32": ".\\gradlew spotlessApply && yarn run prettier",
-    "format:default": "./gradlew spotlessApply && yarn run prettier",
     "build": "run-script-os",
     "build:win32": ".\\gradlew build",
     "build:default": "./gradlew build",
-    "fulldoc": "run-script-os",
-    "fulldoc:win32": "yarn run doc && yarn run fixdocs && yarn run format",
-    "fulldoc:default": "yarn run doc && yarn run fixdocs && yarn run format",
+    "fulldoc": "yarn run doc && yarn run format",
     "docs": "yarn run doc",
     "doc": "run-script-os",
     "doc:win32": ".\\gradlew javadoc",
     "doc:default": "./gradlew javadoc",
-    "prettier": "prettier --write docs/**/*.js docs/**/*.html docs/**/*.css **/*.md Path/**/*.java RobotLibrary/**/*.java Vision/**/*.java",
-    "fixdocs": "nodedos2unix docs/**/COPYRIGHT docs/**/LICENSE docs/**/element-list docs/**/*.html docs/**/*.js docs/**/*.css"
+    "format": "prettier --write docs/**/*.js docs/**/*.html docs/**/*.css **/*.md Path/**/*.java RobotLibrary/**/*.java Vision/**/*.java"
   },
   "devDependencies": {
-    "@freik/dos2unix": "^0.1.0",
     "prettier": "^2.7.1",
     "prettier-plugin-java": "^2.0.0",
     "run-script-os": "^1.1.6"

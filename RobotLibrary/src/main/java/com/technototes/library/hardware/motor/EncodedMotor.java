@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
-
 import com.technototes.library.hardware.Sensored;
 import com.technototes.library.hardware.sensor.encoder.Encoder;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
@@ -153,6 +152,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     public double getSensorValue() {
         return encoder.getSensorValue();
     }
+
     //
     //    @Override
     //    public void setPIDValues(double p, double i, double d) {

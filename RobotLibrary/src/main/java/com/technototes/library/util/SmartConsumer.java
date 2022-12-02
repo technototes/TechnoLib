@@ -5,7 +5,6 @@ import java.util.Map;
 
 @FunctionalInterface
 public interface SmartConsumer<T> {
-
     Map<SmartConsumer<?>, Object> map = new HashMap<>();
 
     void consume(T t);

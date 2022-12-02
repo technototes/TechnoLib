@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * A simple Observation-based integral calculator over time
  */
 public class Integral {
+
     private double accumulator;
     private ElapsedTime deltaTime;
 
