@@ -414,10 +414,16 @@ div.table-tabs > button.table-tab {
 }
 .four-column-summary {
   display: grid;
+<<<<<<< HEAD
   grid-template-columns: minmax(10%, max-content) minmax(10%, max-content) minmax(10%, max-content) minmax(
       10%,
       auto
     );
+=======
+  grid-template-columns:
+    minmax(10%, max-content) minmax(10%, max-content) minmax(10%, max-content)
+    minmax(10%, auto);
+>>>>>>> 75c2a85 (About to try using prettier instead of spotless)
 }
 @media screen and (max-width: 600px) {
   .two-column-summary {

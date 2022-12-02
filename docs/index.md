@@ -8,13 +8,15 @@
 > TechnoLib is an FTC Library for everyone:
 
 - WPILib inspired command structure
-- Tons of simple implementations to provide abstractions, and teach you the basics
+- Tons of simple implementations to provide abstractions, and teach you the
+  basics
 - EasyOpenCV integration for vision
 - RoadRunner integration for path-following
 - Annotation based Telemetry
 
-**The goal of TechnoLib is not only to provide versatile resources that assist in software
-development and strengthen code structure, but to also abstract out redundancy.**
+**The goal of TechnoLib is not only to provide versatile resources that assist
+in software development and strengthen code structure, but to also abstract out
+redundancy.**
 
 ## Installation
 
@@ -34,8 +36,8 @@ But if this library is so good, it must be hard to install right? wrong:
 
 ## Ease of Use
 
-But if this library is so powerful, won't it be hard to use? Nope, in fact its easier than without
-the library
+But if this library is so powerful, won't it be hard to use? Nope, in fact its
+easier than without the library
 
 - Complex subsystems have already been written for you
 - Plenty of simple things to make your life easier
@@ -43,8 +45,14 @@ the library
 
 ## Documentation
 
+<<<<<<< HEAD
 There are not currently any good 'stand alone' examples. The best place for you to get an idea of
 how this stuff works is in our robot code. It's all public on github:
+=======
+There are not currently any good 'stand alone' examples. The best place for you
+to get an idea of how this stuff works is in our robot code. It's all public on
+github:
+>>>>>>> 75c2a85 (About to try using prettier instead of spotless)
 
 - Freight Frenzy (2021-2022)' s
   [16750 robot source code](https://github.com/technototes/FreightFrenzy2021/tree/master/OspreyCode/src/main/java/org/firstinspires/ftc/teamcode)
