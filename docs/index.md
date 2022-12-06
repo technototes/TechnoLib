@@ -43,8 +43,9 @@ the library
 
 ## Documentation
 
-There are not currently any good 'stand alone' examples. The best place for you to get an idea of
-how this stuff works is in our robot code. It's all public on github:
+There are not currently any good 'stand alone' examples. The best place
+for you to get an idea of how this stuff works is in our robot code. It's all public on github:
+idea of how this stuff works is in our robot code. It's all public on github:
 
 - Freight Frenzy (2021-2022)' s
   [16750 robot source code](https://github.com/technototes/FreightFrenzy2021/tree/master/OspreyCode/src/main/java/org/firstinspires/ftc/teamcode)

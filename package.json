@@ -1,5 +1,5 @@
 {
-  "name": "TechnoLib",
+  "name": "technolib",
   "version": "1.0.0",
   "description": "TechnoLib automation scripts",
   "main": "build/automation.js",

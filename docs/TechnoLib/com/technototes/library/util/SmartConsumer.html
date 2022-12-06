@@ -76,12 +76,21 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - The type of the value to be accepted/consumed</dd>
+</dl>
+<dl class="notes">
 <dt>Functional Interface:</dt>
 <dd>This is a functional interface and can therefore be used as the assignment target for a lambda expression or method reference.</dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/FunctionalInterface.html" title="class or interface in java.lang" class="external-link">@FunctionalInterface</a>
-</span><span class="modifiers">public interface </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/util/SmartConsumer.html#line.6">SmartConsumer</a>&lt;T&gt;</span></div>
+</span><span class="modifiers">public interface </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/util/SmartConsumer.html#line.15">SmartConsumer</a>&lt;T&gt;</span></div>
+<div class="block">This is a functional interface, when 'accept' is invoked, will only invoke the 'consume' method
+ when a different value is provided. It basically removed duplicates.
+ <p>
+ TODO: This seems like the HashMap is completely unnecessary. Maybe I'm not following the java
+ TODO: object model, but I don't see how map ever has more than a single value in it...</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -96,7 +105,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="SmartConsumer.html" title="interface in com.technototes.library.util">SmartConsumer</a>&lt;?&gt;,&#8203;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</code></div>
 <div class="col-second even-row-color"><code><span class="member-name-link"><a href="#map">map</a></span></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The map of values that have been consumed.</div>
+</div>
 </div>
 </section>
 </li>
@@ -113,10 +124,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default <a href="SmartConsumer.html" title="interface in com.technototes.library.util">SmartConsumer</a>&lt;<a href="SmartConsumer.html" title="type parameter in SmartConsumer">T</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#accept(T)">accept</a></span>&#8203;(<a href="SmartConsumer.html" title="type parameter in SmartConsumer">T</a>&nbsp;t)</code></div>
-<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">
+<div class="block">The public interface for a SmartConsumer: accept should be invoked, not consume :)</div>
+</div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3"><code><span class="member-name-link"><a href="#consume(T)">consume</a></span>&#8203;(<a href="SmartConsumer.html" title="type parameter in SmartConsumer">T</a>&nbsp;t)</code></div>
-<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table-tab2 method-summary-table method-summary-table-tab3">
+<div class="block">The 'consume' function</div>
+</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code>default <a href="SmartConsumer.html" title="type parameter in SmartConsumer">T</a></code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table"><code><span class="member-name-link"><a href="#getLast()">getLast</a></span>()</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab5 method-summary-table">&nbsp;</div>
@@ -140,7 +155,8 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="map">
 <h3>map</h3>
-<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="SmartConsumer.html" title="interface in com.technototes.library.util">SmartConsumer</a>&lt;?&gt;,&#8203;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/util/SmartConsumer.html#line.8">map</a></span></div>
+<div class="member-signature"><span class="modifiers">static final</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="SmartConsumer.html" title="interface in com.technototes.library.util">SmartConsumer</a>&lt;?&gt;,&#8203;<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/util/SmartConsumer.html#line.20">map</a></span></div>
+<div class="block">The map of values that have been consumed.</div>
 </section>
 </li>
 </ul>
@@ -154,25 +170,32 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="consume(T)">
 <h3 id="consume(java.lang.Object)">consume</h3>
-<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/util/SmartConsumer.html#line.10">consume</a></span>&#8203;<span class="parameters">(<a href="SmartConsumer.html" title="type parameter in SmartConsumer">T</a>&nbsp;t)</span></div>
+<div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/util/SmartConsumer.html#line.25">consume</a></span>&#8203;<span class="parameters">(<a href="SmartConsumer.html" title="type parameter in SmartConsumer">T</a>&nbsp;t)</span></div>
+<div class="block">The 'consume' function</div>
 </section>
 </li>
 <li>
 <section class="detail" id="accept(T)">
 <h3 id="accept(java.lang.Object)">accept</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SmartConsumer.html" title="interface in com.technototes.library.util">SmartConsumer</a>&lt;<a href="SmartConsumer.html" title="type parameter in SmartConsumer">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/util/SmartConsumer.html#line.12">accept</a></span>&#8203;<span class="parameters">(<a href="SmartConsumer.html" title="type parameter in SmartConsumer">T</a>&nbsp;t)</span></div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SmartConsumer.html" title="interface in com.technototes.library.util">SmartConsumer</a>&lt;<a href="SmartConsumer.html" title="type parameter in SmartConsumer">T</a>&gt;</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/util/SmartConsumer.html#line.32">accept</a></span>&#8203;<span class="parameters">(<a href="SmartConsumer.html" title="type parameter in SmartConsumer">T</a>&nbsp;t)</span></div>
+<div class="block">The public interface for a SmartConsumer: accept should be invoked, not consume :)</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>t</code> - The value being consumed/accepted</dd>
+<dt>Returns:</dt>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getLast()">
 <h3>getLast</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SmartConsumer.html" title="type parameter in SmartConsumer">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/util/SmartConsumer.html#line.20">getLast</a></span>()</div>
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="SmartConsumer.html" title="type parameter in SmartConsumer">T</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/util/SmartConsumer.html#line.40">getLast</a></span>()</div>
 </section>
 </li>
 <li>
 <section class="detail" id="reset()">
 <h3>reset</h3>
-<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/util/SmartConsumer.html#line.24">reset</a></span>()</div>
+<div class="member-signature"><span class="modifiers">static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/util/SmartConsumer.html#line.44">reset</a></span>()</div>
 </section>
 </li>
 </ul>
