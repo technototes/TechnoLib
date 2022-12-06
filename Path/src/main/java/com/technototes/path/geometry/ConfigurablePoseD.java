@@ -1,12 +1,12 @@
 package com.technototes.path.geometry;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
-
 public class ConfigurablePoseD extends ConfigurableVector {
+
     public double heading;
 
     public ConfigurablePoseD(Pose2d pose) {
@@ -124,12 +124,9 @@ public class ConfigurablePoseD extends ConfigurableVector {
 
     public static Pose2d mirrorOverY(Pose2d old) {
         return new Pose2d(
-                old.times(-1).getX(),
-                old.getY(),
-                old.headingVec()
-                        .rotated(-Math.PI / 2)
-                        .times(-1)
-                        .rotated(Math.PI / 2)
-                        .angle());
+            old.times(-1).getX(),
+            old.getY(),
+            old.headingVec().rotated(-Math.PI / 2).times(-1).rotated(Math.PI / 2).angle()
+        );
     }
 }

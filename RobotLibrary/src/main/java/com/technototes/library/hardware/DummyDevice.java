@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.hardware.HardwareDevice;
  *
  * @param <T> The type of the device
  */
-@Deprecated
 public class DummyDevice<T> implements HardwareDevice {
 
     private final T internal;

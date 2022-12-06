@@ -42,8 +42,7 @@ repositories {
     mavenCentral()
 }
 
-task javadoc(type: Javadoc)
-{
+task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath = project.files(android.getBootClasspath().join(File.pathSeparator))
     failOnError false

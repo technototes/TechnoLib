@@ -1,7 +1,6 @@
 package com.technototes.library.command;
 
 import androidx.annotation.Nullable;
-
 import java.util.function.BooleanSupplier;
 
 /**
@@ -20,8 +19,11 @@ import java.util.function.BooleanSupplier;
  * @author Alex Stedman
  */
 public class ConditionalCommand implements Command {
+
     private BooleanSupplier supplier;
-    @Nullable private Command trueCommand, falseCommand;
+
+    @Nullable
+    private Command trueCommand, falseCommand;
 
     /**
      * This makes a "wait" command
@@ -59,7 +61,9 @@ public class ConditionalCommand implements Command {
         trueCommand = trueC;
         falseCommand = falseC;
         CommandScheduler.getInstance().scheduleWithOther(this, trueCommand, condition);
-        CommandScheduler.getInstance().scheduleWithOther(this, falseCommand, () -> !condition.getAsBoolean());
+        CommandScheduler
+            .getInstance()
+            .scheduleWithOther(this, falseCommand, () -> !condition.getAsBoolean());
     }
 
     @Override

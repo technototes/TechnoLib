@@ -1,17 +1,16 @@
 package com.technototes.library.control;
 
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-
 import com.qualcomm.robotcore.hardware.Gamepad;
-
 import com.technototes.library.command.Command;
 import com.technototes.library.command.CommandScheduler;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 /** Class for command gamepads that specifies class params
  * @author Alex Stedman
  */
 public class CommandGamepad extends GamepadBase<CommandButton, CommandAxis> {
+
     /** Make command gamepad
      *
      * @param gamepad The normal gamepad

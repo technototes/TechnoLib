@@ -11,6 +11,7 @@ import com.technototes.library.hardware.HardwareDeviceGroup;
 @Deprecated
 @SuppressWarnings("unused")
 public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
+
     private final Servo[] followers;
 
     /**

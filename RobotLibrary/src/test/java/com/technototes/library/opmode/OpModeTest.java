@@ -3,10 +3,10 @@ package com.technototes.library.opmode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import com.technototes.library.structure.CommandOpMode;
 
 public class OpModeTest {
+
     private OpMode opMode;
     private HardwareMap hardwareMap;
     private Gamepad g1, g2;
@@ -24,6 +24,7 @@ public class OpModeTest {
     public void run() {}
 
     public class TestOpMode extends CommandOpMode {
+
         @Override
         public void universalLoop() {
             System.out.println(getOpModeState());

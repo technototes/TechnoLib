@@ -1,17 +1,16 @@
 package com.technototes.library.subsystem.drivebase;
 
-import java.util.function.DoubleSupplier;
-
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
-
 import com.technototes.library.hardware.motor.Motor;
+import java.util.function.DoubleSupplier;
 
 /** Class for mecanum/xdrive drivebases
  * @author Alex Stedman
  * @param <T> The motor type for the subsystem
  */
 public class MecanumDrivebaseSubsystem<T extends DcMotorSimple> extends DrivebaseSubsystem<T> {
+
     /** Drive motors
      *
      */
@@ -24,7 +23,12 @@ public class MecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Drivebas
      * @param rlMotor The rear left motor for the drivebase
      * @param rrMotor The rear right motor for the drivebase
      */
-    public MecanumDrivebaseSubsystem(Motor<T> flMotor, Motor<T> frMotor, Motor<T> rlMotor, Motor<T> rrMotor) {
+    public MecanumDrivebaseSubsystem(
+        Motor<T> flMotor,
+        Motor<T> frMotor,
+        Motor<T> rlMotor,
+        Motor<T> rrMotor
+    ) {
         super(flMotor, frMotor, rlMotor, rrMotor);
         this.flMotor = flMotor;
         this.frMotor = frMotor;
@@ -41,7 +45,12 @@ public class MecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Drivebas
      * @param rrMotor The rear right motor for the drivebase
      */
     public MecanumDrivebaseSubsystem(
-            DoubleSupplier gyro, Motor<T> flMotor, Motor<T> frMotor, Motor<T> rlMotor, Motor<T> rrMotor) {
+        DoubleSupplier gyro,
+        Motor<T> flMotor,
+        Motor<T> frMotor,
+        Motor<T> rlMotor,
+        Motor<T> rrMotor
+    ) {
         super(gyro, flMotor, frMotor, rlMotor, rrMotor);
         this.flMotor = flMotor;
         this.frMotor = frMotor;

@@ -1,15 +1,15 @@
 package com.technototes.library.control;
 
-import java.util.function.BooleanSupplier;
-
 import com.technototes.library.general.Enablable;
 import com.technototes.library.general.Invertable;
 import com.technototes.library.general.Periodic;
+import java.util.function.BooleanSupplier;
 
 /** The class to extend custom gamepad buttons from
  * @author Alex Stedman
  */
-public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonBase>, Enablable<ButtonBase> {
+public class ButtonBase
+    implements BooleanSupplier, Periodic, Invertable<ButtonBase>, Enablable<ButtonBase> {
 
     protected BooleanSupplier booleanSupplier;
 
@@ -54,6 +54,7 @@ public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonB
     public boolean isJustPressed() {
         return pressed && recentAction;
     }
+
     /** Returns if the button is just released
      *
      * @return The above condition
@@ -61,6 +62,7 @@ public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonB
     public boolean isJustReleased() {
         return !pressed && recentAction;
     }
+
     /** Returns if the button is pressed
      *
      * @return The above condition
@@ -68,6 +70,7 @@ public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonB
     public boolean isPressed() {
         return pressed;
     }
+
     /** Returns if the button is released
      *
      * @return The above condition
@@ -75,6 +78,7 @@ public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonB
     public boolean isReleased() {
         return !pressed;
     }
+
     /** Returns if the button is just toggled
      *
      * @return The above condition
@@ -82,6 +86,7 @@ public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonB
     public boolean isJustToggled() {
         return toggle && recentAction && pressed;
     }
+
     /** Returns if the button is just untoggled
      *
      * @return The above condition
@@ -89,6 +94,7 @@ public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonB
     public boolean isJustInverseToggled() {
         return !toggle && recentAction && pressed;
     }
+
     /** Returns if the button is toggled
      *
      * @return The above condition
@@ -96,6 +102,7 @@ public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonB
     public boolean isToggled() {
         return toggle;
     }
+
     /** Returns if the button is untoggled
      *
      * @return The above condition

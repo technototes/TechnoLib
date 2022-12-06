@@ -8,6 +8,7 @@ import com.technototes.library.subsystem.DeviceSubsystem;
  * @param <T> The motor type
  */
 public class MotorSubsystem<T extends Motor<?>> extends DeviceSubsystem<T> {
+
     /** Create motor subsystem
      *
      * @param motor The motor

@@ -10,7 +10,9 @@ import com.technototes.library.hardware.HardwareDevice;
  */
 @Deprecated
 @SuppressWarnings("unused")
-public abstract class Sensor<T extends com.qualcomm.robotcore.hardware.HardwareDevice> extends HardwareDevice<T> {
+public abstract class Sensor<T extends com.qualcomm.robotcore.hardware.HardwareDevice>
+    extends HardwareDevice<T> {
+
     /**
      * Create a sensor
      *

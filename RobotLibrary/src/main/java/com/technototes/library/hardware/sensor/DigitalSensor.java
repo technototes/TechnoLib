@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DigitalChannel;
  */
 @SuppressWarnings("unused")
 public class DigitalSensor extends Sensor<DigitalChannel> {
+
     /** Make a digital sensor
      *
      * @param device The device

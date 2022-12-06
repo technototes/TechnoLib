@@ -11,6 +11,7 @@ public interface IColorSensor {
     default int red() {
         return (argb() >> 16) & 0xff;
     }
+
     /** Get the RGB green of the sensor
      *
      * @return Green
@@ -18,6 +19,7 @@ public interface IColorSensor {
     default int green() {
         return (argb() >> 8) & 0xff;
     }
+
     /** Get the RGB blue of the sensor
      *
      * @return Blue
@@ -33,6 +35,7 @@ public interface IColorSensor {
     default int alpha() {
         return (argb() >> 24) & 0xff;
     }
+
     /** Get HSV as an int
      *
      * @return HSV

@@ -1,13 +1,13 @@
 package com.technototes.path.util;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 
 /**
  * Various utility functions for the BNO055 IMU.
  */
 public class BNO055IMUUtil {
+
     /**
      * Remap BNO055 IMU axes and signs. For reference, the default order is {@link AxesOrder#ZYX}.
      * Call after {@link BNO055IMU#initialize(BNO055IMU.Parameters)}. Although this isn't

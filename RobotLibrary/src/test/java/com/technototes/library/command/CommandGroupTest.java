@@ -4,7 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CommandGroupTest {
-    Command c1 = () -> print(1), c2 = () -> print(2), c3 = () -> print(3), c4 = () -> print(4), c5 = () -> print(5);
+
+    Command c1 = () -> print(1), c2 = () -> print(2), c3 = () -> print(3), c4 = () ->
+        print(4), c5 = () -> print(5);
 
     @BeforeEach
     public void setup() {

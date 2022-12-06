@@ -1,10 +1,10 @@
 package com.technototes.library.logger.entry;
 
+import com.technototes.library.util.Color;
 import java.util.function.Supplier;
 
-import com.technototes.library.util.Color;
-
 public class NumberEntry extends Entry<Number> {
+
     protected Color numberColor;
 
     public NumberEntry(String n, Supplier<Number> s, int x, Color c, Color num) {

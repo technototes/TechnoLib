@@ -1,11 +1,11 @@
 package com.technototes.library.util;
 
 import java.util.function.DoubleConsumer;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DifferentialTest {
+
     public Differential differential;
 
     public double d1, d2;

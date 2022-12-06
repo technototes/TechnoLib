@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 public class SimpleCommandTest {
 
     static class InstantCommand implements Command {
+
         public int initialized = 0;
         public int executed = 0;
         public int ended = 0;

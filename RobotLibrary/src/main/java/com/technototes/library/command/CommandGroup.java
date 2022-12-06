@@ -11,6 +11,7 @@ import java.util.Map;
  * @author Alex Stedman
  */
 public abstract class CommandGroup implements Command {
+
     /**
      * This is a map from the command to whether it has been run
      */
@@ -90,8 +91,9 @@ public abstract class CommandGroup implements Command {
     @Override
     public void execute() {
         // makes true if command just finished
-        commandMap.replaceAll(
-                (command, bool) -> (countCancel ? command.justFinished() : command.justFinishedNoCancel()) || bool);
+        commandMap.replaceAll((command, bool) ->
+            (countCancel ? command.justFinished() : command.justFinishedNoCancel()) || bool
+        );
         anyCancelled = commandMap.keySet().stream().anyMatch(Command::isCancelled) || anyCancelled;
     }
 

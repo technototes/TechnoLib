@@ -7,6 +7,7 @@ import com.technototes.library.hardware.HardwareDevice;
  * @param <T> The {@link HardwareDevice} for this subsystem
  */
 public abstract class DeviceSubsystem<T extends HardwareDevice<?>> implements Subsystem {
+
     protected T device;
 
     /** Create a subsystem

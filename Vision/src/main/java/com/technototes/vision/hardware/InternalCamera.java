@@ -1,15 +1,15 @@
 package com.technototes.vision.hardware;
 
+import com.technototes.library.hardware.DummyDevice;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvInternalCamera;
-
-import com.technototes.library.hardware.DummyDevice;
 
 /**
  * This is a Camera for use with a phone's internal camera
  */
 @SuppressWarnings("unused")
-public class InternalCamera extends Camera<OpenCvInternalCamera, DummyDevice<OpenCvInternalCamera.CameraDirection>> {
+public class InternalCamera
+    extends Camera<OpenCvInternalCamera, DummyDevice<OpenCvInternalCamera.CameraDirection>> {
 
     /**
      * Create the front-facing internal camera
@@ -44,12 +44,17 @@ public class InternalCamera extends Camera<OpenCvInternalCamera, DummyDevice<Ope
      */
     @Override
     public OpenCvInternalCamera createCamera() {
-        return OpenCvCameraFactory.getInstance()
-                .createInternalCamera(
-                        getCameraDirection(),
-                        hardwareMap
-                                .appContext
-                                .getResources()
-                                .getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName()));
+        return OpenCvCameraFactory
+            .getInstance()
+            .createInternalCamera(
+                getCameraDirection(),
+                hardwareMap.appContext
+                    .getResources()
+                    .getIdentifier(
+                        "cameraMonitorViewId",
+                        "id",
+                        hardwareMap.appContext.getPackageName()
+                    )
+            );
     }
 }

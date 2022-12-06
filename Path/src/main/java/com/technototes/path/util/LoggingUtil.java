@@ -4,13 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 
 /**
  * Utility functions for log files.
  */
 public class LoggingUtil {
+
     public static final File ROAD_RUNNER_FOLDER = new File(AppUtil.ROOT_FOLDER + "/RoadRunner/");
 
     private static final long LOG_QUOTA = 25 * 1024 * 1024; // 25MB log quota for now
@@ -28,7 +28,10 @@ public class LoggingUtil {
     private static void pruneLogsIfNecessary() {
         List<File> logFiles = new ArrayList<>();
         buildLogList(logFiles, ROAD_RUNNER_FOLDER);
-        Collections.sort(logFiles, (lhs, rhs) -> Long.compare(lhs.lastModified(), rhs.lastModified()));
+        Collections.sort(
+            logFiles,
+            (lhs, rhs) -> Long.compare(lhs.lastModified(), rhs.lastModified())
+        );
 
         long dirSize = 0;
         for (File file : logFiles) {

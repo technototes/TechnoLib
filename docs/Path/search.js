@@ -1,26 +1,26 @@
 /*
  * Copyright (c) 2015, 2020, Oracle and/or its affiliates. All rights reserved.
- * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Oracle designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
  *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
  *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
+ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+ * or visit www.oracle.com if you need additional information or have any
+ * questions.
  */
 
 var noResult = { l: 'No results found' };
@@ -102,8 +102,8 @@ function createMatcher(pattern, flags) {
 }
 var watermark = 'Search';
 $(function () {
-  var search = $('#search-input');
-  var reset = $('#reset-button');
+  var search = $('#search');
+  var reset = $('#reset');
   search.val('');
   search.prop('disabled', false);
   reset.prop('disabled', false);
@@ -135,9 +135,7 @@ $.widget('custom.catcomplete', $.ui.autocomplete, {
     $.each(items, function (index, item) {
       var li;
       if (item.category && item.category !== currentCategory) {
-        ul.append(
-          '<li class="ui-autocomplete-category">' + item.category + '</li>',
-        );
+        ul.append('<li class="ui-autocomplete-category">' + item.category + '</li>');
         currentCategory = item.category;
       }
       li = rMenu._renderItemData(ul, item);
@@ -166,11 +164,7 @@ $.widget('custom.catcomplete', $.ui.autocomplete, {
     } else if (item.category === catMembers) {
       label =
         item.p && item.p !== UNNAMED
-          ? getHighlightedText(
-              item.p + '.' + item.c + '.' + item.l,
-              matcher,
-              fallbackMatcher,
-            )
+          ? getHighlightedText(item.p + '.' + item.c + '.' + item.l, matcher, fallbackMatcher)
           : getHighlightedText(item.c + '.' + item.l, matcher, fallbackMatcher);
     } else if (item.category === catSearchTags) {
       label = getHighlightedText(item.l, matcher, fallbackMatcher);
@@ -190,12 +184,7 @@ $.widget('custom.catcomplete', $.ui.autocomplete, {
             '</span><br>',
         );
       } else {
-        div.html(
-          label +
-            '<span class="search-tag-holder-result"> (' +
-            item.h +
-            ')</span>',
-        );
+        div.html(label + '<span class="search-tag-holder-result"> (' + item.h + ')</span>');
       }
     } else {
       if (item.m) {
@@ -220,8 +209,7 @@ function rankMatch(match, category) {
     leftBoundaryMatch = 0;
   } else if (
     '_' === input[index - 1] ||
-    (input[index] === input[index].toUpperCase() &&
-      !/^[A-Z0-9_$]+$/.test(input))
+    (input[index] === input[index].toUpperCase() && !/^[A-Z0-9_$]+$/.test(input))
   ) {
     leftBoundaryMatch = 1;
   }
@@ -281,14 +269,9 @@ function doSearch(request, response) {
     return [];
   }
   function searchIndex(indexArray, category, nameFunc) {
-    var primaryResults = searchIndexWithMatcher(
-      indexArray,
-      camelCaseMatcher,
-      category,
-      nameFunc,
-    );
+    var primaryResults = searchIndexWithMatcher(indexArray, camelCaseMatcher, category, nameFunc);
     result = result.concat(primaryResults);
-    if (primaryResults.length <= MIN_RESULTS && !camelCaseMatcher.ignoreCase) {
+    if (primaryResults.length <= MIN_RESULTS && camelCaseMatcher.flags.indexOf('i') === -1) {
       var secondaryResults = searchIndexWithMatcher(
         indexArray,
         fallbackMatcher,
@@ -307,17 +290,13 @@ function doSearch(request, response) {
     return item.l;
   });
   searchIndex(packageSearchIndex, catPackages, function (item) {
-    return item.m && request.term.indexOf('/') > -1
-      ? item.m + '/' + item.l
-      : item.l;
+    return item.m && request.term.indexOf('/') > -1 ? item.m + '/' + item.l : item.l;
   });
   searchIndex(typeSearchIndex, catTypes, function (item) {
     return request.term.indexOf('.') > -1 ? item.p + '.' + item.l : item.l;
   });
   searchIndex(memberSearchIndex, catMembers, function (item) {
-    return request.term.indexOf('.') > -1
-      ? item.p + '.' + item.c + '.' + item.l
-      : item.l;
+    return request.term.indexOf('.') > -1 ? item.p + '.' + item.c + '.' + item.l : item.l;
   });
   searchIndex(tagSearchIndex, catSearchTags, function (item) {
     return item.l;
@@ -334,7 +313,7 @@ function doSearch(request, response) {
   response(result);
 }
 $(function () {
-  $('#search-input').catcomplete({
+  $('#search').catcomplete({
     minLength: 1,
     delay: 300,
     source: doSearch,
@@ -342,7 +321,7 @@ $(function () {
       if (!ui.content.length) {
         ui.content.push(noResult);
       } else {
-        $('#search-input').empty();
+        $('#search').empty();
       }
     },
     autoFocus: true,
@@ -375,8 +354,7 @@ $(function () {
           if (ui.item.p === UNNAMED) {
             url += ui.item.c + '.html' + '#';
           } else {
-            url +=
-              ui.item.p.replace(/\./g, '/') + '/' + ui.item.c + '.html' + '#';
+            url += ui.item.p.replace(/\./g, '/') + '/' + ui.item.c + '.html' + '#';
           }
           if (ui.item.u) {
             url += ui.item.u;
@@ -391,7 +369,7 @@ $(function () {
         } else {
           window.location.href = pathtoroot + url;
         }
-        $('#search-input').focus();
+        $('#search').focus();
       }
     },
   });

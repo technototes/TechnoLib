@@ -1,9 +1,8 @@
 package com.technototes.library.control;
 
-import java.util.function.DoubleSupplier;
-
 import com.technototes.library.general.Enablable;
 import com.technototes.library.general.Periodic;
+import java.util.function.DoubleSupplier;
 
 /** Interface for objects that behave as sticks
  * @author Alex Stedman
@@ -19,6 +18,7 @@ public interface Stick extends Periodic, Enablable<Stick> {
      * @return The double
      */
     double getYAxis();
+
     /** Return x axis supplier
      *
      * @return The double supplier
@@ -26,6 +26,7 @@ public interface Stick extends Periodic, Enablable<Stick> {
     default DoubleSupplier getXSupplier() {
         return this::getXAxis;
     }
+
     /** Return y axis supplier
      *
      * @return The double supplier

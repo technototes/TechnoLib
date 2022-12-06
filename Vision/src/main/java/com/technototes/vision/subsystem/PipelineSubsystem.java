@@ -1,9 +1,8 @@
 package com.technototes.vision.subsystem;
 
-import org.openftc.easyopencv.OpenCvCameraRotation;
-
 import com.technototes.library.subsystem.Subsystem;
 import com.technototes.vision.hardware.Camera;
+import org.openftc.easyopencv.OpenCvCameraRotation;
 
 /**
  * A vision streaming pipeline to enable vision processing during an opmode

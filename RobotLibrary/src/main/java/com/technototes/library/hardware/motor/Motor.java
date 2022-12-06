@@ -1,13 +1,11 @@
 package com.technototes.library.hardware.motor;
 
-import java.util.function.Supplier;
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
-
 import com.technototes.library.general.Invertable;
 import com.technototes.library.hardware.HardwareDevice;
+import java.util.function.Supplier;
 
 /**
  * Class for motors
@@ -16,8 +14,10 @@ import com.technototes.library.hardware.HardwareDevice;
  * @author Alex Stedman
  */
 @SuppressWarnings("unused")
-public class Motor<T extends DcMotorSimple> extends HardwareDevice<T>
-        implements Invertable<Motor<T>>, Supplier<Double> {
+public class Motor<T extends DcMotorSimple>
+    extends HardwareDevice<T>
+    implements Invertable<Motor<T>>, Supplier<Double> {
+
     private boolean invert = false;
     private double min = -1, max = 1;
 
@@ -71,7 +71,8 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T>
      */
     @Override
     public Motor<T> setInverted(boolean inv) {
-        getDevice().setDirection(inv ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);
+        getDevice()
+            .setDirection(inv ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);
         invert = inv;
         return this;
     }
@@ -110,8 +111,9 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T>
      * @return The Motor device (for chaining)
      */
     public Motor<T> brake() {
-        if (getDevice() instanceof DcMotor)
-            ((DcMotor) getDevice()).setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        if (getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setZeroPowerBehavior(
+                DcMotor.ZeroPowerBehavior.BRAKE
+            );
         return this;
     }
 
@@ -121,8 +123,9 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T>
      * @return The Motor device (for chaining)
      */
     public Motor<T> coast() {
-        if (getDevice() instanceof DcMotor)
-            ((DcMotor) getDevice()).setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        if (getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setZeroPowerBehavior(
+                DcMotor.ZeroPowerBehavior.FLOAT
+            );
         return this;
     }
 

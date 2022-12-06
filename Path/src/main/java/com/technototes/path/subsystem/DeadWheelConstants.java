@@ -10,7 +10,6 @@ import java.lang.reflect.Field;
 @SuppressWarnings("unused")
 @FunctionalInterface
 public interface DeadWheelConstants {
-
     Class getConstant();
 
     default double getDouble(Class<? extends Annotation> a) {
@@ -43,27 +42,33 @@ public interface DeadWheelConstants {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface LateralDistance {}
+    @interface LateralDistance {
+    }
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface ForwardOffset {}
+    @interface ForwardOffset {
+    }
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface EncoderOverflow {}
+    @interface EncoderOverflow {
+    }
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface GearRatio {}
+    @interface GearRatio {
+    }
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface TicksPerRev {}
+    @interface TicksPerRev {
+    }
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    @interface WheelRadius {}
+    @interface WheelRadius {
+    }
 
     static double encoderTicksToInches(double ticks, double rad, double rat, double rev) {
         return rad * 2 * Math.PI * rat * ticks / rev;

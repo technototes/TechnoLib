@@ -6,6 +6,7 @@ import com.technototes.library.hardware.motor.EncodedMotor;
  * @author Alex Stedman
  */
 public class EncodedMotorSubsystem extends MotorSubsystem<EncodedMotor<?>> {
+
     /** Max speed
      *
      */
@@ -37,6 +38,7 @@ public class EncodedMotorSubsystem extends MotorSubsystem<EncodedMotor<?>> {
     public boolean setPosition(double ticks) {
         return setPosition(ticks, maxSpeed);
     }
+
     /** Set position for subsystem
      *
      * @param ticks Motor ticks for position

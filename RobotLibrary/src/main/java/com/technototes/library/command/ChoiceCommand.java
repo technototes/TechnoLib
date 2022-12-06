@@ -1,7 +1,6 @@
 package com.technototes.library.command;
 
 import android.util.Pair;
-
 import java.util.Arrays;
 import java.util.function.BooleanSupplier;
 import java.util.stream.Collectors;
@@ -11,6 +10,7 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings("unused")
 public class ChoiceCommand extends ParallelRaceGroup {
+
     /**
      * Each pair represents a condition to check, and the command to execute if that condition is
      * true
@@ -20,10 +20,13 @@ public class ChoiceCommand extends ParallelRaceGroup {
      */
     @SafeVarargs
     public ChoiceCommand(Pair<BooleanSupplier, Command>... cs) {
-        super(Arrays.stream(cs)
+        super(
+            Arrays
+                .stream(cs)
                 .<Command>map(p -> new ConditionalCommand(p.first, p.second))
                 .collect(Collectors.toList())
-                .toArray(new Command[] {}));
+                .toArray(new Command[] {})
+        );
     }
 
     /**

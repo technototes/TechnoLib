@@ -5,7 +5,6 @@ import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.general.Periodic;
 
 public interface Subsystem extends Periodic {
-
     default void register() {
         CommandScheduler.getInstance().register(this);
     }

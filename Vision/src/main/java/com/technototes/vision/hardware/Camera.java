@@ -1,18 +1,14 @@
 package com.technototes.vision.hardware;
 
 import android.graphics.Bitmap;
-
+import com.technototes.library.hardware.HardwareDevice;
 import java.util.function.IntConsumer;
-
 import org.firstinspires.ftc.robotcore.external.function.Consumer;
 import org.firstinspires.ftc.robotcore.external.function.Continuation;
-
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
 import org.openftc.easyopencv.PipelineRecordingParameters;
-
-import com.technototes.library.hardware.HardwareDevice;
 
 /**
  * This is an OpenCVCamera interface using the FTC SDK camera hardware
@@ -20,8 +16,12 @@ import com.technototes.library.hardware.HardwareDevice;
  * @param <T> The OpenCvCamera type
  * @param <U> The HardwareDevice type
  */
-public abstract class Camera<T extends OpenCvCamera, U extends com.qualcomm.robotcore.hardware.HardwareDevice>
-        extends HardwareDevice<U> implements OpenCvCamera {
+public abstract class Camera<
+    T extends OpenCvCamera, U extends com.qualcomm.robotcore.hardware.HardwareDevice
+>
+    extends HardwareDevice<U>
+    implements OpenCvCamera {
+
     /**
      * This is the OpenCvCamera object created
      */
@@ -71,7 +71,6 @@ public abstract class Camera<T extends OpenCvCamera, U extends com.qualcomm.robo
 
     @Override
     public void openCameraDeviceAsync(AsyncCameraOpenListener cameraOpenListener) {
-
         getOpenCvCamera().openCameraDeviceAsync(cameraOpenListener);
     }
 
@@ -83,17 +82,20 @@ public abstract class Camera<T extends OpenCvCamera, U extends com.qualcomm.robo
      * @param error An IntConsumer error handler if an error occurs
      */
     public void openCameraDeviceAsync(Runnable open, IntConsumer error) {
-        getOpenCvCamera().openCameraDeviceAsync(new AsyncCameraOpenListener() {
-            @Override
-            public void onOpened() {
-                open.run();
-            }
+        getOpenCvCamera()
+            .openCameraDeviceAsync(
+                new AsyncCameraOpenListener() {
+                    @Override
+                    public void onOpened() {
+                        open.run();
+                    }
 
-            @Override
-            public void onError(int errorCode) {
-                error.accept(errorCode);
-            }
-        });
+                    @Override
+                    public void onError(int errorCode) {
+                        error.accept(errorCode);
+                    }
+                }
+            );
     }
 
     /**

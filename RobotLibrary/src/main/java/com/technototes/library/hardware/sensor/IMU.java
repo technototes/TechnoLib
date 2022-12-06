@@ -1,12 +1,11 @@
 package com.technototes.library.hardware.sensor;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 
 /**
  * Class for the BNO055 (Inertial Movement Units) that implements the IGyro interface
@@ -194,7 +193,8 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
             int axisMapSign = signs.bVal ^ (0b100 >> indices[0]);
 
             // Enter CONFIG mode
-            getDevice().write8(BNO055IMU.Register.OPR_MODE, BNO055IMU.SensorMode.CONFIG.bVal & 0x0F);
+            getDevice()
+                .write8(BNO055IMU.Register.OPR_MODE, BNO055IMU.SensorMode.CONFIG.bVal & 0x0F);
 
             Thread.sleep(100);
 
@@ -205,7 +205,8 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
             getDevice().write8(BNO055IMU.Register.AXIS_MAP_SIGN, axisMapSign & 0x07);
 
             // Switch back to the previous mode
-            getDevice().write8(BNO055IMU.Register.OPR_MODE, getDevice().getParameters().mode.bVal & 0x0F);
+            getDevice()
+                .write8(BNO055IMU.Register.OPR_MODE, getDevice().getParameters().mode.bVal & 0x0F);
 
             Thread.sleep(100);
         } catch (InterruptedException e) {

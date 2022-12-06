@@ -1,12 +1,12 @@
 package com.technototes.path.geometry;
 
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-import com.acmerobotics.roadrunner.geometry.Vector2d;
-
 @SuppressWarnings("unchecked")
 public class ConfigurableVector {
+
     public double x, y;
 
     public ConfigurableVector(Vector2d pose) {

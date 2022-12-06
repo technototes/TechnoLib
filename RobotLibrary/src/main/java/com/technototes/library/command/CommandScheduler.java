@@ -1,16 +1,14 @@
 package com.technototes.library.command;
 
 import androidx.annotation.Nullable;
-
+import com.technototes.library.general.Periodic;
+import com.technototes.library.structure.CommandOpMode;
+import com.technototes.library.subsystem.Subsystem;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
-
-import com.technototes.library.general.Periodic;
-import com.technototes.library.structure.CommandOpMode;
-import com.technototes.library.subsystem.Subsystem;
 
 /**
  * This is a "singleton" object for scheduling commands. Most usage originates from {@link Command}
@@ -166,7 +164,12 @@ public final class CommandScheduler {
      * @return The CommandScheduler singleton for chaining
      */
     public CommandScheduler scheduleJoystick(Command command, BooleanSupplier supplier) {
-        return scheduleForState(command, supplier, CommandOpMode.OpModeState.RUN, CommandOpMode.OpModeState.END);
+        return scheduleForState(
+            command,
+            supplier,
+            CommandOpMode.OpModeState.RUN,
+            CommandOpMode.OpModeState.END
+        );
     }
 
     /**
@@ -179,7 +182,11 @@ public final class CommandScheduler {
      * @return The CommandScheduler singleton for chaining
      */
     public CommandScheduler scheduleJoystick(Command command) {
-        return scheduleForState(command, CommandOpMode.OpModeState.RUN, CommandOpMode.OpModeState.END);
+        return scheduleForState(
+            command,
+            CommandOpMode.OpModeState.RUN,
+            CommandOpMode.OpModeState.END
+        );
     }
 
     /**
@@ -192,10 +199,14 @@ public final class CommandScheduler {
      * @return The CommandScheduler singleton for chaining
      */
     public CommandScheduler scheduleForState(
-            Command command, BooleanSupplier supplier, CommandOpMode.OpModeState... states) {
+        Command command,
+        BooleanSupplier supplier,
+        CommandOpMode.OpModeState... states
+    ) {
         return schedule(
-                command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
-                () -> supplier.getAsBoolean() && opMode.getOpModeState().isState(states));
+            command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
+            () -> supplier.getAsBoolean() && opMode.getOpModeState().isState(states)
+        );
     }
 
     /**
@@ -207,8 +218,9 @@ public final class CommandScheduler {
      */
     public CommandScheduler scheduleForState(Command command, CommandOpMode.OpModeState... states) {
         return schedule(
-                command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
-                () -> opMode.getOpModeState().isState(states));
+            command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
+            () -> opMode.getOpModeState().isState(states)
+        );
     }
 
     /**
@@ -244,8 +256,15 @@ public final class CommandScheduler {
      * @param additionalCondition The additional condition necessary to be true to schedule the 'other' command
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleAfterOther(Command dependency, Command other, BooleanSupplier additionalCondition) {
-        return schedule(other, () -> dependency.justFinishedNoCancel() && additionalCondition.getAsBoolean());
+    public CommandScheduler scheduleAfterOther(
+        Command dependency,
+        Command other,
+        BooleanSupplier additionalCondition
+    ) {
+        return schedule(
+            other,
+            () -> dependency.justFinishedNoCancel() && additionalCondition.getAsBoolean()
+        );
     }
 
     /**
@@ -257,8 +276,15 @@ public final class CommandScheduler {
      * @param additionalCondition The additional condition necessary to be true to schedule the 'other' command
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleWithOther(Command dependency, Command other, BooleanSupplier additionalCondition) {
-        return schedule(other, () -> dependency.justStarted() && additionalCondition.getAsBoolean());
+    public CommandScheduler scheduleWithOther(
+        Command dependency,
+        Command other,
+        BooleanSupplier additionalCondition
+    ) {
+        return schedule(
+            other,
+            () -> dependency.justStarted() && additionalCondition.getAsBoolean()
+        );
     }
 
     /**
@@ -274,8 +300,9 @@ public final class CommandScheduler {
             defaultMap.put(subsystem, command);
             schedule(command, () -> getCurrent(subsystem) == command);
         } else {
-            System.err.println("default commands must require their subsystem: "
-                    + command.getClass().toString());
+            System.err.println(
+                "default commands must require their subsystem: " + command.getClass().toString()
+            );
         }
         return this;
     }
@@ -297,7 +324,8 @@ public final class CommandScheduler {
      * @param s The subsystem in question
      * @return the default command for the subsystem, or null if there is none
      */
-    @Nullable public Command getDefault(Subsystem s) {
+    @Nullable
+    public Command getDefault(Subsystem s) {
         return opMode.getOpModeState() == CommandOpMode.OpModeState.RUN ? defaultMap.get(s) : null;
     }
 
@@ -309,7 +337,8 @@ public final class CommandScheduler {
      * command for the subsystem, or null if there is no current
      * command usint the subsystem, nor a default command
      */
-    @Nullable public Command getCurrent(Subsystem s) {
+    @Nullable
+    public Command getCurrent(Subsystem s) {
         if (requirementMap.get(s) == null) return null;
         for (Command c : requirementMap.get(s)) {
             if (c.isRunning()) return c;

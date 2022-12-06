@@ -1,7 +1,6 @@
 package com.technototes.library.util;
 
 import android.util.Pair;
-
 import java.util.HashMap;
 import java.util.Map;
 

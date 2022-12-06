@@ -1,15 +1,13 @@
 package com.technototes.library.structure;
 
-import java.util.List;
-
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.hardware2.HardwareBuilder;
 import com.technototes.library.logger.Logger;
+import java.util.List;
 
 /**
  * Class for command based op modes
@@ -17,6 +15,7 @@ import com.technototes.library.logger.Logger;
  * @author Alex Stedman
  */
 public abstract class CommandOpMode extends LinearOpMode {
+
     /**
      * Command gamepad objects
      */

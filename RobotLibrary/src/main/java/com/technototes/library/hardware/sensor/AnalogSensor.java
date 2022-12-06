@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.AnalogInput;
  */
 @SuppressWarnings("unused")
 public class AnalogSensor extends Sensor<AnalogInput> {
+
     /** Make an analog sensor
      *
      * @param device The analog device

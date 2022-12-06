@@ -2,11 +2,10 @@ package com.technototes.library.hardware;
 
 import static com.technototes.library.hardware.HardwareDevice.hardwareMap;
 
+import com.qualcomm.ftccommon.SoundPlayer;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
-
-import com.qualcomm.ftccommon.SoundPlayer;
 
 /**
  * There's just no possible way I care about this. I think there are rules about *not* playing
@@ -14,6 +13,7 @@ import com.qualcomm.ftccommon.SoundPlayer;
  */
 @Deprecated
 public class Speaker {
+
     private final Map<String, Integer> list;
 
     private String currentSong = null;
@@ -31,11 +31,11 @@ public class Speaker {
     public Speaker addSongs(String... name) {
         for (String s : name) {
             list.put(
-                    s,
-                    hardwareMap
-                            .appContext
-                            .getResources()
-                            .getIdentifier(s, "raw", hardwareMap.appContext.getPackageName()));
+                s,
+                hardwareMap.appContext
+                    .getResources()
+                    .getIdentifier(s, "raw", hardwareMap.appContext.getPackageName())
+            );
         }
         return this;
     }
@@ -61,7 +61,8 @@ public class Speaker {
         return SoundPlayer.getInstance().getMasterVolume();
     }
 
-    @Nullable public String getCurrentSong() {
+    @Nullable
+    public String getCurrentSong() {
         return currentSong;
     }
 }

@@ -7,14 +7,25 @@
   "author": "Kevin Frei <kevinfrei@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "format": "format && ftool format",
-    "build": "./gradlew build",
-    "fulldoc": "yarn run doc && ./fixwin && yarn run format",
-    "doc": "./genDocs",
-    "docs": "./genDocs"
+    "build": "run-script-os",
+    "build:win32": ".\\gradlew build",
+    "build:default": "./gradlew build",
+    "fulldoc": "yarn run doc && yarn run fmtdoc",
+    "docs": "yarn run doc",
+    "doc": "run-script-os",
+    "doc:win32": ".\\gradlew javadoc",
+    "doc:default": "./gradlew javadoc",
+    "fmtdoc": "prettier --write docs/**/*.js docs/**/*.html docs/**/*.css **/*.md",
+    "fmtpath": "prettier --write Path/**/*.java",
+    "fmtvis": "prettier --write Vision/**/*.java",
+    "fmtrbt": "prettier --write RobotLibrary/**/*.java",
+    "fmtsrc": "prettier --write Path/**/*.java Vision/**/*.java RobotLibrary/**/*.java",
+    "fmtmisc": "prettier --write *.json *.md .prettierrc",
+    "format": "yarn run fmtdoc && yarn run fmtsrc && yarn run fmtmisc"
   },
   "devDependencies": {
-    "@freik/build-tools": "^3.4.2",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "prettier-plugin-java": "^2.0.0",
+    "run-script-os": "^1.1.6"
   }
 }

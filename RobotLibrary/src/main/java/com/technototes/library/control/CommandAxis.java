@@ -1,14 +1,14 @@
 package com.technototes.library.control;
 
+import com.technototes.library.command.Command;
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
-
-import com.technototes.library.command.Command;
 
 /** Class for command axis for the gamepad
  * @author Alex Stedman
  */
 public class CommandAxis extends AxisBase implements CommandInput<CommandAxis> {
+
     /** Make a command axis
      *
      * @param supplier The axis supplier
@@ -55,6 +55,8 @@ public class CommandAxis extends AxisBase implements CommandInput<CommandAxis> {
     }
 
     public CommandButton getAsButton(double threshold) {
-        return new CommandButton(() -> threshold >= 0 ? getAsDouble() >= threshold : getAsDouble() < threshold);
+        return new CommandButton(() ->
+            threshold >= 0 ? getAsDouble() >= threshold : getAsDouble() < threshold
+        );
     }
 }

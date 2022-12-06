@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.util.Range;
 
 // TODO: Make this use a normal Servo on not a technototes servo
 public class ServoProfiler {
+
     private final Servo servo;
     private double maxVel, maxAccel, targetPosition, servoRange, targetTolerance;
     private final ElapsedTime deltaTime;
@@ -87,17 +88,19 @@ public class ServoProfiler {
         // range.clip makes the change fit the max constraints
         // the min and max make sure both constraints are hit
         // the deltasec makes it independent of looptime
-        delta = Range.clip(
+        delta =
+            Range.clip(
                 deltaSec * servoRange * proportion * (getTargetPosition() - getCurrentPosition()),
                 Math.max(pastDelta - maxAccel * deltaSec, -maxVel * deltaSec),
-                Math.min(pastDelta + maxAccel * deltaSec, maxVel * deltaSec));
+                Math.min(pastDelta + maxAccel * deltaSec, maxVel * deltaSec)
+            );
         servo.setPosition(getCurrentPosition() + delta / servoRange);
 
         return this;
     }
 
     public boolean isAtTarget() {
-        return Math.abs(getCurrentPosition() - getTargetPosition()) < targetTolerance;
+        return (Math.abs(getCurrentPosition() - getTargetPosition()) < targetTolerance);
     }
 
     public double getCurrentPosition() {

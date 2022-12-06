@@ -8,6 +8,7 @@ import com.technototes.library.subsystem.DeviceSubsystem;
  * @author Alex Stedman
  */
 public class ServoSubsystem extends DeviceSubsystem<Servo> {
+
     /** Create servo subsystem
      *
      * @param servo The servo

@@ -1,25 +1,26 @@
 package com.technototes.library.logger.entry;
 
-import java.util.function.Supplier;
-
 import com.technototes.library.logger.Logger;
 import com.technototes.library.util.Color;
+import java.util.function.Supplier;
 
 public class NumberSliderEntry extends NumberEntry {
+
     protected Number min, max, scale;
     protected Color primary, secondary, tertiary;
 
     public NumberSliderEntry(
-            String n,
-            Supplier<Number> s,
-            int x,
-            Number mi,
-            Number ma,
-            Number sc,
-            Color c,
-            Color pr,
-            Color sec,
-            Color tert) {
+        String n,
+        Supplier<Number> s,
+        int x,
+        Number mi,
+        Number ma,
+        Number sc,
+        Color c,
+        Color pr,
+        Color sec,
+        Color tert
+    ) {
         super(n, s, x, c);
         min = mi;
         max = ma;
