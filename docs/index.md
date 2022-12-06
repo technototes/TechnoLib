@@ -43,16 +43,9 @@ the library
 
 ## Documentation
 
-<<<<<<< HEAD <<<<<<< HEAD There are not currently any good 'stand alone' examples. The best place
+There are not currently any good 'stand alone' examples. The best place
 for you to get an idea of how this stuff works is in our robot code. It's all public on github:
-======= There are not currently any good 'stand alone' examples. The best place for you to get an
 idea of how this stuff works is in our robot code. It's all public on github:
-
-> > > > > > > # 75c2a85 (About to try using prettier instead of spotless)
-> > > > > > >
-> > > > > > > There are not currently any good 'stand alone' examples. The best place for you to get
-> > > > > > > an idea of how this stuff works is in our robot code. It's all public on github:
-> > > > > > > 41d879a (Moved from spotless to prettier for java)
 
 - Freight Frenzy (2021-2022)' s
   [16750 robot source code](https://github.com/technototes/FreightFrenzy2021/tree/master/OspreyCode/src/main/java/org/firstinspires/ftc/teamcode)
