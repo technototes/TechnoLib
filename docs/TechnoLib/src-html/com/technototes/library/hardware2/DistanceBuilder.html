@@ -19,27 +19,16 @@
 <span class="source-line-no">006</span><span id="line.6"> * TODO: Remove this. I don't believe this adds much value. Yeah, HardwareMap.get is weird, but</span>
 <span class="source-line-no">007</span><span id="line.7"> * it's in all the documentation, so just read it, see it in the examples, and you're done.</span>
 <span class="source-line-no">008</span><span id="line.8"> */</span>
-<span class="source-line-no">009</span><span id="line.9">@Deprecated</span>
-<span class="source-line-no">010</span><span id="line.10">public class DistanceBuilder extends HardwareBuilder&lt;DistanceSensor&gt; {</span>
-<span class="source-line-no">011</span><span id="line.11"></span>
-<span class="source-line-no">012</span><span id="line.12">    /**</span>
-<span class="source-line-no">013</span><span id="line.13">     * Deprecated</span>
-<span class="source-line-no">014</span><span id="line.14">     *</span>
-<span class="source-line-no">015</span><span id="line.15">     * @param name deprecated</span>
-<span class="source-line-no">016</span><span id="line.16">     */</span>
-<span class="source-line-no">017</span><span id="line.17">    public DistanceBuilder(String name) {</span>
-<span class="source-line-no">018</span><span id="line.18">        super(name);</span>
-<span class="source-line-no">019</span><span id="line.19">    }</span>
-<span class="source-line-no">020</span><span id="line.20"></span>
-<span class="source-line-no">021</span><span id="line.21">    /**</span>
-<span class="source-line-no">022</span><span id="line.22">     * Deprecated</span>
-<span class="source-line-no">023</span><span id="line.23">     *</span>
-<span class="source-line-no">024</span><span id="line.24">     * @param device deprecated</span>
-<span class="source-line-no">025</span><span id="line.25">     */</span>
-<span class="source-line-no">026</span><span id="line.26">    public DistanceBuilder(DistanceSensor device) {</span>
-<span class="source-line-no">027</span><span id="line.27">        super(device);</span>
-<span class="source-line-no">028</span><span id="line.28">    }</span>
-<span class="source-line-no">029</span><span id="line.29">}</span>
+<span class="source-line-no">009</span><span id="line.9">public class DistanceBuilder extends HardwareBuilder&lt;DistanceSensor&gt; {</span>
+<span class="source-line-no">010</span><span id="line.10"></span>
+<span class="source-line-no">011</span><span id="line.11">    public DistanceBuilder(String name) {</span>
+<span class="source-line-no">012</span><span id="line.12">        super(name);</span>
+<span class="source-line-no">013</span><span id="line.13">    }</span>
+<span class="source-line-no">014</span><span id="line.14"></span>
+<span class="source-line-no">015</span><span id="line.15">    public DistanceBuilder(DistanceSensor device) {</span>
+<span class="source-line-no">016</span><span id="line.16">        super(device);</span>
+<span class="source-line-no">017</span><span id="line.17">    }</span>
+<span class="source-line-no">018</span><span id="line.18">}</span>
 
 
 

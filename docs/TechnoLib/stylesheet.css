@@ -414,22 +414,10 @@ div.table-tabs > button.table-tab {
 }
 .four-column-summary {
   display: grid;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 41d879a (Moved from spotless to prettier for java)
   grid-template-columns: minmax(10%, max-content) minmax(10%, max-content) minmax(10%, max-content) minmax(
       10%,
       auto
     );
-<<<<<<< HEAD
-=======
-  grid-template-columns:
-    minmax(10%, max-content) minmax(10%, max-content) minmax(10%, max-content)
-    minmax(10%, auto);
->>>>>>> 75c2a85 (About to try using prettier instead of spotless)
-=======
->>>>>>> 41d879a (Moved from spotless to prettier for java)
 }
 @media screen and (max-width: 600px) {
   .two-column-summary {

@@ -1398,6 +1398,7 @@ memberSearchIndex = [
   { p: 'com.technototes.library.logger', c: 'Log.NumberSlider', l: 'priority()' },
   { p: 'com.technototes.library.logger', c: 'Log', l: 'priority()' },
   { p: 'com.technototes.library.hardware2', c: 'HardwareBuilder', l: 'product' },
+  { p: 'com.technototes.library.hardware', c: 'HardwareDeviceGroup', l: 'propagate(double)' },
   { p: 'com.technototes.library.hardware', c: 'HardwareDeviceGroup', l: 'propogate(double)' },
   { p: 'com.technototes.library.hardware.motor', c: 'EncodedMotorGroup', l: 'propogate(double)' },
   { p: 'com.technototes.library.hardware.motor', c: 'MotorGroup', l: 'propogate(double)' },
