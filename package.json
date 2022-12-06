@@ -10,12 +10,18 @@
     "build": "run-script-os",
     "build:win32": ".\\gradlew build",
     "build:default": "./gradlew build",
-    "fulldoc": "yarn run doc && yarn run format",
+    "fulldoc": "yarn run doc && yarn run fmtdoc",
     "docs": "yarn run doc",
     "doc": "run-script-os",
     "doc:win32": ".\\gradlew javadoc",
     "doc:default": "./gradlew javadoc",
-    "format": "prettier --write docs/**/*.js docs/**/*.html docs/**/*.css **/*.md Path/**/*.java RobotLibrary/**/*.java Vision/**/*.java"
+    "fmtdoc": "prettier --write docs/**/*.js docs/**/*.html docs/**/*.css **/*.md",
+    "fmtpath": "prettier --write Path/**/*.java",
+    "fmtvis": "prettier --write Vision/**/*.java",
+    "fmtrbt": "prettier --write RobotLibrary/**/*.java",
+    "fmtsrc": "prettier --write Path/**/*.java Vision/**/*.java RobotLibrary/**/*.java",
+    "fmtmisc": "prettier --write *.json *.md .prettierrc",
+    "format": "yarn run fmtdoc && yarn run fmtsrc && yarn run fmtmisc"
   },
   "devDependencies": {
     "prettier": "^2.7.1",
