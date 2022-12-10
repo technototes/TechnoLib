@@ -1,5 +1,7 @@
 ## TechnoLib
 
+** Incompatibilities exist with SDK 8.1.1 (and new Control Hub's). I'll get it fixed after InterLeagues **
+
 TechnoLib is a FTC Library for everyone:
 
 - WPILib inspired command structure
