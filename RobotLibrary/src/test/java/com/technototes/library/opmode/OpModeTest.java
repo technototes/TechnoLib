@@ -2,23 +2,22 @@ package com.technototes.library.opmode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.technototes.library.structure.CommandOpMode;
 
 public class OpModeTest {
 
     private OpMode opMode;
-    private HardwareMap hardwareMap;
+    // SDK 8.1.1 doesn't let us make a hardware map with a null appContext
+    // private HardwareMap hardwareMap;
     private Gamepad g1, g2;
 
     public void setup() {
         opMode = new TestOpMode();
-        hardwareMap = new HardwareMap(null);
         g1 = new Gamepad();
         g2 = new Gamepad();
         opMode.gamepad1 = g1;
         opMode.gamepad2 = g2;
-        opMode.hardwareMap = hardwareMap;
+        opMode.hardwareMap = null;
     }
 
     public void run() {}

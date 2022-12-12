@@ -1,19 +1,16 @@
 package com.technototes.library.hardware.sensor;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.BNO055IMUImpl;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 /**
- * Class for the BNO055 (Inertial Movement Units) that implements the IGyro interface
+ * Class for the IMU (Inertial Movement Units) that implements the IGyro interface
  */
 @SuppressWarnings("unused")
-public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
-
-    private double angleOffset = 0;
+public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements IGyro {
 
     /**
      * The direction of the axes signs when remapping the axes
@@ -67,16 +64,27 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
         }
     }
 
-    private BNO055IMU.Parameters parameters;
+    private com.qualcomm.robotcore.hardware.IMU.Parameters parameters;
+    // This is the preferred units (Degrees/radians)
+    private AngleUnit preferred;
+    // This is an offset from 0 so we can zero the IMU without needing to be facing forward
+    private double angleOffset;
+    private AxesOrder axesOrder;
+    private AxesSigns axesSigns;
 
     /**
      * Make an imu
      *
      * @param device The imu device
      */
-    public IMU(BNO055IMUImpl device) {
+    public IMU(com.qualcomm.robotcore.hardware.IMU device) {
         super(device);
-        parameters = new BNO055IMU.Parameters();
+        angleOffset = 0.0;
+
+        // TODO: Validate this on hardware!
+        axesOrder = AxesOrder.ZXY;
+        axesSigns = AxesSigns.PPP;
+
         degrees();
         initialize();
     }
@@ -88,7 +96,11 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      */
     public IMU(String deviceName) {
         super(deviceName);
-        parameters = new BNO055IMU.Parameters();
+        angleOffset = 0.0;
+        // TODO: Validate this on hardware!
+        axesOrder = AxesOrder.ZXY;
+        axesSigns = AxesSigns.PPP;
+
         degrees();
         initialize();
     }
@@ -99,7 +111,9 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      * @return this
      */
     public IMU degrees() {
-        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        // Convert the angle offset!
+        angleOffset = AngleUnit.DEGREES.fromUnit(preferred, angleOffset);
+        preferred = AngleUnit.DEGREES;
         return this;
     }
 
@@ -109,7 +123,9 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      * @return this (for chaining)
      */
     public IMU radians() {
-        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+        // Convert the angle offset!
+        angleOffset = AngleUnit.RADIANS.fromUnit(preferred, angleOffset);
+        preferred = AngleUnit.RADIANS;
         return this;
     }
 
@@ -119,28 +135,35 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      * @return the IMU (for chaining)
      */
     public IMU initialize() {
-        getDevice().initialize(parameters);
+        // TODO: fix this?
+        // getDevice().initialize(parameters);
         return this;
+    }
+
+    // Gets the Yaw (orientation along the z-axis) with no adjustment
+    private double getRawYaw(AngleUnit unit) {
+        // TODO: Deal with the AxesSign thing properly. Cuz it does nothing here, AFAICT
+        return getDevice().getRobotYawPitchRollAngles().getYaw(unit);
     }
 
     /**
      * Get gyro heading
      *
-     * @return The gyro heading
+     * @return The gyro heading (in preferred units, from -180/pi to +180/pi
      */
     @Override
     public double gyroHeading() {
-        return getAngularOrientation().firstAngle;
+        return preferred.normalize(getRawYaw(preferred) - angleOffset);
     }
 
     /**
      * Get the gyro heading in the provided units
      *
      * @param unit the unit desired
-     * @return The heading in 'unit' units
+     * @return The heading in 'unit' units from -180/pi to +180/pi
      */
     public double gyroHeading(AngleUnit unit) {
-        return unit.fromUnit(device.getAngularOrientation().angleUnit, gyroHeading() - angleOffset);
+        return unit.normalize(getRawYaw(unit) - unit.fromUnit(preferred, angleOffset));
     }
 
     /**
@@ -170,7 +193,7 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      */
     @Override
     public void setHeading(double newHeading) {
-        angleOffset = gyroHeading() - newHeading;
+        angleOffset = getRawYaw(preferred) - newHeading;
     }
 
     /**
@@ -181,38 +204,8 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      * @return this (for chaining)
      */
     public IMU remapAxes(AxesOrder order, AxesSigns signs) {
-        try {
-            // the indices correspond with the 2-bit encodings specified in the datasheet
-            int[] indices = order.indices();
-            int axisMapConfig = 0;
-            axisMapConfig |= (indices[0] << 4);
-            axisMapConfig |= (indices[1] << 2);
-            axisMapConfig |= (indices[2]);
-
-            // the BNO055 driver flips the first orientation vector so we also flip here
-            int axisMapSign = signs.bVal ^ (0b100 >> indices[0]);
-
-            // Enter CONFIG mode
-            getDevice()
-                .write8(BNO055IMU.Register.OPR_MODE, BNO055IMU.SensorMode.CONFIG.bVal & 0x0F);
-
-            Thread.sleep(100);
-
-            // Write the AXIS_MAP_CONFIG register
-            getDevice().write8(BNO055IMU.Register.AXIS_MAP_CONFIG, axisMapConfig & 0x3F);
-
-            // Write the AXIS_MAP_SIGN register
-            getDevice().write8(BNO055IMU.Register.AXIS_MAP_SIGN, axisMapSign & 0x07);
-
-            // Switch back to the previous mode
-            getDevice()
-                .write8(BNO055IMU.Register.OPR_MODE, getDevice().getParameters().mode.bVal & 0x0F);
-
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-        parameters = getDevice().getParameters();
+        axesSigns = signs;
+        axesOrder = order;
         return this;
     }
 
@@ -222,7 +215,7 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      * @return The Angular Velocity
      */
     public AngularVelocity getAngularVelocity() {
-        return device.getAngularVelocity();
+        return device.getRobotAngularVelocity(preferred);
     }
 
     /**
@@ -231,6 +224,16 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      * @return the Orientation of the IMU
      */
     public Orientation getAngularOrientation() {
-        return device.getAngularOrientation();
+        Orientation res = getDevice().getRobotOrientation(AxesReference.INTRINSIC, axesOrder, preferred);
+        if ((axesSigns.bVal & AxesSigns.NPP.bVal) == AxesSigns.NPP.bVal) {
+            res.firstAngle = -res.firstAngle;
+        }
+        if ((axesSigns.bVal & AxesSigns.PNP.bVal) == AxesSigns.PNP.bVal) {
+            res.secondAngle = -res.secondAngle;
+        }
+        if ((axesSigns.bVal & AxesSigns.PPN.bVal) == AxesSigns.PPN.bVal) {
+            res.thirdAngle = -res.thirdAngle;
+        }
+        return res;
     }
 }
