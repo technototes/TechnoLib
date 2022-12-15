@@ -11,6 +11,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -89,13 +90,17 @@ public class Logger {
     }
 
     // TODO make list and do sort with comparators
-    // List<List<Entry<?>>
+    // I wish this had a comment describing what Alex thinks it's doing,
+    // I *think* it'strying to set the 'indexed' entries to their preferred locations
+    // then filling in the gaps with unindexed  or lower priority entries.
+    // That bottom loop is also quite slow, but we're talking about 0-20 entries, so performance
+    // is probably irrelevant...
     private Entry<?>[] generate(Set<Entry<?>> a) {
-        Entry<?>[] returnEntry = new Entry[10];
+        Entry<?>[] returnEntry = new Entry[a.size()];
         List<Entry<?>> unindexed = new ArrayList<>();
         for (Entry<?> e : a) {
             int index = e.getIndex();
-            if (index != -1) {
+            if (index >= 0 && index < returnEntry.length) {
                 Entry<?> other = returnEntry[index];
                 if (other == null) {
                     returnEntry[index] = e;
@@ -116,7 +121,6 @@ public class Logger {
                 returnEntry[i] = unindexed.remove(0);
             }
         }
-
         return returnEntry;
     }
 
