@@ -1,7 +1,5 @@
 ## TechnoLib
 
-** Incompatibilities exist with SDK 8.1.1 (and new Control Hub's). I'll get it fixed after InterLeagues **
-
 TechnoLib is a FTC Library for everyone:
 
 - WPILib inspired command structure
@@ -27,9 +25,13 @@ But if this library is so good, it must be hard to install right? wrong:
      }
   ```
 - And add this to the dependencies block in TeamCode/build.gradle:
-  `implementation 'com.github.technototes:TechnoLib:1.1.2'`  
-  **(replace 1.1.2 with the latest release)**
+  `implementation 'com.github.technototes:TechnoLib:1.2.0'`  
+  **(replace 1.2.0 with the latest release)**
 - Build the code and you are good to go
+
+### Version 1.2.0 has breaking changes.
+
+See below for details
 
 ## Ease of Use
 
@@ -56,3 +58,14 @@ how this stuff works is in our robot code. It's all public on github:
 - And here's a PowerPlay (2022-2023) based example
   ["learning" bot](https://github.com/technototes/PowerPlay2022/tree/main/ForTeaching/src/main/java/org/firstinspires/ftc/forteaching/TechnoBot)
   (This is a very basic example of a few concepts, include vision)
+
+## Breaking changes
+
+## Version 1.2.0:
+
+For SDK 8.1 and later, there's a new IMU class that handles a bunch of stuff that was handled by the
+BNO055 IMU internally. This resulted in changes in TechnoLib's IMU class. You will not _likely_ need
+to use the remapAxes function (which has been renamed) and the constructor for the IMU now requires
+that you specify the orientation of your control hub. The SDK also changed the axes' orientation on
+the hub. You'll be happier by just switching your mental model to the new IMU class (but it's weird
+that FIRST changed it :/ )

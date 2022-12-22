@@ -1,5 +1,6 @@
 package com.technototes.library.hardware.sensor;
 
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -52,7 +53,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
         /**
          * The value of the enumeration
          */
-        public final int bVal;
+        public int bVal;
 
         /**
          * Sets the enum to the integer
@@ -64,7 +65,6 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
         }
     }
 
-    private com.qualcomm.robotcore.hardware.IMU.Parameters parameters;
     // This is the preferred units (Degrees/radians)
     private AngleUnit preferred = AngleUnit.DEGREES;
     // This is an offset from 0 so we can zero the IMU without needing to be facing forward
@@ -74,19 +74,51 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
 
     /**
      * Make an imu
-     *
-     * @param device The imu device
      */
-    public IMU(com.qualcomm.robotcore.hardware.IMU device) {
+    public IMU(
+        com.qualcomm.robotcore.hardware.IMU device,
+        com.qualcomm.robotcore.hardware.IMU.Parameters params
+    ) {
         super(device);
         angleOffset = 0.0;
 
-        // TODO: Validate this on hardware!
-        axesOrder = AxesOrder.ZXY;
         axesSigns = AxesSigns.PPP;
+        axesOrder = AxesOrder.ZXY;
 
         degrees();
-        initialize();
+        initialize(params);
+    }
+
+    /**
+     * Make an imu
+     */
+    public IMU(String deviceName, com.qualcomm.robotcore.hardware.IMU.Parameters params) {
+        super(deviceName);
+        angleOffset = 0.0;
+
+        axesSigns = AxesSigns.PPP;
+        axesOrder = AxesOrder.ZXY;
+
+        degrees();
+        initialize(params);
+    }
+
+    /**
+     * Make an imu
+     *
+     * @param device The imu device
+     */
+    public IMU(
+        com.qualcomm.robotcore.hardware.IMU device,
+        RevHubOrientationOnRobot.LogoFacingDirection logo,
+        RevHubOrientationOnRobot.UsbFacingDirection usb
+    ) {
+        this(
+            device,
+            new com.qualcomm.robotcore.hardware.IMU.Parameters(
+                new RevHubOrientationOnRobot(logo, usb)
+            )
+        );
     }
 
     /**
@@ -94,15 +126,17 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      *
      * @param deviceName The device name in hardware map
      */
-    public IMU(String deviceName) {
-        super(deviceName);
-        angleOffset = 0.0;
-        // TODO: Validate this on hardware!
-        axesOrder = AxesOrder.ZXY;
-        axesSigns = AxesSigns.PPP;
-
-        degrees();
-        initialize();
+    public IMU(
+        String deviceName,
+        RevHubOrientationOnRobot.LogoFacingDirection logo,
+        RevHubOrientationOnRobot.UsbFacingDirection usb
+    ) {
+        this(
+            deviceName,
+            new com.qualcomm.robotcore.hardware.IMU.Parameters(
+                new RevHubOrientationOnRobot(logo, usb)
+            )
+        );
     }
 
     /**
@@ -134,16 +168,9 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      *
      * @return the IMU (for chaining)
      */
-    public IMU initialize() {
-        // TODO: fix this?
-        // getDevice().initialize(parameters);
+    public IMU initialize(com.qualcomm.robotcore.hardware.IMU.Parameters imuParams) {
+        getDevice().initialize(imuParams);
         return this;
-    }
-
-    // Gets the Yaw (orientation along the z-axis) with no adjustment
-    private double getRawYaw(AngleUnit unit) {
-        // TODO: Deal with the AxesSign thing properly. Cuz it does nothing here, AFAICT
-        return getDevice().getRobotYawPitchRollAngles().getYaw(unit);
     }
 
     /**
@@ -153,7 +180,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      */
     @Override
     public double gyroHeading() {
-        return preferred.normalize(getRawYaw(preferred));
+        return getAngularOrientation().firstAngle;
     }
 
     /**
@@ -163,7 +190,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * @return The heading in 'unit' units from -180/pi to +180/pi
      */
     public double gyroHeading(AngleUnit unit) {
-        return unit.normalize(getRawYaw(unit) - unit.fromUnit(preferred, angleOffset));
+        return unit.fromUnit(preferred, gyroHeading() - angleOffset);
     }
 
     /**
@@ -193,11 +220,15 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      */
     @Override
     public void setHeading(double newHeading) {
-        angleOffset = getRawYaw(preferred) - newHeading;
+        angleOffset = gyroHeading() - newHeading;
     }
 
     /**
-     * Remaps the axes for the IMU in the order and sign provided
+     * Remaps the axes for the IMU in the order and sign provided.
+     * This is using the 8.1.1+ IMU axis order:
+     * - Z up from the Control Hub
+     * - X positive toward the sensor connector side (I2C, etc...)
+     * - Y positive toward the USB connector end
      *
      * @param order The axis order desired
      * @param signs The signs desired
@@ -213,8 +244,8 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * Remaps the axes for the BNO055 IMU in the order and sign provided
      * The SDK 8.1.1 added a new IMU class, which (delightfully) rotated
      * the X and Y axes around the Z axis by 90 degrees clock-wise (viewed from above)
-     * If you have code that was using that layout, this is what you need to call.
-     * I expect to delete this code eventually...
+     * If you have code that was using that layout, this is what you probably need to call.
+     * I expect to delete this code eventually. Also: it's really not tested at all...
      *
      * @param legacyOrder The *legacy* axis order desired
      * @param legacySigns The *legacy* signs desired
@@ -222,22 +253,54 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      */
     public IMU remapLegacyAxes(AxesOrder legacyOrder, AxesSigns legacySigns) {
         // The BNO055 has the X and Y axes rotated 90 degrees :/
+        // These are *very* untested
         switch (legacyOrder) {
             case XZX:
                 axesOrder = AxesOrder.YZY;
-                // I think signs stay the same on this one...
                 break;
             case XYX:
+                axesOrder = AxesOrder.YXY;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.PNP.bVal;
+                break;
             case YXY:
+                axesOrder = AxesOrder.XYX;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.NPN.bVal;
+                break;
             case YZY:
+                axesOrder = AxesOrder.XZX;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.NPN.bVal;
+                break;
             case ZYZ:
+                axesOrder = AxesOrder.ZXZ;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.PNP.bVal;
+                break;
             case ZXZ:
+                axesOrder = AxesOrder.ZYZ;
+                break;
             case XZY:
+                axesOrder = AxesOrder.YZX;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.PPN.bVal;
+                break;
             case XYZ:
+                axesOrder = AxesOrder.YXZ;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.PNP.bVal;
+                break;
             case YXZ:
+                axesOrder = AxesOrder.XYZ;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.NPP.bVal;
+                break;
             case YZX:
+                axesOrder = AxesOrder.XZY;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.NPP.bVal;
+                break;
             case ZYX:
+                axesOrder = AxesOrder.ZXY;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.PNP.bVal;
+                break;
             case ZXY:
+                axesOrder = AxesOrder.ZYX;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.PPN.bVal;
+                break;
         }
         return this;
     }
@@ -247,8 +310,12 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      *
      * @return The Angular Velocity
      */
+    public AngularVelocity getAngularVelocity(AngleUnit units) {
+        return device.getRobotAngularVelocity(units);
+    }
+
     public AngularVelocity getAngularVelocity() {
-        return device.getRobotAngularVelocity(preferred);
+        return getAngularVelocity(preferred);
     }
 
     /**
@@ -256,8 +323,9 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      *
      * @return the Orientation of the IMU
      */
-    public Orientation getAngularOrientation() {
-        Orientation res = getDevice().getRobotOrientation(AxesReference.INTRINSIC, axesOrder, preferred);
+    public Orientation getAngularOrientation(AngleUnit units) {
+        Orientation res = getDevice()
+            .getRobotOrientation(AxesReference.INTRINSIC, axesOrder, units);
         if ((axesSigns.bVal & AxesSigns.NPP.bVal) == AxesSigns.NPP.bVal) {
             res.firstAngle = -res.firstAngle;
         }
@@ -268,5 +336,9 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
             res.thirdAngle = -res.thirdAngle;
         }
         return res;
+    }
+
+    public Orientation getAngularOrientation() {
+        return getAngularOrientation(preferred);
     }
 }
