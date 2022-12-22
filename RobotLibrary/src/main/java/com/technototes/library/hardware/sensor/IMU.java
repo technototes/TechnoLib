@@ -66,7 +66,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
 
     private com.qualcomm.robotcore.hardware.IMU.Parameters parameters;
     // This is the preferred units (Degrees/radians)
-    private AngleUnit preferred;
+    private AngleUnit preferred = AngleUnit.DEGREES;
     // This is an offset from 0 so we can zero the IMU without needing to be facing forward
     private double angleOffset;
     private AxesOrder axesOrder;
@@ -153,7 +153,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      */
     @Override
     public double gyroHeading() {
-        return preferred.normalize(getRawYaw(preferred) - angleOffset);
+        return preferred.normalize(getRawYaw(preferred));
     }
 
     /**
@@ -203,9 +203,42 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * @param signs The signs desired
      * @return this (for chaining)
      */
-    public IMU remapAxes(AxesOrder order, AxesSigns signs) {
+    public IMU remapAxesAndSigns(AxesOrder order, AxesSigns signs) {
         axesSigns = signs;
         axesOrder = order;
+        return this;
+    }
+
+    /**
+     * Remaps the axes for the BNO055 IMU in the order and sign provided
+     * The SDK 8.1.1 added a new IMU class, which (delightfully) rotated
+     * the X and Y axes around the Z axis by 90 degrees clock-wise (viewed from above)
+     * If you have code that was using that layout, this is what you need to call.
+     * I expect to delete this code eventually...
+     *
+     * @param legacyOrder The *legacy* axis order desired
+     * @param legacySigns The *legacy* signs desired
+     * @return this (for chaining)
+     */
+    public IMU remapLegacyAxes(AxesOrder legacyOrder, AxesSigns legacySigns) {
+        // The BNO055 has the X and Y axes rotated 90 degrees :/
+        switch (legacyOrder) {
+            case XZX:
+                axesOrder = AxesOrder.YZY;
+                // I think signs stay the same on this one...
+                break;
+            case XYX:
+            case YXY:
+            case YZY:
+            case ZYZ:
+            case ZXZ:
+            case XZY:
+            case XYZ:
+            case YXZ:
+            case YZX:
+            case ZYX:
+            case ZXY:
+        }
         return this;
     }
 
