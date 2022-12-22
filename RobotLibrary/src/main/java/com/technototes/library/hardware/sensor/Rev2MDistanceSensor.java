@@ -4,7 +4,8 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /**
- * Class for range sensors
+ * Class for the Rev '2m' range sensors
+ * Note for users: The Rev 2m range sensor is actually only useful at about 1.1 - 1.2m :/
  *
  * @author Alex Stedman
  */

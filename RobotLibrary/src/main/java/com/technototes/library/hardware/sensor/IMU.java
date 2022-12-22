@@ -1,19 +1,17 @@
 package com.technototes.library.hardware.sensor;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.BNO055IMUImpl;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 /**
- * Class for the BNO055 (Inertial Movement Units) that implements the IGyro interface
+ * Class for the IMU (Inertial Movement Units) that implements the IGyro interface
  */
 @SuppressWarnings("unused")
-public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
-
-    private double angleOffset = 0;
+public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements IGyro {
 
     /**
      * The direction of the axes signs when remapping the axes
@@ -55,7 +53,7 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
         /**
          * The value of the enumeration
          */
-        public final int bVal;
+        public int bVal;
 
         /**
          * Sets the enum to the integer
@@ -67,18 +65,60 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
         }
     }
 
-    private BNO055IMU.Parameters parameters;
+    // This is the preferred units (Degrees/radians)
+    private AngleUnit preferred = AngleUnit.DEGREES;
+    // This is an offset from 0 so we can zero the IMU without needing to be facing forward
+    private double angleOffset;
+    private AxesOrder axesOrder;
+    private AxesSigns axesSigns;
+
+    /**
+     * Make an imu
+     */
+    public IMU(
+        com.qualcomm.robotcore.hardware.IMU device,
+        com.qualcomm.robotcore.hardware.IMU.Parameters params
+    ) {
+        super(device);
+        angleOffset = 0.0;
+
+        axesSigns = AxesSigns.PPP;
+        axesOrder = AxesOrder.ZXY;
+
+        degrees();
+        initialize(params);
+    }
+
+    /**
+     * Make an imu
+     */
+    public IMU(String deviceName, com.qualcomm.robotcore.hardware.IMU.Parameters params) {
+        super(deviceName);
+        angleOffset = 0.0;
+
+        axesSigns = AxesSigns.PPP;
+        axesOrder = AxesOrder.ZXY;
+
+        degrees();
+        initialize(params);
+    }
 
     /**
      * Make an imu
      *
      * @param device The imu device
      */
-    public IMU(BNO055IMUImpl device) {
-        super(device);
-        parameters = new BNO055IMU.Parameters();
-        degrees();
-        initialize();
+    public IMU(
+        com.qualcomm.robotcore.hardware.IMU device,
+        RevHubOrientationOnRobot.LogoFacingDirection logo,
+        RevHubOrientationOnRobot.UsbFacingDirection usb
+    ) {
+        this(
+            device,
+            new com.qualcomm.robotcore.hardware.IMU.Parameters(
+                new RevHubOrientationOnRobot(logo, usb)
+            )
+        );
     }
 
     /**
@@ -86,11 +126,17 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      *
      * @param deviceName The device name in hardware map
      */
-    public IMU(String deviceName) {
-        super(deviceName);
-        parameters = new BNO055IMU.Parameters();
-        degrees();
-        initialize();
+    public IMU(
+        String deviceName,
+        RevHubOrientationOnRobot.LogoFacingDirection logo,
+        RevHubOrientationOnRobot.UsbFacingDirection usb
+    ) {
+        this(
+            deviceName,
+            new com.qualcomm.robotcore.hardware.IMU.Parameters(
+                new RevHubOrientationOnRobot(logo, usb)
+            )
+        );
     }
 
     /**
@@ -99,7 +145,9 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      * @return this
      */
     public IMU degrees() {
-        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        // Convert the angle offset!
+        angleOffset = AngleUnit.DEGREES.fromUnit(preferred, angleOffset);
+        preferred = AngleUnit.DEGREES;
         return this;
     }
 
@@ -109,7 +157,9 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      * @return this (for chaining)
      */
     public IMU radians() {
-        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+        // Convert the angle offset!
+        angleOffset = AngleUnit.RADIANS.fromUnit(preferred, angleOffset);
+        preferred = AngleUnit.RADIANS;
         return this;
     }
 
@@ -118,15 +168,15 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      *
      * @return the IMU (for chaining)
      */
-    public IMU initialize() {
-        getDevice().initialize(parameters);
+    public IMU initialize(com.qualcomm.robotcore.hardware.IMU.Parameters imuParams) {
+        getDevice().initialize(imuParams);
         return this;
     }
 
     /**
      * Get gyro heading
      *
-     * @return The gyro heading
+     * @return The gyro heading (in preferred units, from -180/pi to +180/pi
      */
     @Override
     public double gyroHeading() {
@@ -137,10 +187,10 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      * Get the gyro heading in the provided units
      *
      * @param unit the unit desired
-     * @return The heading in 'unit' units
+     * @return The heading in 'unit' units from -180/pi to +180/pi
      */
     public double gyroHeading(AngleUnit unit) {
-        return unit.fromUnit(device.getAngularOrientation().angleUnit, gyroHeading() - angleOffset);
+        return unit.fromUnit(preferred, gyroHeading() - angleOffset);
     }
 
     /**
@@ -174,45 +224,84 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
     }
 
     /**
-     * Remaps the axes for the IMU in the order and sign provided
+     * Remaps the axes for the IMU in the order and sign provided.
+     * This is using the 8.1.1+ IMU axis order:
+     * - Z up from the Control Hub
+     * - X positive toward the sensor connector side (I2C, etc...)
+     * - Y positive toward the USB connector end
      *
      * @param order The axis order desired
      * @param signs The signs desired
      * @return this (for chaining)
      */
-    public IMU remapAxes(AxesOrder order, AxesSigns signs) {
-        try {
-            // the indices correspond with the 2-bit encodings specified in the datasheet
-            int[] indices = order.indices();
-            int axisMapConfig = 0;
-            axisMapConfig |= (indices[0] << 4);
-            axisMapConfig |= (indices[1] << 2);
-            axisMapConfig |= (indices[2]);
+    public IMU remapAxesAndSigns(AxesOrder order, AxesSigns signs) {
+        axesSigns = signs;
+        axesOrder = order;
+        return this;
+    }
 
-            // the BNO055 driver flips the first orientation vector so we also flip here
-            int axisMapSign = signs.bVal ^ (0b100 >> indices[0]);
-
-            // Enter CONFIG mode
-            getDevice()
-                .write8(BNO055IMU.Register.OPR_MODE, BNO055IMU.SensorMode.CONFIG.bVal & 0x0F);
-
-            Thread.sleep(100);
-
-            // Write the AXIS_MAP_CONFIG register
-            getDevice().write8(BNO055IMU.Register.AXIS_MAP_CONFIG, axisMapConfig & 0x3F);
-
-            // Write the AXIS_MAP_SIGN register
-            getDevice().write8(BNO055IMU.Register.AXIS_MAP_SIGN, axisMapSign & 0x07);
-
-            // Switch back to the previous mode
-            getDevice()
-                .write8(BNO055IMU.Register.OPR_MODE, getDevice().getParameters().mode.bVal & 0x0F);
-
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+    /**
+     * Remaps the axes for the BNO055 IMU in the order and sign provided
+     * The SDK 8.1.1 added a new IMU class, which (delightfully) rotated
+     * the X and Y axes around the Z axis by 90 degrees clock-wise (viewed from above)
+     * If you have code that was using that layout, this is what you probably need to call.
+     * I expect to delete this code eventually. Also: it's really not tested at all...
+     *
+     * @param legacyOrder The *legacy* axis order desired
+     * @param legacySigns The *legacy* signs desired
+     * @return this (for chaining)
+     */
+    public IMU remapLegacyAxes(AxesOrder legacyOrder, AxesSigns legacySigns) {
+        // The BNO055 has the X and Y axes rotated 90 degrees :/
+        // These are *very* untested
+        switch (legacyOrder) {
+            case XZX:
+                axesOrder = AxesOrder.YZY;
+                break;
+            case XYX:
+                axesOrder = AxesOrder.YXY;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.PNP.bVal;
+                break;
+            case YXY:
+                axesOrder = AxesOrder.XYX;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.NPN.bVal;
+                break;
+            case YZY:
+                axesOrder = AxesOrder.XZX;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.NPN.bVal;
+                break;
+            case ZYZ:
+                axesOrder = AxesOrder.ZXZ;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.PNP.bVal;
+                break;
+            case ZXZ:
+                axesOrder = AxesOrder.ZYZ;
+                break;
+            case XZY:
+                axesOrder = AxesOrder.YZX;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.PPN.bVal;
+                break;
+            case XYZ:
+                axesOrder = AxesOrder.YXZ;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.PNP.bVal;
+                break;
+            case YXZ:
+                axesOrder = AxesOrder.XYZ;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.NPP.bVal;
+                break;
+            case YZX:
+                axesOrder = AxesOrder.XZY;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.NPP.bVal;
+                break;
+            case ZYX:
+                axesOrder = AxesOrder.ZXY;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.PNP.bVal;
+                break;
+            case ZXY:
+                axesOrder = AxesOrder.ZYX;
+                axesSigns.bVal = legacySigns.bVal ^ AxesSigns.PPN.bVal;
+                break;
         }
-        parameters = getDevice().getParameters();
         return this;
     }
 
@@ -221,8 +310,12 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      *
      * @return The Angular Velocity
      */
+    public AngularVelocity getAngularVelocity(AngleUnit units) {
+        return device.getRobotAngularVelocity(units);
+    }
+
     public AngularVelocity getAngularVelocity() {
-        return device.getAngularVelocity();
+        return getAngularVelocity(preferred);
     }
 
     /**
@@ -230,7 +323,22 @@ public class IMU extends Sensor<BNO055IMUImpl> implements IGyro {
      *
      * @return the Orientation of the IMU
      */
+    public Orientation getAngularOrientation(AngleUnit units) {
+        Orientation res = getDevice()
+            .getRobotOrientation(AxesReference.INTRINSIC, axesOrder, units);
+        if ((axesSigns.bVal & AxesSigns.NPP.bVal) == AxesSigns.NPP.bVal) {
+            res.firstAngle = -res.firstAngle;
+        }
+        if ((axesSigns.bVal & AxesSigns.PNP.bVal) == AxesSigns.PNP.bVal) {
+            res.secondAngle = -res.secondAngle;
+        }
+        if ((axesSigns.bVal & AxesSigns.PPN.bVal) == AxesSigns.PPN.bVal) {
+            res.thirdAngle = -res.thirdAngle;
+        }
+        return res;
+    }
+
     public Orientation getAngularOrientation() {
-        return device.getAngularOrientation();
+        return getAngularOrientation(preferred);
     }
 }
