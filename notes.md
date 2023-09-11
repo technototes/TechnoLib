@@ -9,4 +9,3 @@ The analog sticks are vertically inverted: When you push the stick up/away, the 
 The shoulder triggers' range is from 0 to 1, not -1 to 1.
 
 I'm not currently sure what orientation the SDK 8.1+ IMU calls 0 degrees.
-

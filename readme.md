@@ -25,8 +25,8 @@ But if this library is so good, it must be hard to install right? wrong:
      }
   ```
 - And add this to the dependencies block in TeamCode/build.gradle:
-  `implementation 'com.github.technototes:TechnoLib:1.2.0'`  
-  **(replace 1.2.0 with the latest release)**
+  `implementation 'com.github.technototes:TechnoLib:1.2.0'` **(replace 1.2.0 with the latest
+  release)**
 - Build the code and you are good to go
 
 ### Version 1.2.0 has breaking changes.
@@ -51,7 +51,7 @@ how this stuff works is in our robot code. It's all public on github:
 
 - Freight Frenzy (2021-2022)'s
   [16750 robot source code](https://github.com/technototes/FreightFrenzy2021/tree/master/OspreyCode/src/main/java/org/firstinspires/ftc/teamcode)
-  (this is a more advanced usage, written by the library's primary autho)
+  (this is a more advanced usage, written by the library's primary author)
 - Freight Frenzy (2021-2022)'s
   [20403 robot source code](https://github.com/technototes/FreightFrenzy2021/tree/master/SeagullCode/src/main/java/org/firstinspires/ftc/teamcode)
   (This is a simpler usage, written by students who mostly learned by example)
