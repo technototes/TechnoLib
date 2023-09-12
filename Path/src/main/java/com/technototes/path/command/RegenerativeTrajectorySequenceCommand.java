@@ -20,10 +20,7 @@ public class RegenerativeTrajectorySequenceCommand extends TrajectorySequenceCom
         trajFunc = () -> t.apply(sub::trajectorySequenceBuilder);
     }
 
-    public RegenerativeTrajectorySequenceCommand(
-        MecanumDrivebaseSubsystem sub,
-        Supplier<TrajectorySequence> t
-    ) {
+    public RegenerativeTrajectorySequenceCommand(MecanumDrivebaseSubsystem sub, Supplier<TrajectorySequence> t) {
         super(sub, t);
         trajFunc = t;
     }

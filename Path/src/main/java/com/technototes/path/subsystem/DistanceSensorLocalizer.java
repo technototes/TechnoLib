@@ -58,37 +58,30 @@ public class DistanceSensorLocalizer implements Localizer, Subsystem {
             double distance = sensor.getDistance();
             if (distance < maxSensorDistance && distance > 0.5) {
                 sensorPose =
-                    new Pose2d(
-                        sensorPose.vec().rotated(heading),
-                        Angle.norm(sensorPose.getHeading() + heading)
-                    );
+                    new Pose2d(sensorPose.vec().rotated(heading), Angle.norm(sensorPose.getHeading() + heading));
                 double change;
-                switch (MathUtils.closestTo(2 * sensorPose.getHeading() / Math.PI, 0, 1, 2, 3, 4)) {
+                switch (MathUtils.closestTo((2 * sensorPose.getHeading()) / Math.PI, 0, 1, 2, 3, 4)) {
                     case 0:
                     case 4:
-                        change =
-                            71 - sensorPose.getX() - Math.cos(sensorPose.getHeading()) * distance;
+                        change = 71 - sensorPose.getX() - Math.cos(sensorPose.getHeading()) * distance;
                         if (old != null && Math.abs(old.getX() - change) > 10) break;
                         accumX += change;
                         totalX++;
                         break;
                     case 1:
-                        change =
-                            71 - sensorPose.getY() - Math.sin(sensorPose.getHeading()) * distance;
+                        change = 71 - sensorPose.getY() - Math.sin(sensorPose.getHeading()) * distance;
                         if (old != null && Math.abs(old.getY() - change) > 10) break;
                         accumY += change;
                         totalY++;
                         break;
                     case 2:
-                        change =
-                            71 + sensorPose.getX() + Math.cos(sensorPose.getHeading()) * distance;
+                        change = 71 + sensorPose.getX() + Math.cos(sensorPose.getHeading()) * distance;
                         if (old != null && Math.abs(old.getX() + change) > 10) break;
                         accumX -= change;
                         totalX++;
                         break;
                     case 3:
-                        change =
-                            71 + sensorPose.getY() + Math.sin(sensorPose.getHeading()) * distance;
+                        change = 71 + sensorPose.getY() + Math.sin(sensorPose.getHeading()) * distance;
                         if (old != null && Math.abs(old.getY() + change) > 10) break;
                         accumY -= change;
                         totalY++;
@@ -98,11 +91,7 @@ public class DistanceSensorLocalizer implements Localizer, Subsystem {
         }
         if (old == null) old = new Pose2d();
         poseEstimate =
-            new Pose2d(
-                totalX != 0 ? accumX / totalX : old.getX(),
-                totalY != 0 ? accumY / totalY : old.getY(),
-                heading
-            );
+            new Pose2d(totalX != 0 ? accumX / totalX : old.getX(), totalY != 0 ? accumY / totalY : old.getY(), heading);
     }
 
     public double gyroOffset = 0;

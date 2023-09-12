@@ -20,11 +20,7 @@ public final class TurnSegment extends SequenceSegment {
         super(
             motionProfile.duration(),
             startPose,
-            new Pose2d(
-                startPose.getX(),
-                startPose.getY(),
-                Angle.norm(startPose.getHeading() + totalRotation)
-            ),
+            new Pose2d(startPose.getX(), startPose.getY(), Angle.norm(startPose.getHeading() + totalRotation)),
             markers
         );
         this.totalRotation = totalRotation;

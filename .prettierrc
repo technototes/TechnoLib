@@ -1,4 +1,5 @@
 {
+  "plugins": ["prettier-plugin-java"],
   "printWidth": 100,
   "trailingComma": "all",
   "singleQuote": true,
@@ -17,7 +18,7 @@
     },
     {
       "files": "*.java",
-      "options": { "tabWidth": 4 }
+      "options": { "tabWidth": 4, "printWidth": 120 }
     }
   ]
 }

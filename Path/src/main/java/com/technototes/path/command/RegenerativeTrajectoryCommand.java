@@ -34,11 +34,7 @@ public class RegenerativeTrajectoryCommand extends TrajectoryCommand {
         trajFunc = () -> t.apply(sub::trajectoryBuilder, mux);
     }
 
-    public <T> RegenerativeTrajectoryCommand(
-        MecanumDrivebaseSubsystem sub,
-        Function<T, Trajectory> t,
-        T mux
-    ) {
+    public <T> RegenerativeTrajectoryCommand(MecanumDrivebaseSubsystem sub, Function<T, Trajectory> t, T mux) {
         super(sub, t, mux);
         trajFunc = () -> t.apply(mux);
     }

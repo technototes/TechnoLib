@@ -55,8 +55,6 @@ public class CommandAxis extends AxisBase implements CommandInput<CommandAxis> {
     }
 
     public CommandButton getAsButton(double threshold) {
-        return new CommandButton(() ->
-            threshold >= 0 ? getAsDouble() >= threshold : getAsDouble() < threshold
-        );
+        return new CommandButton(() -> threshold >= 0 ? getAsDouble() >= threshold : getAsDouble() < threshold);
     }
 }

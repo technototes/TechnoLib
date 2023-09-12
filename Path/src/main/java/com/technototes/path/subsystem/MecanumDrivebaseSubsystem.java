@@ -222,13 +222,7 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
     }
 
     public TrajectorySequenceBuilder trajectorySequenceBuilder(Pose2d startPose) {
-        return new TrajectorySequenceBuilder(
-            startPose,
-            VEL_CONSTRAINT,
-            ACCEL_CONSTRAINT,
-            MAX_ANG_VEL,
-            MAX_ANG_ACCEL
-        );
+        return new TrajectorySequenceBuilder(startPose, VEL_CONSTRAINT, ACCEL_CONSTRAINT, MAX_ANG_VEL, MAX_ANG_ACCEL);
     }
 
     public TrajectorySequenceBuilder trajectorySequenceBuilder() {
@@ -309,7 +303,7 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
             coefficients.p,
             coefficients.i,
             coefficients.d,
-            coefficients.f * 12 / batteryVoltageSensor.getVoltage()
+            (coefficients.f * 12) / batteryVoltageSensor.getVoltage()
         );
 
         for (DcMotorEx motor : motors) {
@@ -320,20 +314,12 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
     public void setWeightedDrivePower(Pose2d drivePower) {
         Pose2d vel = drivePower;
 
-        if (
-            Math.abs(drivePower.getX()) +
-            Math.abs(drivePower.getY()) +
-            Math.abs(drivePower.getHeading()) >
-            1
-        ) {
+        if (Math.abs(drivePower.getX()) + Math.abs(drivePower.getY()) + Math.abs(drivePower.getHeading()) > 1) {
             // re-normalize the powers according to the weights
             double denom =
-                VX_WEIGHT *
-                Math.abs(drivePower.getX()) +
-                VY_WEIGHT *
-                Math.abs(drivePower.getY()) +
-                OMEGA_WEIGHT *
-                Math.abs(drivePower.getHeading());
+                VX_WEIGHT * Math.abs(drivePower.getX()) +
+                VY_WEIGHT * Math.abs(drivePower.getY()) +
+                OMEGA_WEIGHT * Math.abs(drivePower.getHeading());
 
             vel =
                 new Pose2d(
@@ -369,12 +355,7 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
         List<Double> wheelVelocities = new ArrayList<>();
         for (DcMotorEx motor : motors) {
             wheelVelocities.add(
-                MecanumConstants.encoderTicksToInches(
-                    motor.getVelocity(),
-                    WHEEL_RADIUS,
-                    GEAR_RATIO,
-                    TICKS_PER_REV
-                )
+                MecanumConstants.encoderTicksToInches(motor.getVelocity(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV)
             );
         }
         return wheelVelocities;

@@ -30,12 +30,7 @@ public class ThreeDeadWheelLocalizer extends ThreeTrackingWheelLocalizer impleme
 
     protected boolean encoderOverflow;
 
-    public ThreeDeadWheelLocalizer(
-        MotorEncoder l,
-        MotorEncoder r,
-        MotorEncoder f,
-        DeadWheelConstants constants
-    ) {
+    public ThreeDeadWheelLocalizer(MotorEncoder l, MotorEncoder r, MotorEncoder f, DeadWheelConstants constants) {
         super(
             Arrays.asList(
                 new Pose2d(0, constants.getDouble(LateralDistance.class) / 2, 0), // left
@@ -56,7 +51,7 @@ public class ThreeDeadWheelLocalizer extends ThreeTrackingWheelLocalizer impleme
     }
 
     public double encoderTicksToInches(double ticks) {
-        return (getWheelRadius() * 2 * Math.PI * getGearRatio() * ticks / getTicksPerRev());
+        return ((getWheelRadius() * 2 * Math.PI * getGearRatio() * ticks) / getTicksPerRev());
     }
 
     @NonNull

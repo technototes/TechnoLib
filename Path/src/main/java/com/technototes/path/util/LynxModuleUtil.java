@@ -32,11 +32,7 @@ public class LynxModuleUtil {
         public boolean equals(Object other) {
             if (other instanceof LynxFirmwareVersion) {
                 LynxFirmwareVersion otherVersion = (LynxFirmwareVersion) other;
-                return (
-                    major == otherVersion.major &&
-                    minor == otherVersion.minor &&
-                    eng == otherVersion.eng
-                );
+                return (major == otherVersion.major && minor == otherVersion.minor && eng == otherVersion.eng);
             } else {
                 return false;
             }
@@ -115,10 +111,7 @@ public class LynxModuleUtil {
             StringBuilder msgBuilder = new StringBuilder();
             msgBuilder.append("One or more of the attached Lynx modules has outdated firmware\n");
             msgBuilder.append(
-                Misc.formatInvariant(
-                    "Mandatory minimum firmware version for Road Runner: %s\n",
-                    MIN_VERSION.toString()
-                )
+                Misc.formatInvariant("Mandatory minimum firmware version for Road Runner: %s\n", MIN_VERSION.toString())
             );
             for (Map.Entry<String, LynxFirmwareVersion> entry : outdatedModules.entrySet()) {
                 msgBuilder.append(

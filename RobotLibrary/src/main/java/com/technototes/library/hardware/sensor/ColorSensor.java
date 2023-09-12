@@ -4,9 +4,7 @@ package com.technototes.library.hardware.sensor;
  * @author Alex Stedman
  */
 @SuppressWarnings("unused")
-public class ColorSensor
-    extends Sensor<com.qualcomm.robotcore.hardware.ColorSensor>
-    implements IColorSensor {
+public class ColorSensor extends Sensor<com.qualcomm.robotcore.hardware.ColorSensor> implements IColorSensor {
 
     /** Make a color Sensor
      *

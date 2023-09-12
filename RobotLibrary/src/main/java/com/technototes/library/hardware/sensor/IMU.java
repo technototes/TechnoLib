@@ -75,10 +75,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
     /**
      * Make an imu
      */
-    public IMU(
-        com.qualcomm.robotcore.hardware.IMU device,
-        com.qualcomm.robotcore.hardware.IMU.Parameters params
-    ) {
+    public IMU(com.qualcomm.robotcore.hardware.IMU device, com.qualcomm.robotcore.hardware.IMU.Parameters params) {
         super(device);
         angleOffset = 0.0;
 
@@ -113,12 +110,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
         RevHubOrientationOnRobot.LogoFacingDirection logo,
         RevHubOrientationOnRobot.UsbFacingDirection usb
     ) {
-        this(
-            device,
-            new com.qualcomm.robotcore.hardware.IMU.Parameters(
-                new RevHubOrientationOnRobot(logo, usb)
-            )
-        );
+        this(device, new com.qualcomm.robotcore.hardware.IMU.Parameters(new RevHubOrientationOnRobot(logo, usb)));
     }
 
     /**
@@ -131,12 +123,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
         RevHubOrientationOnRobot.LogoFacingDirection logo,
         RevHubOrientationOnRobot.UsbFacingDirection usb
     ) {
-        this(
-            deviceName,
-            new com.qualcomm.robotcore.hardware.IMU.Parameters(
-                new RevHubOrientationOnRobot(logo, usb)
-            )
-        );
+        this(deviceName, new com.qualcomm.robotcore.hardware.IMU.Parameters(new RevHubOrientationOnRobot(logo, usb)));
     }
 
     /**
@@ -324,8 +311,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * @return the Orientation of the IMU
      */
     public Orientation getAngularOrientation(AngleUnit units) {
-        Orientation res = getDevice()
-            .getRobotOrientation(AxesReference.INTRINSIC, axesOrder, units);
+        Orientation res = getDevice().getRobotOrientation(AxesReference.INTRINSIC, axesOrder, units);
         if ((axesSigns.bVal & AxesSigns.NPP.bVal) == AxesSigns.NPP.bVal) {
             res.firstAngle = -res.firstAngle;
         }

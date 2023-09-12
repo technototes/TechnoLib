@@ -61,9 +61,7 @@ public class ConditionalCommand implements Command {
         trueCommand = trueC;
         falseCommand = falseC;
         CommandScheduler.getInstance().scheduleWithOther(this, trueCommand, condition);
-        CommandScheduler
-            .getInstance()
-            .scheduleWithOther(this, falseCommand, () -> !condition.getAsBoolean());
+        CommandScheduler.getInstance().scheduleWithOther(this, falseCommand, () -> !condition.getAsBoolean());
     }
 
     @Override

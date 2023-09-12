@@ -8,8 +8,7 @@ import java.util.function.BooleanSupplier;
 /** The class to extend custom gamepad buttons from
  * @author Alex Stedman
  */
-public class ButtonBase
-    implements BooleanSupplier, Periodic, Invertable<ButtonBase>, Enablable<ButtonBase> {
+public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonBase>, Enablable<ButtonBase> {
 
     protected BooleanSupplier booleanSupplier;
 

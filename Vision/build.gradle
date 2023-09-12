@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
+    namespace = 'com.technototes.vision'
 
     lint {
         disable 'ExpiredTargetSdkVersion'
@@ -28,7 +29,7 @@ dependencies {
         exclude group: 'org.ejml', module: 'ejml-all'
     }
 
-    implementation 'org.openftc:easyopencv:1.5.2'
+    implementation 'org.openftc:easyopencv:1.7.0'
 
     testImplementation(platform('org.junit:junit-bom:5.7.0'))
     testImplementation('org.junit.jupiter:junit-jupiter-api:5.7.0')
@@ -56,4 +57,3 @@ afterEvaluate {
 }
 
 apply from: '../build.dependencies.gradle'
-

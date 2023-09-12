@@ -129,11 +129,7 @@ public class Logger {
             for (int i = 0; i < choice.length; i++) {
                 telemetry.addLine(
                     (i > 9 ? i + "| " : i + " | ") +
-                    (
-                        choice[i] == null
-                            ? ""
-                            : choice[i].getTag().replace('`', captionDivider) + choice[i].toString()
-                    )
+                    (choice[i] == null ? "" : choice[i].getTag().replace('`', captionDivider) + choice[i].toString())
                 );
             }
             telemetry.update();
@@ -305,20 +301,12 @@ public class Logger {
 
     private boolean isFieldAllowed(Field f) {
         if (f.isAnnotationPresent(LogConfig.Whitelist.class)) {
-            if (
-                !Arrays
-                    .asList(f.getAnnotation(LogConfig.Whitelist.class).value())
-                    .contains(opMode.getClass())
-            ) {
+            if (!Arrays.asList(f.getAnnotation(LogConfig.Whitelist.class).value()).contains(opMode.getClass())) {
                 return false;
             }
         }
         if (f.isAnnotationPresent(LogConfig.Blacklist.class)) {
-            if (
-                Arrays
-                    .asList(f.getAnnotation(LogConfig.Blacklist.class).value())
-                    .contains(opMode.getClass())
-            ) {
+            if (Arrays.asList(f.getAnnotation(LogConfig.Blacklist.class).value()).contains(opMode.getClass())) {
                 return false;
             }
         }

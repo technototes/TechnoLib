@@ -71,8 +71,7 @@ public class Motor<T extends DcMotorSimple>
      */
     @Override
     public Motor<T> setInverted(boolean inv) {
-        getDevice()
-            .setDirection(inv ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);
+        getDevice().setDirection(inv ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);
         invert = inv;
         return this;
     }

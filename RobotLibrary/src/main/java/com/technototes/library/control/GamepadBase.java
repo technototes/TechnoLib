@@ -14,8 +14,7 @@ import java.util.function.DoubleSupplier;
  * @param <U> The class for the axis components on the gamepad
  * @author Alex Stedman
  */
-public class GamepadBase<T extends ButtonBase, U extends AxisBase>
-    implements Periodic, Enablable<GamepadBase<T, U>> {
+public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Periodic, Enablable<GamepadBase<T, U>> {
 
     private boolean enabled = true;
     // normal gamepad

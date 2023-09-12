@@ -32,9 +32,7 @@ public class Speaker {
         for (String s : name) {
             list.put(
                 s,
-                hardwareMap.appContext
-                    .getResources()
-                    .getIdentifier(s, "raw", hardwareMap.appContext.getPackageName())
+                hardwareMap.appContext.getResources().getIdentifier(s, "raw", hardwareMap.appContext.getPackageName())
             );
         }
         return this;

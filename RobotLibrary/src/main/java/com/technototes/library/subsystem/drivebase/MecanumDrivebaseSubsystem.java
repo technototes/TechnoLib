@@ -23,12 +23,7 @@ public class MecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Drivebas
      * @param rlMotor The rear left motor for the drivebase
      * @param rrMotor The rear right motor for the drivebase
      */
-    public MecanumDrivebaseSubsystem(
-        Motor<T> flMotor,
-        Motor<T> frMotor,
-        Motor<T> rlMotor,
-        Motor<T> rrMotor
-    ) {
+    public MecanumDrivebaseSubsystem(Motor<T> flMotor, Motor<T> frMotor, Motor<T> rlMotor, Motor<T> rrMotor) {
         super(flMotor, frMotor, rlMotor, rrMotor);
         this.flMotor = flMotor;
         this.frMotor = frMotor;

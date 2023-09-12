@@ -8,9 +8,7 @@ import com.technototes.library.hardware.HardwareDeviceGroup;
  * @param <T> The type of motors to group
  */
 @SuppressWarnings("unused")
-public class MotorGroup<T extends DcMotorSimple>
-    extends Motor<T>
-    implements HardwareDeviceGroup<Motor<T>> {
+public class MotorGroup<T extends DcMotorSimple> extends Motor<T> implements HardwareDeviceGroup<Motor<T>> {
 
     private final Motor[] followers;
 

@@ -31,12 +31,7 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice
      * @param device The list of names of cameras as configured in the Robot configuration
      */
     public SwitchableWebcam(String... device) {
-        this(
-            Arrays
-                .stream(device)
-                .map(s -> hardwareMap.get(WebcamName.class, s))
-                .toArray(WebcamName[]::new)
-        );
+        this(Arrays.stream(device).map(s -> hardwareMap.get(WebcamName.class, s)).toArray(WebcamName[]::new));
     }
 
     /**
@@ -61,11 +56,7 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice
             .createSwitchableWebcam(
                 hardwareMap.appContext
                     .getResources()
-                    .getIdentifier(
-                        "cameraMonitorViewId",
-                        "id",
-                        hardwareMap.appContext.getPackageName()
-                    ),
+                    .getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName()),
                 getDevice().get()
             );
     }

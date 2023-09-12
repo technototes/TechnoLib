@@ -88,10 +88,7 @@ public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder {
     }
 
     private int getMultiplier() {
-        return (
-            getDirection().getMultiplier() *
-            (motor.getDirection() == DcMotorSimple.Direction.FORWARD ? 1 : -1)
-        );
+        return (getDirection().getMultiplier() * (motor.getDirection() == DcMotorSimple.Direction.FORWARD ? 1 : -1));
     }
 
     /**
