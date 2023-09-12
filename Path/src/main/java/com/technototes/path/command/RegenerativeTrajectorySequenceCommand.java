@@ -1,7 +1,7 @@
 package com.technototes.path.command;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.technototes.path.subsystem.MecanumDrivebaseSubsystem;
+import com.technototes.path.subsystem.PathingMecanumDrivebaseSubsystem;
 import com.technototes.path.trajectorysequence.TrajectorySequence;
 import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
 import java.util.function.BiFunction;
@@ -13,20 +13,20 @@ public class RegenerativeTrajectorySequenceCommand extends TrajectorySequenceCom
     public Supplier<TrajectorySequence> trajFunc;
 
     public RegenerativeTrajectorySequenceCommand(
-        MecanumDrivebaseSubsystem sub,
+        PathingMecanumDrivebaseSubsystem sub,
         Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> t
     ) {
         super(sub, t);
         trajFunc = () -> t.apply(sub::trajectorySequenceBuilder);
     }
 
-    public RegenerativeTrajectorySequenceCommand(MecanumDrivebaseSubsystem sub, Supplier<TrajectorySequence> t) {
+    public RegenerativeTrajectorySequenceCommand(PathingMecanumDrivebaseSubsystem sub, Supplier<TrajectorySequence> t) {
         super(sub, t);
         trajFunc = t;
     }
 
     public <T> RegenerativeTrajectorySequenceCommand(
-        MecanumDrivebaseSubsystem sub,
+        PathingMecanumDrivebaseSubsystem sub,
         BiFunction<Function<Pose2d, TrajectorySequenceBuilder>, T, TrajectorySequence> t,
         T mux
     ) {
@@ -35,7 +35,7 @@ public class RegenerativeTrajectorySequenceCommand extends TrajectorySequenceCom
     }
 
     public <T> RegenerativeTrajectorySequenceCommand(
-        MecanumDrivebaseSubsystem sub,
+        PathingMecanumDrivebaseSubsystem sub,
         Function<T, TrajectorySequence> t,
         T mux
     ) {

@@ -4,16 +4,17 @@ import com.acmerobotics.roadrunner.drive.DriveSignal;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.technototes.library.command.Command;
-import com.technototes.path.subsystem.MecanumDrivebaseSubsystem;
+import com.technototes.path.subsystem.PathingMecanumDrivebaseSubsystem;
+
 import java.util.function.DoubleSupplier;
 
 public class MecanumDriveCommand implements Command {
 
-    public MecanumDrivebaseSubsystem subsystem;
+    public PathingMecanumDrivebaseSubsystem subsystem;
     public DoubleSupplier x, y, r;
 
     public MecanumDriveCommand(
-        MecanumDrivebaseSubsystem sub,
+        PathingMecanumDrivebaseSubsystem sub,
         DoubleSupplier xSup,
         DoubleSupplier ySup,
         DoubleSupplier rSup

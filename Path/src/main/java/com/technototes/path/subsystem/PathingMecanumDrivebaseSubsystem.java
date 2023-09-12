@@ -59,7 +59,7 @@ import java.util.List;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @SuppressWarnings("unused")
-public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem {
+public class PathingMecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem {
 
     public double speed = 1;
 
@@ -95,7 +95,7 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
 
     protected VoltageSensor batteryVoltageSensor;
 
-    public MecanumDrivebaseSubsystem(
+    public PathingMecanumDrivebaseSubsystem(
         EncodedMotor<DcMotorEx> fl,
         EncodedMotor<DcMotorEx> fr,
         EncodedMotor<DcMotorEx> rl,
@@ -106,7 +106,7 @@ public class MecanumDrivebaseSubsystem extends MecanumDrive implements Subsystem
         this(fl, fr, rl, rr, i, c, null);
     }
 
-    public MecanumDrivebaseSubsystem(
+    public PathingMecanumDrivebaseSubsystem(
         EncodedMotor<DcMotorEx> fl,
         EncodedMotor<DcMotorEx> fr,
         EncodedMotor<DcMotorEx> rl,
