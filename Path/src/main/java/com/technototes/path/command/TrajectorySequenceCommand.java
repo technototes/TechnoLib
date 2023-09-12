@@ -29,10 +29,7 @@ public class TrajectorySequenceCommand implements Command {
         trajectory = t.apply(sub::trajectorySequenceBuilder);
     }
 
-    public TrajectorySequenceCommand(
-        MecanumDrivebaseSubsystem sub,
-        Supplier<TrajectorySequence> t
-    ) {
+    public TrajectorySequenceCommand(MecanumDrivebaseSubsystem sub, Supplier<TrajectorySequence> t) {
         addRequirements(sub);
         subsystem = sub;
         trajectory = t.get();
@@ -48,11 +45,7 @@ public class TrajectorySequenceCommand implements Command {
         trajectory = t.apply(sub::trajectorySequenceBuilder, mux);
     }
 
-    public <T> TrajectorySequenceCommand(
-        MecanumDrivebaseSubsystem sub,
-        Function<T, TrajectorySequence> t,
-        T mux
-    ) {
+    public <T> TrajectorySequenceCommand(MecanumDrivebaseSubsystem sub, Function<T, TrajectorySequence> t, T mux) {
         addRequirements(sub);
         subsystem = sub;
         trajectory = t.apply(mux);

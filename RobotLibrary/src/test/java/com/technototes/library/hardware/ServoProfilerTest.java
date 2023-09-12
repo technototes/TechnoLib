@@ -19,9 +19,7 @@ public class ServoProfilerTest {
         time.reset();
         servoController.setTargetPosition(0.7);
         while (!servoController.isAtTarget()) {
-            System.out.println(
-                time.seconds() + ": " + servoController.update().getCurrentPosition()
-            );
+            System.out.println(time.seconds() + ": " + servoController.update().getCurrentPosition());
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {

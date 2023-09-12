@@ -164,12 +164,7 @@ public final class CommandScheduler {
      * @return The CommandScheduler singleton for chaining
      */
     public CommandScheduler scheduleJoystick(Command command, BooleanSupplier supplier) {
-        return scheduleForState(
-            command,
-            supplier,
-            CommandOpMode.OpModeState.RUN,
-            CommandOpMode.OpModeState.END
-        );
+        return scheduleForState(command, supplier, CommandOpMode.OpModeState.RUN, CommandOpMode.OpModeState.END);
     }
 
     /**
@@ -182,11 +177,7 @@ public final class CommandScheduler {
      * @return The CommandScheduler singleton for chaining
      */
     public CommandScheduler scheduleJoystick(Command command) {
-        return scheduleForState(
-            command,
-            CommandOpMode.OpModeState.RUN,
-            CommandOpMode.OpModeState.END
-        );
+        return scheduleForState(command, CommandOpMode.OpModeState.RUN, CommandOpMode.OpModeState.END);
     }
 
     /**
@@ -256,15 +247,8 @@ public final class CommandScheduler {
      * @param additionalCondition The additional condition necessary to be true to schedule the 'other' command
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleAfterOther(
-        Command dependency,
-        Command other,
-        BooleanSupplier additionalCondition
-    ) {
-        return schedule(
-            other,
-            () -> dependency.justFinishedNoCancel() && additionalCondition.getAsBoolean()
-        );
+    public CommandScheduler scheduleAfterOther(Command dependency, Command other, BooleanSupplier additionalCondition) {
+        return schedule(other, () -> dependency.justFinishedNoCancel() && additionalCondition.getAsBoolean());
     }
 
     /**
@@ -276,15 +260,8 @@ public final class CommandScheduler {
      * @param additionalCondition The additional condition necessary to be true to schedule the 'other' command
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleWithOther(
-        Command dependency,
-        Command other,
-        BooleanSupplier additionalCondition
-    ) {
-        return schedule(
-            other,
-            () -> dependency.justStarted() && additionalCondition.getAsBoolean()
-        );
+    public CommandScheduler scheduleWithOther(Command dependency, Command other, BooleanSupplier additionalCondition) {
+        return schedule(other, () -> dependency.justStarted() && additionalCondition.getAsBoolean());
     }
 
     /**
@@ -300,9 +277,7 @@ public final class CommandScheduler {
             defaultMap.put(subsystem, command);
             schedule(command, () -> getCurrent(subsystem) == command);
         } else {
-            System.err.println(
-                "default commands must require their subsystem: " + command.getClass().toString()
-            );
+            System.err.println("default commands must require their subsystem: " + command.getClass().toString());
         }
         return this;
     }

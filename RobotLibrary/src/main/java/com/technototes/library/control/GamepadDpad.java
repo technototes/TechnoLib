@@ -32,9 +32,7 @@ public class GamepadDpad<T extends ButtonBase> implements Stick {
      */
     @Override
     public double getXAxis() {
-        return (
-            right.getAsBoolean() ? (left.getAsBoolean() ? 0 : 1) : (left.getAsBoolean() ? -1 : 0)
-        );
+        return (right.getAsBoolean() ? (left.getAsBoolean() ? 0 : 1) : (left.getAsBoolean() ? -1 : 0));
     }
 
     /** Return y axis double (treating dpad as stick)

@@ -40,13 +40,7 @@ public enum Color {
      * @return The formatted String
      */
     public String format(Object object) {
-        return (
-            "<font" +
-            (this == NO_COLOR ? "" : " color=#" + getHexValue()) +
-            ">" +
-            object +
-            "</font>"
-        );
+        return ("<font" + (this == NO_COLOR ? "" : " color=#" + getHexValue()) + ">" + object + "</font>");
     }
 
     /** Format the supplied object with the HTML and a format String to become this color

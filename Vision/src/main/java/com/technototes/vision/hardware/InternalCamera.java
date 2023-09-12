@@ -8,8 +8,7 @@ import org.openftc.easyopencv.OpenCvInternalCamera;
  * This is a Camera for use with a phone's internal camera
  */
 @SuppressWarnings("unused")
-public class InternalCamera
-    extends Camera<OpenCvInternalCamera, DummyDevice<OpenCvInternalCamera.CameraDirection>> {
+public class InternalCamera extends Camera<OpenCvInternalCamera, DummyDevice<OpenCvInternalCamera.CameraDirection>> {
 
     /**
      * Create the front-facing internal camera
@@ -50,11 +49,7 @@ public class InternalCamera
                 getCameraDirection(),
                 hardwareMap.appContext
                     .getResources()
-                    .getIdentifier(
-                        "cameraMonitorViewId",
-                        "id",
-                        hardwareMap.appContext.getPackageName()
-                    )
+                    .getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName())
             );
     }
 }

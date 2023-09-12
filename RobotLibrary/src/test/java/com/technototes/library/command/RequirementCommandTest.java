@@ -42,14 +42,7 @@ public class RequirementCommandTest {
 
         for (i[0] = 0; i[0] < 100; i[0]++) {
             CommandScheduler.getInstance().run();
-            System.out.println(
-                " - " +
-                command1.getState() +
-                " - " +
-                command2.getState() +
-                " - " +
-                command3.getState()
-            );
+            System.out.println(" - " + command1.getState() + " - " + command2.getState() + " - " + command3.getState());
         }
     }
 }

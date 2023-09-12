@@ -190,11 +190,11 @@ public interface TankConstants {
     }
 
     static double encoderTicksToInches(double ticks, double rad, double rat, double rev) {
-        return rad * 2 * Math.PI * rat * ticks / rev;
+        return (rad * 2 * Math.PI * rat * ticks) / rev;
     }
 
     static double rpmToVelocity(double rpm, double rad, double rat) {
-        return rpm * rat * 2 * Math.PI * rad / 60.0;
+        return (rpm * rat * 2 * Math.PI * rad) / 60.0;
     }
 
     static double getMotorVelocityF(double ticksPerSecond) {

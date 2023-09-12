@@ -57,10 +57,7 @@ public class TrajectorySequenceRunner {
     private FtcDashboard dashboard;
     private final LinkedList<Pose2d> poseHistory = new LinkedList<>();
 
-    public TrajectorySequenceRunner(
-        TrajectoryFollower follower,
-        PIDCoefficients headingPIDCoefficients
-    ) {
+    public TrajectorySequenceRunner(TrajectoryFollower follower, PIDCoefficients headingPIDCoefficients) {
         this.follower = follower;
 
         turnController = new PIDFController(headingPIDCoefficients);
@@ -114,10 +111,7 @@ public class TrajectorySequenceRunner {
                 remainingMarkers.clear();
 
                 remainingMarkers.addAll(currentSegment.getMarkers());
-                Collections.sort(
-                    remainingMarkers,
-                    (t1, t2) -> Double.compare(t1.getTime(), t2.getTime())
-                );
+                Collections.sort(remainingMarkers, (t1, t2) -> Double.compare(t1.getTime(), t2.getTime()));
             }
 
             double deltaTime = now - currentSegmentStartTime;
@@ -138,8 +132,7 @@ public class TrajectorySequenceRunner {
 
                 targetPose = currentTrajectory.get(deltaTime);
             } else if (currentSegment instanceof TurnSegment) {
-                MotionState targetState =
-                    ((TurnSegment) currentSegment).getMotionProfile().get(deltaTime);
+                MotionState targetState = ((TurnSegment) currentSegment).getMotionProfile().get(deltaTime);
 
                 turnController.setTargetPosition(targetState.getX());
 
@@ -154,10 +147,7 @@ public class TrajectorySequenceRunner {
                 targetPose = startPose.copy(startPose.getX(), startPose.getY(), targetState.getX());
 
                 driveSignal =
-                    new DriveSignal(
-                        new Pose2d(0, 0, targetOmega + correction),
-                        new Pose2d(0, 0, targetAlpha)
-                    );
+                    new DriveSignal(new Pose2d(0, 0, targetOmega + correction), new Pose2d(0, 0, targetAlpha));
 
                 if (deltaTime >= currentSegment.getDuration()) {
                     currentSegmentIndex++;

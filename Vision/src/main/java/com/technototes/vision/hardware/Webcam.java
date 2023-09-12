@@ -40,11 +40,7 @@ public class Webcam extends Camera<OpenCvWebcam, WebcamName> {
                 getDevice(),
                 hardwareMap.appContext
                     .getResources()
-                    .getIdentifier(
-                        "cameraMonitorViewId",
-                        "id",
-                        hardwareMap.appContext.getPackageName()
-                    )
+                    .getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName())
             );
     }
 }

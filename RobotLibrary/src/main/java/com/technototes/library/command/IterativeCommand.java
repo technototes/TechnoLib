@@ -41,11 +41,7 @@ public class IterativeCommand extends SequentialCommandGroup {
         this(func, 0, loops, i -> i + 1);
     }
 
-    public IterativeCommand(
-        Function<Integer, Command> func,
-        int loops,
-        BooleanSupplier stopCondition
-    ) {
+    public IterativeCommand(Function<Integer, Command> func, int loops, BooleanSupplier stopCondition) {
         this(func, 0, loops, i -> i + 1, stopCondition);
     }
 

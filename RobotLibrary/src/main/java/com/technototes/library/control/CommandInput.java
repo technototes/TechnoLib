@@ -62,10 +62,7 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
      * @return The CommandInput&lt;T&gt; instance
      */
     default T whilePressedOnce(Command command) {
-        return schedule(
-            getInstance()::isJustPressed,
-            command.cancelUpon(getInstance()::isReleased)
-        );
+        return schedule(getInstance()::isJustPressed, command.cancelUpon(getInstance()::isReleased));
     }
 
     /**
@@ -85,10 +82,7 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
      * @return The CommandInput&lt;T&gt; instance
      */
     default T whileReleasedOnce(Command command) {
-        return schedule(
-            getInstance()::isJustReleased,
-            command.cancelUpon(getInstance()::isPressed)
-        );
+        return schedule(getInstance()::isJustReleased, command.cancelUpon(getInstance()::isPressed));
     }
 
     /**
@@ -122,10 +116,7 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
      * @return The CommandInput&lt;T&gt; instance
      */
     default T whileToggled(Command command) {
-        return schedule(
-            getInstance()::isToggled,
-            command.cancelUpon(getInstance()::isInverseToggled)
-        );
+        return schedule(getInstance()::isToggled, command.cancelUpon(getInstance()::isInverseToggled));
     }
 
     /**
@@ -136,10 +127,7 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
      * @return The CommandInput&lt;T&gt; instance
      */
     default T whileInverseToggled(Command command) {
-        return schedule(
-            getInstance()::isInverseToggled,
-            command.cancelUpon(getInstance()::isToggled)
-        );
+        return schedule(getInstance()::isInverseToggled, command.cancelUpon(getInstance()::isToggled));
     }
 
     /**

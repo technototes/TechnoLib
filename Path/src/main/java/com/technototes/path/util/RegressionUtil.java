@@ -105,11 +105,7 @@ public class RegressionUtil {
             rampReg.addData(vel, power);
         }
 
-        return new RampResult(
-            Math.abs(rampReg.getSlope()),
-            Math.abs(rampReg.getIntercept()),
-            rampReg.getRSquare()
-        );
+        return new RampResult(Math.abs(rampReg.getSlope()), Math.abs(rampReg.getIntercept()), rampReg.getRSquare());
     }
 
     /**

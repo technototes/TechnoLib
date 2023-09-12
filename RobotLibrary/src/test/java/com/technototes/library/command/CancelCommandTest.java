@@ -29,9 +29,7 @@ public class CancelCommandTest {
         Command c = new cmd();
         ElapsedTime t = new ElapsedTime();
         t.reset();
-        CommandScheduler
-            .getInstance()
-            .scheduleOnce(c.cancelUpon(() -> c.getRuntime().seconds() > 1));
+        CommandScheduler.getInstance().scheduleOnce(c.cancelUpon(() -> c.getRuntime().seconds() > 1));
         while (t.seconds() < 5.5) {
             CommandScheduler.getInstance().run();
             if (c.justFinished()) System.out.println("finish");

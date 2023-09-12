@@ -16,9 +16,7 @@ import org.openftc.easyopencv.PipelineRecordingParameters;
  * @param <T> The OpenCvCamera type
  * @param <U> The HardwareDevice type
  */
-public abstract class Camera<
-    T extends OpenCvCamera, U extends com.qualcomm.robotcore.hardware.HardwareDevice
->
+public abstract class Camera<T extends OpenCvCamera, U extends com.qualcomm.robotcore.hardware.HardwareDevice>
     extends HardwareDevice<U>
     implements OpenCvCamera {
 
