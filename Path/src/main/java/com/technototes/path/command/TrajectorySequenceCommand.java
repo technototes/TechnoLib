@@ -45,7 +45,11 @@ public class TrajectorySequenceCommand implements Command {
         trajectory = t.apply(sub::trajectorySequenceBuilder, mux);
     }
 
-    public <T> TrajectorySequenceCommand(PathingMecanumDrivebaseSubsystem sub, Function<T, TrajectorySequence> t, T mux) {
+    public <T> TrajectorySequenceCommand(
+        PathingMecanumDrivebaseSubsystem sub,
+        Function<T, TrajectorySequence> t,
+        T mux
+    ) {
         addRequirements(sub);
         subsystem = sub;
         trajectory = t.apply(mux);

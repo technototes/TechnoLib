@@ -102,8 +102,8 @@ function createMatcher(pattern, flags) {
 }
 var watermark = 'Search';
 $(function () {
-  var search = $('#search');
-  var reset = $('#reset');
+  var search = $('#search-input');
+  var reset = $('#reset-button');
   search.val('');
   search.prop('disabled', false);
   reset.prop('disabled', false);
@@ -271,7 +271,7 @@ function doSearch(request, response) {
   function searchIndex(indexArray, category, nameFunc) {
     var primaryResults = searchIndexWithMatcher(indexArray, camelCaseMatcher, category, nameFunc);
     result = result.concat(primaryResults);
-    if (primaryResults.length <= MIN_RESULTS && camelCaseMatcher.flags.indexOf('i') === -1) {
+    if (primaryResults.length <= MIN_RESULTS && !camelCaseMatcher.ignoreCase) {
       var secondaryResults = searchIndexWithMatcher(
         indexArray,
         fallbackMatcher,
@@ -313,7 +313,7 @@ function doSearch(request, response) {
   response(result);
 }
 $(function () {
-  $('#search').catcomplete({
+  $('#search-input').catcomplete({
     minLength: 1,
     delay: 300,
     source: doSearch,
@@ -321,7 +321,7 @@ $(function () {
       if (!ui.content.length) {
         ui.content.push(noResult);
       } else {
-        $('#search').empty();
+        $('#search-input').empty();
       }
     },
     autoFocus: true,
@@ -369,7 +369,7 @@ $(function () {
         } else {
           window.location.href = pathtoroot + url;
         }
-        $('#search').focus();
+        $('#search-input').focus();
       }
     },
   });
