@@ -1,13 +1,13 @@
 package com.technototes.path.command;
 
 import com.technototes.library.command.Command;
-import com.technototes.path.subsystem.MecanumDrivebaseSubsystem;
+import com.technototes.path.subsystem.PathingMecanumDrivebaseSubsystem;
 
 public class ResetGyroCommand implements Command {
 
-    public MecanumDrivebaseSubsystem subsystem;
+    public PathingMecanumDrivebaseSubsystem subsystem;
 
-    public ResetGyroCommand(MecanumDrivebaseSubsystem s) {
+    public ResetGyroCommand(PathingMecanumDrivebaseSubsystem s) {
         subsystem = s;
     }
 

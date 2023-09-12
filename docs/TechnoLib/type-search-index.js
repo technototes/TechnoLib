@@ -1,5 +1,5 @@
 typeSearchIndex = [
-  { l: 'All Classes', u: 'allclasses-index.html' },
+  { l: 'All Classes and Interfaces', u: 'allclasses-index.html' },
   { p: 'com.technototes.library.util', l: 'Alliance' },
   { p: 'com.technototes.library.hardware2', l: 'AnalogBuilder' },
   { p: 'com.technototes.library.hardware.sensor', l: 'AnalogSensor' },
@@ -74,7 +74,6 @@ typeSearchIndex = [
   { p: 'com.technototes.library.logger', l: 'Log.Logs' },
   { p: 'com.technototes.library.util', l: 'MapUtils' },
   { p: 'com.technototes.library.util', l: 'MathUtils' },
-  { p: 'com.technototes.library.subsystem.drivebase', l: 'MecanumDrivebaseSubsystem' },
   { p: 'com.technototes.library.hardware.motor', l: 'Motor' },
   { p: 'com.technototes.library.hardware2', l: 'MotorBuilder' },
   { p: 'com.technototes.library.hardware.sensor.encoder', l: 'MotorEncoder' },
@@ -105,6 +104,7 @@ typeSearchIndex = [
   { p: 'com.technototes.library.hardware.servo', l: 'ServoGroup' },
   { p: 'com.technototes.library.hardware.servo', l: 'ServoProfiler' },
   { p: 'com.technototes.library.subsystem.servo', l: 'ServoSubsystem' },
+  { p: 'com.technototes.library.subsystem.drivebase', l: 'SimpleMecanumDrivebaseSubsystem' },
   { p: 'com.technototes.library.util', l: 'SmartConsumer' },
   { p: 'com.technototes.library.hardware', l: 'Speaker' },
   { p: 'com.technototes.library.control', l: 'Stick' },
