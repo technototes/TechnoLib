@@ -20,7 +20,7 @@ public class GamepadTest {
 
     @Test
     public void buttonTest() {
-        CommandButton commandButton = commandGamepad.a;
+        CommandButton commandButton = commandGamepad.xbox_a;
         gamepad.a = false;
         commandButton.periodic();
         gamepad.a = true;
