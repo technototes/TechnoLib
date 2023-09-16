@@ -22,11 +22,11 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
     /**
      * The button objects for the XBox game controller
      */
-    public T a, b, x, y, start, back;
+    public T xbox_a, xbox_b, xbox_x, xbox_y, xbox_start, xbox_back;
     /**
      * The button objects for the PS4 game controller
      */
-    public T cross, circle, square, triangle, share, options;
+    public T ps_cross, ps_circle, ps_square, ps_triangle, ps_share, ps_options;
     /**
      * The button objects for both the XBox and PS4 controllers
      */
@@ -73,12 +73,12 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
         dpad = new GamepadDpad<>(dpadUp, dpadDown, dpadLeft, dpadRight);
         periodics =
             new Periodic[] {
-                a,
-                b,
-                x,
-                y,
-                start,
-                back,
+                xbox_a,
+                xbox_b,
+                xbox_x,
+                xbox_y,
+                xbox_start,
+                xbox_back,
                 leftBumper,
                 rightBumper,
                 leftTrigger,
@@ -89,12 +89,12 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
             };
         enablables =
             new Enablable[] {
-                a,
-                b,
-                x,
-                y,
-                start,
-                back,
+                xbox_a,
+                xbox_b,
+                xbox_x,
+                xbox_y,
+                xbox_start,
+                xbox_back,
                 leftBumper,
                 rightBumper,
                 leftTrigger,
@@ -110,19 +110,19 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
         throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         // buttons
         // a=new T();
-        a = buttonInstance(() -> g.a);
-        b = buttonInstance(() -> g.b);
-        x = buttonInstance(() -> g.x);
-        y = buttonInstance(() -> g.y);
-        cross = a;
-        circle = b;
-        square = x;
-        triangle = y;
+        xbox_a = buttonInstance(() -> g.a);
+        xbox_b = buttonInstance(() -> g.b);
+        xbox_x = buttonInstance(() -> g.x);
+        xbox_y = buttonInstance(() -> g.y);
+        ps_cross = xbox_a;
+        ps_circle = xbox_b;
+        ps_square = xbox_x;
+        ps_triangle = xbox_y;
 
-        start = buttonInstance(() -> g.start);
-        back = buttonInstance(() -> g.back);
-        share = back;
-        options = start;
+        xbox_start = buttonInstance(() -> g.start);
+        xbox_back = buttonInstance(() -> g.back);
+        ps_share = xbox_back;
+        ps_options = xbox_start;
 
         // bumpers
         leftBumper = buttonInstance(() -> g.left_bumper);
@@ -158,51 +158,51 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
         /**
          * XBox A button
          */
-        A,
+        XBOX_A,
         /**
          * XBox B button
          */
-        B,
+        XBOX_B,
         /**
          * XBox X button
          */
-        X,
+        XBOX_X,
         /**
          * XBox Y button
          */
-        Y,
+        XBOX_Y,
         /**
          * PS4 Cross (X) button
          */
-        CROSS,
+        PS_CROSS,
         /**
          * PS4 Circle (O) button
          */
-        CIRCLE,
+        PS_CIRCLE,
         /**
          * PS4 Square button
          */
-        SQUARE,
+        PS_SQUARE,
         /**
          * PS4 Triangle button
          */
-        TRIANGLE,
+        PS_TRIANGLE,
         /**
          * PS4 Share button
          */
-        SHARE,
+        PS_SHARE,
         /**
          * PS4 Options button
          */
-        OPTIONS,
+        PS_OPTIONS,
         /**
-         * PS4/XBox Start button
+         * XBox Start button
          */
-        START,
+        XBOX_START,
         /**
-         * PS4/XBox Back button
+         * XBox Back button
          */
-        BACK,
+        XBOX_BACK,
         /**
          * Left bumper button
          */
@@ -259,30 +259,30 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
      */
     public T getButton(Button bu) {
         switch (bu) {
-            case A:
-                return a;
-            case B:
-                return b;
-            case X:
-                return x;
-            case Y:
-                return y;
-            case CROSS:
-                return cross;
-            case CIRCLE:
-                return circle;
-            case SQUARE:
-                return square;
-            case TRIANGLE:
-                return triangle;
-            case SHARE:
-                return share;
-            case OPTIONS:
-                return options;
-            case BACK:
-                return back;
-            case START:
-                return start;
+            case XBOX_A:
+                return xbox_a;
+            case XBOX_B:
+                return xbox_b;
+            case XBOX_X:
+                return xbox_x;
+            case XBOX_Y:
+                return xbox_y;
+            case PS_CROSS:
+                return ps_cross;
+            case PS_CIRCLE:
+                return ps_circle;
+            case PS_SQUARE:
+                return ps_square;
+            case PS_TRIANGLE:
+                return ps_triangle;
+            case PS_SHARE:
+                return ps_share;
+            case PS_OPTIONS:
+                return ps_options;
+            case XBOX_BACK:
+                return xbox_back;
+            case XBOX_START:
+                return xbox_start;
             case LEFT_BUMPER:
                 return leftBumper;
             case RIGHT_BUMPER:
