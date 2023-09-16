@@ -61,6 +61,18 @@ how this stuff works is in our robot code. It's all public on github:
 
 ## Breaking changes
 
+## Version 1.3.0:
+
+- The two conflicting `MecanumDrivebaseSubsystem` classes, on in `RobotLibrary`, and one in `Path`,
+  are now differentiated: `SimpleMecanumDrivebaseSubsystem` and `PathingMecanumDrivebaseSubsystem`.
+  Check which module you were importing to and change your code to use the appropriate drivebase
+  subsystem.
+
+- The button names are now prefixed with `xbox_` or `ps_` depending on if the button is on an XBox
+  controller, or a PlayStation controller. This is particularly helpful when you're trying to use
+  the "X" buttons. On the XBox controller, it was called `x` and now it's called `xbox_x`, while the
+  button with an "X" on a PlayStation controller was called `cross` and is now called `ps_cross`.
+
 ## Version 1.2.0:
 
 For SDK 8.1 and later, there's a new IMU class that handles a bunch of stuff that was handled by the
