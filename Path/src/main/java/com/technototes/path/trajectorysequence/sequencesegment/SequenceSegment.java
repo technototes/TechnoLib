@@ -1,7 +1,6 @@
 package com.technototes.path.trajectorysequence.sequencesegment;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.trajectory.TrajectoryMarker;
+import com.acmerobotics.roadrunner.Pose2d;
 import java.util.List;
 
 public abstract class SequenceSegment {

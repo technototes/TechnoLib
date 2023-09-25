@@ -1,7 +1,9 @@
 package com.technototes.path.util;
 
 import androidx.annotation.Nullable;
-import com.acmerobotics.roadrunner.kinematics.Kinematics;
+
+import com.acmerobotics.roadrunner.MotorFeedforward;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -147,6 +149,7 @@ public class RegressionUtil {
             double accel = accelSamples.get(i);
             double power = powerSamples.get(i);
 
+            /*
             double powerFromVel = Kinematics.calculateMotorFeedforward(
                 vel,
                 0.0,
@@ -154,6 +157,11 @@ public class RegressionUtil {
                 0.0,
                 rampResult.kStatic
             );
+            */
+            // KBF: No clue if this is right. Haven't thought about math
+            MotorFeedforward ff = new MotorFeedforward(rampResult.kStatic, rampResult.kV, 0);
+            double powerFromVel = ff.compute(vel, accel);
+            // KBF: End Changes
             double powerFromAccel = power - powerFromVel;
 
             accelReg.addData(accel, powerFromAccel);
