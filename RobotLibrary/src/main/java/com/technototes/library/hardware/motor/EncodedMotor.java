@@ -119,31 +119,6 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     }
 
     /**
-     * Set the Inverted state for the motor. WARNING: THIS IS BACKWARD TO WHAT YOU MIGHT THINK!
-     * True - Motor goes *forward*. False - motor goes *reverse*.
-     * <p>
-     * This is overridden so it can return an EncodedMotor, and not just a Motor
-     *
-     * @param invert true for forward, false for reverse (probably not what you were expecting)
-     * @return The motor (for chaining)
-     */
-    @Override
-    public EncodedMotor<T> setInverted(boolean invert) {
-        super.setInverted(invert);
-        return this;
-    }
-
-    /**
-     * Invert the motor (toggle inversion)
-     *
-     * @return The motor (for chaining)
-     */
-    @Override
-    public EncodedMotor<T> invert() {
-        return setInverted(!getInverted());
-    }
-
-    /**
      * Set the motor to go *backward*
      */
     @Override
@@ -155,6 +130,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     /**
      * Set the motor to go *forward*
      */
+    @Override
     public EncodedMotor<T> setForward() {
         super.setForward();
         return this;
@@ -163,6 +139,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     /**
      * Set the motor to go in a particular direction
      */
+    @Override
     public EncodedMotor<T> setDirection(DcMotorSimple.Direction dir) {
         super.setDirection(dir);
         return this;
