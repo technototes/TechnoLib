@@ -8,7 +8,6 @@ import com.technototes.library.hardware.HardwareDevice;
  * @param <T> The Sensor hardware device
  * @author Alex Stedman
  */
-@Deprecated
 @SuppressWarnings("unused")
 public abstract class Sensor<T extends com.qualcomm.robotcore.hardware.HardwareDevice> extends HardwareDevice<T> {
 

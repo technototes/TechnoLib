@@ -3,7 +3,6 @@ package com.technototes.library.hardware.motor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
-import com.technototes.library.general.Invertable;
 import com.technototes.library.hardware.HardwareDevice;
 import java.util.function.Supplier;
 
@@ -14,11 +13,8 @@ import java.util.function.Supplier;
  * @author Alex Stedman
  */
 @SuppressWarnings("unused")
-public class Motor<T extends DcMotorSimple>
-    extends HardwareDevice<T>
-    implements Invertable<Motor<T>>, Supplier<Double> {
+public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements Supplier<Double> {
 
-    private boolean invert = false;
     private double min = -1, max = 1;
 
     /**
@@ -53,18 +49,6 @@ public class Motor<T extends DcMotorSimple>
     }
 
     /**
-     * Returns whether the motor is inverted. WARNING: THIS RETURNS TRUE FOR A "FORWARD" SETTING!
-     * Use getDirection() instead!
-     *
-     * @return True for inverted (forward) false for not inverted (reverse)
-     */
-    @Override
-    @Deprecated
-    public boolean getInverted() {
-        return invert;
-    }
-
-    /**
      * Returns the DcMotorSimple.Direction the motor is traveling
      */
     public DcMotorSimple.Direction getDirection() {
@@ -72,27 +56,10 @@ public class Motor<T extends DcMotorSimple>
     }
 
     /**
-     * Set the Inverted state for the motor. WARNING: THIS IS BACKWARD TO WHAT YOU MIGHT THINK!
-     * True - Motor goes *forward*. False - motor goes *reverse*.
-     * Use setForward()/setBackward() instead!
-     *
-     * @param inv true for forward, false for reverse (probably not what you were expecting)
-     * @return The motor (for chaining)
-     */
-    @Override
-    @Deprecated
-    public Motor<T> setInverted(boolean inv) {
-        getDevice().setDirection(inv ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);
-        invert = inv;
-        return this;
-    }
-
-    /**
      * Set the motor to go *backward*
      */
     public Motor<T> setBackward() {
         getDevice().setDirection(DcMotorSimple.Direction.REVERSE);
-        invert = true;
         return this;
     }
 
@@ -101,7 +68,6 @@ public class Motor<T extends DcMotorSimple>
      */
     public Motor<T> setForward() {
         getDevice().setDirection(DcMotorSimple.Direction.FORWARD);
-        invert = false;
         return this;
     }
 
@@ -110,20 +76,7 @@ public class Motor<T extends DcMotorSimple>
      */
     public Motor<T> setDirection(DcMotorSimple.Direction dir) {
         getDevice().setDirection(dir);
-        invert = dir == DcMotorSimple.Direction.FORWARD;
         return this;
-    }
-
-    /**
-     * Invert the motor (toggle inversion)
-     * Use setForward()/setBackward() instead!
-     *
-     * @return The motor (for chaining)
-     */
-    @Override
-    @Deprecated
-    public Motor<T> invert() {
-        return setInverted(!getInverted());
     }
 
     /**
