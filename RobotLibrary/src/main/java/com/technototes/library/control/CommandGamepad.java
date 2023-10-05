@@ -44,12 +44,12 @@ public class CommandGamepad extends GamepadBase<CommandButton, CommandAxis> {
     }
 
     public CommandGamepad scheduleStick(Stick s, BiFunction<Double, Double, Command> f) {
-        CommandScheduler.getInstance().scheduleJoystick(f.apply(s.getXAxis(), s.getXAxis()));
+        CommandScheduler.scheduleJoystick(f.apply(s.getXAxis(), s.getXAxis()));
         return this;
     }
 
     public CommandGamepad scheduleStick(Stick s, BiConsumer<Double, Double> f) {
-        CommandScheduler.getInstance().scheduleJoystick(() -> f.accept(s.getXAxis(), s.getXAxis()));
+        CommandScheduler.scheduleJoystick(() -> f.accept(s.getXAxis(), s.getXAxis()));
         return this;
     }
 

@@ -15,7 +15,6 @@ import com.technototes.library.hardware.Sensored;
  *
  * @author Alex Stedman
  */
-@Deprecated
 @SuppressWarnings("unused")
 public class Servo
     extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>

@@ -8,7 +8,6 @@ import com.technototes.library.hardware.HardwareDeviceGroup;
  *
  * @author Alex Stedman
  */
-@Deprecated
 @SuppressWarnings("unused")
 public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
 

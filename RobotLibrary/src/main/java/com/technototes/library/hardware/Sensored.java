@@ -10,7 +10,6 @@ import java.util.function.DoubleSupplier;
  *
  * @author Alex Stedman
  */
-@Deprecated
 @SuppressWarnings("unused")
 public interface Sensored extends DoubleSupplier {
     /**

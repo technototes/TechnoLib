@@ -9,7 +9,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  *
  * @author Alex Stedman
  */
-@Deprecated
 @SuppressWarnings("unused")
 public class Rev2MDistanceSensor extends Sensor<DistanceSensor> implements IDistanceSensor {
 
