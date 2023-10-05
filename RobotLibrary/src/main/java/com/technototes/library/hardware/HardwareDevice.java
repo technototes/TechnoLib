@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
  * @param <T> The class for the default device (ones found in ftcsdk)
  * @author Alex Stedman
  */
-@Deprecated
 @SuppressWarnings("unused")
 public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.HardwareDevice> {
 

@@ -9,7 +9,8 @@ import javax.annotation.Nullable;
 
 /**
  * There's just no possible way I care about this. I think there are rules about *not* playing
- * anything through the speaker now, anyway. This is going away.
+ * anything through the speaker now, anyway. This is going away. (The rules were created because
+ * of Alex, if I recall correctly...
  */
 @Deprecated
 public class Speaker {

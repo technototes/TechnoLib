@@ -54,22 +54,33 @@ public class Motor<T extends DcMotorSimple>
 
     /**
      * Returns whether the motor is inverted. WARNING: THIS RETURNS TRUE FOR A "FORWARD" SETTING!
+     * Use getDirection() instead!
      *
      * @return True for inverted (forward) false for not inverted (reverse)
      */
     @Override
+    @Deprecated
     public boolean getInverted() {
         return invert;
     }
 
     /**
+     * Returns the DcMotorSimple.Direction the motor is traveling
+     */
+    public DcMotorSimple.Direction getDirection() {
+        return getDevice().getDirection();
+    }
+
+    /**
      * Set the Inverted state for the motor. WARNING: THIS IS BACKWARD TO WHAT YOU MIGHT THINK!
      * True - Motor goes *forward*. False - motor goes *reverse*.
+     * Use setForward()/setBackward() instead!
      *
      * @param inv true for forward, false for reverse (probably not what you were expecting)
      * @return The motor (for chaining)
      */
     @Override
+    @Deprecated
     public Motor<T> setInverted(boolean inv) {
         getDevice().setDirection(inv ? DcMotorSimple.Direction.FORWARD : DcMotorSimple.Direction.REVERSE);
         invert = inv;
@@ -77,11 +88,40 @@ public class Motor<T extends DcMotorSimple>
     }
 
     /**
+     * Set the motor to go *backward*
+     */
+    public Motor<T> setBackward() {
+        getDevice().setDirection(DcMotorSimple.Direction.REVERSE);
+        invert = true;
+        return this;
+    }
+
+    /**
+     * Set the motor to go *forward*
+     */
+    public Motor<T> setForward() {
+        getDevice().setDirection(DcMotorSimple.Direction.FORWARD);
+        invert = false;
+        return this;
+    }
+
+    /**
+     * Set the motor to go in a particular direction
+     */
+    public Motor<T> setDirection(DcMotorSimple.Direction dir) {
+        getDevice().setDirection(dir);
+        invert = dir == DcMotorSimple.Direction.FORWARD;
+        return this;
+    }
+
+    /**
      * Invert the motor (toggle inversion)
+     * Use setForward()/setBackward() instead!
      *
      * @return The motor (for chaining)
      */
     @Override
+    @Deprecated
     public Motor<T> invert() {
         return setInverted(!getInverted());
     }
