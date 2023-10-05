@@ -10,7 +10,6 @@ import java.util.List;
  *
  * @author Alex Stedman
  */
-@Deprecated
 @SuppressWarnings("unused")
 public interface HardwareDeviceGroup<T extends HardwareDevice> {
     /**

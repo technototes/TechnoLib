@@ -144,6 +144,31 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     }
 
     /**
+     * Set the motor to go *backward*
+     */
+    @Override
+    public EncodedMotor<T> setBackward() {
+        super.setBackward();
+        return this;
+    }
+
+    /**
+     * Set the motor to go *forward*
+     */
+    public EncodedMotor<T> setForward() {
+        super.setForward();
+        return this;
+    }
+
+    /**
+     * Set the motor to go in a particular direction
+     */
+    public EncodedMotor<T> setDirection(DcMotorSimple.Direction dir) {
+        super.setDirection(dir);
+        return this;
+    }
+
+    /**
      * Get the encoder position value
      *
      * @return The encoder position value

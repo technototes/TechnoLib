@@ -31,6 +31,7 @@ public class Logger {
     public Entry<?>[] initEntries;
     private final Set<Entry<?>> unindexedRunEntries;
     private final Set<Entry<?>> unindexedInitEntries;
+    private final Set<Object> recordedAlready;
     private final Telemetry telemetry;
     private final OpMode opMode;
     /**
@@ -49,6 +50,7 @@ public class Logger {
         telemetry.setDisplayFormat(Telemetry.DisplayFormat.HTML);
         unindexedRunEntries = new LinkedHashSet<>();
         unindexedInitEntries = new LinkedHashSet<>();
+        recordedAlready = new LinkedHashSet<>();
         configure(op);
         runEntries = generate(unindexedRunEntries);
         initEntries = generate(unindexedInitEntries);
@@ -58,9 +60,10 @@ public class Logger {
         for (Field field : root.getClass().getFields()) {
             try {
                 Object o = field.get(root);
-                if (isFieldAllowed(field)) {
+                if (!recordedAlready.contains(o) && isFieldAllowed(field)) {
                     if (o instanceof Loggable) {
                         configure(o);
+                        recordedAlready.add(o);
                     } else if (
                         field.isAnnotationPresent(Log.class) ||
                         field.isAnnotationPresent(Log.Number.class) ||

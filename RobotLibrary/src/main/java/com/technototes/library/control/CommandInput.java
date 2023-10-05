@@ -145,7 +145,7 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
      * @return The CommandInput&lt;T&gt; instance
      */
     default T schedule(BooleanSupplier condition, Command command) {
-        CommandScheduler.getInstance().scheduleJoystick(command, condition);
+        CommandScheduler.scheduleJoystick(command, condition);
         return getInstance();
     }
 

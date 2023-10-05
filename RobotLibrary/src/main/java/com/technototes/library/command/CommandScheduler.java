@@ -23,23 +23,21 @@ import java.util.function.BooleanSupplier;
  */
 public final class CommandScheduler {
 
-    private final Map<Command, BooleanSupplier> commandMap;
-    private final Map<Subsystem, Set<Command>> requirementMap;
-    private final Map<Subsystem, Command> defaultMap;
+    private static Map<Command, BooleanSupplier> commandMap = new HashMap<>();
+    private static Map<Subsystem, Set<Command>> requirementMap = new HashMap<>();
+    private static Map<Subsystem, Command> defaultMap = new HashMap<>();
 
-    private final Set<Periodic> registered;
+    private static Set<Periodic> registered = new LinkedHashSet<>();
 
-    private CommandOpMode opMode;
+    private static CommandOpMode opMode;
 
     /**
      * Set the scheduler's opmode
      *
      * @param c the opmode
-     * @return the CommandScheduler (useful for chaining)
      */
-    public CommandScheduler setOpMode(CommandOpMode c) {
+    public static void setOpMode(CommandOpMode c) {
         opMode = c;
-        return this;
     }
 
     /**
@@ -47,9 +45,8 @@ public final class CommandScheduler {
      *
      * @return the CommandScheduler (useful for chaining)
      */
-    public CommandScheduler terminateOpMode() {
+    public static void terminateOpMode() {
         opMode.terminate();
-        return this;
     }
 
     /**
@@ -57,24 +54,24 @@ public final class CommandScheduler {
      *
      * @return elapsed time since opmode was started, in seconds
      */
-    public double getOpModeRuntime() {
+    public static double getOpModeRuntime() {
         return opMode.getOpModeRuntime();
     }
 
     // The Singleton CommandScheduler
-    private static CommandScheduler instance;
+    // private static CommandScheduler instance;
 
     /**
      * Get (or create) the singleton CommandScheduler object
      *
      * @return The CommandScheduler singleton
-     */
     public static synchronized CommandScheduler getInstance() {
         if (instance == null) {
             instance = new CommandScheduler();
         }
         return instance;
     }
+     */
 
     /**
      * Alex had a comment "be careful with this" and he's not wrong.
@@ -82,18 +79,18 @@ public final class CommandScheduler {
      *
      * @return a *new* singleton object (which makes very little sense)
      */
-    public static synchronized CommandScheduler resetScheduler() {
-        instance = null;
+    public static void resetScheduler() {
         Command.clear();
-        return getInstance();
     }
 
+    /*
     private CommandScheduler() {
         commandMap = new HashMap<>();
         requirementMap = new HashMap<>();
         defaultMap = new HashMap<>();
         registered = new LinkedHashSet<>();
     }
+    */
 
     /**
      * Schedule a command to run
@@ -101,8 +98,8 @@ public final class CommandScheduler {
      * @param command the command to schedule
      * @return the CommandScheduler (useful for chaining)
      */
-    public CommandScheduler schedule(Command command) {
-        return schedule(command, () -> true);
+    public static void schedule(Command command) {
+        schedule(command, () -> true);
     }
 
     /**
@@ -111,8 +108,8 @@ public final class CommandScheduler {
      * @param command the command to schedule
      * @return the CommandScheduler (useful for chaining)
      */
-    public CommandScheduler scheduleOnce(Command command) {
-        return schedule(command);
+    public static void scheduleOnce(Command command) {
+        schedule(command);
     }
 
     /**
@@ -122,8 +119,8 @@ public final class CommandScheduler {
      * @param state   the state during which the command should be scheduled
      * @return the CommandScheduler (useful for chaining)
      */
-    public CommandScheduler scheduleOnceForState(Command command, CommandOpMode.OpModeState state) {
-        return scheduleForState(command, state);
+    public static void scheduleOnceForState(Command command, CommandOpMode.OpModeState state) {
+        scheduleForState(command, state);
     }
 
     /**
@@ -136,8 +133,8 @@ public final class CommandScheduler {
      * @param supplier The condition which also must be true to run the command
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleInit(Command command, BooleanSupplier supplier) {
-        return scheduleForState(command, supplier, CommandOpMode.OpModeState.INIT);
+    public static void scheduleInit(Command command, BooleanSupplier supplier) {
+        scheduleForState(command, supplier, CommandOpMode.OpModeState.INIT);
     }
 
     /**
@@ -148,8 +145,8 @@ public final class CommandScheduler {
      * @param command The command to run
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleInit(Command command) {
-        return scheduleForState(command, () -> true, CommandOpMode.OpModeState.INIT);
+    public static void scheduleInit(Command command) {
+        scheduleForState(command, () -> true, CommandOpMode.OpModeState.INIT);
     }
 
     /**
@@ -163,8 +160,8 @@ public final class CommandScheduler {
      * @param supplier The condition which must also be true to run the command
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleJoystick(Command command, BooleanSupplier supplier) {
-        return scheduleForState(command, supplier, CommandOpMode.OpModeState.RUN, CommandOpMode.OpModeState.END);
+    public static void scheduleJoystick(Command command, BooleanSupplier supplier) {
+        scheduleForState(command, supplier, CommandOpMode.OpModeState.RUN, CommandOpMode.OpModeState.END);
     }
 
     /**
@@ -176,8 +173,8 @@ public final class CommandScheduler {
      * @param command The command to run repeatedly.
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleJoystick(Command command) {
-        return scheduleForState(command, CommandOpMode.OpModeState.RUN, CommandOpMode.OpModeState.END);
+    public static void scheduleJoystick(Command command) {
+        scheduleForState(command, CommandOpMode.OpModeState.RUN, CommandOpMode.OpModeState.END);
     }
 
     /**
@@ -189,12 +186,12 @@ public final class CommandScheduler {
      * @param supplier The function to determin in the command should be scheduled
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleForState(
+    public static void scheduleForState(
         Command command,
         BooleanSupplier supplier,
         CommandOpMode.OpModeState... states
     ) {
-        return schedule(
+        schedule(
             command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
             () -> supplier.getAsBoolean() && opMode.getOpModeState().isState(states)
         );
@@ -207,8 +204,8 @@ public final class CommandScheduler {
      * @param states  The list of states to schedule the command
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleForState(Command command, CommandOpMode.OpModeState... states) {
-        return schedule(
+    public static void scheduleForState(Command command, CommandOpMode.OpModeState... states) {
+        schedule(
             command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
             () -> opMode.getOpModeState().isState(states)
         );
@@ -222,8 +219,8 @@ public final class CommandScheduler {
      * @param other      The command to schedule when 'dependency' has finished
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleAfterOther(Command dependency, Command other) {
-        return schedule(other, dependency::justFinishedNoCancel);
+    public static void scheduleAfterOther(Command dependency, Command other) {
+        schedule(other, dependency::justFinishedNoCancel);
     }
 
     /**
@@ -234,8 +231,8 @@ public final class CommandScheduler {
      * @param other      The command to schedule when 'dependency' has started
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleWithOther(Command dependency, Command other) {
-        return schedule(other, dependency::justStarted);
+    public static void scheduleWithOther(Command dependency, Command other) {
+        schedule(other, dependency::justStarted);
     }
 
     /**
@@ -247,8 +244,8 @@ public final class CommandScheduler {
      * @param additionalCondition The additional condition necessary to be true to schedule the 'other' command
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleAfterOther(Command dependency, Command other, BooleanSupplier additionalCondition) {
-        return schedule(other, () -> dependency.justFinishedNoCancel() && additionalCondition.getAsBoolean());
+    public static void scheduleAfterOther(Command dependency, Command other, BooleanSupplier additionalCondition) {
+        schedule(other, () -> dependency.justFinishedNoCancel() && additionalCondition.getAsBoolean());
     }
 
     /**
@@ -260,8 +257,8 @@ public final class CommandScheduler {
      * @param additionalCondition The additional condition necessary to be true to schedule the 'other' command
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleWithOther(Command dependency, Command other, BooleanSupplier additionalCondition) {
-        return schedule(other, () -> dependency.justStarted() && additionalCondition.getAsBoolean());
+    public static void scheduleWithOther(Command dependency, Command other, BooleanSupplier additionalCondition) {
+        schedule(other, () -> dependency.justStarted() && additionalCondition.getAsBoolean());
     }
 
     /**
@@ -272,14 +269,13 @@ public final class CommandScheduler {
      * @param subsystem The subsystem to run the command against when it's unused
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler scheduleDefault(Command command, Subsystem subsystem) {
+    public static void scheduleDefault(Command command, Subsystem subsystem) {
         if (command.getRequirements().contains(subsystem)) {
             defaultMap.put(subsystem, command);
             schedule(command, () -> getCurrent(subsystem) == command);
         } else {
             System.err.println("default commands must require their subsystem: " + command.getClass().toString());
         }
-        return this;
     }
 
     /**
@@ -288,9 +284,8 @@ public final class CommandScheduler {
      * @param p The Periodic function to run
      * @return The CommandScheduler singleton for chaining
      */
-    public CommandScheduler register(Periodic p) {
+    public static void register(Periodic p) {
         registered.add(p);
-        return this;
     }
 
     /**
@@ -300,7 +295,7 @@ public final class CommandScheduler {
      * @return the default command for the subsystem, or null if there is none
      */
     @Nullable
-    public Command getDefault(Subsystem s) {
+    public static Command getDefault(Subsystem s) {
         return opMode.getOpModeState() == CommandOpMode.OpModeState.RUN ? defaultMap.get(s) : null;
     }
 
@@ -313,7 +308,7 @@ public final class CommandScheduler {
      * command usint the subsystem, nor a default command
      */
     @Nullable
-    public Command getCurrent(Subsystem s) {
+    public static Command getCurrent(Subsystem s) {
         if (requirementMap.get(s) == null) return null;
         for (Command c : requirementMap.get(s)) {
             if (c.isRunning()) return c;
@@ -329,21 +324,20 @@ public final class CommandScheduler {
      * @param supplier The function that returns true when the command should be run
      * @return the CommandScheduler singleton for easy chaining
      */
-    public CommandScheduler schedule(Command command, BooleanSupplier supplier) {
+    public static void schedule(Command command, BooleanSupplier supplier) {
         commandMap.put(command, supplier);
         for (Subsystem s : command.getRequirements()) {
             requirementMap.putIfAbsent(s, new LinkedHashSet<>());
             requirementMap.get(s).add(command);
             register(s);
         }
-        return this;
     }
 
     /**
      * This is invoked from inside the CommandOpMode method, during the opCode.
      * It it the core logic of actually scheduling &amp; running the commands.
      */
-    public void run() {
+    public static void run() {
         // For each newly scheduled command,
         // cancel any existing command that is using the new command's subsystem requirements
         commandMap.forEach((c1, b) -> {

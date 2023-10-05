@@ -61,7 +61,8 @@ public abstract class CommandOpMode extends LinearOpMode {
     @Override
     public final void runOpMode() {
         opModeState = OpModeState.INIT;
-        CommandScheduler.resetScheduler().setOpMode(this);
+        CommandScheduler.resetScheduler();
+        CommandScheduler.setOpMode(this);
         hubs = hardwareMap.getAll(LynxModule.class);
         hubs.forEach(e -> e.setBulkCachingMode(LynxModule.BulkCachingMode.MANUAL));
         HardwareBuilder.initMap(hardwareMap);
@@ -73,20 +74,20 @@ public abstract class CommandOpMode extends LinearOpMode {
         while (!(isStarted() && additionalInitConditions()) && !terminated && !isStopRequested()) {
             initLoop();
             universalLoop();
-            CommandScheduler.getInstance().run();
+            CommandScheduler.run();
             logger.initUpdate();
             driverGamepad.periodic();
             codriverGamepad.periodic();
             hubs.forEach(LynxModule::clearBulkCache);
         }
         opModeState = OpModeState.RUN;
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
         uponStart();
         opModeTimer.reset();
         while (opModeIsActive() && !terminated && !isStopRequested()) {
             runLoop();
             universalLoop();
-            CommandScheduler.getInstance().run();
+            CommandScheduler.run();
             logger.runUpdate();
             driverGamepad.periodic();
             codriverGamepad.periodic();
@@ -94,7 +95,7 @@ public abstract class CommandOpMode extends LinearOpMode {
         }
         opModeState = OpModeState.END;
         end();
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
         CommandScheduler.resetScheduler();
         opModeTimer.reset();
     }
