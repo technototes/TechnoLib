@@ -4,19 +4,16 @@ import com.technototes.library.subsystem.Subsystem;
 
 import java.util.function.Consumer;
 
-public class SimpleCommand<T extends Subsystem> implements Command {
-    T sub;
-    Consumer<T> method;
+public class SimpleCommand implements Command {
+    Runnable method;
 
-    public SimpleCommand(T s, Consumer<T> m) {
+    public SimpleCommand(Runnable m) {
         super();
-        s = sub;
         method = m;
-        addRequirements(sub);
     }
 
     @Override
     public void execute() {
-        method.accept(sub);
+        method.run();
     }
 }
