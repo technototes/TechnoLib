@@ -1,9 +1,11 @@
 package com.technototes.library.command;
 
 import androidx.annotation.Nullable;
+
 import com.technototes.library.general.Periodic;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.subsystem.Subsystem;
+
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -65,10 +67,10 @@ public final class CommandScheduler {
      *
      * @return The CommandScheduler singleton
     public static synchronized CommandScheduler getInstance() {
-        if (instance == null) {
-            instance = new CommandScheduler();
-        }
-        return instance;
+    if (instance == null) {
+    instance = new CommandScheduler();
+    }
+    return instance;
     }
      */
 
@@ -97,6 +99,12 @@ public final class CommandScheduler {
      */
     public static void schedule(Command command) {
         schedule(command, () -> true);
+    }
+    public static <S extends Subsystem> void schedule(S req, Consumer<S> methodRef) {
+        schedule(new SimpleCommand(req, methodRef),  () -> true);
+    }
+    public static <S extends Subsystem, T> void schedule(S req, BiConsumer<S, T> methodRef, T param) {
+        schedule(new ParameterCommand<S, T>(req, methodRef, param),  () -> true);
     }
 
     /**
@@ -130,6 +138,12 @@ public final class CommandScheduler {
     public static void scheduleInit(Command command, BooleanSupplier supplier) {
         scheduleForState(command, supplier, CommandOpMode.OpModeState.INIT);
     }
+    public static <S extends Subsystem> void scheduleInit(S req, Consumer<S> methodRef, BooleanSupplier supplier) {
+        scheduleInit(new SimpleCommand(req, methodRef), supplier);
+    }
+    public static <S extends Subsystem, T> void scheduleInit(S req, BiConsumer<S, T> methodRef, T param, BooleanSupplier supplier) {
+        scheduleInit(new ParameterCommand<S, T>(req, methodRef, param), supplier);
+    }
 
     /**
      * Schedule a command to be run recurringly during the 'Init' phase of an opmode.
@@ -140,6 +154,12 @@ public final class CommandScheduler {
      */
     public static void scheduleInit(Command command) {
         scheduleForState(command, () -> true, CommandOpMode.OpModeState.INIT);
+    }
+    public static <S extends Subsystem> void scheduleInit(S req, Consumer<S> methodRef) {
+        scheduleInit(new SimpleCommand(req, methodRef));
+    }
+    public static <S extends Subsystem, T> void scheduleInit(S req, BiConsumer<S, T> methodRef, T param) {
+        scheduleInit(new ParameterCommand<S, T>(req, methodRef, param));
     }
 
     /**
@@ -177,14 +197,24 @@ public final class CommandScheduler {
      * @param supplier The function to determin in the command should be scheduled
      */
     public static void scheduleForState(
-        Command command,
-        BooleanSupplier supplier,
-        CommandOpMode.OpModeState... states
+            Command command,
+            BooleanSupplier supplier,
+            CommandOpMode.OpModeState... states
     ) {
         schedule(
-            command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
-            () -> supplier.getAsBoolean() && opMode.getOpModeState().isState(states)
+                command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
+                () -> supplier.getAsBoolean() && opMode.getOpModeState().isState(states)
         );
+    }
+
+    public static <S extends Subsystem> void scheduleForState(S req, Consumer<S> methodRef, BooleanSupplier supplier,
+                                                              CommandOpMode.OpModeState... states) {
+        scheduleForState(new SimpleCommand(req, methodRef), supplier, states);
+    }
+
+    public static <S extends Subsystem, T> void scheduleForState(S req, BiConsumer<S, T> methodRef, T param, BooleanSupplier supplier,
+                                                                 CommandOpMode.OpModeState... states) {
+        scheduleForState(new ParameterCommand<S, T>(req, methodRef, param), supplier, states);
     }
 
     /**
@@ -195,10 +225,19 @@ public final class CommandScheduler {
      */
     public static void scheduleForState(Command command, CommandOpMode.OpModeState... states) {
         schedule(
-            command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
-            () -> opMode.getOpModeState().isState(states)
+                command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
+                () -> opMode.getOpModeState().isState(states)
         );
     }
+
+    public static <S extends Subsystem> void scheduleForState(S req, Consumer<S> methodRef, CommandOpMode.OpModeState... states) {
+        scheduleForState(new SimpleCommand(req, methodRef), states);
+    }
+
+    public static <S extends Subsystem, T> void scheduleForState(S req, BiConsumer<S, T> methodRef, T param, CommandOpMode.OpModeState... states) {
+        scheduleForState(new ParameterCommand<S, T>(req, methodRef, param), states);
+    }
+
 
     /**
      * Schedule the 'other' command (the second one) when the 'dependency' command has
@@ -262,6 +301,15 @@ public final class CommandScheduler {
         }
     }
 
+    public static <S extends Subsystem> void scheduleDefault(S req, Consumer<S> methodRef) {
+        scheduleDefault(new SimpleCommand(req, methodRef), req);
+    }
+
+    public static <S extends Subsystem, T> void scheduleDefault(S req, BiConsumer<S, T> methodRef, T param) {
+        scheduleDefault(new ParameterCommand<S, T>(req, methodRef, param), req);
+    }
+
+
     /**
      * Register a periodic function to be run once each schedule loop
      *
@@ -316,10 +364,11 @@ public final class CommandScheduler {
     }
 
     public static <S extends Subsystem> void schedule(S req, Consumer<S> methodRef, BooleanSupplier sup) {
-        schedule(new SimpleCommandWrapper(req, methodRef), sup);
+        schedule(new SimpleCommand(req, methodRef), sup);
     }
+
     public static <S extends Subsystem, T> void schedule(S req, BiConsumer<S, T> methodRef, T param, BooleanSupplier sup) {
-        schedule(new ParameterCommandWrapper<S, T>(req, methodRef, param), sup);
+        schedule(new ParameterCommand<S, T>(req, methodRef, param), sup);
     }
 
     /**

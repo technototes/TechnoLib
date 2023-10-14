@@ -4,11 +4,11 @@ import com.technototes.library.subsystem.Subsystem;
 
 import java.util.function.Consumer;
 
-public class SimpleCommandWrapper<T extends Subsystem> implements Command {
+public class SimpleCommand<T extends Subsystem> implements Command {
     T sub;
     Consumer<T> method;
 
-    public SimpleCommandWrapper(T s, Consumer<T> m) {
+    public SimpleCommand(T s, Consumer<T> m) {
         super();
         s = sub;
         method = m;
