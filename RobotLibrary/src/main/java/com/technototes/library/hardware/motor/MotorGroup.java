@@ -37,7 +37,7 @@ public class MotorGroup<T extends DcMotorSimple> extends Motor<T> implements Har
     }
 
     @Override
-    public void propogate(double value) {
+    public void propagate(double value) {
         for (Motor m : followers) {
             m.setSpeed(value);
         }
@@ -46,6 +46,6 @@ public class MotorGroup<T extends DcMotorSimple> extends Motor<T> implements Har
     @Override
     public void setSpeed(double speed) {
         super.setSpeed(speed);
-        propogate(speed);
+        propagate(speed);
     }
 }
