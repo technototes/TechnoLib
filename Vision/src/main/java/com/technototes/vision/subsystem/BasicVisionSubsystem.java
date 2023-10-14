@@ -86,10 +86,16 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
         return this;
     }
 
+    // These are the three functions you need to implement.
+    // I use this so that you can edit your rectangles in realtime from the FtcDashboard.
+    // If you don't use FtcDashboard, just make an array of Rect's and be done with it.
+    // But really, you should be using FtcDashboard. It's much faster to get this right.
+
+    // How many rectangles are you checking?
     abstract int numRectangles();
-
+    // Get the specific rectangle number
     abstract Rect getRect(int rectNumber);
-
+    // Process the particular rectangle (you probably want to call countPixelsOfColor ;) )
     public abstract void runDetection(Mat inputHSV, int rectNumber);
 
     protected void detectionProcessing(Mat frame) {
@@ -120,13 +126,13 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
         detectionProcessing(firstFrame);
     }
 
-    protected int countColorsInRect(HSVRange range, Mat imgHSV, Mat telemetryRGB, int xOffset, int yOffset) {
+    protected int countPixelsOfColor(HSVRange range, Mat imgHSV, Mat telemetryRGB, int xOffset, int yOffset) {
         int totalColorCount = 0;
         // Since we might have a hue range of -15 to 15 to detect red,
         // make the range 165 to 180 and run countColorsInRect with just that range first
         HSVRange handleRedWrap = range.makeWrapAround();
         if (handleRedWrap != null) {
-            totalColorCount += countColorsInRect(handleRedWrap, imgHSV, telemetryRGB, xOffset, yOffset);
+            totalColorCount += countPixelsOfColor(handleRedWrap, imgHSV, telemetryRGB, xOffset, yOffset);
             range = range.truncateRange();
         }
         Scalar low = range.lowEdge();
@@ -143,7 +149,7 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
                     if (telemetryRGB != null) {
                         // The color choice makes things stripey, which makes it easier to identify
                         double[] colorToDraw = ((j + i) & 3) != 0 ? low.val : high.val;
-                        imgHSV.put(j + yOffset, i + xOffset, colorToDraw);
+                        telemetryRGB.put(j + yOffset, i + xOffset, colorToDraw);
                     }
                 }
             }

@@ -4,12 +4,9 @@ import org.opencv.core.Scalar;
 
 public class HSVRange {
 
-    int hueLow;
-    int hueHigh;
-    int satLow;
-    int satHigh;
-    int valLow;
-    int valHigh;
+    int hueLow, hueHigh;
+    int satLow, satHigh;
+    int valLow, valHigh;
 
     // Private constructor for wrap around/truncation stuff
     private HSVRange(int hLo, int hHi, HSVRange copyFrom) {
