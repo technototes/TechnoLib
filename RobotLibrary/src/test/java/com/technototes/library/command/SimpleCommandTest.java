@@ -43,13 +43,13 @@ public class SimpleCommandTest {
         InstantCommand command = new InstantCommand();
 
         // Creating a command shouldn't cause it to be scheduled
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
         assertEquals(0, command.initialized);
         assertEquals(0, command.executed);
         assertEquals(0, command.ended);
         assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().schedule(command);
+        CommandScheduler.schedule(command);
 
         // Scheduling a command won't cause it to run until after run()
         assertEquals(0, command.initialized);
@@ -57,7 +57,7 @@ public class SimpleCommandTest {
         assertEquals(0, command.ended);
         assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
 
         // ?? The first run after scheduling a command doesn't do anything for the command
         // Yes because the first one puts the command into the state of intialization,
@@ -68,7 +68,7 @@ public class SimpleCommandTest {
         assertEquals(0, command.ended);
         assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
 
         /* KBF: This is a little odd. For reasons that are obvious in the code,
                the initialized state exists only before first execution, but not between command
@@ -83,7 +83,7 @@ public class SimpleCommandTest {
         // assertEquals(0, command.ended);
         // assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
 
         // The third run after scheduling a command finally runs it
         assertEquals(1, command.initialized);
@@ -91,7 +91,7 @@ public class SimpleCommandTest {
         assertEquals(0, command.ended);
         assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
 
         // The fourth run after scheduling a 'one-shot' command finally ends it
         assertEquals(1, command.initialized);
@@ -99,14 +99,14 @@ public class SimpleCommandTest {
         assertEquals(1, command.ended);
         assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
         // An ended command doesn't get scheduled anymore
         assertEquals(1, command.initialized);
         assertEquals(1, command.executed);
         assertEquals(1, command.ended);
         assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
         // An ended command doesn't get scheduled anymore
         // ?? But it does get initialized
         // when you schedule a command, its added to a loop.
@@ -121,7 +121,7 @@ public class SimpleCommandTest {
         // assertEquals(1, command.ended);
         // assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
         // An ended command doesn't get scheduled anymore
         // ?? But it does get initialized
         // ?? And executed??
@@ -130,7 +130,7 @@ public class SimpleCommandTest {
         assertEquals(1, command.ended);
         assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
         // An ended command doesn't get scheduled anymore
         // ?? But it does get initialized
         // ?? And executed??
@@ -140,13 +140,13 @@ public class SimpleCommandTest {
         assertEquals(2, command.ended);
         assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
         assertEquals(2, command.initialized);
         assertEquals(2, command.executed);
         assertEquals(2, command.ended);
         assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
 
         // KBF: Commented out, see comment above
         // assertEquals(3, command.initialized);
@@ -154,13 +154,13 @@ public class SimpleCommandTest {
         // assertEquals(2, command.ended);
         // assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
         assertEquals(3, command.initialized);
         assertEquals(3, command.executed);
         assertEquals(2, command.ended);
         assertEquals(0, command.canceled);
 
-        CommandScheduler.getInstance().run();
+        CommandScheduler.run();
         assertEquals(3, command.initialized);
         assertEquals(3, command.executed);
         assertEquals(3, command.ended);
