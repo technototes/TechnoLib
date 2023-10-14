@@ -36,12 +36,12 @@ public class RequirementCommandTest {
     @Test
     public void run() {
         int[] i = new int[1];
-        CommandScheduler.getInstance().schedule(command1, () -> i[0] == 0);
-        CommandScheduler.getInstance().schedule(command2, () -> i[0] == 1);
-        CommandScheduler.getInstance().schedule(command3, () -> i[0] == 2);
+        CommandScheduler.schedule(command1, () -> i[0] == 0);
+        CommandScheduler.schedule(command2, () -> i[0] == 1);
+        CommandScheduler.schedule(command3, () -> i[0] == 2);
 
         for (i[0] = 0; i[0] < 100; i[0]++) {
-            CommandScheduler.getInstance().run();
+            CommandScheduler.run();
             System.out.println(" - " + command1.getState() + " - " + command2.getState() + " - " + command3.getState());
         }
     }
