@@ -3,22 +3,20 @@ package com.technototes.library.command;
 import com.technototes.library.subsystem.Subsystem;
 
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
-public class ParameterCommand<T extends Subsystem, U> implements Command {
-    T sub;
+public class ParameterCommand<U> implements Command {
     U param;
-    BiConsumer<T, U> method;
+    Consumer<U> method;
 
-    public ParameterCommand(T s, BiConsumer<T, U> m, U arg) {
+    public ParameterCommand(Consumer<U> m, U arg) {
         super();
-        s = sub;
         param = arg;
         method = m;
-        addRequirements(sub);
     }
 
     @Override
     public void execute() {
-        method.accept(sub, param);
+        method.accept(param);
     }
 }
