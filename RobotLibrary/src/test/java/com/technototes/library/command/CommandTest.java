@@ -20,9 +20,9 @@ public class CommandTest {
     public void scheduleCommand() {
         long i = System.currentTimeMillis();
         int e = 0;
-        CommandScheduler.getInstance().schedule(c.sleep(1));
+        CommandScheduler.schedule(c.sleep(1));
         while (System.currentTimeMillis() - i < 10500) {
-            CommandScheduler.getInstance().run();
+            CommandScheduler.run();
             if (c.justFinished()) System.out.println("finish");
             // System.out.println(e++);
         }

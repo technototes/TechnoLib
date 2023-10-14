@@ -15,9 +15,9 @@ public class CommandGroupTest {
     @Test
     public void scheduleCommand() {
         CommandGroup g = new SequentialCommandGroup(c1, c2, c3, c4, c5);
-        CommandScheduler.getInstance().schedule(g);
+        CommandScheduler.schedule(g);
         for (int i = 0; i < 100; i++) {
-            CommandScheduler.getInstance().run();
+            CommandScheduler.run();
             // System.out.println(e++);'
         }
     }
