@@ -37,7 +37,7 @@ public class EncodedMotorGroup<T extends DcMotorSimple>
     }
 
     @Override
-    public void propogate(double value) {
+    public void propagate(double value) {
         for (Motor<T> m : followers) {
             m.setSpeed(value);
         }
@@ -46,13 +46,13 @@ public class EncodedMotorGroup<T extends DcMotorSimple>
     @Override
     public void setVelocity(double tps) {
         super.setVelocity(tps);
-        propogate(super.getSpeed());
+        propagate(super.getSpeed());
     }
 
     @Override
     public boolean setPosition(double ticks, double speed) {
         boolean b = super.setPosition(ticks, speed);
-        propogate(super.getSpeed());
+        propagate(super.getSpeed());
         return b;
     }
 }

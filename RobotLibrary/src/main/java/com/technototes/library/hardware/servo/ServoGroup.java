@@ -39,7 +39,7 @@ public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
     }
 
     @Override
-    public void propogate(double value) {
+    public void propagate(double value) {
         for (Servo s : followers) {
             s.setPosition(value);
         }
@@ -48,7 +48,7 @@ public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
     @Override
     public void setPosition(double position) {
         super.setPosition(position);
-        propogate(position);
+        propagate(position);
     }
 
     @Override
