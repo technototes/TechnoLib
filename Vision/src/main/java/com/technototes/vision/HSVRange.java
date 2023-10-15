@@ -48,6 +48,10 @@ public class HSVRange {
         return null;
     }
 
+    public HSVRange newHue(int newHue, int hRange) {
+        return new HSVRange(newHue, hRange, satLow, satHigh, valLow, valHigh);
+    }
+
     public Scalar lowEdge() {
         return new Scalar(hueLow, satLow, valLow);
     }
