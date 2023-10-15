@@ -93,8 +93,10 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
 
     // How many rectangles are you checking?
     abstract int numRectangles();
+
     // Get the specific rectangle number
     abstract Rect getRect(int rectNumber);
+
     // Process the particular rectangle (you probably want to call countPixelsOfColor ;) )
     public abstract void runDetection(Mat inputHSV, int rectNumber);
 
