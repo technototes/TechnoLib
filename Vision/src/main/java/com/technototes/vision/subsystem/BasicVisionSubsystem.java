@@ -92,19 +92,22 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
     // But really, you should be using FtcDashboard. It's much faster to get this right.
 
     // How many rectangles are you checking?
-    abstract int numRectangles();
+    public abstract int numRectangles();
 
     // Get the specific rectangle number
-    abstract Rect getRect(int rectNumber);
+    public abstract Rect getRect(int rectNumber);
 
     // Process the particular rectangle (you probably want to call countPixelsOfColor ;) )
     public abstract void runDetection(Mat inputHSV, int rectNumber);
+
+    protected void detectionStart() {}
+    protected void detectionEnd() {}
 
     protected void detectionProcessing(Mat frame) {
         // Put the input matrix in a member variable, so that other functions can draw on it
         curFrameRGB = frame;
         int count = numRectangles();
-
+        detectionStart();
         for (int i = 0; i < count; i++) {
             // First, slice the smaller rectangle out of the overall bitmap:
             Rect r = getRect(i);
@@ -116,6 +119,7 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
             Imgproc.cvtColor(subRectRGB, subRectHSV, Imgproc.COLOR_RGB2HSV);
             runDetection(subRectHSV, i);
         }
+        detectionEnd();
     }
 
     @Override
