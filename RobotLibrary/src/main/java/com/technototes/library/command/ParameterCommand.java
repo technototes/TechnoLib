@@ -1,11 +1,11 @@
 package com.technototes.library.command;
 
 import com.technototes.library.subsystem.Subsystem;
-
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class ParameterCommand<U> implements Command {
+
     U param;
     Consumer<U> method;
 

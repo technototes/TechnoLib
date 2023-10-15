@@ -3,11 +3,9 @@ package com.technototes.path.trajectorysequence;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.technototes.path.geometry.ConfigurablePose;
 import com.technototes.path.geometry.ConfigurablePoseD;
-
 import java.util.function.Function;
 
 public interface TrajectoryPath extends Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> {
-
     static TrajectoryPath lineTo(ConfigurablePose start, ConfigurablePose end) {
         return b -> b.apply(start.toPose()).lineTo(end.toPose().vec()).build();
     }
@@ -64,4 +62,3 @@ public interface TrajectoryPath extends Function<Function<Pose2d, TrajectorySequ
         };
     }
 }
-
