@@ -106,8 +106,8 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
     protected void detectionProcessing(Mat frame) {
         // Put the input matrix in a member variable, so that other functions can draw on it
         curFrameRGB = frame;
-        int count = numRectangles();
         detectionStart();
+        int count = numRectangles();
         for (int i = 0; i < count; i++) {
             // First, slice the smaller rectangle out of the overall bitmap:
             Rect r = getRect(i);
