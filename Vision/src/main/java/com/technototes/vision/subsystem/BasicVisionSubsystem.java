@@ -21,15 +21,30 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
      * The Camera object this subsystem is processing frames from
      */
     protected Camera camera;
+    /**
+     * The width and height of the image requested from the camera
+     */
     protected int width, height;
+    /**
+     * The rotation applied to the image
+     */
     protected OpenCvCameraRotation rotation;
+    /**
+     * The current frame being processed (can be drawn on!)
+     */
     protected Mat curFrameRGB;
+    /**
+     * True iff the pipeline is properly set and running
+     */
     protected boolean pipelineSet;
 
     /**
      * Create the subsystem with the Camera provided
      *
      * @param c The camera to process frames from
+     * @param w The width of the camera image
+     * @param h The height fo the camera image
+     * @param rot The rotation of the camera image
      */
     public BasicVisionSubsystem(Camera c, int w, int h, OpenCvCameraRotation rot) {
         camera = c;
@@ -49,10 +64,17 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
         return camera;
     }
 
+
+    /**
+     * Start the images coming from the camera
+     */
     protected void beginStreaming() {
         camera.startStreaming(width, height, rotation);
     }
 
+    /**
+     * Turn on the camera and start visual processing
+     */
     public void startVisionPipeline() {
         camera.setPipeline(this);
         pipelineSet = true;
@@ -60,6 +82,9 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
         camera.openCameraDeviceAsync(this::beginStreaming, i -> startVisionPipeline());
     }
 
+    /**
+     * Turn off the camera and enable visual processing
+     */
     public void stopVisionPipeline() {
         camera.setPipeline(null);
         pipelineSet = false;
@@ -68,6 +93,11 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
         });
     }
 
+    /**
+     * Turn off the camera and stop visual processing
+     *
+     * @return this for chaining if you really want...
+     */
     public BasicVisionSubsystem startStreaming() {
         beginStreaming();
         return this;
@@ -91,18 +121,45 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
     // If you don't use FtcDashboard, just make an array of Rect's and be done with it.
     // But really, you should be using FtcDashboard. It's much faster to get this right.
 
-    // How many rectangles are you checking?
+    /**
+     * @return How many rectangles are you checking
+     */
     public abstract int numRectangles();
 
-    // Get the specific rectangle number
+    /**
+     * Get the specific rectangle number
+     *
+     * @param rectNumber Which rectangle to return
+     * @return The rectangle that will be processed
+     */
     public abstract Rect getRect(int rectNumber);
 
-    // Process the particular rectangle (you probably want to call countPixelsOfColor ;) )
+
+
+    /**
+     * Process the particular rectangle (you probably want to call countPixelsOfColor ;) )
+     * @param inputHSV The HSV rectangle to process
+     * @param rectNumber The rectangle this Mat is from within the overall image
+     */
     public abstract void runDetection(Mat inputHSV, int rectNumber);
 
+    /**
+     * Override this to do something before a frame is processed
+     */
     protected void detectionStart() {}
+    /**
+     * Override this to do something after a frame is processed
+     */
     protected void detectionEnd() {}
 
+    /**
+     * Run processing on the frame provided.
+     * This invokes detectionStart, numRectangles, getRect, runDetection, and detectionEnd.
+     * You probably don't want to bother overriding it, unless you can't use the rectangle
+     * processing facilty as is.
+     *
+     * @param frame The RGB frame from the camera
+     */
     protected void detectionProcessing(Mat frame) {
         // Put the input matrix in a member variable, so that other functions can draw on it
         curFrameRGB = frame;
@@ -132,6 +189,16 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
         detectionProcessing(firstFrame);
     }
 
+    /**
+     * Count the number of pixels that are in the given range
+     *
+     * @param range The HSV range to look for
+     * @param imgHSV A sub-rectangle to count pixels in
+     * @param telemetryRGB The (optional) output RGB image (to help with debugging)
+     * @param xOffset The x-offset fo the subrectangle within the output RGB image
+     * @param yOffset The y-offset fo the subrectangle within the output RGB image
+     * @return The number of pixels that were found to be within the specified range
+     */
     protected int countPixelsOfColor(HSVRange range, Mat imgHSV, Mat telemetryRGB, int xOffset, int yOffset) {
         int totalColorCount = 0;
         // Since we might have a hue range of -15 to 15 to detect red,
