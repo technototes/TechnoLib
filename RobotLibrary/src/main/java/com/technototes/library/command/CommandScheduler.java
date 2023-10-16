@@ -128,6 +128,7 @@ public final class CommandScheduler {
      *
      * @param req the subsystem required
      * @param methodRef the function to invoke on the subsystem
+     * @param <S> The type of the subsystem required by the method
      */
     public static <S extends Subsystem> void schedule(S req, Consumer<S> methodRef) {
         schedule(req, methodRef, () -> true);
@@ -143,6 +144,8 @@ public final class CommandScheduler {
      * @param req the subsystem required
      * @param methodRef the function to invoke on the subsystem
      * @param param the parameter to pass to the function being called
+     * @param <S> The type of the subsystem required by the method
+     * @param <T> The type of the parameter to pass to the method
      */
     public static <S extends Subsystem, T> void schedule(S req, BiConsumer<S, T> methodRef, T param) {
         schedule(req, methodRef, param, () -> true);
@@ -167,9 +170,10 @@ public final class CommandScheduler {
      * CommandScheduler.schedule(robot.liftSubsys, LiftSubsystem::GoToPosition, LiftPos.MIDDLE)
      * }
      *
-     * @param req the subsystem required
      * @param methodRef the function to invoke on the subsystem
      * @param param the parameter to pass to the function being called
+     * @param <S> The type of the subsystem required by the method
+     * @param <T> The type of the parameter to pass to the method
      */
     public static <S extends Subsystem, T> void schedule(Consumer<T> methodRef, T param) {
         schedule(methodRef, param, () -> true);
@@ -201,6 +205,7 @@ public final class CommandScheduler {
      * @param req the subsystem required
      * @param methodRef the function to invoke on the subsystem
      * @param supplier the boolean function to run to determine if the function should be run
+     * @param <S> The type of the subsystem required by the method
      */
     public static <S extends Subsystem> void scheduleInit(S req, Consumer<S> methodRef, BooleanSupplier supplier) {
         scheduleInit(new SimpleRequiredCommand<>(req, methodRef), supplier);
@@ -221,6 +226,8 @@ public final class CommandScheduler {
      * @param methodRef the function to invoke on the subsystem
      * @param param the argument passed to the methodRef function
      * @param supplier the boolean function to run to determine if the function should be run
+     * @param <S> The type of the subsystem required by the method
+     * @param <T> The type of the parameter to pass to the method
      */
     public static <S extends Subsystem, T> void scheduleInit(
         S req,
@@ -241,7 +248,6 @@ public final class CommandScheduler {
      * CommandScheduler.scheduleInit(robot.visionSystem, TokenIdentifyingSubsystem::seeTheThing, () -> TokenIdentifyingSubsystem.CAMERA_CONNECTED)
      * }
      *
-     * @param req the subsystem required
      * @param methodRef the function to invoke on the subsystem
      * @param supplier the boolean function to run to determine if the function should be run
      */
@@ -260,10 +266,10 @@ public final class CommandScheduler {
      * // but only if TokenIdentifyingSubsystem.CAMERA_CONNECTED is also true
      * CommandScheduler.scheduleInit(robot.visionSystem, TokenIdentifyingSubsystem::seeTheThing, Alliance.RED, () -> TokenIdentifyingSubsystem.CAMERA_CONNECTED)
      * }
-     * @param req the subsystem required
      * @param methodRef the function to invoke on the subsystem
      * @param param the argument passed to the methodRef function
      * @param supplier the boolean function to run to determine if the function should be run
+     * @param <T> The type of the parameter to pass to the method
      */
     public static <T> void scheduleInit(Consumer<T> methodRef, T param, BooleanSupplier supplier) {
         scheduleInit(new ParameterCommand<>(methodRef, param), supplier);
