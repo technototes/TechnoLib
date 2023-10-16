@@ -57,7 +57,7 @@ public class Range {
     /**
      * Get the 'middle' of the range
      *
-     * @return the average of min & max
+     * @return the average of min &amp; max
      */
     public double middle() {
         return (min + max) / 2;

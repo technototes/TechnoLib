@@ -28,18 +28,66 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
         return schedule(getInstance()::isJustPressed, command);
     }
 
+    /**
+     * Schedule a method of a required subsystem to be run once the input is pressed.
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.MoveUp()
+     * gamepad.dpad.up.whenPressed(robot.liftSubsys, LiftSubsystem::MoveUp)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem> T whenPressed(S req, Consumer<S> methodRef) {
         return whenPressed(new SimpleRequiredCommand<>(req, methodRef));
     }
 
+    /**
+     * Schedule a method of a required subsystem (with a parameter) to be run once the input is pressed.
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.Move(LiftDirection.UP)
+     * gamepad.dpad.up.whenPressed(robot.liftSubsys, LiftSubsystem::Move, LiftDirction.UP)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param param the value to pass to the method being invoked
+     * @param <S> The type of the subsystem required by the method
+     * @param <R> The type of the parameter to pass to the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem, R> T whenPressed(S req, BiConsumer<S, R> methodRef, R param) {
         return whenPressed(new ParameterRequiredCommand<>(req, methodRef, param));
     }
 
+    /**
+     * Schedule a method to be run once the input is pressed.
+     *
+     * {@code
+     * // This command calls robot.brightenLights
+     * gamepad.dpad.up.whenPressed(robot::brightenLights)
+     * }
+     * @param methodRef the method on the subsystem to invoke
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default T whenPressed(Runnable methodRef) {
         return whenPressed(new SimpleCommand(methodRef));
     }
 
+    /**
+     * Schedule a method with a parameter to be run once the input is pressed.
+     *
+     * {@code
+     * // This command calls robot.blinkLights(RGB_PURPLE)
+     * gamepad.dpad.up.whenPressed(robot::blinkLights, RGB_PURPLE)
+     * }
+     * @param methodRef the method to invoke
+     * @param param the parameter to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <R> T whenPressed(Consumer<R> methodRef, R param) {
         return whenPressed(new ParameterCommand<>(methodRef, param));
     }
@@ -54,18 +102,66 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
         return schedule(getInstance()::isJustReleased, command);
     }
 
+    /**
+     * Schedule a method of a required subsystem to be run once the input is released.
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.MoveUp()
+     * gamepad.dpad.up.whenReleased(robot.liftSubsys, LiftSubsystem::MoveUp)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem> T whenReleased(S req, Consumer<S> methodRef) {
         return whenReleased(new SimpleRequiredCommand<>(req, methodRef));
     }
 
+    /**
+     * Schedule a method of a required subsystem (with a parameter) to be run once the input is released.
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.Move(LiftDirection.UP)
+     * gamepad.dpad.up.whenReleased(robot.liftSubsys, LiftSubsystem::Move, LiftDirction.UP)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param param the value to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem, R> T whenReleased(S req, BiConsumer<S, R> methodRef, R param) {
         return whenReleased(new ParameterRequiredCommand<>(req, methodRef, param));
     }
 
+    /**
+     * Schedule a method to be run once the input is released.
+     *
+     * {@code
+     * // This command calls robot.brightenLights
+     * gamepad.dpad.up.whenReleased(robot::brightenLights)
+     * }
+     * @param methodRef the method on the subsystem to invoke
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default T whenReleased(Runnable methodRef) {
         return whenReleased(new SimpleCommand(methodRef));
     }
 
+    /**
+     * Schedule a method with a parameter to be run once the input is released.
+     *
+     * {@code
+     * // This command calls robot.blinkLights(RGB_PURPLE)
+     * gamepad.dpad.up.whenReleased(robot::blinkLights, RGB_PURPLE)
+     * }
+     * @param methodRef the method to invoke
+     * @param param the parameter to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <R> T whenReleased(Consumer<R> methodRef, R param) {
         return whenReleased(new ParameterCommand<>(methodRef, param));
     }
@@ -81,18 +177,70 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
         return schedule(getInstance()::isPressed, command.cancelUpon(getInstance()::isReleased));
     }
 
+    /**
+     * Schedule a method of a required subsystem to be run over &amp; over while the input is pressed,
+     * but once it's released, the command will be cancelled.
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.MoveUp()
+     * gamepad.dpad.up.whilePressed(robot.liftSubsys, LiftSubsystem::MoveUp)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem> T whilePressed(S req, Consumer<S> methodRef) {
         return whilePressed(new SimpleRequiredCommand<>(req, methodRef));
     }
 
+    /**
+     * Schedule a method of a required subsystem (with a parameter) to be run over &amp; over while the input is pressed,
+     * but once it's released, the command will be cancelled.
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.Move(LiftDirection.UP)
+     * gamepad.dpad.up.whilePressed(robot.liftSubsys, LiftSubsystem::Move, LiftDirction.UP)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param param the value to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem, R> T whilePressed(S req, BiConsumer<S, R> methodRef, R param) {
         return whilePressed(new ParameterRequiredCommand<>(req, methodRef, param));
     }
 
+    /**
+     * Schedule a method to be run over &amp; over while the input is pressed,
+     * but once it's released, the command will be cancelled.
+     *
+     * {@code
+     * // This command calls robot.brightenLights
+     * gamepad.dpad.up.whilePressed(robot::brightenLights)
+     * }
+     * @param methodRef the method on the subsystem to invoke
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default T whilePressed(Runnable methodRef) {
         return whilePressed(new SimpleCommand(methodRef));
     }
 
+    /**
+     * Schedule a method with a parameter to be run over &amp; over while the input is pressed,
+     * but once it's released, the command will be cancelled.
+     *
+     * {@code
+     * // This command calls robot.blinkLights(RGB_PURPLE)
+     * gamepad.dpad.up.whilePressed(robot::blinkLights, RGB_PURPLE)
+     * }
+     * @param methodRef the method to invoke
+     * @param param the parameter to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <R> T whilePressed(Consumer<R> methodRef, R param) {
         return whilePressed(new ParameterCommand<>(methodRef, param));
     }
@@ -108,18 +256,70 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
         return schedule(getInstance()::isReleased, command.cancelUpon(getInstance()::isPressed));
     }
 
+    /**
+     * Schedule a method of a required subsystem to be run over &amp; over while the input is released,
+     * but once it's pressed, the command will be cancelled.
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.StayPut()
+     * gamepad.dpad.up.whileReleased(robot.liftSubsys, LiftSubsystem::StayPut)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem> T whileReleased(S req, Consumer<S> methodRef) {
         return whileReleased(new SimpleRequiredCommand<>(req, methodRef));
     }
 
+    /**
+     * Schedule a method of a required subsystem (with a parameter) to be run over &amp; over while the input is released,
+     * but once it's pressed, the command will be cancelled.
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.Move(LiftDirection.UP)
+     * gamepad.dpad.up.whileReleased(robot.liftSubsys, LiftSubsystem::Move, LiftDirction.UP)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param param the value to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem, R> T whileReleased(S req, BiConsumer<S, R> methodRef, R param) {
         return whileReleased(new ParameterRequiredCommand<>(req, methodRef, param));
     }
 
+    /**
+     * Schedule a method to be run over &amp; over while the input is released,
+     * but once it's pressed, the command will be cancelled.
+     *
+     * {@code
+     * // This command calls robot.brightenLights
+     * gamepad.dpad.up.whileReleased(robot::brightenLights)
+     * }
+     * @param methodRef the method on the subsystem to invoke
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default T whileReleased(Runnable methodRef) {
         return whileReleased(new SimpleCommand(methodRef));
     }
 
+    /**
+     * Schedule a method with a parameter to be run over &amp; over while the input is released,
+     * but once it's pressed, the command will be cancelled.
+     *
+     * {@code
+     * // This command calls robot.blinkLights(RGB_PURPLE)
+     * gamepad.dpad.up.whileReleased(robot::blinkLights, RGB_PURPLE)
+     * }
+     * @param methodRef the method to invoke
+     * @param param the parameter to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <R> T whileReleased(Consumer<R> methodRef, R param) {
         return whileReleased(new ParameterCommand<>(methodRef, param));
     }
@@ -136,18 +336,74 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
         return schedule(getInstance()::isJustPressed, command.cancelUpon(getInstance()::isReleased));
     }
 
+    /**
+     * Schedule a method of a required subsystem to be run while the input is pressed, but only once,
+     * and if the command takes so long that the input is released, the command
+     * will be cancelled.
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.StayPut()
+     * gamepad.dpad.up.whilePressedOnce(robot.liftSubsys, LiftSubsystem::StayPut)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem> T whilePressedOnce(S req, Consumer<S> methodRef) {
         return whilePressedOnce(new SimpleRequiredCommand<>(req, methodRef));
     }
 
+    /**
+     * Schedule a method of a required subsystem (with a parameter) to be run while the input is pressed, but only once,
+     * and if the command takes so long that the input is released, the command
+     * will be cancelled.
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.Move(LiftDirection.UP)
+     * gamepad.dpad.up.whilePressedOnce(robot.liftSubsys, LiftSubsystem::Move, LiftDirction.UP)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param param the value to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem, R> T whilePressedOnce(S req, BiConsumer<S, R> methodRef, R param) {
         return whilePressedOnce(new ParameterRequiredCommand<>(req, methodRef, param));
     }
 
+    /**
+     * Schedule a method to be run while the input is pressed, but only once,
+     * and if the command takes so long that the input is released, the command
+     * will be cancelled.
+     *
+     * {@code
+     * // This command calls robot.brightenLights
+     * gamepad.dpad.up.whilePressedOnce(robot::brightenLights)
+     * }
+     * @param methodRef the method on the subsystem to invoke
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default T whilePressedOnce(Runnable methodRef) {
         return whilePressedOnce(new SimpleCommand(methodRef));
     }
 
+    /**
+     * Schedule a method with a parameter to be run while the input is pressed, but only once,
+     * and if the command takes so long that the input is released, the command
+     * will be cancelled.
+     *
+     * {@code
+     * // This command calls robot.blinkLights(RGB_PURPLE)
+     * gamepad.dpad.up.whilePressedOnce(robot::blinkLights, RGB_PURPLE)
+     * }
+     * @param methodRef the method to invoke
+     * @param param the parameter to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <R> T whilePressedOnce(Consumer<R> methodRef, R param) {
         return whilePressedOnce(new ParameterCommand<>(methodRef, param));
     }
@@ -162,18 +418,66 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
         return schedule(getInstance()::isPressed, command);
     }
 
+    /**
+     * Schedule a method of a required subsystem to be run over &amp; over while the input is pressed
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.MoveUp()
+     * gamepad.dpad.up.whilePressedContinuous(robot.liftSubsys, LiftSubsystem::MoveUp)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem> T whilePressedContinuous(S req, Consumer<S> methodRef) {
         return whilePressedContinuous(new SimpleRequiredCommand<>(req, methodRef));
     }
 
+    /**
+     * Schedule a method of a required subsystem (with a parameter) to be run over &amp; over while the input is pressed
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.Move(LiftDirection.UP)
+     * gamepad.dpad.up.whilePressedContinuous(robot.liftSubsys, LiftSubsystem::Move, LiftDirction.UP)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param param the value to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem, R> T whilePressedContinuous(S req, BiConsumer<S, R> methodRef, R param) {
         return whilePressedContinuous(new ParameterRequiredCommand<>(req, methodRef, param));
     }
 
+    /**
+     * Schedule a method to be run over &amp; over while the input is pressed
+     *
+     * {@code
+     * // This command calls robot.brightenLights
+     * gamepad.dpad.up.whilePressedContinuous(robot::brightenLights)
+     * }
+     * @param methodRef the method on the subsystem to invoke
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default T whilePressedContinuous(Runnable methodRef) {
         return whilePressedContinuous(new SimpleCommand(methodRef));
     }
 
+    /**
+     * Schedule a method with a parameter to be run over &amp; over while the input is pressed
+     *
+     * {@code
+     * // This command calls robot.blinkLights(RGB_PURPLE)
+     * gamepad.dpad.up.whilePressedContinuous(robot::blinkLights, RGB_PURPLE)
+     * }
+     * @param methodRef the method to invoke
+     * @param param the parameter to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <R> T whilePressedContinuous(Consumer<R> methodRef, R param) {
         return whilePressedContinuous(new ParameterCommand<>(methodRef, param));
     }
@@ -188,18 +492,66 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
         return schedule(getInstance()::isJustReleased, command.cancelUpon(getInstance()::isPressed));
     }
 
+    /**
+     * Schedule the method to be run on the given subsystem to be run when the input is
+     * released, but only once!
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.MoveUp()
+     * gamepad.dpad.up.whileReleasedOnce(robot.liftSubsys, LiftSubsystem::MoveUp)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem> T whileReleasedOnce(S req, Consumer<S> methodRef) {
         return whileReleasedOnce(new SimpleRequiredCommand<>(req, methodRef));
     }
-
+    /**
+     * Schedule the method to be run (with the parameter provided) on the given subsystem to be
+     * run when the input is released, but only once!
+     *
+     * {@code
+     * // This command calls robot.liftSubsys.Move(LiftDirection.UP)
+     * gamepad.dpad.up.whileReleasedOnce(robot.liftSubsys, LiftSubsystem::Move, LiftDirction.UP)
+     * }
+     * @param req The subsystem to control
+     * @param methodRef the method on the subsystem to invoke
+     * @param param the value to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem, R> T whileReleasedOnce(S req, BiConsumer<S, R> methodRef, R param) {
         return whileReleasedOnce(new ParameterRequiredCommand<>(req, methodRef, param));
     }
-
+    /**
+     * Schedule the method to be run when the input is released, but only once!
+     *
+     * {@code
+     * // This command calls robot.lightsOff
+     * gamepad.dpad.up.whileReleasedOnce(robot::lightsOff)
+     * }
+     * @param methodRef the method on the subsystem to invoke
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default T whileReleasedOnce(Runnable methodRef) {
         return whileReleasedOnce(new SimpleCommand(methodRef));
     }
-
+    /**
+     * Schedule the method to be run (with the paramter provided) when the input is released,
+     * but only once!
+     *
+     * {@code
+     * // This command calls robot.blinkLights(2)
+     * gamepad.dpad.up.whileReleasedOnce(robot::blinkLights, 2)
+     * }
+     * @param methodRef the method to invoke
+     * @param param the parameter to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <R> T whileReleasedOnce(Consumer<R> methodRef, R param) {
         return whileReleasedOnce(new ParameterCommand<>(methodRef, param));
     }
@@ -215,18 +567,54 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
         return schedule(getInstance()::isJustToggled, command);
     }
 
+    /**
+     * Schedule a method that requires a subsystem to be run when the input was just toggled
+     * (From pressed to released, or released to pressed)
+     *
+     * @param req The required subsystem i.e. the subsystem being controlled
+     * @param methodRef The method of the subsystem being invoked
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem> T whenToggled(S req, Consumer<S> methodRef) {
         return whenToggled(new SimpleRequiredCommand<>(req, methodRef));
     }
 
+    /**
+     * Schedule a method that requires a subsystem (with a parameter) to be run when the input was just toggled
+     * (From pressed to released, or released to pressed)
+     *
+     * @param req The required subsystem i.e. the subsystem being controlled
+     * @param methodRef The method of the subsystem being invoked
+     * @param param The parameter to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem, R> T whenToggled(S req, BiConsumer<S, R> methodRef, R param) {
         return whenToggled(new ParameterRequiredCommand<>(req, methodRef, param));
     }
 
+    /**
+     * Schedule a method to be run when the input was just toggled
+     * (From pressed to released, or released to pressed)
+     *
+     * @param methodRef The method to be invoked
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default T whenToggled(Runnable methodRef) {
         return whenToggled(new SimpleCommand(methodRef));
     }
 
+    /**
+     * Schedule a method (with a parameter) to be run when the input was just toggled
+     * (From pressed to released, or released to pressed)
+     *
+     * @param methodRef The method to be invoked
+     * @param param the parameter to be passed to the method invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <R> T whenToggled(Consumer<R> methodRef, R param) {
         return whenToggled(new ParameterCommand<>(methodRef, param));
     }
@@ -241,18 +629,50 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
         return schedule(getInstance()::isJustInverseToggled, command);
     }
 
+    /**
+     * Schedule a method on a subsystem to be run when the input has only stopped being toggled
+     *
+     * @param req The required subsystem i.e. the subsystem being controlled
+     * @param methodRef The method of the subsystem being invoked
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem> T whenInverseToggled(S req, Consumer<S> methodRef) {
         return whenInverseToggled(new SimpleRequiredCommand<>(req, methodRef));
     }
 
+    /**
+     * Schedule the command to be run when the input has only stopped being toggled
+     *
+     * @param req The required subsystem i.e. the subsystem being controlled
+     * @param methodRef The method of the subsystem being invoked
+     * @param param The parameter to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem, R> T whenInverseToggled(S req, BiConsumer<S, R> methodRef, R param) {
         return whenInverseToggled(new ParameterRequiredCommand<>(req, methodRef, param));
     }
 
+    /**
+     * Schedule a method to be run when the input has only stopped being toggled
+     *
+     * @param methodRef The method to be invoked
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default T whenInverseToggled(Runnable methodRef) {
         return whenInverseToggled(new SimpleCommand(methodRef));
     }
 
+    /**
+     * Schedule a method with a parameter to be run when the input has only stopped being toggled
+     *
+     * @param methodRef The method to be invoked
+     * @param param the parameter to be passed to the method invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <R> T whenInverseToggled(Consumer<R> methodRef, R param) {
         return whenInverseToggled(new ParameterCommand<>(methodRef, param));
     }
@@ -270,18 +690,62 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
         return schedule(getInstance()::isToggled, command.cancelUpon(getInstance()::isInverseToggled));
     }
 
+    /**
+     * Schedule a method to be run while the input is changing.
+     * It will be canceled once the input is not changing.
+     * This is questionably useful, as toggling over &amp; over is a 'frequency' problem.
+     * I expect this is going to behave almost the same as whenToggled...
+     *
+     * @param req The required subsystem i.e. the subsystem being controlled
+     * @param methodRef The method of the subsystem being invoked
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem> T whileToggled(S req, Consumer<S> methodRef) {
         return whileToggled(new SimpleRequiredCommand<>(req, methodRef));
     }
 
+    /**
+     * Schedule a method (with a parameter) to be run while the input is changing.
+     * It will be canceled once the input is not changing.
+     * This is questionably useful, as toggling over &amp; over is a 'frequency' problem.
+     * I expect this is going to behave almost the same as whenToggled...
+     *
+     * @param req The required subsystem i.e. the subsystem being controlled
+     * @param methodRef The method of the subsystem being invoked
+     * @param param The parameter to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem, R> T whileToggled(S req, BiConsumer<S, R> methodRef, R param) {
         return whileToggled(new ParameterRequiredCommand<>(req, methodRef, param));
     }
 
+    /**
+     * Schedule a method to be run while the input is changing.
+     * It will be canceled once the input is not changing.
+     * This is questionably useful, as toggling over &amp; over is a 'frequency' problem.
+     * I expect this is going to behave almost the same as whenToggled...
+     *
+     * @param methodRef The method to be invoked
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default T whileToggled(Runnable methodRef) {
         return whileToggled(new SimpleCommand(methodRef));
     }
 
+    /**
+     * Schedule a method (with a parameter) to be run while the input is changing.
+     * It will be canceled once the input is not changing.
+     * This is questionably useful, as toggling over &amp; over is a 'frequency' problem.
+     * I expect this is going to behave almost the same as whenToggled...
+     *
+     * @param methodRef The method to be invoked
+     * @param param the parameter to be passed to the method invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <R> T whileToggled(Consumer<R> methodRef, R param) {
         return whileToggled(new ParameterCommand<>(methodRef, param));
     }
@@ -297,18 +761,54 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
         return schedule(getInstance()::isInverseToggled, command.cancelUpon(getInstance()::isToggled));
     }
 
+    /**
+     * Schedule the command to run over &amp; over while the input is *not* changing
+     * It will be canceled once the input is toggled.
+     *
+     * @param req The required subsystem i.e. the subsystem being controlled
+     * @param methodRef The method of the subsystem being invoked
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem> T whileInverseToggled(S req, Consumer<S> methodRef) {
         return whileInverseToggled(new SimpleRequiredCommand<>(req, methodRef));
     }
 
+    /**
+     * Schedule the command to run over &amp; over while the input is *not* changing
+     * It will be canceled once the input is toggled.
+     *
+     * @param req The required subsystem i.e. the subsystem being controlled
+     * @param methodRef The method of the subsystem being invoked
+     * @param param The parameter to pass to the method being invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @param <S> The type of the subsystem required by the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <S extends Subsystem, R> T whileInverseToggled(S req, BiConsumer<S, R> methodRef, R param) {
         return whileInverseToggled(new ParameterRequiredCommand<>(req, methodRef, param));
     }
 
+    /**
+     * Schedule the command to run over &amp; over while the input is *not* changing
+     * It will be canceled once the input is toggled.
+     *
+     * @param methodRef The method to be invoked
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default T whileInverseToggled(Runnable methodRef) {
         return whileInverseToggled(new SimpleCommand(methodRef));
     }
 
+    /**
+     * Schedule the command to run over &amp; over while the input is *not* changing
+     * It will be canceled once the input is toggled.
+     *
+     * @param methodRef The method to be invoked
+     * @param param the parameter to be passed to the method invoked
+     * @param <R> The type of the parameter to pass to the method
+     * @return The CommandInput&lt;T&gt; instance
+     */
     default <R> T whileInverseToggled(Consumer<R> methodRef, R param) {
         return whileInverseToggled(new ParameterCommand<>(methodRef, param));
     }

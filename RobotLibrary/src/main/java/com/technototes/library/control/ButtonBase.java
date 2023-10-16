@@ -115,26 +115,48 @@ public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonB
      */
     @Override
     public boolean getAsBoolean() {
+        // Alex had to get some of that sweet, sweet exclusive or operator...
+        // For the non-bit-twiddly among us, this is (bs.get() != inverted) && isEnabled()
+        // Or, verbally: flip the booleanSupplier if it's inverted, and it's only true if
+        // it's also enabled...
         return booleanSupplier.getAsBoolean() ^ inverted && isEnabled();
     }
 
+    /**
+     * Inverts the button, such that "isPressed" and "isReleased" are opposite, along with everything
+     * that entails
+     *
+     * @param invert Inversion value (true inverts, false leaves the values as is)
+     * @return the ButtonBase object
+     */
     @Override
     public ButtonBase setInverted(boolean invert) {
         inverted = invert;
         return this;
     }
 
+    /**
+     * @return True if the button is inverted (pressed registers as released, etc...)
+     */
     @Override
     public boolean getInverted() {
         return inverted;
     }
 
+    /**
+     * Enable or disable the button
+     * @param enable True for enabled, false for disabled
+     * @return
+     */
     @Override
     public ButtonBase setEnabled(boolean enable) {
         enabled = enable;
         return this;
     }
 
+    /**
+     * @return True if the button is enabled
+     */
     @Override
     public boolean isEnabled() {
         return enabled;
