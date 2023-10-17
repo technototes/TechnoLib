@@ -508,6 +508,7 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
     default <S extends Subsystem> T whileReleasedOnce(S req, Consumer<S> methodRef) {
         return whileReleasedOnce(new SimpleRequiredCommand<>(req, methodRef));
     }
+
     /**
      * Schedule the method to be run (with the parameter provided) on the given subsystem to be
      * run when the input is released, but only once!
@@ -526,6 +527,7 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
     default <S extends Subsystem, R> T whileReleasedOnce(S req, BiConsumer<S, R> methodRef, R param) {
         return whileReleasedOnce(new ParameterRequiredCommand<>(req, methodRef, param));
     }
+
     /**
      * Schedule the method to be run when the input is released, but only once!
      *
@@ -539,6 +541,7 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
     default T whileReleasedOnce(Runnable methodRef) {
         return whileReleasedOnce(new SimpleCommand(methodRef));
     }
+
     /**
      * Schedule the method to be run (with the paramter provided) when the input is released,
      * but only once!

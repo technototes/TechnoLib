@@ -64,7 +64,6 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
         return camera;
     }
 
-
     /**
      * Start the images coming from the camera
      */
@@ -134,8 +133,6 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
      */
     public abstract Rect getRect(int rectNumber);
 
-
-
     /**
      * Process the particular rectangle (you probably want to call countPixelsOfColor ;) )
      * @param inputHSV The HSV rectangle to process
@@ -147,6 +144,7 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
      * Override this to do something before a frame is processed
      */
     protected void detectionStart() {}
+
     /**
      * Override this to do something after a frame is processed
      */
