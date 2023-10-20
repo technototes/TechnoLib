@@ -12,6 +12,11 @@ public class SimpleCommand implements Command {
         method = m;
     }
 
+    public <T> SimpleCommand(Consumer<T> m, T arg) {
+        super();
+        method = () -> m.accept(arg);
+    }
+
     @Override
     public void execute() {
         method.run();
