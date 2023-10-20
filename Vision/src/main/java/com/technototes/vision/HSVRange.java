@@ -5,6 +5,9 @@ import org.opencv.core.Scalar;
 /**
  * This is used to detect colors in a particular HSV 'range'
  */
+/**
+ * This is used to detect colors in a particular HSV 'range'
+ */
 public class HSVRange {
 
     int hueLow, hueHigh;
