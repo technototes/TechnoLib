@@ -8,9 +8,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.BiConsumer;
 import java.util.function.BooleanSupplier;
-import java.util.function.Consumer;
 
 /**
  * This is a "singleton" object for scheduling commands. Most usage originates from {@link Command}
@@ -121,65 +119,6 @@ public final class CommandScheduler {
     }
 
     /**
-     * Schedule a method on a subsystem to run as a command:
-     * {@code
-     * CommandScheduler.schedule(robot.intakeSubsystem, IntakeSubsystem::activate)
-     * }
-     *
-     * @param req the subsystem required
-     * @param methodRef the function to invoke on the subsystem
-     * @param <S> The type of the subsystem required by the method
-     */
-    public static <S extends Subsystem> void schedule(S req, Consumer<S> methodRef) {
-        schedule(req, methodRef, () -> true);
-    }
-
-    /**
-     * Schedule a method on a subsystem to run as a command, that takes an extra parameter:
-     * {@code
-     * // This command effectively calls robot.liftSubsys.GoToPosition(LiftPos.MIDDLE)
-     * CommandScheduler.schedule(robot.liftSubsys, LiftSubsystem::GoToPosition, LiftPos.MIDDLE)
-     * }
-     *
-     * @param req the subsystem required
-     * @param methodRef the function to invoke on the subsystem
-     * @param param the parameter to pass to the function being called
-     * @param <S> The type of the subsystem required by the method
-     * @param <T> The type of the parameter to pass to the method
-     */
-    public static <S extends Subsystem, T> void schedule(S req, BiConsumer<S, T> methodRef, T param) {
-        schedule(req, methodRef, param, () -> true);
-    }
-
-    /**
-     * Schedule a method to run as a command that does not require controlling a subsystem!
-     * {@code
-     * CommandScheduler.schedule(robot.signalSubsystem::blinkLights)
-     * }
-     *
-     * @param methodRef the function to invoke on the subsystem
-     */
-    public static void schedule(Runnable methodRef) {
-        schedule(methodRef, () -> true);
-    }
-
-    /**
-     * Schedule a method on a subsystem to run as a command, that takes an extra parameter:
-     * {@code
-     * // This command effectively calls robot.liftSubsys.GoToPosition(LiftPos.MIDDLE)
-     * CommandScheduler.schedule(robot.liftSubsys, LiftSubsystem::GoToPosition, LiftPos.MIDDLE)
-     * }
-     *
-     * @param methodRef the function to invoke on the subsystem
-     * @param param the parameter to pass to the function being called
-     * @param <S> The type of the subsystem required by the method
-     * @param <T> The type of the parameter to pass to the method
-     */
-    public static <S extends Subsystem, T> void schedule(Consumer<T> methodRef, T param) {
-        schedule(methodRef, param, () -> true);
-    }
-
-    /**
      * Schedule a command to be run recurringly during the 'Init' phase of an opmode.
      * This can be used for vision, as well as running any system to help the
      * drive team ensure that the robot is appropriately positioned on the field.
@@ -193,89 +132,6 @@ public final class CommandScheduler {
     }
 
     /**
-     * Schedule a method on a subsystem to be run recurringly during the 'Init' phase of an opmode.
-     * This can be used for vision, as well as running any system to help the
-     * drive team ensure that the robot is appropriately positioned on the field.
-     * This will only be run if the BooleanSupplier 'supplier' is also true!
-     * {@code
-     * // This command effectively calls robot.visionSystem.seeTheThing()
-     * CommandScheduler.scheduleInit(robot.visionSystem, TokenIdentifyingSubsystem::seeTheThing, () -> TokenIdentifyingSubsystem.CAMERA_CONNECTED)
-     * }
-     *
-     * @param req the subsystem required
-     * @param methodRef the function to invoke on the subsystem
-     * @param supplier the boolean function to run to determine if the function should be run
-     * @param <S> The type of the subsystem required by the method
-     */
-    public static <S extends Subsystem> void scheduleInit(S req, Consumer<S> methodRef, BooleanSupplier supplier) {
-        scheduleInit(new SimpleRequiredCommand<>(req, methodRef), supplier);
-    }
-
-    /**
-     * Schedule a method on a subsystem to be run recurringly during the 'Init' phase of an opmode,
-     * that also takes a parameter.
-     * This can be used for vision, as well as running any system to help the
-     * drive team ensure that the robot is appropriately positioned on the field.
-     * This will only be run if the BooleanSupplier 'supplier' is also true!
-     * {@code
-     * // This command effectively calls robot.visionSystem.seeTheThing(Alliance.RED),
-     * // but only if TokenIdentifyingSubsystem.CAMERA_CONNECTED is also true
-     * CommandScheduler.scheduleInit(robot.visionSystem, TokenIdentifyingSubsystem::seeTheThing, Alliance.RED, () -> TokenIdentifyingSubsystem.CAMERA_CONNECTED)
-     * }
-     * @param req the subsystem required
-     * @param methodRef the function to invoke on the subsystem
-     * @param param the argument passed to the methodRef function
-     * @param supplier the boolean function to run to determine if the function should be run
-     * @param <S> The type of the subsystem required by the method
-     * @param <T> The type of the parameter to pass to the method
-     */
-    public static <S extends Subsystem, T> void scheduleInit(
-        S req,
-        BiConsumer<S, T> methodRef,
-        T param,
-        BooleanSupplier supplier
-    ) {
-        scheduleInit(new ParameterRequiredCommand<S, T>(req, methodRef, param), supplier);
-    }
-
-    /**
-     * Schedule a method on a subsystem to be run recurringly during the 'Init' phase of an opmode.
-     * This can be used for vision, as well as running any system to help the
-     * drive team ensure that the robot is appropriately positioned on the field.
-     * This will only be run if the BooleanSupplier 'supplier' is also true!
-     * {@code
-     * // This command effectively calls robot.visionSystem.seeTheThing()
-     * CommandScheduler.scheduleInit(robot.visionSystem, TokenIdentifyingSubsystem::seeTheThing, () -> TokenIdentifyingSubsystem.CAMERA_CONNECTED)
-     * }
-     *
-     * @param methodRef the function to invoke on the subsystem
-     * @param supplier the boolean function to run to determine if the function should be run
-     */
-    public static void scheduleInit(Runnable methodRef, BooleanSupplier supplier) {
-        scheduleInit(new SimpleCommand(methodRef), supplier);
-    }
-
-    /**
-     * Schedule a method on a subsystem to be run recurringly during the 'Init' phase of an opmode,
-     * that also takes a parameter.
-     * This can be used for vision, as well as running any system to help the
-     * drive team ensure that the robot is appropriately positioned on the field.
-     * This will only be run if the BooleanSupplier 'supplier' is also true!
-     * {@code
-     * // This command effectively calls robot.visionSystem.seeTheThing(Alliance.RED),
-     * // but only if TokenIdentifyingSubsystem.CAMERA_CONNECTED is also true
-     * CommandScheduler.scheduleInit(robot.visionSystem, TokenIdentifyingSubsystem::seeTheThing, Alliance.RED, () -> TokenIdentifyingSubsystem.CAMERA_CONNECTED)
-     * }
-     * @param methodRef the function to invoke on the subsystem
-     * @param param the argument passed to the methodRef function
-     * @param supplier the boolean function to run to determine if the function should be run
-     * @param <T> The type of the parameter to pass to the method
-     */
-    public static <T> void scheduleInit(Consumer<T> methodRef, T param, BooleanSupplier supplier) {
-        scheduleInit(new ParameterCommand<>(methodRef, param), supplier);
-    }
-
-    /**
      * Schedule a command to be run recurringly during the 'Init' phase of an opmode.
      * This can be used for vision, as well as running any system to help the
      * drive team ensure that the robot is appropriately positioned on the field.
@@ -284,22 +140,6 @@ public final class CommandScheduler {
      */
     public static void scheduleInit(Command command) {
         scheduleForState(command, () -> true, CommandOpMode.OpModeState.INIT);
-    }
-
-    public static <S extends Subsystem> void scheduleInit(S req, Consumer<S> methodRef) {
-        scheduleInit(new SimpleRequiredCommand(req, methodRef));
-    }
-
-    public static <S extends Subsystem, T> void scheduleInit(S req, BiConsumer<S, T> methodRef, T param) {
-        scheduleInit(new ParameterRequiredCommand<S, T>(req, methodRef, param));
-    }
-
-    public static void scheduleInit(Runnable methodRef) {
-        scheduleInit(new SimpleCommand(methodRef));
-    }
-
-    public static <T> void scheduleInit(Consumer<T> methodRef, T param) {
-        scheduleInit(new ParameterCommand<>(methodRef, param));
     }
 
     /**
@@ -321,42 +161,6 @@ public final class CommandScheduler {
         );
     }
 
-    public static <S extends Subsystem> void scheduleForState(
-        S req,
-        Consumer<S> methodRef,
-        BooleanSupplier supplier,
-        CommandOpMode.OpModeState... states
-    ) {
-        scheduleForState(new SimpleRequiredCommand(req, methodRef), supplier, states);
-    }
-
-    public static <S extends Subsystem, T> void scheduleForState(
-        S req,
-        BiConsumer<S, T> methodRef,
-        T param,
-        BooleanSupplier supplier,
-        CommandOpMode.OpModeState... states
-    ) {
-        scheduleForState(new ParameterRequiredCommand<S, T>(req, methodRef, param), supplier, states);
-    }
-
-    public static void scheduleForState(
-        Runnable methodRef,
-        BooleanSupplier supplier,
-        CommandOpMode.OpModeState... states
-    ) {
-        scheduleForState(new SimpleCommand(methodRef), supplier, states);
-    }
-
-    public static <T> void scheduleForState(
-        Consumer<T> methodRef,
-        T param,
-        BooleanSupplier supplier,
-        CommandOpMode.OpModeState... states
-    ) {
-        scheduleForState(new ParameterCommand<>(methodRef, param), supplier, states);
-    }
-
     /**
      * Schedule a command to be run when the OpMode is one of the provided list of states.
      *
@@ -368,31 +172,6 @@ public final class CommandScheduler {
             command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
             () -> opMode.getOpModeState().isState(states)
         );
-    }
-
-    public static <S extends Subsystem> void scheduleForState(
-        S req,
-        Consumer<S> methodRef,
-        CommandOpMode.OpModeState... states
-    ) {
-        scheduleForState(new SimpleRequiredCommand(req, methodRef), states);
-    }
-
-    public static <S extends Subsystem, T> void scheduleForState(
-        S req,
-        BiConsumer<S, T> methodRef,
-        T param,
-        CommandOpMode.OpModeState... states
-    ) {
-        scheduleForState(new ParameterRequiredCommand<S, T>(req, methodRef, param), states);
-    }
-
-    public static void scheduleForState(Runnable methodRef, CommandOpMode.OpModeState... states) {
-        scheduleForState(new SimpleCommand(methodRef), states);
-    }
-
-    public static <T> void scheduleForState(Consumer<T> methodRef, T param, CommandOpMode.OpModeState... states) {
-        scheduleForState(new ParameterCommand<>(methodRef, param), states);
     }
 
     /**
@@ -457,14 +236,6 @@ public final class CommandScheduler {
         }
     }
 
-    public static <S extends Subsystem> void scheduleDefault(S req, Consumer<S> methodRef) {
-        scheduleDefault(new SimpleRequiredCommand(req, methodRef), req);
-    }
-
-    public static <S extends Subsystem, T> void scheduleDefault(S req, BiConsumer<S, T> methodRef, T param) {
-        scheduleDefault(new ParameterRequiredCommand<S, T>(req, methodRef, param), req);
-    }
-
     /**
      * Register a periodic function to be run once each schedule loop
      *
@@ -516,27 +287,6 @@ public final class CommandScheduler {
             requirementMap.get(s).add(command);
             register(s);
         }
-    }
-
-    public static <S extends Subsystem> void schedule(S req, Consumer<S> methodRef, BooleanSupplier sup) {
-        schedule(new SimpleRequiredCommand(req, methodRef), sup);
-    }
-
-    public static <S extends Subsystem, T> void schedule(
-        S req,
-        BiConsumer<S, T> methodRef,
-        T param,
-        BooleanSupplier sup
-    ) {
-        schedule(new ParameterRequiredCommand<S, T>(req, methodRef, param), sup);
-    }
-
-    public static void schedule(Runnable methodRef, BooleanSupplier sup) {
-        schedule(new SimpleCommand(methodRef), sup);
-    }
-
-    public static <T> void schedule(Consumer<T> methodRef, T param, BooleanSupplier sup) {
-        schedule(new ParameterCommand<>(methodRef, param), sup);
     }
 
     /**
