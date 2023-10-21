@@ -283,6 +283,7 @@ public final class CommandScheduler {
     public static void schedule(Command command, BooleanSupplier supplier) {
         commandMap.put(command, supplier);
         for (Subsystem s : command.getRequirements()) {
+            // TODO: Fail if a required subsystem is null, and maybe log something
             requirementMap.putIfAbsent(s, new LinkedHashSet<>());
             requirementMap.get(s).add(command);
             register(s);
