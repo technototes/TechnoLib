@@ -3,7 +3,8 @@ package com.technototes.library.hardware.motor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.technototes.library.hardware.HardwareDeviceGroup;
 
-/** Class for a group of motors
+/**
+ * Class for a group of motors
  *
  * @param <T> The type of motors to group
  */
@@ -12,7 +13,8 @@ public class MotorGroup<T extends DcMotorSimple> extends Motor<T> implements Har
 
     private final Motor[] followers;
 
-    /** Make a motor group
+    /**
+     * Make a motor group
      *
      * @param motors The motors
      */
@@ -47,5 +49,15 @@ public class MotorGroup<T extends DcMotorSimple> extends Motor<T> implements Har
     public void setSpeed(double speed) {
         super.setSpeed(speed);
         propagate(speed);
+    }
+
+    public void setSpeeds(double... speeds) {
+        for (int i = 0; i < speeds.length && i < getDeviceCount(); i++) {
+            getDeviceNum(i).setSpeed(speeds[i]);
+        }
+    }
+
+    public Motor<T> getDeviceNum(int i) {
+        return (i == 0) ? this : followers[i - 1];
     }
 }

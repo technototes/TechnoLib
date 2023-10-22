@@ -3,10 +3,15 @@ package com.technototes.library.subsystem.motor;
 import com.technototes.library.hardware.motor.Motor;
 import com.technototes.library.subsystem.DeviceSubsystem;
 
-/** Class for motor subsystems
+/**
+ * a bad example class for motor subsystems:
+ * Don't expose a device as a subsystem. Subsystems should control/mediate access to the devices,
+ * not just expose a device.
+ *
  * @author Alex Stedman
  * @param <T> The motor type
  */
+@Deprecated
 public class MotorSubsystem<T extends Motor<?>> extends DeviceSubsystem<T> {
 
     /** Create motor subsystem
