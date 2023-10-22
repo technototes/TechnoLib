@@ -46,9 +46,20 @@ public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
     }
 
     @Override
+    public Servo getDeviceNum(int i) {
+        return (i == 0) ? this : followers[i - 1];
+    }
+
+    @Override
     public void setPosition(double position) {
         super.setPosition(position);
         propagate(position);
+    }
+
+    public void setPositions(double... positions) {
+        for (int i = 0; i < positions.length && i < getDeviceCount(); i++) {
+            getDeviceNum(i).setPosition(positions[i]);
+        }
     }
 
     @Override
