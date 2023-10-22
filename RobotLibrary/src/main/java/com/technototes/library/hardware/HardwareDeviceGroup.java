@@ -3,6 +3,7 @@ package com.technototes.library.hardware;
 import com.technototes.library.hardware.motor.Motor;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Interface for hardware device groups
@@ -38,9 +39,13 @@ public interface HardwareDeviceGroup<T extends HardwareDevice> {
     /**
      * Propagate actions across the followers
      *
-     * @param value the value to propagate
+     * @param func the action to propagate
      */
-    default void propagate(double value) {}
+    default void propagate(Consumer<? super T> func) {
+        for (T obj : getFollowers()) {
+            func.accept(obj);
+        }
+    }
 
     T getDeviceNum(int i);
 
