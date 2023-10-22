@@ -3,6 +3,7 @@ package com.technototes.library.subsystem.drivebase;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.technototes.library.hardware.motor.Motor;
 import com.technototes.library.hardware.motor.MotorGroup;
+import com.technototes.library.subsystem.Subsystem;
 import java.util.function.DoubleSupplier;
 
 /**
@@ -11,7 +12,7 @@ import java.util.function.DoubleSupplier;
  * @param <T> The type of motors for the drivebase
  * @author Alex Stedman The motors for the drivebase
  */
-public abstract class DrivebaseSubsystem<T extends DcMotorSimple> {
+public abstract class DrivebaseSubsystem<T extends DcMotorSimple> implements Subsystem {
 
     protected MotorGroup<T> motors;
 

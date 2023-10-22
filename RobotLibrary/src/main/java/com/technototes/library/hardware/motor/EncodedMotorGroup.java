@@ -3,7 +3,9 @@ package com.technototes.library.hardware.motor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.technototes.library.hardware.HardwareDeviceGroup;
 
-/** Class for encoded motor groups
+/**
+ * Class for encoded motor groups
+ *
  * @author Alex Stedman
  */
 @SuppressWarnings("unused")
@@ -13,9 +15,10 @@ public class EncodedMotorGroup<T extends DcMotorSimple>
 
     private final EncodedMotor<T>[] followers;
 
-    /** Create an encoded motor groupM
+    /**
+     * Create an encoded motor groupM
      *
-     * @param leader The Lead motor
+     * @param leader    The Lead motor
      * @param followers The following motors
      */
     public EncodedMotorGroup(EncodedMotor<T> leader, EncodedMotor<T>... followers) {
@@ -49,10 +52,26 @@ public class EncodedMotorGroup<T extends DcMotorSimple>
         propagate(super.getSpeed());
     }
 
+    public void setVelocities(double... tps) {
+        for (int i = 0; i < tps.length && i < getDeviceCount(); i++) {
+            getDeviceNum(i).setVelocity(tps[i]);
+        }
+    }
+
     @Override
     public boolean setPosition(double ticks, double speed) {
-        boolean b = super.setPosition(ticks, speed);
-        propagate(super.getSpeed());
+        boolean b = true;
+        for (int i = 0; i < getDeviceCount(); i++) {
+            b = getDeviceNum(i).setPosition(ticks, speed) && b;
+        }
+        return b;
+    }
+
+    public boolean setPositions(double... ticks_then_speeds) {
+        boolean b = true;
+        for (int i = 0; i < ticks_then_speeds.length / 2 && i < getDeviceCount(); i++) {
+            b = getDeviceNum(i).setPosition(ticks_then_speeds[i * 2], ticks_then_speeds[i * 2 + 1]) && b;
+        }
         return b;
     }
 

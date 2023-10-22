@@ -20,7 +20,7 @@ public interface HardwareDeviceGroup<T extends HardwareDevice> {
      */
     T[] getFollowers();
 
-    default List<T> getFollowerist() {
+    default List<T> getFollowerList() {
         return Arrays.asList(getFollowers());
     }
 
