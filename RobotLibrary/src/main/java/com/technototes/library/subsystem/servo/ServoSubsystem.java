@@ -4,9 +4,14 @@ import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.hardware.servo.ServoGroup;
 import com.technototes.library.subsystem.DeviceSubsystem;
 
-/** Class for servo subsystems
+/**
+ * a bad example class for servo subsystems
+ *
+ * This is an anti-pattern: Don't expose a servo as a subsystem. Expose capabilities of the
+ * subsystem, for use by commands
  * @author Alex Stedman
  */
+@Deprecated
 public class ServoSubsystem extends DeviceSubsystem<Servo> {
 
     /** Create servo subsystem

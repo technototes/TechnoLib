@@ -11,26 +11,26 @@ public class EncodedMotorGroup<T extends DcMotorSimple>
     extends EncodedMotor<T>
     implements HardwareDeviceGroup<Motor<T>> {
 
-    private final Motor<T>[] followers;
+    private final EncodedMotor<T>[] followers;
 
     /** Create an encoded motor groupM
      *
      * @param leader The Lead motor
      * @param followers The following motors
      */
-    public EncodedMotorGroup(EncodedMotor<T> leader, Motor<T>... followers) {
+    public EncodedMotorGroup(EncodedMotor<T> leader, EncodedMotor<T>... followers) {
         super(leader.getDevice());
         this.followers = followers;
     }
 
     @Override
-    public Motor<T>[] getFollowers() {
+    public EncodedMotor<T>[] getFollowers() {
         return followers;
     }
 
     @Override
-    public Motor<T>[] getAllDevices() {
-        Motor<T>[] m = new Motor[followers.length + 1];
+    public EncodedMotor<T>[] getAllDevices() {
+        EncodedMotor<T>[] m = new EncodedMotor[followers.length + 1];
         m[0] = this;
         System.arraycopy(followers, 0, m, 1, m.length - 1);
         return m;
@@ -38,7 +38,7 @@ public class EncodedMotorGroup<T extends DcMotorSimple>
 
     @Override
     public void propagate(double value) {
-        for (Motor<T> m : followers) {
+        for (EncodedMotor<T> m : followers) {
             m.setSpeed(value);
         }
     }
@@ -54,5 +54,9 @@ public class EncodedMotorGroup<T extends DcMotorSimple>
         boolean b = super.setPosition(ticks, speed);
         propagate(super.getSpeed());
         return b;
+    }
+
+    public EncodedMotor<T> getDeviceNum(int i) {
+        return (i == 0) ? this : followers[i - 1];
     }
 }

@@ -1,5 +1,6 @@
 package com.technototes.library.hardware;
 
+import com.technototes.library.hardware.motor.Motor;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,4 +41,10 @@ public interface HardwareDeviceGroup<T extends HardwareDevice> {
      * @param value the value to propagate
      */
     default void propagate(double value) {}
+
+    T getDeviceNum(int i);
+
+    default int getDeviceCount() {
+        return getFollowers().length + 1;
+    }
 }
