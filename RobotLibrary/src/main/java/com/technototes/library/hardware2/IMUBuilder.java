@@ -9,6 +9,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
  * TODO: Remove this. I don't believe this adds much value. Yeah, HardwareMap.get is weird, but
  * it's in all the documentation, so just read it, see it in the examples, and you're done.
  */
+@Deprecated
 public class IMUBuilder extends HardwareBuilder<BNO055IMU> {
 
     /**

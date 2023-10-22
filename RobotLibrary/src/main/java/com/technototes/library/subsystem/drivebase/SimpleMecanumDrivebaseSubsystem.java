@@ -5,18 +5,35 @@ import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.motor.Motor;
 import java.util.function.DoubleSupplier;
 
-/** Class for mecanum/xdrive drivebases
- * @author Alex Stedman
+/**
+ * Class for mecanum/xdrive drivebases
+ *
  * @param <T> The motor type for the subsystem
+ * @author Alex Stedman
  */
 public class SimpleMecanumDrivebaseSubsystem<T extends DcMotorSimple> extends DrivebaseSubsystem<T> {
 
-    /** Drive motors
-     *
+    /**
+     * Drive motors
      */
-    public Motor<T> flMotor, frMotor, rlMotor, rrMotor;
+    protected Motor<T> flMotor() {
+        return motors.getDeviceNum(0);
+    }
 
-    /** Create mecanum drivebase
+    protected Motor<T> frMotor() {
+        return motors.getDeviceNum(1);
+    }
+
+    protected Motor<T> rlMotor() {
+        return motors.getDeviceNum(2);
+    }
+
+    protected Motor<T> rrMotor() {
+        return motors.getDeviceNum(3);
+    }
+
+    /**
+     * Create mecanum drivebase
      *
      * @param flMotor The front left motor for the drivebase
      * @param frMotor The front right motor for the drivebase
@@ -25,15 +42,12 @@ public class SimpleMecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Dr
      */
     public SimpleMecanumDrivebaseSubsystem(Motor<T> flMotor, Motor<T> frMotor, Motor<T> rlMotor, Motor<T> rrMotor) {
         super(flMotor, frMotor, rlMotor, rrMotor);
-        this.flMotor = flMotor;
-        this.frMotor = frMotor;
-        this.rlMotor = rlMotor;
-        this.rrMotor = rrMotor;
     }
 
-    /** Create mecanum drivebase
+    /**
+     * Create mecanum drivebase
      *
-     * @param gyro The gyro supplier
+     * @param gyro    The gyro supplier
      * @param flMotor The front left motor for the drivebase
      * @param frMotor The front right motor for the drivebase
      * @param rlMotor The rear left motor for the drivebase
@@ -47,10 +61,6 @@ public class SimpleMecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Dr
         Motor<T> rrMotor
     ) {
         super(gyro, flMotor, frMotor, rlMotor, rrMotor);
-        this.flMotor = flMotor;
-        this.frMotor = frMotor;
-        this.rlMotor = rlMotor;
-        this.rrMotor = rrMotor;
     }
 
     public void joystickDrive(double x, double y, double rotation) {
@@ -89,9 +99,6 @@ public class SimpleMecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Dr
     }
 
     public void drive(double flSpeed, double frSpeed, double rlSpeed, double rrSpeed) {
-        flMotor.setSpeed(flSpeed * getSpeed());
-        frMotor.setSpeed(frSpeed * getSpeed());
-        rlMotor.setSpeed(rlSpeed * getSpeed());
-        rrMotor.setSpeed(rrSpeed * getSpeed());
+        motors.setSpeeds(flSpeed * getSpeed(), frSpeed * getSpeed(), rlSpeed * getSpeed(), rrSpeed * getSpeed());
     }
 }

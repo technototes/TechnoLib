@@ -2,9 +2,14 @@ package com.technototes.library.subsystem.motor;
 
 import com.technototes.library.hardware.motor.EncodedMotor;
 
-/** Class for encoded motor subsystems
+/**
+ * A bad example class for encoded motor subsystems
+ *
+ * This is an anti-pattern.
+ * Subsystems are levels of abstraction. This doesn't provide a real level of abstraction.
  * @author Alex Stedman
  */
+@Deprecated
 public class EncodedMotorSubsystem extends MotorSubsystem<EncodedMotor<?>> {
 
     /** Max speed

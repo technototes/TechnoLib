@@ -4,26 +4,33 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.motor.Motor;
 
-/** Class for drivebase subsystems
- * @author Alex Stedman
+/**
+ * Class for drivebase subsystems
+ *
  * @param <T> The type of motor for the drivebase
+ * @author Alex Stedman
  */
 public class TankDrivebaseSubsystem<T extends DcMotorSimple> extends DrivebaseSubsystem<T> {
 
-    /** Drive motors
-     *
+    /**
+     * Drive motors
      */
-    public Motor<T> leftSide, rightSide;
+    protected Motor<T> leftSide() {
+        return motors.getDeviceNum(0);
+    }
 
-    /** Create tank drivebase
+    protected Motor<T> rightSide() {
+        return motors.getDeviceNum(1);
+    }
+
+    /**
+     * Create tank drivebase
      *
-     * @param leftMotor The motor/motorgroup for the left side of the drivebase
+     * @param leftMotor  The motor/motorgroup for the left side of the drivebase
      * @param rightMotor The motor/motorgroup for the right side of the drivebase
      */
     public TankDrivebaseSubsystem(Motor<T> leftMotor, Motor<T> rightMotor) {
         super(leftMotor, rightMotor);
-        leftSide = leftMotor;
-        rightSide = rightMotor;
     }
 
     public void arcadeDrive(double y, double x) {
@@ -40,7 +47,6 @@ public class TankDrivebaseSubsystem<T extends DcMotorSimple> extends DrivebaseSu
     }
 
     public void drive(double l, double r) {
-        leftSide.setSpeed(l * getSpeed());
-        rightSide.setSpeed(r * getSpeed());
+        motors.setSpeeds(l * getSpeed(), r * getSpeed());
     }
 }
