@@ -11,7 +11,7 @@ import com.technototes.library.hardware.HardwareDeviceGroup;
 @SuppressWarnings("unused")
 public class EncodedMotorGroup<T extends DcMotorSimple>
     extends EncodedMotor<T>
-    implements HardwareDeviceGroup<Motor<T>> {
+    implements HardwareDeviceGroup<EncodedMotor<T>> {
 
     private final EncodedMotor<T>[] followers;
 
@@ -40,16 +40,9 @@ public class EncodedMotorGroup<T extends DcMotorSimple>
     }
 
     @Override
-    public void propagate(double value) {
-        for (EncodedMotor<T> m : followers) {
-            m.setSpeed(value);
-        }
-    }
-
-    @Override
     public void setVelocity(double tps) {
         super.setVelocity(tps);
-        propagate(super.getSpeed());
+        propagate(obj -> obj.setVelocity(tps));
     }
 
     public void setVelocities(double... tps) {
