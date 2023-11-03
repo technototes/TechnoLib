@@ -9,9 +9,7 @@ TechnoLib is a FTC Library for everyone:
 - Annotation based Telemetry
 - And much much more
 
-**The goal of this library is stated as follows** The goal of TechnoLib is not only to provide
-versatile resources that assist in software development and strengthen code structure, but to also
-abstract out redundancy.
+### The goal of this library is not only to provide versatile resources that assist in software development and strengthen code structure, but to also abstract out redundancy.
 
 ## Installation
 
@@ -25,11 +23,11 @@ But if this library is so good, it must be hard to install right? wrong:
      }
   ```
 - And add this to the dependencies block in TeamCode/build.gradle:
-  `implementation 'com.github.technototes:TechnoLib:1.2.0'` **(replace 1.2.0 with the latest
+  `implementation 'com.github.technototes:TechnoLib:1.3.0'` **(replace 1.3.0 with the latest
   release)**
 - Build the code and you are good to go
 
-### Version 1.2.0 has breaking changes.
+### Both versions 1.2.0 and 1.2.0 have breaking changes.
 
 See below for details
 
@@ -81,3 +79,41 @@ to use the remapAxes function (which has been renamed) and the constructor for t
 that you specify the orientation of your control hub. The SDK also changed the axes' orientation on
 the hub. You'll be happier by just switching your mental model to the new IMU class (but it's weird
 that FIRST changed it :/ )
+
+# Notes from Kevin Frei
+
+Hi, the original author of this libary (Alex Stedman) graduated and went off to college. So now I'm
+maintaining it.
+
+I'm an FTC mentor, not an FRC mentor. My goals are to enable capable programmers (often times coming
+from Python) to be able to create a functional, _reliable_ robot quickly and easily. Java, and
+particularly some Java conventions however, are not always the most conducive language to these
+goals. I've made a few minor edits/improvements in the 1.3.0 release, but I'm also prototyping a new
+2.0 release during the 2023/2024 season (our students are still using 1.3.0). The point of me
+working on the prototype during build/competition season is primarily because I'm watching what
+students struggle with, what I'm stuck explaining over &amp; over, etc... and am trying to adjust
+the library to be more approachable and easier to interact with.
+
+## Small Ideas
+
+Initially, I found the hardware wrapper types to be mostly just a waste of effort. Now, however, I'm
+considering building out MUCH more capability in them. The 2 primary things I'd like to add are:
+
+1. Resilience to disconnected hardware
+2. Easy, code-free logging opt-in/opt-out
+
+For item 1, we have a typical setup where we have flags in the "robot" object where we can
+'disconnect' a subsystem, thus allowing the bot to continue to function even when specific hardware
+isn't connected. This could be done without too much effort, and could potentially also be a nice
+stepping stone to some level of hardware simulation.
+
+For item 2, for most of the hardware types, it's often useful to log data from those types (current
+power/velocity, current tick values, etc...) but doing so is somewhat clunky. It would be nice if
+you could set a flag in the dashboard, or perhaps just add a top-level to the constructor or a
+subsystem that would enable/disable logging with little-to-no code changes.
+
+## Big Ideas
+
+Full simulation of a robot would be _tremendously_ helpful. Initially just being able to simulate
+all the hardware would be useful. Being able to configure motors, servos, and sensors in a 3
+dimensional model, with connections to parts would be MUCH more work (but also MUCH cooler)
