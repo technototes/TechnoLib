@@ -13,14 +13,15 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 public class Rev2MDistanceSensor extends Sensor<DistanceSensor> implements IDistanceSensor {
 
     private DistanceUnit distanceUnit;
+    private double dist;
 
     /**
      * Create a range sensor
      *
      * @param device The sensor device
      */
-    public Rev2MDistanceSensor(DistanceSensor device) {
-        super(device);
+    public Rev2MDistanceSensor(DistanceSensor device, String nm) {
+        super(device, nm);
     }
 
     /**
@@ -32,6 +33,11 @@ public class Rev2MDistanceSensor extends Sensor<DistanceSensor> implements IDist
         super(deviceName);
     }
 
+    @Override
+    public String LogLine() {
+        return logData(String.format("%f1.3%s", this.dist, this.distanceUnit));
+    }
+
     /**
      * Get the value with a specified distance Unit
      *
@@ -40,7 +46,8 @@ public class Rev2MDistanceSensor extends Sensor<DistanceSensor> implements IDist
      */
     @Override
     public double getDistance(DistanceUnit distanceUnit) {
-        return getDevice().getDistance(distanceUnit);
+        this.dist = getDevice().getDistance(distanceUnit);
+        return dist;
     }
 
     /**

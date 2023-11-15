@@ -13,6 +13,17 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 @SuppressWarnings("unused")
 public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements IGyro {
 
+    private Orientation orientation;
+    public AngularVelocity angularVelocity;
+
+    // TODO: Make this report zero-ing info properly
+    @Override
+    public String LogLine() {
+        return logData(
+            String.format("%f1.3,%f1.3,%f1.3 ", orientation.firstAngle, orientation.secondAngle, orientation.thirdAngle)
+        );
+    }
+
     /**
      * The direction of the axes signs when remapping the axes
      *
@@ -80,9 +91,8 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      *
      * Use the Logo/Usb Facing direction API's as part of the FTC 8.1+ SDK
      */
-    @Deprecated
-    public IMU(com.qualcomm.robotcore.hardware.IMU device, com.qualcomm.robotcore.hardware.IMU.Parameters params) {
-        super(device);
+    protected IMU(com.qualcomm.robotcore.hardware.IMU device, com.qualcomm.robotcore.hardware.IMU.Parameters params) {
+        super(device, "imu");
         angleOffset = 0.0;
 
         axesSigns = AxesSigns.PPP;
@@ -97,8 +107,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      *
      * Use the Logo/Usb Facing direction API's as part of the FTC 8.1+ SDK
      */
-    @Deprecated
-    public IMU(String deviceName, com.qualcomm.robotcore.hardware.IMU.Parameters params) {
+    protected IMU(String deviceName, com.qualcomm.robotcore.hardware.IMU.Parameters params) {
         super(deviceName);
         angleOffset = 0.0;
 
@@ -308,7 +317,8 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * @return The Angular Velocity
      */
     public AngularVelocity getAngularVelocity(AngleUnit units) {
-        return device.getRobotAngularVelocity(units);
+        angularVelocity = getDevice().getRobotAngularVelocity(units);
+        return angularVelocity;
     }
 
     public AngularVelocity getAngularVelocity() {
@@ -321,17 +331,17 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * @return the Orientation of the IMU
      */
     public Orientation getAngularOrientation(AngleUnit units) {
-        Orientation res = getDevice().getRobotOrientation(AxesReference.INTRINSIC, axesOrder, units);
+        orientation = getDevice().getRobotOrientation(AxesReference.INTRINSIC, axesOrder, units);
         if ((axesSigns.bVal & AxesSigns.NPP.bVal) == AxesSigns.NPP.bVal) {
-            res.firstAngle = -res.firstAngle;
+            orientation.firstAngle = -orientation.firstAngle;
         }
         if ((axesSigns.bVal & AxesSigns.PNP.bVal) == AxesSigns.PNP.bVal) {
-            res.secondAngle = -res.secondAngle;
+            orientation.secondAngle = -orientation.secondAngle;
         }
         if ((axesSigns.bVal & AxesSigns.PPN.bVal) == AxesSigns.PPN.bVal) {
-            res.thirdAngle = -res.thirdAngle;
+            orientation.thirdAngle = -orientation.thirdAngle;
         }
-        return res;
+        return orientation;
     }
 
     public Orientation getAngularOrientation() {
