@@ -16,8 +16,8 @@ public abstract class Sensor<T extends com.qualcomm.robotcore.hardware.HardwareD
      *
      * @param device The device
      */
-    public Sensor(T device) {
-        super(device);
+    public Sensor(T device, String nm) {
+        super(device, nm);
     }
 
     /**

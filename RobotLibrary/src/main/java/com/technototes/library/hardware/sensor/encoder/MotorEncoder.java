@@ -15,6 +15,12 @@ public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder {
     private static final int CPS_STEP = 0x10000;
     public int offset = 0;
 
+    private int curPos;
+    private int rawPos;
+    private double curVel;
+    private double rawVel;
+    private double corVel;
+
     private static double inverseOverflow(double input, double estimate) {
         double real = input;
         while (Math.abs(estimate - real) > CPS_STEP / 2.0) {
@@ -57,8 +63,8 @@ public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder {
     private double velocityEstimate;
     private double lastUpdateTime;
 
-    public MotorEncoder(DcMotorEx motor, ElapsedTime clock) {
-        super(motor);
+    public MotorEncoder(DcMotorEx motor, ElapsedTime clock, String nm) {
+        super(motor, nm);
         // motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         this.motor = motor;
         this.clock = clock;
@@ -71,12 +77,19 @@ public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder {
         this.lastUpdateTime = clock.seconds();
     }
 
-    public MotorEncoder(DcMotorEx motor) {
-        this(motor, new ElapsedTime());
+    public MotorEncoder(DcMotorEx motor, String nm) {
+        this(motor, new ElapsedTime(), nm);
     }
 
     public MotorEncoder(String deviceName) {
-        this(hardwareMap.get(DcMotorEx.class, deviceName));
+        this(hardwareMap.get(DcMotorEx.class, deviceName), deviceName);
+    }
+
+    @Override
+    public String LogLine() {
+        return logData(
+            String.format("%d (Raw: %d), Vel %f1.3 (Raw: %f1.3, Cor: %f1.)", curPos, rawPos, curVel, rawVel, corVel)
+        );
     }
 
     public Direction getDirection() {
@@ -102,23 +115,27 @@ public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder {
 
     public int getCurrentPosition() {
         int multiplier = getMultiplier();
-        int currentPosition = (motor.getCurrentPosition() - offset) * multiplier;
-        if (currentPosition != lastPosition) {
+        rawPos = motor.getCurrentPosition();
+        curPos = (rawPos - offset) * multiplier;
+        if (curPos != lastPosition) {
             double currentTime = clock.seconds();
             double dt = currentTime - lastUpdateTime;
-            velocityEstimate = (currentPosition - lastPosition) / dt;
-            lastPosition = currentPosition;
+            velocityEstimate = (curPos - lastPosition) / dt;
+            lastPosition = curPos;
             lastUpdateTime = currentTime;
         }
-        return currentPosition;
+        return curPos;
     }
 
     public double getRawVelocity() {
         int multiplier = getMultiplier();
-        return motor.getVelocity() * multiplier;
+        rawVel = motor.getVelocity();
+        curVel = rawVel * multiplier;
+        return curVel;
     }
 
     public double getCorrectedVelocity() {
-        return inverseOverflow(getRawVelocity(), velocityEstimate);
+        corVel = inverseOverflow(getRawVelocity(), velocityEstimate);
+        return corVel;
     }
 }

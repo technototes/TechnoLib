@@ -21,6 +21,7 @@ public class Servo
     implements Sensored, Invertable<Servo> {
 
     private boolean inverted = false;
+    private double pos = 0.0;
 
     /**
      * Create servo object
@@ -38,6 +39,12 @@ public class Servo
      */
     public Servo(String deviceName) {
         super(deviceName);
+    }
+
+    @Override
+    public String LogLine() {
+        // Could also include the min/max stuff, and "inverted"
+        return logData(String.format("%1.3", pos));
     }
 
     /**
@@ -79,7 +86,8 @@ public class Servo
      * @param position The position to set the servo to
      */
     public void setPosition(double position) {
-        device.setPosition(Range.clip(!inverted ? position : 1 - position, 0, 1));
+        this.pos = Range.clip(!inverted ? position : 1 - position, 0, 1);
+        device.setPosition(this.pos);
     }
 
     public void incrementPosition(double incAmount) {
@@ -88,7 +96,8 @@ public class Servo
 
     @Override
     public double getSensorValue() {
-        return inverted ? 1 - device.getPosition() : device.getPosition();
+        this.pos = device.getPosition();
+        return inverted ? 1 - this.pos : this.pos;
     }
 
     /**

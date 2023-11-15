@@ -17,15 +17,21 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
      */
     public static HardwareMap hardwareMap = null;
 
-    protected T device;
+    private T device;
+
+    /**
+     * The name of the hardware used for logging & hardware creation
+     */
+    protected String name;
 
     /**
      * Make a hardware device
      *
      * @param device The default device
      */
-    public HardwareDevice(T device) {
+    public HardwareDevice(T device, String deviceName) {
         this.device = device;
+        name = deviceName;
     }
 
     /**
@@ -35,7 +41,12 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
      */
     @SuppressWarnings("unchecked cast")
     protected HardwareDevice(String deviceName) {
-        this(hardwareMap.get((Class<T>) com.qualcomm.robotcore.hardware.HardwareDevice.class/*T.class*/, deviceName));
+        try {
+            device =
+                hardwareMap.get((Class<T>) com.qualcomm.robotcore.hardware.HardwareDevice.class/*T.class*/, deviceName);
+        } catch (Exception e) {
+            device = null;
+        }
     }
 
     /**
@@ -44,6 +55,20 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
      * @return The device
      */
     public T getDevice() {
+        // TODO: Assert that we've got a device, yeah?
         return device;
     }
+
+    /**
+     * Get the logging expression
+     */
+    protected String logData(String info) {
+        return String.format("%s: %s", name, info);
+    }
+
+    /**
+     * This is used for logging stuff by name and/or device type
+     * @return
+     */
+    public abstract String LogLine();
 }
