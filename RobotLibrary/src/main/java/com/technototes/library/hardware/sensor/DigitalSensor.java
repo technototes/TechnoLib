@@ -8,12 +8,15 @@ import com.qualcomm.robotcore.hardware.DigitalChannel;
 @SuppressWarnings("unused")
 public class DigitalSensor extends Sensor<DigitalChannel> {
 
+    private boolean val;
+
     /** Make a digital sensor
      *
      * @param device The device
      */
-    public DigitalSensor(DigitalChannel device) {
-        super(device);
+    public DigitalSensor(DigitalChannel device, String nm) {
+        super(device, nm);
+        val = false;
     }
 
     /** Make a digital sensor
@@ -24,11 +27,17 @@ public class DigitalSensor extends Sensor<DigitalChannel> {
         super(deviceName);
     }
 
+    @Override
+    public String LogLine() {
+        return logData(val ? "T" : "F");
+    }
+
     /** Get the sensor value as a boolean
      *
      * @return Sensor value as boolean
      */
     public boolean getValue() {
-        return getDevice().getState();
+        val = getDevice().getState();
+        return val;
     }
 }

@@ -8,12 +8,14 @@ import com.qualcomm.robotcore.hardware.AnalogInput;
 @SuppressWarnings("unused")
 public class AnalogSensor extends Sensor<AnalogInput> {
 
+    private double val;
+
     /** Make an analog sensor
      *
      * @param device The analog device
      */
-    public AnalogSensor(AnalogInput device) {
-        super(device);
+    public AnalogSensor(AnalogInput device, String nm) {
+        super(device, nm);
     }
 
     /** Make an analog sensor
@@ -24,7 +26,13 @@ public class AnalogSensor extends Sensor<AnalogInput> {
         super(deviceName);
     }
 
+    @Override
+    public String LogLine() {
+        return logData(String.format("%f1.4", val));
+    }
+
     public double getSensorValue() {
-        return getDevice().getMaxVoltage();
+        val = getDevice().getMaxVoltage();
+        return val;
     }
 }

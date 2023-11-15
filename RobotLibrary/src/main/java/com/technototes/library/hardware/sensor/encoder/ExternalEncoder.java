@@ -9,14 +9,15 @@ import com.technototes.library.hardware.sensor.Sensor;
 public class ExternalEncoder extends Sensor<AnalogInput> implements Encoder {
 
     private double zero = 0;
+    private double val = 0;
 
     /**
      * Create an ExternalEncoder from an arbitrary AnalogInput
      *
      * @param device the AnalogInput device
      */
-    public ExternalEncoder(AnalogInput device) {
-        super(device);
+    public ExternalEncoder(AnalogInput device, String nm) {
+        super(device, nm);
     }
 
     /**
@@ -26,6 +27,11 @@ public class ExternalEncoder extends Sensor<AnalogInput> implements Encoder {
      */
     public ExternalEncoder(String deviceName) {
         super(deviceName);
+    }
+
+    @Override
+    public String LogLine() {
+        return logData(String.format("%f1.3 (raw: %f1.3)", val - zero, val));
     }
 
     /**
