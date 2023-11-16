@@ -52,4 +52,10 @@ public class InternalCamera extends Camera<OpenCvInternalCamera, DummyDevice<Ope
                     .getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName())
             );
     }
+
+    // TODO: Should we log something?
+    @Override
+    public String LogLine() {
+        return null;
+    }
 }

@@ -31,7 +31,7 @@ public abstract class Camera<T extends OpenCvCamera, U extends com.qualcomm.robo
      * @param device The HardwareDevice for the camera (from hardwareMap.get)
      */
     protected Camera(U device) {
-        super(device);
+        super(device, "");
         openCvCamera = createCamera();
     }
 

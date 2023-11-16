@@ -28,8 +28,8 @@ public class Servo
      *
      * @param device The servo
      */
-    public Servo(com.qualcomm.robotcore.hardware.Servo device) {
-        super(device);
+    public Servo(com.qualcomm.robotcore.hardware.Servo device, String nm) {
+        super(device, nm);
     }
 
     /**
@@ -87,7 +87,7 @@ public class Servo
      */
     public void setPosition(double position) {
         this.pos = Range.clip(!inverted ? position : 1 - position, 0, 1);
-        device.setPosition(this.pos);
+        getDevice().setPosition(this.pos);
     }
 
     public void incrementPosition(double incAmount) {
@@ -96,7 +96,7 @@ public class Servo
 
     @Override
     public double getSensorValue() {
-        this.pos = device.getPosition();
+        this.pos = getDevice().getPosition();
         return inverted ? 1 - this.pos : this.pos;
     }
 
