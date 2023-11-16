@@ -1,6 +1,7 @@
 package com.technototes.library.logger;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.logger.entry.BooleanEntry;
 import com.technototes.library.logger.entry.Entry;
 import com.technototes.library.logger.entry.NumberEntry;
@@ -31,7 +32,11 @@ public class Logger {
     private static Set<String> hardwareToLog = new TreeSet<>();
 
     public static void LogHardware(String names) {
-        hardwareToLog = new TreeSet<String>(Arrays.asList(names.split(";")));
+        if (names == null || names.length() == 0) {
+            hardwareToLog = new TreeSet<>();
+        } else {
+            hardwareToLog = new TreeSet<String>(Arrays.asList(names.split(";")));
+        }
     }
 
     public Entry<?>[] runEntries;
@@ -130,7 +135,15 @@ public class Logger {
     }
 
     private void update(Entry<?>[] choice) {
-        if (!hardwareToLog.isEmpty()) {}
+        if (!hardwareToLog.isEmpty()) {
+            for (HardwareDevice<?> hw : HardwareDevice.devices) {
+                if (hardwareToLog.contains(hw.getName())) {
+                    // Add the line to the log
+                    telemetry.addLine(hw.LogLine());
+                }
+            }
+        }
+
         try {
             for (Entry<?> item : choice) {
                 // telemetry.addLine(

@@ -34,6 +34,10 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
      */
     protected String name;
 
+    public String getName() {
+        return name;
+    }
+
     /**
      * Make a hardware device
      *
