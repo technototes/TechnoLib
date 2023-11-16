@@ -27,6 +27,12 @@ public class Webcam extends Camera<OpenCvWebcam, WebcamName> {
         super(device);
     }
 
+    // TODO: Should we log something?
+    @Override
+    public String LogLine() {
+        return null;
+    }
+
     /**
      * Create an OpenCvWebcam, which can then be used in your vision pipeline
      *

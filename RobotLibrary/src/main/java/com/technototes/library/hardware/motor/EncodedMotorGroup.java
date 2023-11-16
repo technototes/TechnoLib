@@ -15,6 +15,16 @@ public class EncodedMotorGroup<T extends DcMotorSimple>
 
     private final EncodedMotor<T>[] followers;
 
+    @Override
+    public String LogLine() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < getDeviceCount(); i++) {
+            sb.append(i == 0 ? "group:" : ";");
+            sb.append(getDeviceNum(i).LogLine());
+        }
+        return sb.toString();
+    }
+
     /**
      * Create an encoded motor groupM
      *
@@ -22,7 +32,7 @@ public class EncodedMotorGroup<T extends DcMotorSimple>
      * @param followers The following motors
      */
     public EncodedMotorGroup(EncodedMotor<T> leader, EncodedMotor<T>... followers) {
-        super(leader.getDevice());
+        super(leader.getDevice(), "emGrp");
         this.followers = followers;
     }
 
