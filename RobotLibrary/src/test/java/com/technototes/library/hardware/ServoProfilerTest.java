@@ -13,7 +13,7 @@ public class ServoProfilerTest {
 
     @Test
     public void test() {
-        servo = new Servo(new MockServo()).startAt(0);
+        servo = new Servo(new MockServo(), "mockServo").startAt(0);
         servoController = new ServoProfiler(servo).setConstraints(1, 0.4, 1);
         time = new ElapsedTime();
         time.reset();

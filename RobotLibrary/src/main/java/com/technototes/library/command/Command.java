@@ -1,7 +1,6 @@
 package com.technototes.library.command;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.technototes.library.subsystem.DeviceSubsystem;
 import com.technototes.library.subsystem.Subsystem;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -300,7 +299,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
     /**
      * Return the subsystem requirements for this command
      *
-     * @return The {@link DeviceSubsystem} requirements
+     * @return The {@link Subsystem} requirements
      */
     default Set<Subsystem> getRequirements() {
         requirementMap.putIfAbsent(this, new LinkedHashSet<>());

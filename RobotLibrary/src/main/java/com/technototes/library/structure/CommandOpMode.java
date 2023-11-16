@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandGamepad;
-import com.technototes.library.hardware2.HardwareBuilder;
+import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.logger.Logger;
 import java.util.List;
 
@@ -60,12 +60,12 @@ public abstract class CommandOpMode extends LinearOpMode {
 
     @Override
     public final void runOpMode() {
+        HardwareDevice.initMap(hardwareMap);
         opModeState = OpModeState.INIT;
         CommandScheduler.resetScheduler();
         CommandScheduler.setOpMode(this);
         hubs = hardwareMap.getAll(LynxModule.class);
         hubs.forEach(e -> e.setBulkCachingMode(LynxModule.BulkCachingMode.MANUAL));
-        HardwareBuilder.initMap(hardwareMap);
         driverGamepad = new CommandGamepad(gamepad1);
         codriverGamepad = new CommandGamepad(gamepad2);
         opModeTimer.reset();
