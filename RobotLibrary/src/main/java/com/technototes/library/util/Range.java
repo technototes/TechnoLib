@@ -2,7 +2,10 @@ package com.technototes.library.util;
 
 /**
  * Helper class for tracking a range
+ *
+ * Adds minimal value over com.qualcomm.robotcore.util.Range, which is the reason for deprecation
  */
+@Deprecated
 public class Range {
 
     /**
