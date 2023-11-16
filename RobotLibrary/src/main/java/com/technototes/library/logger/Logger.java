@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;
@@ -26,6 +27,12 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * @author Alex Stedman
  */
 public class Logger {
+
+    private static Set<String> hardwareToLog = new TreeSet<>();
+
+    public static void LogHardware(String names) {
+        hardwareToLog = new TreeSet<String>(Arrays.asList(names.split(";")));
+    }
 
     public Entry<?>[] runEntries;
     public Entry<?>[] initEntries;
@@ -89,7 +96,7 @@ public class Logger {
 
     // TODO make list and do sort with comparators
     // I wish this had a comment describing what Alex thinks it's doing,
-    // I *think* it'strying to set the 'indexed' entries to their preferred locations
+    // I *think* it's trying to set the 'indexed' entries to their preferred locations
     // then filling in the gaps with unindexed  or lower priority entries.
     // That bottom loop is also quite slow, but we're talking about 0-20 entries, so performance
     // is probably irrelevant...
@@ -123,6 +130,7 @@ public class Logger {
     }
 
     private void update(Entry<?>[] choice) {
+        if (!hardwareToLog.isEmpty()) {}
         try {
             for (Entry<?> item : choice) {
                 // telemetry.addLine(

@@ -1,6 +1,9 @@
 package com.technototes.library.hardware;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Class for hardware devices
@@ -16,6 +19,13 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
      * Hardware map object for stuff
      */
     public static HardwareMap hardwareMap = null;
+    protected static Map<String, HardwareDevice<?>> names = new HashMap<>();
+
+    public static void initMap(HardwareMap h) {
+        hardwareMap = h;
+    }
+
+    public static Set<HardwareDevice<?>> devices = null;
 
     private T device;
 
@@ -32,6 +42,7 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
     public HardwareDevice(T device, String deviceName) {
         this.device = device;
         name = deviceName;
+        names.put(deviceName, this);
     }
 
     /**
@@ -45,7 +56,7 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
             device =
                 hardwareMap.get((Class<T>) com.qualcomm.robotcore.hardware.HardwareDevice.class/*T.class*/, deviceName);
         } catch (Exception e) {
-            device = null;
+            device = null; // (T) new FailedDevice<T>(deviceName);
         }
     }
 
