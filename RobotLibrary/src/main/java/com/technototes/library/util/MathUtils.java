@@ -30,9 +30,9 @@ public class MathUtils {
      * @return The max
      */
     public static int getMax(int... args) {
-        int max = 0;
+        int max = args[0];
         for (int i = 1; i < args.length; i++) {
-            max = Math.max(args[i - 1], args[i]);
+            max = Math.max(max, args[i]);
         }
         return max;
     }
@@ -61,6 +61,7 @@ public class MathUtils {
      * @return The constrained number
      * @deprecated
      */
+    @Deprecated
     public static int constrain(int min, int num, int max) {
         return num < min ? min : (num > max ? max : num);
     }
@@ -75,6 +76,7 @@ public class MathUtils {
      * @return The constrained number
      * @deprecated
      */
+    @Deprecated
     public static double constrain(double min, double num, double max) {
         return num < min ? min : (num > max ? max : num);
     }
