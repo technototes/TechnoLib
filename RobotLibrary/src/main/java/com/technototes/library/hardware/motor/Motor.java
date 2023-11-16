@@ -16,14 +16,36 @@ import java.util.function.Supplier;
 public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements Supplier<Double> {
 
     private double min = -1, max = 1;
+    protected double power;
+    protected DcMotorSimple.Direction dir;
+    protected DcMotor.ZeroPowerBehavior zeroBehavior;
+
+    private String dirStr() {
+        return dir == DcMotorSimple.Direction.FORWARD ? "Fwd" : "Rev";
+    }
+
+    private String zBehavior() {
+        boolean simple = (getDevice() instanceof DcMotor);
+        if (simple) {
+            return "";
+        }
+        if (zeroBehavior == DcMotor.ZeroPowerBehavior.BRAKE) {
+            return "Brk";
+        } else {
+            return "Flt";
+        }
+    }
 
     /**
      * Create a motor
      *
      * @param device The hardware device
      */
-    public Motor(T device) {
-        super(device);
+    public Motor(T device, String nm) {
+        super(device, nm);
+        power = 0;
+        dir = DcMotorSimple.Direction.FORWARD;
+        zeroBehavior = DcMotor.ZeroPowerBehavior.FLOAT;
     }
 
     /**
@@ -33,6 +55,15 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      */
     public Motor(String deviceName) {
         super(deviceName);
+    }
+
+    @Override
+    public String LogLine() {
+        if (min <= -1.0 && max >= 1.0) {
+            return logData(String.format("%1.2f%s%s", power, dirStr(), zBehavior()));
+        } else {
+            return logData(String.format("%1.2f%s%s[%1.2f-%1.2f]", power, dirStr(), zBehavior(), min, max));
+        }
     }
 
     /**
@@ -54,7 +85,8 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * Returns the DcMotorSimple.Direction the motor is traveling
      */
     public DcMotorSimple.Direction getDirection() {
-        return getDevice().getDirection();
+        dir = getDevice().getDirection();
+        return dir;
     }
 
     /**
@@ -62,6 +94,7 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      */
     public Motor<T> setBackward() {
         getDevice().setDirection(DcMotorSimple.Direction.REVERSE);
+        dir = DcMotorSimple.Direction.REVERSE;
         return this;
     }
 
@@ -70,6 +103,7 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      */
     public Motor<T> setForward() {
         getDevice().setDirection(DcMotorSimple.Direction.FORWARD);
+        dir = DcMotorSimple.Direction.FORWARD;
         return this;
     }
 
@@ -77,6 +111,7 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * Set the motor to go in a particular direction
      */
     public Motor<T> setDirection(DcMotorSimple.Direction dir) {
+        this.dir = dir;
         getDevice().setDirection(dir);
         return this;
     }
@@ -126,9 +161,11 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * @return The Motor device (for chaining)
      */
     public Motor<T> brake() {
-        if (getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setZeroPowerBehavior(
-                DcMotor.ZeroPowerBehavior.BRAKE
-            );
+        T device = getDevice();
+        if (device instanceof DcMotor) {
+            ((DcMotor) device).setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            zeroBehavior = DcMotor.ZeroPowerBehavior.BRAKE;
+        }
         return this;
     }
 
@@ -138,9 +175,11 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * @return The Motor device (for chaining)
      */
     public Motor<T> coast() {
-        if (getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setZeroPowerBehavior(
-                DcMotor.ZeroPowerBehavior.FLOAT
-            );
+        T device = getDevice();
+        if (device instanceof DcMotor) {
+            ((DcMotor) device).setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            zeroBehavior = DcMotor.ZeroPowerBehavior.FLOAT;
+        }
         return this;
     }
 

@@ -13,13 +13,23 @@ public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
 
     private final Servo[] followers;
 
+    @Override
+    public String LogLine() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < getDeviceCount(); i++) {
+            sb.append(i == 0 ? "group:" : ";");
+            sb.append(getDeviceNum(i).LogLine());
+        }
+        return sb.toString();
+    }
+
     /**
      * Create a servo group
      *
      * @param servos the servos
      */
     public ServoGroup(Servo... servos) {
-        super(servos[0].getDevice());
+        super(servos[0].getDevice(), "group");
         super.setInverted(servos[0].getInverted());
         followers = new Servo[servos.length - 1];
         System.arraycopy(servos, 1, followers, 0, followers.length);

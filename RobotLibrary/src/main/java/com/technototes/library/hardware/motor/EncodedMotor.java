@@ -23,6 +23,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     public double positionThreshold = 50;
 
     private Encoder encoder;
+    private DcMotor.RunMode runMode;
 
     /**
      * Make encoded motor
@@ -30,8 +31,8 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      * @param device The dcmotor object
      * @param e      The encoder for the motor
      */
-    public EncodedMotor(T device, Encoder e) {
-        super(device);
+    public EncodedMotor(T device, Encoder e, String nm) {
+        super(device, nm);
         encoder = e;
     }
 
@@ -51,10 +52,10 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      *
      * @param device The dcmotor object
      */
-    public EncodedMotor(T device) {
-        super(device);
+    public EncodedMotor(T device, String nm) {
+        super(device, nm);
         if (device instanceof DcMotorEx) {
-            encoder = new MotorEncoder((DcMotorEx) device);
+            encoder = new MotorEncoder((DcMotorEx) device, nm);
         }
     }
 
@@ -66,7 +67,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     public EncodedMotor(String deviceName) {
         super(deviceName);
         if (getDevice() instanceof DcMotorEx) {
-            encoder = new MotorEncoder((DcMotorEx) getDevice());
+            encoder = new MotorEncoder((DcMotorEx) getDevice(), deviceName);
         }
     }
 
@@ -114,7 +115,11 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      * @return The motor (for chaining)
      */
     public EncodedMotor<T> setRunMode(DcMotor.RunMode m) {
-        if (getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(m);
+        T device = getDevice();
+        if (device instanceof DcMotor) {
+            ((DcMotor) device).setMode(m);
+            runMode = m;
+        }
         return this;
     }
 
@@ -242,7 +247,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      */
     public void setVelocity(double tps) {
         if (getDevice() instanceof DcMotor) {
-            ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            setRunMode(DcMotor.RunMode.RUN_USING_ENCODER);
             getDevice().setPower(tps);
         }
     }
@@ -253,28 +258,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      * @return the power for the motor
      */
     public double getVelocity() {
-        return getDevice().getPower();
-    }
-
-    /**
-     * Gets the power set for the motor
-     *
-     * @return THe power for the motor
-     */
-    @Override
-    public double getSpeed() {
-        return getDevice().getPower();
-    }
-
-    /**
-     * Sets the (clipped) speed for the motor
-     *
-     * @param speed The speed of the motor
-     */
-    @Override
-    public void setSpeed(double speed) {
-        // if(getDevice() instanceof DcMotor) ((DcMotor) getDevice()).setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        super.setSpeed(speed);
+        return getSpeed();
     }
 
     @Override

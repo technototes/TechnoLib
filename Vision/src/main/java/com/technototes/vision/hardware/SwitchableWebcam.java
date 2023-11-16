@@ -105,4 +105,10 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice
         }
         return null;
     }
+
+    // TODO: Shoudl we log something?
+    @Override
+    public String LogLine() {
+        return null;
+    }
 }

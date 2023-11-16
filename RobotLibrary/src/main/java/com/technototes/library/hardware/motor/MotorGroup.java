@@ -13,6 +13,16 @@ public class MotorGroup<T extends DcMotorSimple> extends Motor<T> implements Har
 
     private final Motor[] followers;
 
+    @Override
+    public String LogLine() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < getDeviceCount(); i++) {
+            sb.append(i == 0 ? "group:" : ";");
+            sb.append(getDeviceNum(i).LogLine());
+        }
+        return sb.toString();
+    }
+
     /**
      * Make a motor group
      *
@@ -20,7 +30,7 @@ public class MotorGroup<T extends DcMotorSimple> extends Motor<T> implements Har
      */
     @SafeVarargs
     public MotorGroup(Motor<T>... motors) {
-        super(motors[0].getDevice());
+        super(motors[0].getDevice(), "grp");
         followers = new Motor[motors.length - 1];
         System.arraycopy(motors, 1, followers, 0, followers.length);
     }
