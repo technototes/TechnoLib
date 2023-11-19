@@ -25,7 +25,7 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
     }
 
     private String zBehavior() {
-        boolean simple = (getDevice() instanceof DcMotor);
+        boolean simple = (getRawDevice() instanceof DcMotor);
         if (simple) {
             return "";
         }
@@ -85,7 +85,10 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * Returns the DcMotorSimple.Direction the motor is traveling
      */
     public DcMotorSimple.Direction getDirection() {
-        dir = getDevice().getDirection();
+        T device = getRawDevice();
+        if (device != null) {
+            dir = device.getDirection();
+        }
         return dir;
     }
 
@@ -93,7 +96,10 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * Set the motor to go *backward*
      */
     public Motor<T> setBackward() {
-        getDevice().setDirection(DcMotorSimple.Direction.REVERSE);
+        T device = getRawDevice();
+        if (device != null) {
+            device.setDirection(DcMotorSimple.Direction.REVERSE);
+        }
         dir = DcMotorSimple.Direction.REVERSE;
         return this;
     }
@@ -102,7 +108,10 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * Set the motor to go *forward*
      */
     public Motor<T> setForward() {
-        getDevice().setDirection(DcMotorSimple.Direction.FORWARD);
+        T device = getRawDevice();
+        if (device != null) {
+            device.setDirection(DcMotorSimple.Direction.FORWARD);
+        }
         dir = DcMotorSimple.Direction.FORWARD;
         return this;
     }
@@ -112,7 +121,10 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      */
     public Motor<T> setDirection(DcMotorSimple.Direction dir) {
         this.dir = dir;
-        getDevice().setDirection(dir);
+        T device = getRawDevice();
+        if (device != null) {
+            device.setDirection(dir);
+        }
         return this;
     }
 
@@ -133,7 +145,11 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * @return the power value (as a double)
      */
     public double getPower() {
-        return device.getPower();
+        T device = getRawDevice();
+        if (device != null) {
+            power = device.getPower();
+        }
+        return power;
     }
 
     /**
@@ -152,7 +168,11 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * @param pow The power value (-1 -> 1)
      */
     public void setPower(double pow) {
-        device.setPower(Range.clip(pow, min, max));
+        power = Range.clip(speed, min, max);
+        T device = getRawDevice();
+        if (device != null) {
+            device.setPower(power);
+        }
     }
 
     /**
@@ -161,11 +181,11 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * @return The Motor device (for chaining)
      */
     public Motor<T> brake() {
-        T device = getDevice();
+        T device = getRawDevice();
         if (device instanceof DcMotor) {
             ((DcMotor) device).setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            zeroBehavior = DcMotor.ZeroPowerBehavior.BRAKE;
         }
+        zeroBehavior = DcMotor.ZeroPowerBehavior.BRAKE;
         return this;
     }
 
@@ -175,11 +195,11 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * @return The Motor device (for chaining)
      */
     public Motor<T> coast() {
-        T device = getDevice();
+        T device = getRawDevice();
         if (device instanceof DcMotor) {
             ((DcMotor) device).setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            zeroBehavior = DcMotor.ZeroPowerBehavior.FLOAT;
         }
+        zeroBehavior = DcMotor.ZeroPowerBehavior.FLOAT;
         return this;
     }
 

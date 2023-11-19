@@ -32,7 +32,10 @@ public class AnalogSensor extends Sensor<AnalogInput> {
     }
 
     public double getSensorValue() {
-        val = getDevice().getMaxVoltage();
+        AnalogInput device = getRawDevice();
+        if (device != null) {
+            val = device.getMaxVoltage();
+        }
         return val;
     }
 }

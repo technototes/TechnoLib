@@ -32,7 +32,7 @@ public class EncodedMotorGroup<T extends DcMotorSimple>
      * @param followers The following motors
      */
     public EncodedMotorGroup(EncodedMotor<T> leader, EncodedMotor<T>... followers) {
-        super(leader.getDevice(), "emGrp");
+        super(leader.getRawDevice(), "emGrp");
         this.followers = followers;
     }
 
