@@ -37,7 +37,10 @@ public class DigitalSensor extends Sensor<DigitalChannel> {
      * @return Sensor value as boolean
      */
     public boolean getValue() {
-        val = getDevice().getState();
+        DigitalChannel device = getRawDevice();
+        if (device != null) {
+            val = device.getState();
+        }
         return val;
     }
 }

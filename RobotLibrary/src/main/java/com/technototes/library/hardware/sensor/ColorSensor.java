@@ -38,7 +38,10 @@ public class ColorSensor extends Sensor<com.qualcomm.robotcore.hardware.ColorSen
 
     @Override
     public int argb() {
-        val = getDevice().argb();
+        com.qualcomm.robotcore.hardware.ColorSensor device = getRawDevice();
+        if (device != null) {
+            val = device.argb();
+        }
         return val;
     }
 }
