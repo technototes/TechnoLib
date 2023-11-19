@@ -204,9 +204,7 @@ public class Logger {
                         (Supplier<Boolean>) m,
                         ((Log.Boolean) as).index(),
                         ((Log.Boolean) as).trueValue(),
-                        ((Log.Boolean) as).falseValue(),
-                        ((Log.Boolean) as).trueFormat(),
-                        ((Log.Boolean) as).falseFormat()
+                        ((Log.Boolean) as).falseValue()
                     );
                 e.setPriority(((Log.Boolean) as).priority());
             } else if (as instanceof LogConfig.Run) {
@@ -260,13 +258,13 @@ public class Logger {
     }
 
     private boolean isFieldAllowed(Field f) {
-        if (f.isAnnotationPresent(LogConfig.Whitelist.class)) {
-            if (!Arrays.asList(f.getAnnotation(LogConfig.Whitelist.class).value()).contains(opMode.getClass())) {
+        if (f.isAnnotationPresent(LogConfig.AllowList.class)) {
+            if (!Arrays.asList(f.getAnnotation(LogConfig.AllowList.class).value()).contains(opMode.getClass())) {
                 return false;
             }
         }
-        if (f.isAnnotationPresent(LogConfig.Blacklist.class)) {
-            if (Arrays.asList(f.getAnnotation(LogConfig.Blacklist.class).value()).contains(opMode.getClass())) {
+        if (f.isAnnotationPresent(LogConfig.DenyList.class)) {
+            if (Arrays.asList(f.getAnnotation(LogConfig.DenyList.class).value()).contains(opMode.getClass())) {
                 return false;
             }
         }

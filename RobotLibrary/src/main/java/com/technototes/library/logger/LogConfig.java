@@ -32,26 +32,26 @@ public @interface LogConfig {
         boolean duringInit() default false;
     }
 
-    /** Annotation for Whitelisting Opmodes to log this item
+    /** Annotation for allowing Opmodes to log this item
      *
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(value = { FIELD, LOCAL_VARIABLE, METHOD })
-    @interface Whitelist {
-        /** The whitelisted opmodes
+    @interface AllowList {
+        /** The allowed opmodes
          *
          * @return Opmode Classes
          */
         Class<?>[] value();
     }
 
-    /** Annotation for Blacklisting Opmodes to log this item
+    /** Annotation for denying Opmodes to log this item
      *
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(value = { FIELD, LOCAL_VARIABLE, METHOD })
-    @interface Blacklist {
-        /** The blacklisted opmodes
+    @interface DenyList {
+        /** The denied opmodes
          *
          * @return Opmode Classes
          */

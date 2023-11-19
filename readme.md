@@ -4,8 +4,8 @@ TechnoLib is a FTC Library for everyone:
 
 - WPILib inspired command structure
 - Tons of simple implementations to provide abstractions, and teach you the basics
-- EOCV integration for vision
-- RoadRunner integration for pathfollowing
+- EasyOpenCV integration for vision
+- RoadRunner integration for path-following
 - Annotation based Telemetry
 - And much much more
 
