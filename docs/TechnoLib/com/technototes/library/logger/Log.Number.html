@@ -73,7 +73,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Retention.html" title="class or interface in java.lang.annotation" class="external-link">@Retention</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/RetentionPolicy.html#RUNTIME" title="class or interface in java.lang.annotation" class="external-link">RUNTIME</a>)
 <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Target.html" title="class or interface in java.lang.annotation" class="external-link">@Target</a>({<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/ElementType.html#FIELD" title="class or interface in java.lang.annotation" class="external-link">FIELD</a>,<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/ElementType.html#LOCAL_VARIABLE" title="class or interface in java.lang.annotation" class="external-link">LOCAL_VARIABLE</a>,<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/ElementType.html#METHOD" title="class or interface in java.lang.annotation" class="external-link">METHOD</a>})
-</span><span class="modifiers">public static @interface </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.html#line-69">Log.Number</a></span></div>
+</span><span class="modifiers">public static @interface </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.html#line-56">Log.Number</a></span></div>
 <div class="block">Log a number</div>
 </section>
 <section class="summary">
@@ -87,25 +87,15 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Optional Element</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code><a href="../util/Color.html" title="enum class in com.technototes.library.util">Color</a></code></div>
-<div class="col-second even-row-color"><code><a href="#color()" class="member-name-link">color</a></code></div>
+<div class="col-first even-row-color"><code>int</code></div>
+<div class="col-second even-row-color"><code><a href="#index()" class="member-name-link">index</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">The color for the tag for the number</div>
-</div>
-<div class="col-first odd-row-color"><code>int</code></div>
-<div class="col-second odd-row-color"><code><a href="#index()" class="member-name-link">index</a></code></div>
-<div class="col-last odd-row-color">
 <div class="block">Store index for this annotation (position in telemetry)</div>
 </div>
-<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#name()" class="member-name-link">name</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">Store the name for this annotation to be be beside</div>
-</div>
-<div class="col-first odd-row-color"><code><a href="../util/Color.html" title="enum class in com.technototes.library.util">Color</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#numberColor()" class="member-name-link">numberColor</a></code></div>
+<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#name()" class="member-name-link">name</a></code></div>
 <div class="col-last odd-row-color">
-<div class="block">The color for the number</div>
+<div class="block">Store the name for this annotation to be be beside</div>
 </div>
 <div class="col-first even-row-color"><code>int</code></div>
 <div class="col-second even-row-color"><code><a href="#priority()" class="member-name-link">priority</a></code></div>
@@ -127,7 +117,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="index()">
 <h3>index</h3>
-<div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Number.html#line-76">index</a></span></div>
+<div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Number.html#line-63">index</a></span></div>
 <div class="block">Store index for this annotation (position in telemetry)</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -142,7 +132,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="priority()">
 <h3>priority</h3>
-<div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Number.html#line-82">priority</a></span></div>
+<div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Number.html#line-69">priority</a></span></div>
 <div class="block">Store priority for this log entry (to pick the most wanted entry over others with same index)</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -157,7 +147,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="name()">
 <h3>name</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Number.html#line-88">name</a></span></div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Number.html#line-75">name</a></span></div>
 <div class="block">Store the name for this annotation to be be beside</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -166,36 +156,6 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Default:</dt>
 <dd>""</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="color()">
-<h3>color</h3>
-<div class="member-signature"><span class="return-type"><a href="../util/Color.html" title="enum class in com.technototes.library.util">Color</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Number.html#line-94">color</a></span></div>
-<div class="block">The color for the tag for the number</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The color</dd>
-</dl>
-<dl class="notes">
-<dt>Default:</dt>
-<dd>NO_COLOR</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="numberColor()">
-<h3>numberColor</h3>
-<div class="member-signature"><span class="return-type"><a href="../util/Color.html" title="enum class in com.technototes.library.util">Color</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Number.html#line-100">numberColor</a></span></div>
-<div class="block">The color for the number</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The color</dd>
-</dl>
-<dl class="notes">
-<dt>Default:</dt>
-<dd>NO_COLOR</dd>
 </dl>
 </section>
 </li>
