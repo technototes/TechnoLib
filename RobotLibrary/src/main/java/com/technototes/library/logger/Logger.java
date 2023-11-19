@@ -126,11 +126,13 @@ public class Logger {
 
     private void update(Entry<?>[] choice) {
         try {
-            for (int i = 0; i < choice.length; i++) {
-                telemetry.addLine(
-                    (i > 9 ? i + "| " : i + " | ") +
-                    (choice[i] == null ? "" : choice[i].getTag().replace('`', captionDivider) + choice[i].toString())
-                );
+            for (Entry<?> item : choice) {
+                // telemetry.addLine(
+                //   (i > 9 ? i + "| " : i + " | ") +
+                //   (choice[i] == null ? "" : choice[i].getTag().replace('`', captionDivider) + choice[i].toString())
+                // );
+                // All teh fancy HTML stuff gets in the way of the FTC Dashboard graph
+                telemetry.addData(item.getName(), item.get());
             }
             telemetry.update();
         } catch (Exception ignored) {}
