@@ -185,9 +185,7 @@ public class Logger {
                     new NumberEntry(
                         ((Log.Number) as).name(),
                         (Supplier<Number>) m,
-                        ((Log.Number) as).index(),
-                        ((Log.Number) as).color(),
-                        ((Log.Number) as).numberColor()
+                        ((Log.Number) as).index()
                     );
                 e.setPriority(((Log.Number) as).priority());
             } else if (as instanceof Log) {
@@ -196,9 +194,7 @@ public class Logger {
                         ((Log) as).name(),
                         (Supplier<String>) m,
                         ((Log) as).index(),
-                        ((Log) as).color(),
-                        ((Log) as).format(),
-                        ((Log) as).entryColor()
+                        ((Log) as).format()
                     );
                 e.setPriority(((Log) as).priority());
             } else if (as instanceof Log.Boolean) {
@@ -209,11 +205,8 @@ public class Logger {
                         ((Log.Boolean) as).index(),
                         ((Log.Boolean) as).trueValue(),
                         ((Log.Boolean) as).falseValue(),
-                        ((Log.Boolean) as).color(),
                         ((Log.Boolean) as).trueFormat(),
-                        ((Log.Boolean) as).falseFormat(),
-                        ((Log.Boolean) as).trueColor(),
-                        ((Log.Boolean) as).falseColor()
+                        ((Log.Boolean) as).falseFormat()
                     );
                 e.setPriority(((Log.Boolean) as).priority());
             } else if (as instanceof LogConfig.Run) {

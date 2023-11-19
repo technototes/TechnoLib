@@ -1,21 +1,18 @@
 package com.technototes.library.logger.entry;
 
-import com.technototes.library.util.Color;
 import java.util.function.Supplier;
 
 public class StringEntry extends Entry<String> {
 
     private String format;
-    private Color entryColor;
 
-    public StringEntry(String n, Supplier<String> s, int x, Color c, String f, Color ec) {
-        super(n, s, x, c);
+    public StringEntry(String n, Supplier<String> s, int x, String f) {
+        super(n, s, x);
         format = f;
-        entryColor = ec;
     }
 
     @Override
     public String toString() {
-        return entryColor.format(format, get());
+        return String.format(format, get());
     }
 }
