@@ -66,8 +66,9 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      */
     public EncodedMotor(String deviceName) {
         super(deviceName);
-        if (getDevice() instanceof DcMotorEx) {
-            encoder = new MotorEncoder((DcMotorEx) getDevice(), deviceName);
+        T device = getRawDevice();
+        if (device instanceof DcMotorEx) {
+            encoder = new MotorEncoder((DcMotorEx)device, deviceName);
         }
     }
 
@@ -92,8 +93,9 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      * @return The motor (for chaining)
      */
     public EncodedMotor<T> setPIDFCoeffecients(double p, double i, double d, double f) {
-        if (getDevice() instanceof DcMotorEx) {
-            ((DcMotorEx) getDevice()).setVelocityPIDFCoefficients(p, i, d, f);
+        T device = getRawDevice();
+        if (device instanceof DcMotorEx) {
+            ((DcMotorEx)device).setVelocityPIDFCoefficients(p, i, d, f);
         }
         return this;
     }
@@ -115,11 +117,11 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      * @return The motor (for chaining)
      */
     public EncodedMotor<T> setRunMode(DcMotor.RunMode m) {
-        T device = getDevice();
+        T device = getRawDevice();
         if (device instanceof DcMotor) {
             ((DcMotor) device).setMode(m);
-            runMode = m;
         }
+        runMode = m;
         return this;
     }
 
@@ -246,9 +248,10 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      * @param tps the speed in encoder ticks per second
      */
     public void setVelocity(double tps) {
-        if (getDevice() instanceof DcMotor) {
+        T device = getRawDevice();
+        if (device instanceof DcMotor) {
             setRunMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            getDevice().setPower(tps);
+            device.setPower(tps);
         }
     }
 

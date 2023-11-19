@@ -46,7 +46,10 @@ public class Rev2MDistanceSensor extends Sensor<DistanceSensor> implements IDist
      */
     @Override
     public double getDistance(DistanceUnit distanceUnit) {
-        this.dist = getDevice().getDistance(distanceUnit);
+        DistanceSensor device = getRawDevice();
+        if (device != null) {
+            dist = device.getDistance(distanceUnit);
+        }
         return dist;
     }
 

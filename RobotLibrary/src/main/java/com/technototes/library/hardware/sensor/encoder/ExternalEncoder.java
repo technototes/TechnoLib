@@ -39,7 +39,10 @@ public class ExternalEncoder extends Sensor<AnalogInput> implements Encoder {
      */
     @Override
     public void zeroEncoder() {
-        zero = getDevice().getVoltage();
+        AnalogInput device = getRawDevice();
+        if (device != null) {
+            zero = device.getVoltage();
+        }
     }
 
     /**

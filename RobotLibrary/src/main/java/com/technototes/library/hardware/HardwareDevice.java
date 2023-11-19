@@ -56,12 +56,7 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
      */
     @SuppressWarnings("unchecked cast")
     protected HardwareDevice(String deviceName) {
-        try {
-            device =
-                hardwareMap.get((Class<T>) com.qualcomm.robotcore.hardware.HardwareDevice.class/*T.class*/, deviceName);
-        } catch (Exception e) {
-            device = null; // (T) new FailedDevice<T>(deviceName);
-        }
+        device = hardwareMap.tryGet((Class<T>) com.qualcomm.robotcore.hardware.HardwareDevice.class/*T.class*/, deviceName);
     }
 
     /**
@@ -69,9 +64,13 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
      *
      * @return The device
      */
-    public T getDevice() {
+    protected T getRawDevice() {
         // TODO: Assert that we've got a device, yeah?
         return device;
+    }
+
+    protected boolean realHardware() {
+        return device != null;
     }
 
     /**
