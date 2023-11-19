@@ -107,6 +107,5 @@ public @interface Log {
          * @return The name as a string
          */
         String name() default "";
-
     }
 }

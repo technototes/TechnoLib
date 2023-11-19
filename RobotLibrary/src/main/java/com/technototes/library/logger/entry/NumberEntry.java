@@ -11,7 +11,6 @@ public class NumberEntry extends Entry<Number> {
         super(n, s, x);
     }
 
-
     @Override
     public String toString() {
         return numberColor.format(get());

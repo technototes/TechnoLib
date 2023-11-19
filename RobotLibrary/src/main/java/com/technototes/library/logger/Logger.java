@@ -181,21 +181,10 @@ public class Logger {
         Entry<?> e = null;
         for (Annotation as : a) {
             if (as instanceof Log.Number) {
-                e =
-                    new NumberEntry(
-                        ((Log.Number) as).name(),
-                        (Supplier<Number>) m,
-                        ((Log.Number) as).index()
-                    );
+                e = new NumberEntry(((Log.Number) as).name(), (Supplier<Number>) m, ((Log.Number) as).index());
                 e.setPriority(((Log.Number) as).priority());
             } else if (as instanceof Log) {
-                e =
-                    new StringEntry(
-                        ((Log) as).name(),
-                        (Supplier<String>) m,
-                        ((Log) as).index(),
-                        ((Log) as).format()
-                    );
+                e = new StringEntry(((Log) as).name(), (Supplier<String>) m, ((Log) as).index(), ((Log) as).format());
                 e.setPriority(((Log) as).priority());
             } else if (as instanceof Log.Boolean) {
                 e =
