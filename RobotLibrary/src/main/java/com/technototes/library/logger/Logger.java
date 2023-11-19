@@ -3,15 +3,12 @@ package com.technototes.library.logger;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.technototes.library.logger.entry.BooleanEntry;
 import com.technototes.library.logger.entry.Entry;
-import com.technototes.library.logger.entry.NumberBarEntry;
 import com.technototes.library.logger.entry.NumberEntry;
-import com.technototes.library.logger.entry.NumberSliderEntry;
 import com.technototes.library.logger.entry.StringEntry;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -67,8 +64,6 @@ public class Logger {
                     } else if (
                         field.isAnnotationPresent(Log.class) ||
                         field.isAnnotationPresent(Log.Number.class) ||
-                        field.isAnnotationPresent(Log.NumberSlider.class) ||
-                        field.isAnnotationPresent(Log.NumberBar.class) ||
                         field.isAnnotationPresent(Log.Boolean.class)
                     ) {
                         if (field.getType().isPrimitive() || o instanceof String) {
@@ -185,37 +180,7 @@ public class Logger {
         boolean init = false, run = true;
         Entry<?> e = null;
         for (Annotation as : a) {
-            if (as instanceof Log.NumberSlider) {
-                e =
-                    new NumberSliderEntry(
-                        ((Log.NumberSlider) as).name(),
-                        (Supplier<Number>) m,
-                        ((Log.NumberSlider) as).index(),
-                        ((Log.NumberSlider) as).min(),
-                        ((Log.NumberSlider) as).max(),
-                        ((Log.NumberSlider) as).scale(),
-                        ((Log.NumberSlider) as).color(),
-                        ((Log.NumberSlider) as).sliderBackground(),
-                        ((Log.NumberSlider) as).outline(),
-                        ((Log.NumberSlider) as).slider()
-                    );
-                e.setPriority(((Log.NumberSlider) as).priority());
-            } else if (as instanceof Log.NumberBar) {
-                e =
-                    new NumberBarEntry(
-                        ((Log.NumberBar) as).name(),
-                        (Supplier<Number>) m,
-                        ((Log.NumberBar) as).index(),
-                        ((Log.NumberBar) as).min(),
-                        ((Log.NumberBar) as).max(),
-                        ((Log.NumberBar) as).scale(),
-                        ((Log.NumberBar) as).color(),
-                        ((Log.NumberBar) as).completeBarColor(),
-                        ((Log.NumberBar) as).outline(),
-                        ((Log.NumberBar) as).incompleteBarColor()
-                    );
-                e.setPriority(((Log.NumberBar) as).priority());
-            } else if (as instanceof Log.Number) {
+            if (as instanceof Log.Number) {
                 e =
                     new NumberEntry(
                         ((Log.Number) as).name(),
