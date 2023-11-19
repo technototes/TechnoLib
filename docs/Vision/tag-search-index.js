@@ -1,1 +1,2 @@
-tagSearchIndex = [];updateSearchResults();
+tagSearchIndex = [];
+updateSearchResults();
