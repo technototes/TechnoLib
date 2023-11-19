@@ -7,13 +7,7 @@ public class BooleanEntry extends Entry<Boolean> {
 
     private String trueEntry, falseEntry;
 
-    public BooleanEntry(
-        String n,
-        Supplier<Boolean> s,
-        int index,
-        String wt,
-        String wf
-    ) {
+    public BooleanEntry(String n, Supplier<Boolean> s, int index, String wt, String wf) {
         super(n, s, index);
         trueEntry = wt;
         falseEntry = wf;
