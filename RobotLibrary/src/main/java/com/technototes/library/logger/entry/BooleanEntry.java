@@ -13,15 +13,12 @@ public class BooleanEntry extends Entry<Boolean> {
         int index,
         String wt,
         String wf,
-        Color c,
         String tf,
-        String ff,
-        Color tc,
-        Color fc
+        String ff
     ) {
-        super(n, s, index, c);
-        trueEntry = new StringEntry("", () -> wt, -1, Color.NO_COLOR, tf, tc);
-        falseEntry = new StringEntry("", () -> wf, -1, Color.NO_COLOR, ff, fc);
+        super(n, s, index);
+        trueEntry = new StringEntry("", () -> wt, -1, tf);
+        falseEntry = new StringEntry("", () -> wf, -1, ff);
     }
 
     @Override
