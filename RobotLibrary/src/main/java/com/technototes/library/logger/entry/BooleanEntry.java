@@ -5,24 +5,22 @@ import java.util.function.Supplier;
 
 public class BooleanEntry extends Entry<Boolean> {
 
-    private StringEntry trueEntry, falseEntry;
+    private String trueEntry, falseEntry;
 
     public BooleanEntry(
         String n,
         Supplier<Boolean> s,
         int index,
         String wt,
-        String wf,
-        String tf,
-        String ff
+        String wf
     ) {
         super(n, s, index);
-        trueEntry = new StringEntry("", () -> wt, -1, tf);
-        falseEntry = new StringEntry("", () -> wf, -1, ff);
+        trueEntry = wt;
+        falseEntry = wf;
     }
 
     @Override
     public String toString() {
-        return (get() ? trueEntry : falseEntry).get();
+        return (get() ? trueEntry : falseEntry);
     }
 }

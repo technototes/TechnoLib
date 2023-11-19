@@ -96,25 +96,11 @@ public @interface Log {
          */
         String trueValue() default "true";
 
-        /** The format for when the boolean returns true
-         *
-         * @return The String format
-         */
-        String trueFormat() default "%s";
-
-
         /** Store the string when the annotated method returns false
          *
          * @return The string
          */
         String falseValue() default "false";
-
-        /** The format for when the boolean returns false
-         *
-         * @return The String format
-         */
-        String falseFormat() default "%s";
-
 
         /** Store the name for this annotation to be be beside
          *
