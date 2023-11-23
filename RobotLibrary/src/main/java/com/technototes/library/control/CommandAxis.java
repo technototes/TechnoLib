@@ -1,7 +1,6 @@
 package com.technototes.library.control;
 
 import com.technototes.library.command.Command;
-
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
 
