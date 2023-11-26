@@ -60,7 +60,7 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
      *
      * @return the Camera device in use
      */
-    public Camera getDevice() {
+    protected Camera getRawDevice() {
         return camera;
     }
 
@@ -211,15 +211,15 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
         // Check to see which pixels are between low and high, output into a boolean matrix Cr
         Mat count = new Mat();
         Core.inRange(imgHSV, low, high, count);
-        // TODO: It seems like there should be a more optimized way to do this.
-        for (int i = 0; i < count.width(); i++) {
-            for (int j = 0; j < count.height(); j++) {
-                if (count.get(j, i)[0] > 0) {
-                    totalColorCount++;
-                    // Draw a dots on the image at this point - input was put into img
-                    if (telemetryRGB != null) {
+        totalColorCount = Core.countNonZero(count);
+        if (telemetryRGB != null) {
+            // TODO: It seems like there should be a more optimized way to do this.
+            for (int i = 0; i < count.width(); i++) {
+                for (int j = 0; j < count.height(); j++) {
+                    if (count.get(j, i)[0] > 0) {
+                        // Draw a dots on the image at this point - input was put into img
                         // The color choice makes things stripey, which makes it easier to identify
-                        double[] colorToDraw = ((j + i) & 3) != 0 ? low.val : high.val;
+                        double[] colorToDraw = ((j + i) & 2) != 0 ? low.val : high.val;
                         telemetryRGB.put(j + yOffset, i + xOffset, colorToDraw);
                     }
                 }
