@@ -43,6 +43,10 @@ public class ExternalEncoder extends Sensor<AnalogInput> implements Encoder {
      */
     @Override
     public double getSensorValue() {
-        return getDevice().getVoltage() - zero;
+        AnalogInput device = getRawDevice();
+        if (device != null) {
+            val = device.getVoltage();
+        }
+        return val - zero;
     }
 }

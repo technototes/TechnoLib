@@ -75,10 +75,6 @@ public class MotorEncoder extends Sensor<DcMotorEx> implements Encoder {
         this(motor, new ElapsedTime());
     }
 
-    public MotorEncoder(EncodedMotor<DcMotorEx> motor) {
-        this(motor.getDevice());
-    }
-
     public MotorEncoder(String deviceName) {
         this(hardwareMap.get(DcMotorEx.class, deviceName));
     }

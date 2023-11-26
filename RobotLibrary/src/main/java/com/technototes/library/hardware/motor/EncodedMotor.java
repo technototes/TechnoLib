@@ -291,4 +291,10 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     public EncodedMotor<T> setLimits(double mi, double ma) {
         return (EncodedMotor<T>) super.setLimits(mi, ma);
     }
+
+    // Ah, Java, you're such a hideous language...
+    public <U extends DcMotorSimple> U getRawMotor(Class<U> type) {
+        T device = getRawDevice();
+        return (device != null && type.isInstance(device)) ? type.cast(device) : null;
+    }
 }
