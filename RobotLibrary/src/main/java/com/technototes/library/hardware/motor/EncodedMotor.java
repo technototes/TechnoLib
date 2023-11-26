@@ -68,7 +68,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
         super(deviceName);
         T device = getRawDevice();
         if (device instanceof DcMotorEx) {
-            encoder = new MotorEncoder((DcMotorEx)device, deviceName);
+            encoder = new MotorEncoder((DcMotorEx) device, deviceName);
         }
     }
 
@@ -95,7 +95,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     public EncodedMotor<T> setPIDFCoeffecients(double p, double i, double d, double f) {
         T device = getRawDevice();
         if (device instanceof DcMotorEx) {
-            ((DcMotorEx)device).setVelocityPIDFCoefficients(p, i, d, f);
+            ((DcMotorEx) device).setVelocityPIDFCoefficients(p, i, d, f);
         }
         return this;
     }
@@ -108,6 +108,20 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      */
     public EncodedMotor<T> setPIDFCoeffecients(PIDFCoefficients coeffecients) {
         return setPIDFCoeffecients(coeffecients.p, coeffecients.i, coeffecients.d, coeffecients.f);
+    }
+
+    /**
+     * Configure the PIDF constants for the motor
+     *
+     * @param c The PIDF coefficients to set
+     * @return The motor (for chaining)
+     */
+    public EncodedMotor<T> setPIDFCoeffecients(DcMotor.RunMode m, PIDFCoefficients c) {
+        T device = getRawDevice();
+        if (device instanceof DcMotorEx) {
+            ((DcMotorEx) device).setPIDFCoefficients(m, c);
+        }
+        return this;
     }
 
     /**

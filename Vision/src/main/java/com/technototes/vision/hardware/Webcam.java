@@ -43,7 +43,7 @@ public class Webcam extends Camera<OpenCvWebcam, WebcamName> {
         return OpenCvCameraFactory
             .getInstance()
             .createWebcam(
-                getDevice(),
+                getRawDevice(),
                 hardwareMap.appContext
                     .getResources()
                     .getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName())
