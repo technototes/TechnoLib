@@ -16,11 +16,11 @@ public class TankDrivebaseSubsystem<T extends DcMotorSimple> extends DrivebaseSu
      * Drive motors
      */
     protected Motor<T> leftSide() {
-        return motors.getDeviceNum(0);
+        return motors[0];
     }
 
     protected Motor<T> rightSide() {
-        return motors.getDeviceNum(1);
+        return motors[1];
     }
 
     /**
@@ -47,6 +47,7 @@ public class TankDrivebaseSubsystem<T extends DcMotorSimple> extends DrivebaseSu
     }
 
     public void drive(double l, double r) {
-        motors.setSpeeds(l * getSpeed(), r * getSpeed());
+        motors[0].setPower(l * getSpeed());
+        motors[1].setPower(r * getSpeed());
     }
 }

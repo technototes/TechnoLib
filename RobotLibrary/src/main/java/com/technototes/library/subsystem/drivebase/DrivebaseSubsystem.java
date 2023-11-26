@@ -2,7 +2,6 @@ package com.technototes.library.subsystem.drivebase;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.technototes.library.hardware.motor.Motor;
-import com.technototes.library.hardware.motor.MotorGroup;
 import com.technototes.library.subsystem.Subsystem;
 import java.util.function.DoubleSupplier;
 
@@ -14,7 +13,7 @@ import java.util.function.DoubleSupplier;
  */
 public abstract class DrivebaseSubsystem<T extends DcMotorSimple> implements Subsystem {
 
-    protected MotorGroup<T> motors;
+    protected Motor<T>[] motors;
 
     /**
      * Override this to get the gyroscope heading.
@@ -28,7 +27,7 @@ public abstract class DrivebaseSubsystem<T extends DcMotorSimple> implements Sub
      * @param motors The drive motors
      */
     public DrivebaseSubsystem(Motor<T>... motors) {
-        this.motors = new MotorGroup<T>(motors);
+        this.motors = motors;
     }
 
     /**
@@ -38,7 +37,7 @@ public abstract class DrivebaseSubsystem<T extends DcMotorSimple> implements Sub
      * @param motors The drive motors
      */
     public DrivebaseSubsystem(DoubleSupplier gyro, Motor<T>... motors) {
-        this.motors = new MotorGroup<T>(motors);
+        this.motors = motors;
         gyroSupplier = gyro;
     }
 

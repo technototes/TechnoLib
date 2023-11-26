@@ -33,7 +33,7 @@ public class InternalCamera extends Camera<OpenCvInternalCamera, DummyDevice<Ope
      * @return FRONT or REAR, probably (TODO)
      */
     public OpenCvInternalCamera.CameraDirection getCameraDirection() {
-        return getDevice().get();
+        return getRawDevice().get();
     }
 
     /**

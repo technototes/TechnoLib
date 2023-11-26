@@ -21,9 +21,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
-import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 import com.technototes.library.hardware.HardwareDevice;
-import com.technototes.library.hardware.motor.EncodedMotorGroup;
+import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.subsystem.Subsystem;
 import com.technototes.path.subsystem.TankConstants.*;
@@ -34,7 +33,6 @@ import com.technototes.path.util.LynxModuleUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
@@ -60,14 +58,14 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
 
     private TrajectoryFollower follower;
 
-    private List<DcMotorEx> motors, leftMotors, rightMotors;
+    private List<EncodedMotor<DcMotorEx>> motors, leftMotors, rightMotors;
     private IMU imu;
 
     private VoltageSensor batteryVoltageSensor;
 
     public TankDrivebaseSubsystem(
-        EncodedMotorGroup<DcMotorEx> left,
-        EncodedMotorGroup<DcMotorEx> right,
+        List<EncodedMotor<DcMotorEx>> left,
+        List<EncodedMotor<DcMotorEx>> right,
         IMU i,
         TankConstants c,
         Localizer localizer
@@ -120,17 +118,19 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
         // add/remove motors depending on your robot (e.g., 6WD)
 
         motors = new ArrayList<>();
-        leftMotors = left.getAllDeviceList().stream().map(HardwareDevice::getDevice).collect(Collectors.toList());
-        rightMotors = right.getAllDeviceList().stream().map(HardwareDevice::getDevice).collect(Collectors.toList());
+        leftMotors = left;
+        rightMotors = right;
         motors.addAll(leftMotors);
         motors.addAll(rightMotors);
 
-        for (DcMotorEx motor : motors) {
+        /*
+         * Turning this off for now, because we don't expose it in the EncodedMotor class (yet?)
+        for (EncodedMotor<DcMotorEx> motor : motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
             motorConfigurationType.setAchieveableMaxRPMFraction(1.0);
             motor.setMotorType(motorConfigurationType);
         }
-
+        */
         if (c.getBoolean(TankConstants.UseDriveEncoder.class)) {
             setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
@@ -215,14 +215,18 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
     }
 
     public void setMode(DcMotor.RunMode runMode) {
-        for (DcMotorEx motor : motors) {
-            motor.setMode(runMode);
+        for (EncodedMotor<DcMotorEx> motor : motors) {
+            motor.setRunMode(runMode);
         }
     }
 
     public void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior zeroPowerBehavior) {
-        for (DcMotorEx motor : motors) {
-            motor.setZeroPowerBehavior(zeroPowerBehavior);
+        for (EncodedMotor<DcMotorEx> motor : motors) {
+            if (zeroPowerBehavior == DcMotor.ZeroPowerBehavior.BRAKE) {
+                motor.brake();
+            } else if (zeroPowerBehavior == DcMotor.ZeroPowerBehavior.FLOAT) {
+                motor.coast();
+            }
         }
     }
 
@@ -233,8 +237,8 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
             coefficients.d,
             (coefficients.f * 12) / batteryVoltageSensor.getVoltage()
         );
-        for (DcMotorEx motor : motors) {
-            motor.setPIDFCoefficients(runMode, compensatedCoefficients);
+        for (EncodedMotor<DcMotorEx> motor : motors) {
+            motor.setPIDFCoeffecients(runMode, compensatedCoefficients);
         }
     }
 
@@ -255,13 +259,13 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
     @Override
     public List<Double> getWheelPositions() {
         double leftSum = 0, rightSum = 0;
-        for (DcMotorEx leftMotor : leftMotors) {
+        for (EncodedMotor<DcMotorEx> leftMotor : leftMotors) {
             leftSum +=
-            TankConstants.encoderTicksToInches(leftMotor.getCurrentPosition(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV);
-            for (DcMotorEx rightMotor : rightMotors) {
+            TankConstants.encoderTicksToInches(leftMotor.getSensorValue(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV);
+            for (EncodedMotor<DcMotorEx> rightMotor : rightMotors) {
                 rightSum +=
                 TankConstants.encoderTicksToInches(
-                    rightMotor.getCurrentPosition(),
+                    rightMotor.getSensorValue(),
                     WHEEL_RADIUS,
                     GEAR_RATIO,
                     TICKS_PER_REV
@@ -273,11 +277,11 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
 
     public List<Double> getWheelVelocities() {
         double leftSum = 0, rightSum = 0;
-        for (DcMotorEx leftMotor : leftMotors) {
+        for (EncodedMotor<DcMotorEx> leftMotor : leftMotors) {
             leftSum +=
             TankConstants.encoderTicksToInches(leftMotor.getVelocity(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV);
         }
-        for (DcMotorEx rightMotor : rightMotors) {
+        for (EncodedMotor<DcMotorEx> rightMotor : rightMotors) {
             rightSum +=
             TankConstants.encoderTicksToInches(rightMotor.getVelocity(), WHEEL_RADIUS, GEAR_RATIO, TICKS_PER_REV);
         }
@@ -286,11 +290,11 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
 
     @Override
     public void setMotorPowers(double v, double v1) {
-        for (DcMotorEx leftMotor : leftMotors) {
-            leftMotor.setPower(v);
+        for (EncodedMotor<DcMotorEx> leftMotor : leftMotors) {
+            leftMotor.setSpeed(v);
         }
-        for (DcMotorEx rightMotor : rightMotors) {
-            rightMotor.setPower(v1);
+        for (EncodedMotor<DcMotorEx> rightMotor : rightMotors) {
+            rightMotor.setSpeed(v1);
         }
     }
 

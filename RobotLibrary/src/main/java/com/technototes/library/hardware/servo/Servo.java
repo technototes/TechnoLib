@@ -59,9 +59,10 @@ public class Servo
     }
 
     public Servo scalePWM(double min, double max) {
-        if (getDevice() instanceof ServoImplEx) ((ServoImplEx) getDevice()).setPwmRange(
-                new PwmControl.PwmRange(min, max)
-            );
+        com.qualcomm.robotcore.hardware.Servo dev = getRawDevice();
+        if (dev instanceof ServoImplEx) {
+            ((ServoImplEx) dev).setPwmRange(new PwmControl.PwmRange(min, max));
+        }
         return this;
     }
 
@@ -87,7 +88,7 @@ public class Servo
      */
     public void setPosition(double position) {
         this.pos = Range.clip(!inverted ? position : 1 - position, 0, 1);
-        getDevice().setPosition(this.pos);
+        getRawDevice().setPosition(this.pos);
     }
 
     public void incrementPosition(double incAmount) {
@@ -96,7 +97,7 @@ public class Servo
 
     @Override
     public double getSensorValue() {
-        this.pos = getDevice().getPosition();
+        this.pos = getRawDevice().getPosition();
         return inverted ? 1 - this.pos : this.pos;
     }
 
@@ -117,7 +118,7 @@ public class Servo
      * @return this
      */
     public Servo onRange(double min, double max) {
-        getDevice().scaleRange(min, max);
+        getRawDevice().scaleRange(min, max);
         return this;
     }
 }

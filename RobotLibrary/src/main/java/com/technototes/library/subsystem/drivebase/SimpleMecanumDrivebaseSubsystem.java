@@ -17,19 +17,19 @@ public class SimpleMecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Dr
      * Drive motors
      */
     protected Motor<T> flMotor() {
-        return motors.getDeviceNum(0);
+        return motors[0];
     }
 
     protected Motor<T> frMotor() {
-        return motors.getDeviceNum(1);
+        return motors[1];
     }
 
     protected Motor<T> rlMotor() {
-        return motors.getDeviceNum(2);
+        return motors[2];
     }
 
     protected Motor<T> rrMotor() {
-        return motors.getDeviceNum(3);
+        return motors[3];
     }
 
     /**
@@ -99,6 +99,9 @@ public class SimpleMecanumDrivebaseSubsystem<T extends DcMotorSimple> extends Dr
     }
 
     public void drive(double flSpeed, double frSpeed, double rlSpeed, double rrSpeed) {
-        motors.setSpeeds(flSpeed * getSpeed(), frSpeed * getSpeed(), rlSpeed * getSpeed(), rrSpeed * getSpeed());
+        motors[0].setPower(flSpeed * getSpeed());
+        motors[1].setPower(frSpeed * getSpeed());
+        motors[2].setPower(rlSpeed * getSpeed());
+        motors[3].setPower(rrSpeed * getSpeed());
     }
 }

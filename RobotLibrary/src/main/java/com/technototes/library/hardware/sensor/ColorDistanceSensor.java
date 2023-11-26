@@ -1,7 +1,6 @@
 package com.technototes.library.hardware.sensor;
 
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
-
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class ColorDistanceSensor extends Sensor<ColorRangeSensor> implements IDistanceSensor, IColorSensor {
@@ -21,28 +20,28 @@ public class ColorDistanceSensor extends Sensor<ColorRangeSensor> implements IDi
         int alpha = (color >> 24) & 0xFF;
         if (alpha != 0 && alpha != 0xFF) {
             return logData(
-                    String.format(
-                            "d:%f1.2%s A(%d)R(%d)G(%d)B(%d) [%f1.3]",
-                            dist,
-                            distanceUnit,
-                            alpha,
-                            (color >> 16) & 0xFF,
-                            (color >> 8) & 0xFF,
-                            color & 0xFF,
-                            light
-                    )
+                String.format(
+                    "d:%f1.2%s A(%d)R(%d)G(%d)B(%d) [%f1.3]",
+                    dist,
+                    distanceUnit,
+                    alpha,
+                    (color >> 16) & 0xFF,
+                    (color >> 8) & 0xFF,
+                    color & 0xFF,
+                    light
+                )
             );
         } else {
             return logData(
-                    String.format(
-                            "d:%f1.2%s R(%d)G(%d)B(%d) [%f1.3]",
-                            dist,
-                            distanceUnit,
-                            (color >> 16) & 0xFF,
-                            (color >> 8) & 0xFF,
-                            color & 0xFF,
-                            light
-                    )
+                String.format(
+                    "d:%f1.2%s R(%d)G(%d)B(%d) [%f1.3]",
+                    dist,
+                    distanceUnit,
+                    (color >> 16) & 0xFF,
+                    (color >> 8) & 0xFF,
+                    color & 0xFF,
+                    light
+                )
             );
         }
     }

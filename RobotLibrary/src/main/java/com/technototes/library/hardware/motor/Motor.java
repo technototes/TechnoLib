@@ -156,6 +156,7 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * Set the (range-clipped) speed of motor
      *
      * @param speed The speed of the motor
+     * @deprecated Please use setPower instead
      */
     @Deprecated
     public void setSpeed(double speed) {
@@ -168,7 +169,7 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * @param pow The power value (-1 -> 1)
      */
     public void setPower(double pow) {
-        power = Range.clip(speed, min, max);
+        power = Range.clip(pow, min, max);
         T device = getRawDevice();
         if (device != null) {
             device.setPower(power);
