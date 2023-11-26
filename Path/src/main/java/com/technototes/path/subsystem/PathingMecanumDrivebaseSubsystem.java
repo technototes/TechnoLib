@@ -123,10 +123,10 @@ public class PathingMecanumDrivebaseSubsystem extends MecanumDrive implements Su
             c.getDouble(WheelBase.class),
             c.getDouble(LateralMult.class)
         );
-        leftFront = fl.getDevice();
-        leftRear = rl.getDevice();
-        rightRear = rr.getDevice();
-        rightFront = fr.getDevice();
+        leftFront = fl.getRawMotor(DcMotorEx.class);
+        leftRear = rl.getRawMotor(DcMotorEx.class);
+        rightRear = rr.getRawMotor(DcMotorEx.class);
+        rightFront = fr.getRawMotor(DcMotorEx.class);
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 

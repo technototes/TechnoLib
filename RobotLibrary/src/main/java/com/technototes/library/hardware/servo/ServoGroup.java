@@ -8,7 +8,6 @@ import com.technototes.library.hardware.HardwareDeviceGroup;
  *
  * @author Alex Stedman
  */
-@Deprecated
 @SuppressWarnings("unused")
 public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
 
@@ -40,16 +39,20 @@ public class ServoGroup extends Servo implements HardwareDeviceGroup<Servo> {
     }
 
     @Override
-    public void propogate(double value) {
-        for (Servo s : followers) {
-            s.setPosition(value);
-        }
+    public Servo getDeviceNum(int i) {
+        return (i == 0) ? this : followers[i - 1];
     }
 
     @Override
     public void setPosition(double position) {
         super.setPosition(position);
-        propogate(position);
+        propagate(obj -> obj.setPosition(position));
+    }
+
+    public void setPositions(double... positions) {
+        for (int i = 0; i < positions.length && i < getDeviceCount(); i++) {
+            getDeviceNum(i).setPosition(positions[i]);
+        }
     }
 
     @Override

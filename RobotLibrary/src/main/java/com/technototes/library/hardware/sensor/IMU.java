@@ -15,7 +15,10 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
 
     /**
      * The direction of the axes signs when remapping the axes
+     *
+     * Probably don't use this stuff. Just use the IMU direction from the 8.1 and later SDK
      */
+    @Deprecated
     public enum AxesSigns {
         /**
          * Positive, Positive, Positive
@@ -74,7 +77,10 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
 
     /**
      * Make an imu
+     *
+     * Use the Logo/Usb Facing direction API's as part of the FTC 8.1+ SDK
      */
+    @Deprecated
     public IMU(com.qualcomm.robotcore.hardware.IMU device, com.qualcomm.robotcore.hardware.IMU.Parameters params) {
         super(device);
         angleOffset = 0.0;
@@ -88,7 +94,10 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
 
     /**
      * Make an imu
+     *
+     * Use the Logo/Usb Facing direction API's as part of the FTC 8.1+ SDK
      */
+    @Deprecated
     public IMU(String deviceName, com.qualcomm.robotcore.hardware.IMU.Parameters params) {
         super(deviceName);
         angleOffset = 0.0;
@@ -238,6 +247,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * @param legacySigns The *legacy* signs desired
      * @return this (for chaining)
      */
+    @Deprecated
     public IMU remapLegacyAxes(AxesOrder legacyOrder, AxesSigns legacySigns) {
         // The BNO055 has the X and Y axes rotated 90 degrees :/
         // These are *very* untested

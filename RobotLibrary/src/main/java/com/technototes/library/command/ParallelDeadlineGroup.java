@@ -28,7 +28,7 @@ public class ParallelDeadlineGroup extends CommandGroup {
      */
     @Override
     public void schedule(Command c) {
-        CommandScheduler.getInstance().scheduleWithOther(this, c);
+        CommandScheduler.scheduleWithOther(this, c);
     }
 
     /**

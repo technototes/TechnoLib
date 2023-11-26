@@ -1,7 +1,9 @@
 package com.technototes.library.hardware;
 
+import com.technototes.library.hardware.motor.Motor;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Interface for hardware device groups
@@ -10,7 +12,6 @@ import java.util.List;
  *
  * @author Alex Stedman
  */
-@Deprecated
 @SuppressWarnings("unused")
 public interface HardwareDeviceGroup<T extends HardwareDevice> {
     /**
@@ -20,7 +21,7 @@ public interface HardwareDeviceGroup<T extends HardwareDevice> {
      */
     T[] getFollowers();
 
-    default List<T> getFollowerist() {
+    default List<T> getFollowerList() {
         return Arrays.asList(getFollowers());
     }
 
@@ -36,21 +37,19 @@ public interface HardwareDeviceGroup<T extends HardwareDevice> {
     }
 
     /**
-     * Propogate actions across the followers
-     * <p>
-     * Note to self: Alex couldn't spell :)
-     *
-     * @param value the value to propogate
-     */
-    @Deprecated
-    default void propogate(double value) {}
-
-    /**
      * Propagate actions across the followers
-     * <p>
-     * Note to self: Alex couldn't spell :)
      *
-     * @param value the value to propagate
+     * @param func the action to propagate
      */
-    default void propagate(double value) {}
+    default void propagate(Consumer<? super T> func) {
+        for (T obj : getFollowers()) {
+            func.accept(obj);
+        }
+    }
+
+    T getDeviceNum(int i);
+
+    default int getDeviceCount() {
+        return getFollowers().length + 1;
+    }
 }
