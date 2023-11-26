@@ -43,8 +43,10 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * @return The Motor (for chaining)
      */
     public Motor<T> setLimits(double mi, double ma) {
-        min = Range.clip(mi, -1, 1);
-        max = Range.clip(ma, -1, 1);
+        mi = Range.clip(mi, -1, 1);
+        ma = Range.clip(ma, -1, 1);
+        min = Math.min(mi, ma);
+        max = Math.max(mi, ma);
         return this;
     }
 
@@ -83,18 +85,39 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      * Gets the power value for the motor
      *
      * @return the power value (as a double)
+     * @deprecated use getPower() instead
      */
+    @Deprecated
     public double getSpeed() {
+        return getPower();
+    }
+
+    /**
+     * Gets the power value for the motor
+     *
+     * @return the power value (as a double)
+     */
+    public double getPower() {
         return device.getPower();
     }
 
     /**
-     * Set speed of motor
+     * Set the (range-clipped) speed of motor
      *
      * @param speed The speed of the motor
      */
+    @Deprecated
     public void setSpeed(double speed) {
-        device.setPower(Range.clip(speed, min, max));
+        setPower(speed);
+    }
+
+    /**
+     * Set the (range-clipped) power of the motor
+     *
+     * @param pow The power value (-1 -> 1)
+     */
+    public void setPower(double pow) {
+        device.setPower(Range.clip(pow, min, max));
     }
 
     /**
