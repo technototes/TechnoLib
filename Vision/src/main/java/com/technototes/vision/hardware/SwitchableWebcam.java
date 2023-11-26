@@ -39,10 +39,10 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice
      * through the switchable interface
      *
      * @param device The list of Webcam devices
-     */
     public SwitchableWebcam(Webcam... device) {
         this(Arrays.stream(device).map(HardwareDevice::getDevice).toArray(WebcamName[]::new));
     }
+     */
 
     /**
      * Get the switchable webcam object to use with your pipeline
@@ -57,7 +57,7 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice
                 hardwareMap.appContext
                     .getResources()
                     .getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName()),
-                getDevice().get()
+                getRawDevice().get()
             );
     }
 
@@ -68,7 +68,7 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice
      * @return the SwitchableWebcam object for the 'w' device
      */
     public SwitchableWebcam setActiveCamera(Webcam w) {
-        return setActiveCamera(w.getDevice());
+        return setActiveCamera(w.getName());
     }
 
     /**

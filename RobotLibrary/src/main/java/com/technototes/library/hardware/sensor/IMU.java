@@ -174,7 +174,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * @return the IMU (for chaining)
      */
     public IMU initialize(com.qualcomm.robotcore.hardware.IMU.Parameters imuParams) {
-        getDevice().initialize(imuParams);
+        getRawDevice().initialize(imuParams);
         return this;
     }
 
@@ -317,7 +317,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * @return The Angular Velocity
      */
     public AngularVelocity getAngularVelocity(AngleUnit units) {
-        angularVelocity = getDevice().getRobotAngularVelocity(units);
+        angularVelocity = getRawDevice().getRobotAngularVelocity(units);
         return angularVelocity;
     }
 
@@ -331,7 +331,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * @return the Orientation of the IMU
      */
     public Orientation getAngularOrientation(AngleUnit units) {
-        orientation = getDevice().getRobotOrientation(AxesReference.INTRINSIC, axesOrder, units);
+        orientation = getRawDevice().getRobotOrientation(AxesReference.INTRINSIC, axesOrder, units);
         if ((axesSigns.bVal & AxesSigns.NPP.bVal) == AxesSigns.NPP.bVal) {
             orientation.firstAngle = -orientation.firstAngle;
         }
