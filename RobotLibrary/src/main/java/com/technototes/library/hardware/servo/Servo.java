@@ -97,7 +97,6 @@ public class Servo
 
     @Override
     public double getSensorValue() {
-        this.pos = getRawDevice().getPosition();
         return inverted ? 1 - this.pos : this.pos;
     }
 
