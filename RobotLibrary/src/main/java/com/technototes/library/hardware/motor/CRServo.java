@@ -12,7 +12,7 @@ import java.util.function.Supplier;
  * Not Yet Implemented!
  * TODO: Implement this
  */
-public class CRServo extends HardwareDevice<com.qualcomm.robotcore.hardware.CRServo> implements Supplier<Double> {
+public class CRServo extends HardwareDevice<com.qualcomm.robotcore.hardware.CRServo> {
 
     public CRServo(com.qualcomm.robotcore.hardware.CRServo device, String deviceName) throws InvalidClassException {
         super(device, deviceName);
@@ -29,8 +29,4 @@ public class CRServo extends HardwareDevice<com.qualcomm.robotcore.hardware.CRSe
         return null;
     }
 
-    @Override
-    public Double get() {
-        return null;
-    }
 }
