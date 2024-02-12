@@ -31,9 +31,13 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
     Map<Command, ElapsedTime> timeMap = new HashMap<>();
     /**
      * The Command to Required Subsystems lookup
+     *
+     * KBF-TODO: Change this to controllerMap and add an observer list
      */
     Map<Command, Set<Subsystem>> requirementMap = new HashMap<>();
 
+    // KBF: Maybe use the term "control" and "observe"
+    // then even if we're just observing, a subsystem would be scheduled.
     /**
      * Add requirement subsystems to command
      * <p>
