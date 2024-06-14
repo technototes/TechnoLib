@@ -45,7 +45,7 @@ public class ConditionalCommand implements Command {
     public ConditionalCommand(BooleanSupplier condition, Command command) {
         supplier = condition;
         trueCommand = command;
-        CommandScheduler.getInstance().scheduleWithOther(this, trueCommand, condition);
+        CommandScheduler.scheduleWithOther(this, trueCommand, condition);
         falseCommand = null;
     }
 
@@ -60,8 +60,8 @@ public class ConditionalCommand implements Command {
         supplier = condition;
         trueCommand = trueC;
         falseCommand = falseC;
-        CommandScheduler.getInstance().scheduleWithOther(this, trueCommand, condition);
-        CommandScheduler.getInstance().scheduleWithOther(this, falseCommand, () -> !condition.getAsBoolean());
+        CommandScheduler.scheduleWithOther(this, trueCommand, condition);
+        CommandScheduler.scheduleWithOther(this, falseCommand, () -> !condition.getAsBoolean());
     }
 
     @Override

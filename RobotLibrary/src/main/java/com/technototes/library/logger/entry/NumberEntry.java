@@ -7,14 +7,8 @@ public class NumberEntry extends Entry<Number> {
 
     protected Color numberColor;
 
-    public NumberEntry(String n, Supplier<Number> s, int x, Color c, Color num) {
-        super(n, s, x, c);
-        numberColor = num;
-    }
-
-    public NumberEntry(String n, Supplier<Number> s, int x, Color c) {
-        super(n, s, x, c);
-        numberColor = Color.NO_COLOR;
+    public NumberEntry(String n, Supplier<Number> s, int x) {
+        super(n, s, x);
     }
 
     @Override

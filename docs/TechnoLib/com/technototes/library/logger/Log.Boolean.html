@@ -73,7 +73,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Retention.html" title="class or interface in java.lang.annotation" class="external-link">@Retention</a>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/RetentionPolicy.html#RUNTIME" title="class or interface in java.lang.annotation" class="external-link">RUNTIME</a>)
 <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/Target.html" title="class or interface in java.lang.annotation" class="external-link">@Target</a>({<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/ElementType.html#FIELD" title="class or interface in java.lang.annotation" class="external-link">FIELD</a>,<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/ElementType.html#LOCAL_VARIABLE" title="class or interface in java.lang.annotation" class="external-link">LOCAL_VARIABLE</a>,<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/annotation/ElementType.html#METHOD" title="class or interface in java.lang.annotation" class="external-link">METHOD</a>})
-</span><span class="modifiers">public static @interface </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.html#line-234">Log.Boolean</a></span></div>
+</span><span class="modifiers">public static @interface </span><span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.html#line-78">Log.Boolean</a></span></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -86,54 +86,29 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Optional Element</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code><a href="../util/Color.html" title="enum class in com.technototes.library.util">Color</a></code></div>
-<div class="col-second even-row-color"><code><a href="#color()" class="member-name-link">color</a></code></div>
-<div class="col-last even-row-color">
-<div class="block">The color for the tag for the boolean</div>
-</div>
-<div class="col-first odd-row-color"><code><a href="../util/Color.html" title="enum class in com.technototes.library.util">Color</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#falseColor()" class="member-name-link">falseColor</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">The color for the false String</div>
-</div>
 <div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#falseFormat()" class="member-name-link">falseFormat</a></code></div>
+<div class="col-second even-row-color"><code><a href="#falseValue()" class="member-name-link">falseValue</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">The format for when the boolean returns false</div>
-</div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#falseValue()" class="member-name-link">falseValue</a></code></div>
-<div class="col-last odd-row-color">
 <div class="block">Store the string when the annotated method returns false</div>
 </div>
-<div class="col-first even-row-color"><code>int</code></div>
-<div class="col-second even-row-color"><code><a href="#index()" class="member-name-link">index</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>int</code></div>
+<div class="col-second odd-row-color"><code><a href="#index()" class="member-name-link">index</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Store index for this annotation (position in telemetry)</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#name()" class="member-name-link">name</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color"><code><a href="#name()" class="member-name-link">name</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Store the name for this annotation to be be beside</div>
 </div>
-<div class="col-first even-row-color"><code>int</code></div>
-<div class="col-second even-row-color"><code><a href="#priority()" class="member-name-link">priority</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code>int</code></div>
+<div class="col-second odd-row-color"><code><a href="#priority()" class="member-name-link">priority</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Store priority for this log entry (to pick the most wanted entry over others with same index)</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="../util/Color.html" title="enum class in com.technototes.library.util">Color</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#trueColor()" class="member-name-link">trueColor</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">The color for the true String</div>
-</div>
 <div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#trueFormat()" class="member-name-link">trueFormat</a></code></div>
+<div class="col-second even-row-color"><code><a href="#trueValue()" class="member-name-link">trueValue</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">The format for when the boolean returns true</div>
-</div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#trueValue()" class="member-name-link">trueValue</a></code></div>
-<div class="col-last odd-row-color">
 <div class="block">Store the string when the annotated method returns true</div>
 </div>
 </div>
@@ -151,7 +126,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="index()">
 <h3>index</h3>
-<div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-241">index</a></span></div>
+<div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-85">index</a></span></div>
 <div class="block">Store index for this annotation (position in telemetry)</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -166,7 +141,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="priority()">
 <h3>priority</h3>
-<div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-247">priority</a></span></div>
+<div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-91">priority</a></span></div>
 <div class="block">Store priority for this log entry (to pick the most wanted entry over others with same index)</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -181,7 +156,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="trueValue()">
 <h3>trueValue</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-253">trueValue</a></span></div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-97">trueValue</a></span></div>
 <div class="block">Store the string when the annotated method returns true</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -194,39 +169,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="trueFormat()">
-<h3>trueFormat</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-259">trueFormat</a></span></div>
-<div class="block">The format for when the boolean returns true</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The String format</dd>
-</dl>
-<dl class="notes">
-<dt>Default:</dt>
-<dd>"%s"</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="trueColor()">
-<h3>trueColor</h3>
-<div class="member-signature"><span class="return-type"><a href="../util/Color.html" title="enum class in com.technototes.library.util">Color</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-265">trueColor</a></span></div>
-<div class="block">The color for the true String</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The color</dd>
-</dl>
-<dl class="notes">
-<dt>Default:</dt>
-<dd>NO_COLOR</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="falseValue()">
 <h3>falseValue</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-271">falseValue</a></span></div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-103">falseValue</a></span></div>
 <div class="block">Store the string when the annotated method returns false</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -239,39 +184,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="falseFormat()">
-<h3>falseFormat</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-277">falseFormat</a></span></div>
-<div class="block">The format for when the boolean returns false</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The String format</dd>
-</dl>
-<dl class="notes">
-<dt>Default:</dt>
-<dd>"%s"</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="falseColor()">
-<h3>falseColor</h3>
-<div class="member-signature"><span class="return-type"><a href="../util/Color.html" title="enum class in com.technototes.library.util">Color</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-283">falseColor</a></span></div>
-<div class="block">The color for the false String</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The color</dd>
-</dl>
-<dl class="notes">
-<dt>Default:</dt>
-<dd>NO_COLOR</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="name()">
 <h3>name</h3>
-<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-289">name</a></span></div>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-109">name</a></span></div>
 <div class="block">Store the name for this annotation to be be beside</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -280,21 +195,6 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Default:</dt>
 <dd>""</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="color()">
-<h3>color</h3>
-<div class="member-signature"><span class="return-type"><a href="../util/Color.html" title="enum class in com.technototes.library.util">Color</a></span>&nbsp;<span class="element-name"><a href="../../../../src-html/com/technototes/library/logger/Log.Boolean.html#line-295">color</a></span></div>
-<div class="block">The color for the tag for the boolean</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>The color</dd>
-</dl>
-<dl class="notes">
-<dt>Default:</dt>
-<dd>NO_COLOR</dd>
 </dl>
 </section>
 </li>

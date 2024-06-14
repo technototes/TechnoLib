@@ -1,6 +1,5 @@
 package com.technototes.library.logger.entry;
 
-import com.technototes.library.util.Color;
 import java.util.function.Supplier;
 
 /**
@@ -27,29 +26,18 @@ public abstract class Entry<T> implements Supplier<T> {
      * The name of the Entry
      */
     protected String name;
-    /**
-     * String to use a 'header' (calculated from name and color)
-     */
-    protected String tag;
-    /**
-     * Color to display
-     */
-    protected Color color;
 
     /**
-     * Create an entry with name, value, index, and color
+     * Create an entry with name, value, index
      *
      * @param n     Name of the entry
      * @param s     Value function to display
      * @param index Index of the entry
-     * @param c     Color to display
      */
-    public Entry(String n, Supplier<T> s, int index, Color c) {
+    public Entry(String n, Supplier<T> s, int index) {
         x = index;
         supplier = s;
         name = n;
-        color = c;
-        tag = (name.equals("") ? " " : color.format(name) + " ` ");
     }
 
     /**
@@ -79,16 +67,7 @@ public abstract class Entry<T> implements Supplier<T> {
     }
 
     /**
-     * The tag for the entry
-     *
-     * @return The tag
-     */
-    public String getTag() {
-        return tag;
-    }
-
-    /**
-     * Get the name (unformatted tag)
+     * Get the name
      *
      * @return The name
      */

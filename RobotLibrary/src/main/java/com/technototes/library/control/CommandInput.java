@@ -76,7 +76,7 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
     }
 
     /**
-     * Schdule the command to be run when the input is released, but only once!
+     * Schedule the command to be run when the input is released, but only once!
      *
      * @param command The command to be run
      * @return The CommandInput&lt;T&gt; instance
@@ -145,7 +145,7 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
      * @return The CommandInput&lt;T&gt; instance
      */
     default T schedule(BooleanSupplier condition, Command command) {
-        CommandScheduler.getInstance().scheduleJoystick(command, condition);
+        CommandScheduler.scheduleJoystick(command, condition);
         return getInstance();
     }
 
@@ -164,6 +164,8 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
      * 'press' will be executed once when the input is pressed.
      * 'release' will be executed once when the input is released.
      *
+     * You could just use button.whenPressed(press).whenRelease(release)
+     *
      * @param press   The command to run on Press
      * @param release The command to run on Release
      * @return The CommandInput&lt;T&gt; instance
@@ -176,7 +178,9 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
     /**
      * For scheduling a pair commands for while the input is pressed and released.
      * 'press' will be executed over &amp; over while the input is pressed.
-     * 'release' will be exeucted over &amp; over while the input is released.
+     * 'release' will be executed over &amp; over while the input is released.
+     *
+     * Just use button.whilePressed(...).whileReleased(...)
      *
      * @param press   The command to run on Press
      * @param release The command to run on Release
@@ -190,6 +194,9 @@ public interface CommandInput<T extends ButtonBase> extends BooleanSupplier {
     /**
      * For scheduling a pair of "opposite" commands for toggling when something
      * is or is not being toggled
+     *
+     * For non-command (method ref) usage, just use
+     * button.whenToggled(toggled).whenInverseToggled(notToggled)
      *
      * @param toggle  The command to run when the input flips states
      * @param itoggle The command to run when the input has not changed states

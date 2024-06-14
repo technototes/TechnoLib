@@ -20,21 +20,16 @@
 <span class="source-line-no">007</span><span id="line-7"></span>
 <span class="source-line-no">008</span><span id="line-8">    protected Color numberColor;</span>
 <span class="source-line-no">009</span><span id="line-9"></span>
-<span class="source-line-no">010</span><span id="line-10">    public NumberEntry(String n, Supplier&lt;Number&gt; s, int x, Color c, Color num) {</span>
-<span class="source-line-no">011</span><span id="line-11">        super(n, s, x, c);</span>
-<span class="source-line-no">012</span><span id="line-12">        numberColor = num;</span>
-<span class="source-line-no">013</span><span id="line-13">    }</span>
+<span class="source-line-no">010</span><span id="line-10">    public NumberEntry(String n, Supplier&lt;Number&gt; s, int x) {</span>
+<span class="source-line-no">011</span><span id="line-11">        super(n, s, x);</span>
+<span class="source-line-no">012</span><span id="line-12">    }</span>
+<span class="source-line-no">013</span><span id="line-13"></span>
 <span class="source-line-no">014</span><span id="line-14"></span>
-<span class="source-line-no">015</span><span id="line-15">    public NumberEntry(String n, Supplier&lt;Number&gt; s, int x, Color c) {</span>
-<span class="source-line-no">016</span><span id="line-16">        super(n, s, x, c);</span>
-<span class="source-line-no">017</span><span id="line-17">        numberColor = Color.NO_COLOR;</span>
+<span class="source-line-no">015</span><span id="line-15">    @Override</span>
+<span class="source-line-no">016</span><span id="line-16">    public String toString() {</span>
+<span class="source-line-no">017</span><span id="line-17">        return numberColor.format(get());</span>
 <span class="source-line-no">018</span><span id="line-18">    }</span>
-<span class="source-line-no">019</span><span id="line-19"></span>
-<span class="source-line-no">020</span><span id="line-20">    @Override</span>
-<span class="source-line-no">021</span><span id="line-21">    public String toString() {</span>
-<span class="source-line-no">022</span><span id="line-22">        return numberColor.format(get());</span>
-<span class="source-line-no">023</span><span id="line-23">    }</span>
-<span class="source-line-no">024</span><span id="line-24">}</span>
+<span class="source-line-no">019</span><span id="line-19">}</span>
 
 
 

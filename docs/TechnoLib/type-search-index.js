@@ -1,6 +1,7 @@
 typeSearchIndex = [
   { l: 'All Classes and Interfaces', u: 'allclasses-index.html' },
   { p: 'com.technototes.library.util', l: 'Alliance' },
+  { p: 'com.technototes.library.logger', l: 'LogConfig.AllowList' },
   { p: 'com.technototes.library.hardware2', l: 'AnalogBuilder' },
   { p: 'com.technototes.library.hardware.sensor', l: 'AnalogSensor' },
   { p: 'com.technototes.library.hardware.sensor', l: 'IMU.AxesSigns' },
@@ -8,7 +9,6 @@ typeSearchIndex = [
   { p: 'com.technototes.library.control', l: 'GamepadBase.Axis' },
   { p: 'com.technototes.library.control', l: 'AxisBase' },
   { p: 'com.technototes.library.control', l: 'Binding' },
-  { p: 'com.technototes.library.logger', l: 'LogConfig.Blacklist' },
   { p: 'com.technototes.library.util', l: 'Alliance.Blue' },
   { p: 'com.technototes.library.logger', l: 'Log.Boolean' },
   { p: 'com.technototes.library.logger.entry', l: 'BooleanEntry' },
@@ -35,6 +35,7 @@ typeSearchIndex = [
   { p: 'com.technototes.library.command', l: 'ConditionalCommand' },
   { p: 'com.technototes.library.hardware.servo', l: 'ServoProfiler.Constraints' },
   { p: 'com.technototes.library.hardware2', l: 'CRServoBuilder' },
+  { p: 'com.technototes.library.logger', l: 'LogConfig.DenyList' },
   { p: 'com.technototes.library.subsystem', l: 'DeviceSubsystem' },
   { p: 'com.technototes.library.util', l: 'Differential' },
   { p: 'com.technototes.library.util', l: 'Differential.DifferentialPriority' },
@@ -80,11 +81,7 @@ typeSearchIndex = [
   { p: 'com.technototes.library.hardware.motor', l: 'MotorGroup' },
   { p: 'com.technototes.library.subsystem.motor', l: 'MotorSubsystem' },
   { p: 'com.technototes.library.logger', l: 'Log.Number' },
-  { p: 'com.technototes.library.logger', l: 'Log.NumberBar' },
-  { p: 'com.technototes.library.logger.entry', l: 'NumberBarEntry' },
   { p: 'com.technototes.library.logger.entry', l: 'NumberEntry' },
-  { p: 'com.technototes.library.logger', l: 'Log.NumberSlider' },
-  { p: 'com.technototes.library.logger.entry', l: 'NumberSliderEntry' },
   { p: 'com.technototes.library.structure', l: 'CommandOpMode.OpModeState' },
   { p: 'com.technototes.library.command', l: 'ParallelCommandGroup' },
   { p: 'com.technototes.library.command', l: 'ParallelDeadlineGroup' },
@@ -113,6 +110,5 @@ typeSearchIndex = [
   { p: 'com.technototes.library.subsystem.drivebase', l: 'TankDrivebaseSubsystem' },
   { p: 'com.technototes.library.control', l: 'Binding.Type' },
   { p: 'com.technototes.library.command', l: 'WaitCommand' },
-  { p: 'com.technototes.library.logger', l: 'LogConfig.Whitelist' },
 ];
 updateSearchResults();
