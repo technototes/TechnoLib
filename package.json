@@ -24,8 +24,9 @@
     "format": "yarn run fmtdoc && yarn run fmtsrc && yarn run fmtmisc"
   },
   "devDependencies": {
-    "prettier": "3.1.0",
-    "prettier-plugin-java": "2.4.0",
+    "prettier": "3.3.2",
+    "prettier-plugin-java": "2.6.0",
     "run-script-os": "1.1.6"
-  }
+  },
+  "packageManager": "yarn@4.3.0"
 }
