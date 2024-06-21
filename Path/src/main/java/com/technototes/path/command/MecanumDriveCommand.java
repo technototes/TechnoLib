@@ -18,7 +18,7 @@ public class MecanumDriveCommand implements Command {
         DoubleSupplier ySup,
         DoubleSupplier rSup
     ) {
-        addRequirements(sub);
+        addControlledSubsystems(sub);
         subsystem = sub;
         x = xSup;
         y = ySup;

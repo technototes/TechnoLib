@@ -30,26 +30,39 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
      */
     Map<Command, ElapsedTime> timeMap = new HashMap<>();
     /**
-     * The Command to Required Subsystems lookup
-     *
-     * KBF-TODO: Change this to controllerMap and add an observer list
+     * The Command to Controlled Subsystems lookup
      */
-    Map<Command, Set<Subsystem>> requirementMap = new HashMap<>();
-
-    // KBF: Maybe use the term "control" and "observe"
-    // then even if we're just observing, a subsystem would be scheduled.
+    Map<Command, Set<Subsystem>> controllerMap = new HashMap<>();
     /**
-     * Add requirement subsystems to command
+     * The Command to Observed Subsystems lookup
+     */
+    Map<Command, Set<Subsystem>> observerMap = new HashMap<>();
+
+    /**
+     * Add observed subsystems to command
      * <p>
-     * Requirements are subsystems upon which this command depends. When executing a command,
-     * any commands that are currently being executed which depend upon the subsystem(s) required
-     * will be cancelled by the CommandScheduler.
+     * Observed subsystems are subsystems upon which this command depends.
      *
-     * @param requirements The subsystems this command uses
+     * @param observed The subsystems this command *observes*
      * @return this
      */
-    default Command addRequirements(Subsystem... requirements) {
-        getRequirements().addAll(Arrays.asList(requirements));
+    default Command addObservedSubsystems(Subsystem... observed) {
+        getObservedSubsystems().addAll(Arrays.asList(observed));
+        return this;
+    }
+
+    /**
+     * Add controlled subsystems to command
+     * <p>
+     * Controlled Subsystems are subsystems upon which this command should uniquely depend.
+     * When executing a command, any commands that are currently being executed which control the
+     * subsystem(s) controlled by this command will be cancelled by the CommandScheduler.
+     *
+     * @param controlled The subsystems this command *controls*
+     * @return this
+     */
+    default Command addControlledSubsystems(Subsystem... controlled) {
+        getControlledSubsystems().addAll(Arrays.asList(controlled));
         return this;
     }
 
@@ -301,13 +314,23 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
     }
 
     /**
-     * Return the subsystem requirements for this command
+     * Return the subsystem(s) that this command controls
      *
-     * @return The {@link Subsystem} requirements
+     * @return The {@link Subsystem}s controlled by this command
      */
-    default Set<Subsystem> getRequirements() {
-        requirementMap.putIfAbsent(this, new LinkedHashSet<>());
-        return requirementMap.get(this);
+    default Set<Subsystem> getControlledSubsystems() {
+        controllerMap.putIfAbsent(this, new LinkedHashSet<>());
+        return controllerMap.get(this);
+    }
+
+    /**
+     * Return the subsystem(s) that this command observes
+     *
+     * @return The {@link Subsystem}s observed by this command
+     */
+    default Set<Subsystem> getObservedSubsystems() {
+        observerMap.putIfAbsent(this, new LinkedHashSet<>());
+        return observerMap.get(this);
     }
 
     /**
@@ -363,24 +386,37 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
     }
 
     /**
-     * Clear out the state, time, and requirement maps. Be careful with this one!
+     * Clear out the state, time, and controller/observer maps. Be careful with this one!
      */
     static void clear() {
         stateMap.clear();
         timeMap.clear();
-        requirementMap.clear();
+        controllerMap.clear();
+        observerMap.clear();
     }
 
     /**
-     * This is a helper to create a new command from an existing command, but with additional
-     * subsystem requirements
+     * This is a helper to create a new command from an existing command, but with
+     * additional subsystems that it controls
      *
      * @param c The command to add the extra subsystem
-     * @param s The subsystem (or list of subsystems) to add to the commands requiremets
+     * @param s The subsystem (or list of subsystems) the command will control
      * @return The new command
      */
-    static Command create(Command c, Subsystem... s) {
-        return c.addRequirements(s);
+    static Command createController(Command c, Subsystem... s) {
+        return c.addControlledSubsystems(s);
+    }
+
+    /**
+     * This is a helper to create a new command from an existing command, but with
+     * additional subsystems that it observes
+     *
+     * @param c The command to add the extra subsystem
+     * @param s The subsystem (or list of subsystems) the command will observe
+     * @return The new command
+     */
+    static Command createObserver(Command c, Subsystem... s) {
+        return c.addObservedSubsystems(s);
     }
 
     /**

@@ -15,7 +15,7 @@ public class TrajectoryCommand implements Command {
     public PathingMecanumDrivebaseSubsystem subsystem;
 
     public TrajectoryCommand(PathingMecanumDrivebaseSubsystem sub, Trajectory t) {
-        addRequirements(sub);
+        addControlledSubsystems(sub);
         subsystem = sub;
         trajectory = t;
     }
@@ -24,13 +24,13 @@ public class TrajectoryCommand implements Command {
         PathingMecanumDrivebaseSubsystem sub,
         Function<Function<Pose2d, TrajectoryBuilder>, Trajectory> t
     ) {
-        addRequirements(sub);
+        addControlledSubsystems(sub);
         subsystem = sub;
         trajectory = t.apply(sub::trajectoryBuilder);
     }
 
     public TrajectoryCommand(PathingMecanumDrivebaseSubsystem sub, Supplier<Trajectory> t) {
-        addRequirements(sub);
+        addControlledSubsystems(sub);
         subsystem = sub;
         trajectory = t.get();
     }
@@ -40,13 +40,13 @@ public class TrajectoryCommand implements Command {
         BiFunction<Function<Pose2d, TrajectoryBuilder>, T, Trajectory> t,
         T mux
     ) {
-        addRequirements(sub);
+        addControlledSubsystems(sub);
         subsystem = sub;
         trajectory = t.apply(sub::trajectoryBuilder, mux);
     }
 
     public <T> TrajectoryCommand(PathingMecanumDrivebaseSubsystem sub, Function<T, Trajectory> t, T mux) {
-        addRequirements(sub);
+        addControlledSubsystems(sub);
         subsystem = sub;
         trajectory = t.apply(mux);
     }

@@ -11,19 +11,19 @@ public class MethodCommand implements Command {
     public MethodCommand(Runnable m, Subsystem... subs) {
         super();
         method = m;
-        addRequirements(subs);
+        addControlledSubsystems(subs);
     }
 
     public <T> MethodCommand(Consumer<T> m, T arg, Subsystem... subs) {
         super();
         method = () -> m.accept(arg);
-        addRequirements(subs);
+        addControlledSubsystems(subs);
     }
 
     public <T, U> MethodCommand(BiConsumer<T, U> m, T arg1, U arg2, Subsystem... subs) {
         super();
         method = () -> m.accept(arg1, arg2);
-        addRequirements(subs);
+        addControlledSubsystems(subs);
     }
 
     @Override

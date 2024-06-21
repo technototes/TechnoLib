@@ -28,9 +28,9 @@ public class RequirementCommandTest {
     public void setup() {
         subsystem = new DummySubsystem();
         CommandScheduler.resetScheduler();
-        command1 = Command.create(subsystem::method1, subsystem);
-        command2 = Command.create(subsystem::method2, subsystem);
-        command3 = Command.create(subsystem::method3, subsystem);
+        command1 = Command.createContoller(subsystem::method1, subsystem);
+        command2 = Command.createContoller(subsystem::method2, subsystem);
+        command3 = Command.createContoller(subsystem::method3, subsystem);
     }
 
     @Test

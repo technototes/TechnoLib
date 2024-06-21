@@ -5,6 +5,7 @@ import com.technototes.library.general.Periodic;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.subsystem.Subsystem;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -24,7 +25,8 @@ import java.util.function.BooleanSupplier;
 public final class CommandScheduler {
 
     private static final Map<Command, BooleanSupplier> commandMap = new HashMap<>();
-    private static final Map<Subsystem, Set<Command>> requirementMap = new HashMap<>();
+    private static final Map<Subsystem, Set<Command>> controllingMap = new HashMap<>();
+    private static final Map<Subsystem, Set<Command>> observingMap = new HashMap<>();
     private static final Map<Subsystem, Command> defaultMap = new HashMap<>();
 
     private static final Set<Periodic> registered = new LinkedHashSet<>();
@@ -228,9 +230,9 @@ public final class CommandScheduler {
      * @param subsystem The subsystem to run the command against when it's unused
      */
     public static void scheduleDefault(Command command, Subsystem subsystem) {
-        if (command.getRequirements().contains(subsystem)) {
+        if (command.getControlledSubsystems().contains(subsystem)) {
             defaultMap.put(subsystem, command);
-            schedule(command, () -> getCurrent(subsystem) == command);
+            schedule(command, () -> getCurrentController(subsystem) == command);
         } else {
             System.err.println("default commands must require their subsystem: " + command.getClass().toString());
         }
@@ -257,21 +259,37 @@ public final class CommandScheduler {
     }
 
     /**
-     * This gets the command currently using the subsystem provided
+     * This gets the command currently controlling the subsystem provided
      *
      * @param s The subsystem in question.
      * @return The Command currently using the subsystem, the default
      * command for the subsystem, or null if there is no current
-     * command usint the subsystem, nor a default command
+     * command controlling the subsystem, nor a default command
      */
     @Nullable
-    public static Command getCurrent(Subsystem s) {
-        if (requirementMap.get(s) == null) return null;
-        for (Command c : requirementMap.get(s)) {
+    public static Command getCurrentController(Subsystem s) {
+        if (controllingMap.get(s) == null) return null;
+        for (Command c : controllingMap.get(s)) {
             if (c.isRunning()) return c;
         }
         return getDefault(s);
     }
+
+    /**
+     * This gets the command(s) currently observing the subsystem provided
+     *
+     * @param s The subsystem in question.
+     * @return The set of Commands currently observing the subsystem
+     */
+    public static Set<Command> getCurrentObservers(Subsystem s) {
+        Set<Command> observers = new HashSet<>();
+        if (observingMap.get(s) == null) return observers;
+        for (Command c : observingMap.get(s)) {
+            if (c.isRunning()) observers.add(c);
+        }
+        return observers;
+    }
+
 
     /**
      * Register a command to be scheduled. The 'supplier' function is what triggers
@@ -282,10 +300,15 @@ public final class CommandScheduler {
      */
     public static void schedule(Command command, BooleanSupplier supplier) {
         commandMap.put(command, supplier);
-        for (Subsystem s : command.getRequirements()) {
+        for (Subsystem s : command.getControlledSubsystems()) {
             // TODO: Fail if a required subsystem is null, and maybe log something
-            requirementMap.putIfAbsent(s, new LinkedHashSet<>());
-            requirementMap.get(s).add(command);
+            controllingMap.putIfAbsent(s, new LinkedHashSet<>());
+            controllingMap.get(s).add(command);
+            register(s);
+        }
+        for (Subsystem s: command.getObservedSubsystems()) {
+            observingMap.putIfAbsent(s, new LinkedHashSet<>());
+            observingMap.get(s).add(command);
             register(s);
         }
     }
@@ -299,8 +322,8 @@ public final class CommandScheduler {
         // cancel any existing command that is using the new command's subsystem requirements
         commandMap.forEach((c1, b) -> {
             if (c1.justStarted()) {
-                for (Subsystem s : c1.getRequirements()) {
-                    for (Command c2 : requirementMap.get(s)) {
+                for (Subsystem s : c1.getControlledSubsystems()) {
+                    for (Command c2 : controllingMap.get(s)) {
                         if (c1 != c2) {
                             c2.cancel();
                         }
