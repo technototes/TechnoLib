@@ -2,12 +2,15 @@ package com.technototes.library.command;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.technototes.library.subsystem.Subsystem;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
@@ -31,13 +34,14 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
     Map<Command, ElapsedTime> timeMap = new HashMap<>();
     /**
      * The Command to Required Subsystems lookup
-     *
+     * <p>
      * KBF-TODO: Change this to controllerMap and add an observer list
      */
     Map<Command, Set<Subsystem>> requirementMap = new HashMap<>();
 
     // KBF: Maybe use the term "control" and "observe"
     // then even if we're just observing, a subsystem would be scheduled.
+
     /**
      * Add requirement subsystems to command
      * <p>
@@ -58,7 +62,8 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
      * <p>
      * Defaults to doing nothing
      */
-    default void initialize() {}
+    default void initialize() {
+    }
 
     /**
      * Execute the command
@@ -85,7 +90,8 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
      *
      * @param cancel True if the command was cancelled, False if it ended naturally
      */
-    default void end(boolean cancel) {}
+    default void end(boolean cancel) {
+    }
 
     /**
      * Run a command or series of ParallelCommands after this one
@@ -220,7 +226,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
             case INITIALIZING:
                 initialize();
                 setState(CommandState.EXECUTING);
-            // no return for fallthrough
+                // no return for fallthrough
             case EXECUTING:
                 execute();
                 if (isFinished()) setState(CommandState.FINISHED);
@@ -373,14 +379,40 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
 
     /**
      * This is a helper to create a new command from an existing command, but with additional
-     * subsystem requirements
+     * subsystem requirements. "Existing commands" also happen to be method references, because
+     * a command is a Runnable, and Java will up-cast the interface to a command interface on
+     * the fly.
      *
      * @param c The command to add the extra subsystem
-     * @param s The subsystem (or list of subsystems) to add to the commands requiremets
+     * @param s The subsystem (or list of subsystems) to add to the command's requirements
      * @return The new command
      */
     static Command create(Command c, Subsystem... s) {
         return c.addRequirements(s);
+    }
+
+    static <T> Command create(Consumer<T> method, T arg, Subsystem... s) {
+        return Command.create(() -> method.accept(arg), s);
+    }
+
+    static <T> Command create(Consumer<T> method, Supplier<T> argSupplier, Subsystem... s) {
+        return Command.create(() -> method.accept(argSupplier.get()), s);
+    }
+
+    static <T, U> Command create(BiConsumer<T, U> method, Supplier<T> arg1supplier, U arg2, Subsystem... s) {
+        return Command.create(() -> method.accept(arg1supplier.get(), arg2), s);
+    }
+
+    static <T, U> Command create(BiConsumer<T, U> method, T arg1, Supplier<U> arg2supplier, Subsystem... s) {
+        return Command.create(() -> method.accept(arg1, arg2supplier.get()), s);
+    }
+
+    static <T, U> Command create(BiConsumer<T, U> method, Supplier<T> arg1supplier, Supplier<U> arg2supplier, Subsystem... s) {
+        return Command.create(() -> method.accept(arg1supplier.get(), arg2supplier.get()), s);
+    }
+
+    static <T, U> Command create(BiConsumer<T, U> method, T arg1, U arg2, Subsystem... s) {
+        return Command.create(() -> method.accept(arg1, arg2), s);
     }
 
     /**
