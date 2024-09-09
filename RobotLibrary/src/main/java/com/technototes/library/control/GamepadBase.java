@@ -1,7 +1,7 @@
 package com.technototes.library.control;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.technototes.library.general.Enablable;
+import com.technototes.library.general.CanBeEnabled;
 import com.technototes.library.general.Periodic;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.BooleanSupplier;
@@ -14,7 +14,8 @@ import java.util.function.DoubleSupplier;
  * @param <U> The class for the axis components on the gamepad
  * @author Alex Stedman
  */
-public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Periodic, Enablable<GamepadBase<T, U>> {
+public class GamepadBase<T extends ButtonBase, U extends AxisBase>
+    implements Periodic, CanBeEnabled<GamepadBase<T, U>> {
 
     private boolean enabled = true;
     // normal gamepad
@@ -46,7 +47,7 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
 
     // periodics to run
     private Periodic[] periodics;
-    private Enablable<?>[] enablables;
+    private CanBeEnabled<?>[] enablables;
 
     private Class<T> buttonClass;
     private Class<U> axisClass;
@@ -71,38 +72,36 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
         leftStick = new GamepadStick<>(leftStickX, leftStickY, leftStickButton);
         rightStick = new GamepadStick<>(rightStickX, rightStickY, rightStickButton);
         dpad = new GamepadDpad<>(dpadUp, dpadDown, dpadLeft, dpadRight);
-        periodics =
-            new Periodic[] {
-                xbox_a,
-                xbox_b,
-                xbox_x,
-                xbox_y,
-                xbox_start,
-                xbox_back,
-                leftBumper,
-                rightBumper,
-                leftTrigger,
-                rightTrigger,
-                leftStick,
-                rightStick,
-                dpad,
-            };
-        enablables =
-            new Enablable[] {
-                xbox_a,
-                xbox_b,
-                xbox_x,
-                xbox_y,
-                xbox_start,
-                xbox_back,
-                leftBumper,
-                rightBumper,
-                leftTrigger,
-                rightTrigger,
-                leftStick,
-                rightStick,
-                dpad,
-            };
+        periodics = new Periodic[] {
+            xbox_a,
+            xbox_b,
+            xbox_x,
+            xbox_y,
+            xbox_start,
+            xbox_back,
+            leftBumper,
+            rightBumper,
+            leftTrigger,
+            rightTrigger,
+            leftStick,
+            rightStick,
+            dpad,
+        };
+        enablables = new CanBeEnabled[] {
+            xbox_a,
+            xbox_b,
+            xbox_x,
+            xbox_y,
+            xbox_start,
+            xbox_back,
+            leftBumper,
+            rightBumper,
+            leftTrigger,
+            rightTrigger,
+            leftStick,
+            rightStick,
+            dpad,
+        };
     }
 
     // to actually instantiate the objects
@@ -489,7 +488,7 @@ public class GamepadBase<T extends ButtonBase, U extends AxisBase> implements Pe
     @Override
     public GamepadBase<T, U> setEnabled(boolean enable) {
         enabled = enable;
-        for (Enablable<?> enablable : enablables) enablable.setEnabled(enable);
+        for (CanBeEnabled<?> enablable : enablables) enablable.setEnabled(enable);
         return this;
     }
 

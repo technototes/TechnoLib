@@ -211,6 +211,6 @@ public class Motor<T extends DcMotorSimple> extends HardwareDevice<T> implements
      */
     @Override
     public Double get() {
-        return getSpeed();
+        return getPower();
     }
 }

@@ -7,26 +7,20 @@
   "author": "Kevin Frei <kevinfrei@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "run-script-os",
-    "build:win32": ".\\gradlew build",
-    "build:default": "./gradlew build",
-    "fulldoc": "yarn run doc && yarn run fmtdoc",
-    "docs": "yarn run doc",
-    "doc": "run-script-os",
-    "doc:win32": ".\\gradlew javadoc",
-    "doc:default": "./gradlew javadoc",
-    "fmtdoc": "prettier --write docs/**/*.js docs/**/*.html docs/**/*.css **/*.md",
-    "fmtpath": "prettier --write Path/**/*.java",
-    "fmtvis": "prettier --write Vision/**/*.java",
-    "fmtrbt": "prettier --write RobotLibrary/**/*.java",
-    "fmtsrc": "prettier --write Path/**/*.java Vision/**/*.java RobotLibrary/**/*.java",
-    "fmtmisc": "prettier --write *.json *.md .prettierrc",
-    "format": "yarn run fmtdoc && yarn run fmtsrc && yarn run fmtmisc"
+    "build": "bun run gradle build",
+    "fulldoc": "bun run doc && bun run format",
+    "docs": "bun run gradle javadoc",
+    "doc": "bun run gradle javadoc",
+    "format": "tools format bun",
+    "gradle": "bun run os gradle",
+    "gradle:win": ".\\\\gradlew",
+    "gradle:def": "./gradlew",
+    "os": "bun run scripts/os.ts"
   },
   "devDependencies": {
-    "prettier": "3.3.2",
-    "prettier-plugin-java": "2.6.0",
-    "run-script-os": "1.1.6"
+    "@freik/workspace": "^0.6.4",
+    "prettier": "3.3.3",
+    "prettier-plugin-java": "2.6.4"
   },
-  "packageManager": "yarn@4.3.0"
+  "packageManager": "bun@1.1.27"
 }

@@ -3,7 +3,7 @@ package com.technototes.library.hardware.servo;
 import com.qualcomm.robotcore.hardware.PwmControl;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.util.Range;
-import com.technototes.library.general.Invertable;
+import com.technototes.library.general.Invertible;
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.hardware.Sensored;
 
@@ -18,7 +18,7 @@ import com.technototes.library.hardware.Sensored;
 @SuppressWarnings("unused")
 public class Servo
     extends HardwareDevice<com.qualcomm.robotcore.hardware.Servo>
-    implements Sensored, Invertable<Servo> {
+    implements Sensored, Invertible<Servo> {
 
     private boolean inverted = false;
     private double pos = 0.0;

@@ -1,13 +1,13 @@
 package com.technototes.library.control;
 
-import com.technototes.library.general.Enablable;
+import com.technototes.library.general.CanBeEnabled;
 import com.technototes.library.general.Periodic;
 import java.util.function.DoubleSupplier;
 
 /** Interface for objects that behave as sticks
  * @author Alex Stedman
  */
-public interface Stick extends Periodic, Enablable<Stick> {
+public interface Stick extends Periodic, CanBeEnabled<Stick> {
     /** Return x axis double
      *
      * @return The double
