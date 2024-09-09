@@ -238,7 +238,7 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
             (coefficients.f * 12) / batteryVoltageSensor.getVoltage()
         );
         for (EncodedMotor<DcMotorEx> motor : motors) {
-            motor.setPIDFCoeffecients(runMode, compensatedCoefficients);
+            motor.setPIDFCoefficients(runMode, compensatedCoefficients);
         }
     }
 

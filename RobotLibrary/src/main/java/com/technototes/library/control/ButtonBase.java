@@ -1,14 +1,14 @@
 package com.technototes.library.control;
 
-import com.technototes.library.general.Enablable;
-import com.technototes.library.general.Invertable;
+import com.technototes.library.general.CanBeEnabled;
+import com.technototes.library.general.Invertible;
 import com.technototes.library.general.Periodic;
 import java.util.function.BooleanSupplier;
 
 /** The class to extend custom gamepad buttons from
  * @author Alex Stedman
  */
-public class ButtonBase implements BooleanSupplier, Periodic, Invertable<ButtonBase>, Enablable<ButtonBase> {
+public class ButtonBase implements BooleanSupplier, Periodic, Invertible<ButtonBase>, CanBeEnabled<ButtonBase> {
 
     protected BooleanSupplier booleanSupplier;
 

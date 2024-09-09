@@ -92,7 +92,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      * @param f The Forward Feedback coefficient
      * @return The motor (for chaining)
      */
-    public EncodedMotor<T> setPIDFCoeffecients(double p, double i, double d, double f) {
+    public EncodedMotor<T> setPIDFCoefficients(double p, double i, double d, double f) {
         T device = getRawDevice();
         if (device instanceof DcMotorEx) {
             ((DcMotorEx) device).setVelocityPIDFCoefficients(p, i, d, f);
@@ -103,11 +103,11 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
     /**
      * Configure the PIDF constants for the motor
      *
-     * @param coeffecients The PIDF coefficients to set
+     * @param coefficients The PIDF coefficients to set
      * @return The motor (for chaining)
      */
-    public EncodedMotor<T> setPIDFCoeffecients(PIDFCoefficients coeffecients) {
-        return setPIDFCoeffecients(coeffecients.p, coeffecients.i, coeffecients.d, coeffecients.f);
+    public EncodedMotor<T> setPIDFCoefficients(PIDFCoefficients coefficients) {
+        return setPIDFCoefficients(coefficients.p, coefficients.i, coefficients.d, coefficients.f);
     }
 
     /**
@@ -116,7 +116,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      * @param c The PIDF coefficients to set
      * @return The motor (for chaining)
      */
-    public EncodedMotor<T> setPIDFCoeffecients(DcMotor.RunMode m, PIDFCoefficients c) {
+    public EncodedMotor<T> setPIDFCoefficients(DcMotor.RunMode m, PIDFCoefficients c) {
         T device = getRawDevice();
         if (device instanceof DcMotorEx) {
             ((DcMotorEx) device).setPIDFCoefficients(m, c);
@@ -214,9 +214,9 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      */
     public boolean setPosition(double ticks, double speed) {
         if (!isAtPosition(ticks)) {
-            setSpeed(getSensorValue() < ticks ? speed : -speed);
+            setPower(getSensorValue() < ticks ? speed : -speed);
         } else {
-            setSpeed(0);
+            setPower(0);
             return true;
         }
         return false;
@@ -275,7 +275,7 @@ public class EncodedMotor<T extends DcMotorSimple> extends Motor<T> implements S
      * @return the power for the motor
      */
     public double getVelocity() {
-        return getSpeed();
+        return getPower();
     }
 
     @Override
