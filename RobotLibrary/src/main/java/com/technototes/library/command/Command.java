@@ -2,7 +2,6 @@ package com.technototes.library.command;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.technototes.library.subsystem.Subsystem;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -62,8 +61,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
      * <p>
      * Defaults to doing nothing
      */
-    default void initialize() {
-    }
+    default void initialize() {}
 
     /**
      * Execute the command
@@ -90,8 +88,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
      *
      * @param cancel True if the command was cancelled, False if it ended naturally
      */
-    default void end(boolean cancel) {
-    }
+    default void end(boolean cancel) {}
 
     /**
      * Run a command or series of ParallelCommands after this one
@@ -226,7 +223,8 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
             case INITIALIZING:
                 initialize();
                 setState(CommandState.EXECUTING);
-                // no return for fallthrough
+                // KBF: Don't fall through, so that everything gets initialized then executed
+                return;
             case EXECUTING:
                 execute();
                 if (isFinished()) setState(CommandState.FINISHED);
@@ -407,7 +405,12 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
         return Command.create(() -> method.accept(arg1, arg2supplier.get()), s);
     }
 
-    static <T, U> Command create(BiConsumer<T, U> method, Supplier<T> arg1supplier, Supplier<U> arg2supplier, Subsystem... s) {
+    static <T, U> Command create(
+        BiConsumer<T, U> method,
+        Supplier<T> arg1supplier,
+        Supplier<U> arg2supplier,
+        Subsystem... s
+    ) {
         return Command.create(() -> method.accept(arg1supplier.get(), arg2supplier.get()), s);
     }
 

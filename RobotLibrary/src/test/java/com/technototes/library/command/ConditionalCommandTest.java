@@ -1,11 +1,13 @@
 package com.technototes.library.command;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SimpleCommandTest {
+public class ConditionalCommandTest {
+
+    public static boolean shouldRun = false;
 
     @BeforeEach
     public void setup() {
@@ -15,11 +17,12 @@ public class SimpleCommandTest {
     @Test
     public void scheduleCommandNoCancel() {
         CommandForTesting command = new CommandForTesting();
-
+        shouldRun = true;
+        Command toSchedule = new ConditionalCommand(() -> shouldRun, command);
         // Creating a command shouldn't cause it to be scheduled
         CommandScheduler.run();
         assertTrue(command.check(0, 0, 0, 0));
-        CommandScheduler.schedule(command);
+        CommandScheduler.schedule(toSchedule);
         // Scheduling a command won't cause it to run until after run()
         assertTrue(command.check(0, 0, 0, 0));
         CommandScheduler.run();
@@ -47,6 +50,7 @@ public class SimpleCommandTest {
         CommandScheduler.run();
         // An ended command doesn't get scheduled anymore
         assertTrue(command.check(1, 1, 1, 0));
+        shouldRun = false;
         CommandScheduler.run();
         // An ended command doesn't get scheduled anymore
         // ?? But it does get initialized
@@ -58,27 +62,11 @@ public class SimpleCommandTest {
         // An ended command doesn't get scheduled anymore
         assertTrue(command.check(1, 1, 1, 0));
         CommandScheduler.run();
-        assertTrue(command.check(2, 1, 1, 0));
+        assertTrue(command.check(1, 1, 1, 0));
         CommandScheduler.run();
-        // An ended command doesn't get scheduled anymore
-        // ?? But it does get initialized
-        // ?? And executed??
-        assertTrue(command.check(2, 2, 1, 0));
+        assertTrue(command.check(1, 1, 1, 0));
         CommandScheduler.run();
-        // An ended command doesn't get scheduled anymore
-        // ?? But it does get initialized
-        // ?? And executed??
-        // ?? And ends again?
-        assertTrue(command.check(2, 2, 2, 0));
+        assertTrue(command.check(1, 1, 1, 0));
         CommandScheduler.run();
-        assertTrue(command.check(2, 2, 2, 0));
-        CommandScheduler.run();
-        assertTrue(command.check(2, 2, 2, 0));
-        CommandScheduler.run();
-        assertTrue(command.check(3, 2, 2, 0));
-        CommandScheduler.run();
-        assertTrue(command.check(3, 3, 2, 0));
-        CommandScheduler.run();
-        assertTrue(command.check(3, 3, 3, 0));
     }
 }
