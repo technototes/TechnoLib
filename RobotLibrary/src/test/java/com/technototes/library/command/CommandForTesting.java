@@ -46,6 +46,6 @@ public class CommandForTesting implements Command {
     }
 
     public String lastResult() {
-        return String.format("%08x", lastRes);
+        return String.format("%d %d %d %d", initialized, executed, ended, canceled);
     }
 }

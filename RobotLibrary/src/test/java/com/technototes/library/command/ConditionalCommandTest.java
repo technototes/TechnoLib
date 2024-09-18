@@ -25,13 +25,15 @@ public class ConditionalCommandTest {
         CommandScheduler.schedule(toSchedule);
         // Scheduling a command won't cause it to run until after run()
         assertTrue(command.check(0, 0, 0, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // RESET -> STARTED
         // ?? The first run after scheduling a command doesn't do anything for the command
         // Yes because the first one puts the command into the state of initialization,
         // so that other commands can be scheduled off this command just starting
         // for parallel groups
+        assertTrue(command.isRunning());
+        assertTrue(command.justStarted());
         assertTrue(command.check(0, 0, 0, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // STARTED -> INITIALIZING
 
         /* KBF: This is a little odd. For reasons that are obvious in the code,
                the initialized state exists only before first execution, but not between command
@@ -42,16 +44,16 @@ public class ConditionalCommandTest {
         // ?? The second run after scheduling a command initializes the command
         // see above
         // assertTrue(command.check(1, 0, 0, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // INITIALIZING -> EXEC -> FINISHED
         // The third run after scheduling a command finally runs it
-        assertTrue(command.check(1, 1, 0, 0));
-        CommandScheduler.run();
+        assertTrue(command.check(1, 1, 0, 0), command.lastResult());
+        CommandScheduler.run(); // FINISHED -> RESET
         // The fourth run after scheduling a 'one-shot' command finally ends it
         assertTrue(command.check(1, 1, 1, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // RESET -> STARTED
         // An ended command doesn't get scheduled anymore
         assertTrue(command.check(1, 1, 1, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // STARTED -> INITIALIZING?
         // An ended command doesn't get scheduled anymore
         // ?? But it does get initialized
         // when you schedule a command, its added to a loop.
@@ -61,7 +63,9 @@ public class ConditionalCommandTest {
 
         // KBF: Commented out: See comment above
         // assertTrue(command.check(2, 1, 1, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // INITIALIZING -> EXEC -> FINISHED?
+        // It looks like the ConditionalCommand is 1 phase later than a normal command upon
+        // rerun. Not sure what's going on. Need to investigate
         // An ended command doesn't get scheduled anymore
         // ?? But it does get initialized
         // ?? And executed??
@@ -73,13 +77,13 @@ public class ConditionalCommandTest {
         // ?? And ends again?
         assertTrue(command.check(2, 2, 1/*2*/, 0), command.lastResult());
         CommandScheduler.run();
-        assertTrue(command.check(1/*2*/, 1/*2*/, 1/*2*/, 0), command.lastResult());
+        assertTrue(command.check(2, 2, 2, 0), command.lastResult());
         CommandScheduler.run();
         // KBF: Commented out, see comment above
         // assertTrue(command.check(3, 2, 2, 0));
         CommandScheduler.run();
-        assertTrue(command.check(1/*3*/, 1/*3*/, 1/*2*/, 0), command.lastResult());
+        assertTrue(command.check(2/*3*/, 2/*3*/, 2/*2*/, 0), command.lastResult());
         CommandScheduler.run();
-        assertTrue(command.check(1/*3*/, 1/*3*/, 1/*3*/, 0), command.lastResult());
+        assertTrue(command.check(2/*3*/, 2/*3*/, 2/*3*/, 0), command.lastResult());
     }
 }

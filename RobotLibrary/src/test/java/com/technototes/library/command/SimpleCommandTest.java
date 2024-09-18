@@ -22,33 +22,36 @@ public class SimpleCommandTest {
         CommandScheduler.schedule(command);
         // Scheduling a command won't cause it to run until after run()
         assertTrue(command.check(0, 0, 0, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // RESET -> STARTED
         // ?? The first run after scheduling a command doesn't do anything for the command
         // Yes because the first one puts the command into the state of initialization,
         // so that other commands can be scheduled off this command just starting
         // for parallel groups
+        assertTrue(command.isRunning());
+        assertTrue(command.justStarted());
         assertTrue(command.check(0, 0, 0, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // STARTED -> INITIALIZING
 
-        /* KBF: This is a little odd. For reasons that are obvious in the code,
-               the initialized state exists only before first execution, but not between command
-               scheduler runs. The odd thing is that we have to run the command scheduler twice
-               before the scheduler inits & executes the command. I should dig into this. Later.
+        /* KBF:
+         This is a little odd. For reasons that are obvious in the code,
+         the initialized state exists only before first execution, but not between command
+         scheduler runs. The odd thing is that we have to run the command scheduler twice
+         before the scheduler inits & executes the command. I should dig into this. Later.
         */
 
         // ?? The second run after scheduling a command initializes the command
         // see above
         // assertTrue(command.check(1, 0, 0, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // INITIALIZING -> EXEC -> FINISHED
         // The third run after scheduling a command finally runs it
         assertTrue(command.check(1, 1, 0, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // FINISHED -> RESET
         // The fourth run after scheduling a 'one-shot' command finally ends it
         assertTrue(command.check(1, 1, 1, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // RESET -> STARTED
         // An ended command doesn't get scheduled anymore
         assertTrue(command.check(1, 1, 1, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // STARTED -> INITIALIZING
         // An ended command doesn't get scheduled anymore
         // ?? But it does get initialized
         // when you schedule a command, its added to a loop.
@@ -58,25 +61,25 @@ public class SimpleCommandTest {
 
         // KBF: Commented out: See comment above
         // assertTrue(command.check(2, 1, 1, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // INITIALIZING -> EXEC -> FINISHED
         // An ended command doesn't get scheduled anymore
         // ?? But it does get initialized
         // ?? And executed??
         assertTrue(command.check(2, 2, 1, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // FINISHED -> RESET
         // An ended command doesn't get scheduled anymore
         // ?? But it does get initialized
         // ?? And executed??
         // ?? And ends again?
         assertTrue(command.check(2, 2, 2, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // RESET -> STARTED
         assertTrue(command.check(2, 2, 2, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // STARTED -> INITIALIZING
         // KBF: Commented out, see comment above
         // assertTrue(command.check(3, 2, 2, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // INITIALIZING -> EXEC -> FINISHED
         assertTrue(command.check(3, 3, 2, 0));
-        CommandScheduler.run();
+        CommandScheduler.run(); // FINISHED -> RESET
         assertTrue(command.check(3, 3, 3, 0));
     }
 }
