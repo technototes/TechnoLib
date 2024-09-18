@@ -223,8 +223,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
             case INITIALIZING:
                 initialize();
                 setState(CommandState.EXECUTING);
-                // KBF: Don't fall through, so that everything gets initialized then executed
-                return;
+                // no return for fallthrough
             case EXECUTING:
                 execute();
                 if (isFinished()) setState(CommandState.FINISHED);

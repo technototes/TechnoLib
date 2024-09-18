@@ -25,7 +25,27 @@ public class CommandForTesting implements Command {
         }
     }
 
+    /*
+    RESET,
+    STARTED,
+    INITIALIZING,
+    EXECUTING,
+    FINISHED,
+    INTERRUPTED,
+    CANCELLED,
+    */
+    private int lastRes = 0;
+
     public boolean check(int i, int x, int e, int c) {
-        return initialized == i && executed == x && ended == e && canceled == c;
+        int iCheck = (initialized == i) ? 0 : 0xFF000000;
+        int xCheck = (executed == x) ? 0 : 0xFF0000;
+        int eCheck = (ended == e) ? 0 : 0xFF00;
+        int cCheck = (canceled == c) ? 0 : 0xFF;
+        lastRes = iCheck | xCheck | eCheck | cCheck;
+        return lastRes == 0;
+    }
+
+    public String lastResult() {
+        return String.format("%08x", lastRes);
     }
 }
