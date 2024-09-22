@@ -1,5 +1,6 @@
 package com.technototes.library.hardware;
 
+import android.util.Log;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,8 +57,15 @@ public abstract class HardwareDevice<T extends com.qualcomm.robotcore.hardware.H
      */
     @SuppressWarnings("unchecked cast")
     protected HardwareDevice(String deviceName) {
-        device =
-            hardwareMap.tryGet((Class<T>) com.qualcomm.robotcore.hardware.HardwareDevice.class/*T.class*/, deviceName);
+        device = hardwareMap.tryGet(
+            (Class<T>) com.qualcomm.robotcore.hardware.HardwareDevice.class/*T.class*/,
+            deviceName
+        );
+        name = deviceName;
+        names.put(name, this);
+        /* if (device == null) {
+            Log.e("DEVICE FAILURE", deviceName);
+        } */
     }
 
     /**
