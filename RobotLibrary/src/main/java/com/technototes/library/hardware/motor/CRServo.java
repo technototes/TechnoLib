@@ -41,6 +41,8 @@ public class CRServo extends HardwareDevice<com.qualcomm.robotcore.hardware.CRSe
      */
     public CRServo(String deviceName) {
         super(deviceName);
+        power = 0;
+        dir = DcMotorSimple.Direction.FORWARD;
     }
 
     @Override
