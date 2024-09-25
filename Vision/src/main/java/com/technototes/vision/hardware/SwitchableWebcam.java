@@ -51,8 +51,7 @@ public class SwitchableWebcam extends Camera<OpenCvSwitchableWebcam, DummyDevice
      */
     @Override
     public OpenCvSwitchableWebcam createCamera() {
-        return OpenCvCameraFactory
-            .getInstance()
+        return OpenCvCameraFactory.getInstance()
             .createSwitchableWebcam(
                 hardwareMap.appContext
                     .getResources()

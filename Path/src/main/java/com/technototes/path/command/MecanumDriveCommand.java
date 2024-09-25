@@ -27,8 +27,9 @@ public class MecanumDriveCommand implements Command {
 
     @Override
     public void execute() {
-        Vector2d input = new Vector2d(-y.getAsDouble() * subsystem.speed, -x.getAsDouble() * subsystem.speed)
-            .rotated(-subsystem.getExternalHeading());
+        Vector2d input = new Vector2d(-y.getAsDouble() * subsystem.speed, -x.getAsDouble() * subsystem.speed).rotated(
+            -subsystem.getExternalHeading()
+        );
 
         subsystem.setWeightedDrivePower(
             new Pose2d(input.getX(), input.getY(), -Math.pow(r.getAsDouble() * subsystem.speed, 3))

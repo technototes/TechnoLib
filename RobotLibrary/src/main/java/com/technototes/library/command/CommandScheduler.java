@@ -168,9 +168,8 @@ public final class CommandScheduler {
      * @param states  The list of states to schedule the command
      */
     public static void scheduleForState(Command command, CommandOpMode.OpModeState... states) {
-        schedule(
-            command.cancelUpon(() -> !opMode.getOpModeState().isState(states)),
-            () -> opMode.getOpModeState().isState(states)
+        schedule(command.cancelUpon(() -> !opMode.getOpModeState().isState(states)), () ->
+            opMode.getOpModeState().isState(states)
         );
     }
 

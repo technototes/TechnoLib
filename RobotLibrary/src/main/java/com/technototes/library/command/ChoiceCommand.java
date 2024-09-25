@@ -21,8 +21,7 @@ public class ChoiceCommand extends ParallelRaceGroup {
     @SafeVarargs
     public ChoiceCommand(Pair<BooleanSupplier, Command>... cs) {
         super(
-            Arrays
-                .stream(cs)
+            Arrays.stream(cs)
                 .<Command>map(p -> new ConditionalCommand(p.first, p.second))
                 .collect(Collectors.toList())
                 .toArray(new Command[] {})

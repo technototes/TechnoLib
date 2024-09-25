@@ -40,8 +40,7 @@ public class Webcam extends Camera<OpenCvWebcam, WebcamName> {
      */
     @Override
     public OpenCvWebcam createCamera() {
-        return OpenCvCameraFactory
-            .getInstance()
+        return OpenCvCameraFactory.getInstance()
             .createWebcam(
                 getRawDevice(),
                 hardwareMap.appContext

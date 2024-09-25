@@ -87,9 +87,7 @@ public abstract class BasicVisionSubsystem extends OpenCvPipeline implements Sub
     public void stopVisionPipeline() {
         camera.setPipeline(null);
         pipelineSet = false;
-        camera.closeCameraDeviceAsync(() -> {
-            /* Do we need to do anything to stop the vision pipeline? */
-        });
+        camera.closeCameraDeviceAsync(() -> {});
     }
 
     /**
