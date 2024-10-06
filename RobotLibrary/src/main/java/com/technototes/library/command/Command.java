@@ -223,7 +223,7 @@ public interface Command extends Runnable, Supplier<Command.CommandState> {
             case INITIALIZING:
                 initialize();
                 setState(CommandState.EXECUTING);
-                // no return for fallthrough
+            // no return for fallthrough
             case EXECUTING:
                 execute();
                 if (isFinished()) setState(CommandState.FINISHED);

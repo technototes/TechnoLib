@@ -146,8 +146,10 @@ public class TrajectorySequenceRunner {
                 Pose2d startPose = currentSegment.getStartPose();
                 targetPose = startPose.copy(startPose.getX(), startPose.getY(), targetState.getX());
 
-                driveSignal =
-                    new DriveSignal(new Pose2d(0, 0, targetOmega + correction), new Pose2d(0, 0, targetAlpha));
+                driveSignal = new DriveSignal(
+                    new Pose2d(0, 0, targetOmega + correction),
+                    new Pose2d(0, 0, targetAlpha)
+                );
 
                 if (deltaTime >= currentSegment.getDuration()) {
                     currentSegmentIndex++;

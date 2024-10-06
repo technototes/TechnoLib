@@ -530,8 +530,13 @@ public class TrajectorySequenceBuilder {
 
         double tangent = setAbsoluteTangent ? absoluteTangent : Angle.norm(lastPose.getHeading() + tangentOffset);
 
-        currentTrajectoryBuilder =
-            new TrajectoryBuilder(lastPose, tangent, currentVelConstraint, currentAccelConstraint, resolution);
+        currentTrajectoryBuilder = new TrajectoryBuilder(
+            lastPose,
+            tangent,
+            currentVelConstraint,
+            currentAccelConstraint,
+            resolution
+        );
     }
 
     public TrajectorySequence build() {
@@ -629,27 +634,25 @@ public class TrajectorySequenceBuilder {
                 newMarkers.add(new TrajectoryMarker(segmentOffsetTime, marker.getCallback()));
 
                 TurnSegment thisSegment = (TurnSegment) segment;
-                newSegment =
-                    new TurnSegment(
-                        thisSegment.getStartPose(),
-                        thisSegment.getTotalRotation(),
-                        thisSegment.getMotionProfile(),
-                        newMarkers
-                    );
+                newSegment = new TurnSegment(
+                    thisSegment.getStartPose(),
+                    thisSegment.getTotalRotation(),
+                    thisSegment.getMotionProfile(),
+                    newMarkers
+                );
             } else if (segment instanceof TrajectorySegment) {
                 TrajectorySegment thisSegment = (TrajectorySegment) segment;
 
                 List<TrajectoryMarker> newMarkers = new ArrayList<>(thisSegment.getTrajectory().getMarkers());
                 newMarkers.add(new TrajectoryMarker(segmentOffsetTime, marker.getCallback()));
 
-                newSegment =
-                    new TrajectorySegment(
-                        new Trajectory(
-                            thisSegment.getTrajectory().getPath(),
-                            thisSegment.getTrajectory().getProfile(),
-                            newMarkers
-                        )
-                    );
+                newSegment = new TrajectorySegment(
+                    new Trajectory(
+                        thisSegment.getTrajectory().getPath(),
+                        thisSegment.getTrajectory().getProfile(),
+                        newMarkers
+                    )
+                );
             }
 
             sequenceSegments.set(segmentIndex, newSegment);

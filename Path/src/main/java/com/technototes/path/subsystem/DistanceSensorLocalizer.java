@@ -57,8 +57,10 @@ public class DistanceSensorLocalizer implements Localizer, Subsystem {
             Pose2d sensorPose = entry.getValue();
             double distance = sensor.getDistance();
             if (distance < maxSensorDistance && distance > 0.5) {
-                sensorPose =
-                    new Pose2d(sensorPose.vec().rotated(heading), Angle.norm(sensorPose.getHeading() + heading));
+                sensorPose = new Pose2d(
+                    sensorPose.vec().rotated(heading),
+                    Angle.norm(sensorPose.getHeading() + heading)
+                );
                 double change;
                 switch (MathUtils.closestTo((2 * sensorPose.getHeading()) / Math.PI, 0, 1, 2, 3, 4)) {
                     case 0:
@@ -90,8 +92,11 @@ public class DistanceSensorLocalizer implements Localizer, Subsystem {
             }
         }
         if (old == null) old = new Pose2d();
-        poseEstimate =
-            new Pose2d(totalX != 0 ? accumX / totalX : old.getX(), totalY != 0 ? accumY / totalY : old.getY(), heading);
+        poseEstimate = new Pose2d(
+            totalX != 0 ? accumX / totalX : old.getX(),
+            totalY != 0 ? accumY / totalY : old.getY(),
+            heading
+        );
     }
 
     public double gyroOffset = 0;

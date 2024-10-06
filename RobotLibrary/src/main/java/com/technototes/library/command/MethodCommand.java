@@ -91,7 +91,12 @@ public class MethodCommand implements Command {
      * @param arg2supplier The function to compute the second argument to pass to the method
      * @param subs Any subsystems this command requires
      */
-    public <T, U> MethodCommand(BiConsumer<T, U> m, Supplier<T> arg1supplier, Supplier<U> arg2supplier, Subsystem... subs) {
+    public <T, U> MethodCommand(
+        BiConsumer<T, U> m,
+        Supplier<T> arg1supplier,
+        Supplier<U> arg2supplier,
+        Subsystem... subs
+    ) {
         super();
         method = () -> m.accept(arg1supplier.get(), arg2supplier.get());
         addRequirements(subs);

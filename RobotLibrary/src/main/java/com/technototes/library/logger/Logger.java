@@ -172,31 +172,25 @@ public class Logger {
     }
 
     private void set(Annotation[] a, Method m, Object root) {
-        set(
-            a,
-            () -> {
-                try {
-                    return m.invoke(root);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
-                }
-                return null;
+        set(a, () -> {
+            try {
+                return m.invoke(root);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
             }
-        );
+            return null;
+        });
     }
 
     private void set(Annotation[] a, Field m, Object root) {
-        set(
-            a,
-            () -> {
-                try {
-                    return m.get(root);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-                return null;
+        set(a, () -> {
+            try {
+                return m.get(root);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
             }
-        );
+            return null;
+        });
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -211,14 +205,13 @@ public class Logger {
                 e = new StringEntry(((Log) as).name(), (Supplier<String>) m, ((Log) as).index(), ((Log) as).format());
                 e.setPriority(((Log) as).priority());
             } else if (as instanceof Log.Boolean) {
-                e =
-                    new BooleanEntry(
-                        ((Log.Boolean) as).name(),
-                        (Supplier<Boolean>) m,
-                        ((Log.Boolean) as).index(),
-                        ((Log.Boolean) as).trueValue(),
-                        ((Log.Boolean) as).falseValue()
-                    );
+                e = new BooleanEntry(
+                    ((Log.Boolean) as).name(),
+                    (Supplier<Boolean>) m,
+                    ((Log.Boolean) as).index(),
+                    ((Log.Boolean) as).trueValue(),
+                    ((Log.Boolean) as).falseValue()
+                );
                 e.setPriority(((Log.Boolean) as).priority());
             } else if (as instanceof LogConfig.Run) {
                 init = ((LogConfig.Run) as).duringInit();

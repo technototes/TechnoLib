@@ -163,14 +163,13 @@ public class PathingMecanumDrivebaseSubsystem extends MecanumDrive implements Su
         VEL_CONSTRAINT = getVelocityConstraint(MAX_VEL, MAX_ANG_VEL, TRACK_WIDTH);
         ACCEL_CONSTRAINT = getAccelerationConstraint(MAX_ACCEL);
 
-        follower =
-            new HolonomicPIDVAFollower(
-                TRANSLATIONAL_PID,
-                TRANSLATIONAL_PID,
-                HEADING_PID,
-                new Pose2d(0.5, 0.5, Math.toRadians(5.0)),
-                0.5
-            );
+        follower = new HolonomicPIDVAFollower(
+            TRANSLATIONAL_PID,
+            TRANSLATIONAL_PID,
+            HEADING_PID,
+            new Pose2d(0.5, 0.5, Math.toRadians(5.0)),
+            0.5
+        );
 
         LynxModuleUtil.ensureMinimumFirmwareVersion(HardwareDevice.hardwareMap);
 
@@ -241,9 +240,8 @@ public class PathingMecanumDrivebaseSubsystem extends MecanumDrive implements Su
     }
 
     public void followTrajectoryAsync(Trajectory trajectory) {
-        if (trajectory == null) trajectorySequenceRunner.followTrajectorySequenceAsync(
-            null
-        ); else trajectorySequenceRunner.followTrajectorySequenceAsync(
+        if (trajectory == null) trajectorySequenceRunner.followTrajectorySequenceAsync(null);
+        else trajectorySequenceRunner.followTrajectorySequenceAsync(
             trajectorySequenceBuilder(trajectory.start()).addTrajectory(trajectory).build()
         );
     }
@@ -321,13 +319,11 @@ public class PathingMecanumDrivebaseSubsystem extends MecanumDrive implements Su
                 VY_WEIGHT * Math.abs(drivePower.getY()) +
                 OMEGA_WEIGHT * Math.abs(drivePower.getHeading());
 
-            vel =
-                new Pose2d(
-                    VX_WEIGHT * drivePower.getX(),
-                    VY_WEIGHT * drivePower.getY(),
-                    OMEGA_WEIGHT * drivePower.getHeading()
-                )
-                    .div(denom);
+            vel = new Pose2d(
+                VX_WEIGHT * drivePower.getX(),
+                VY_WEIGHT * drivePower.getY(),
+                OMEGA_WEIGHT * drivePower.getHeading()
+            ).div(denom);
         }
 
         setDrivePower(vel);

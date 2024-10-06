@@ -43,8 +43,7 @@ public class InternalCamera extends Camera<OpenCvInternalCamera, DummyDevice<Ope
      */
     @Override
     public OpenCvInternalCamera createCamera() {
-        return OpenCvCameraFactory
-            .getInstance()
+        return OpenCvCameraFactory.getInstance()
             .createInternalCamera(
                 getCameraDirection(),
                 hardwareMap.appContext

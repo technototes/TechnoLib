@@ -91,8 +91,8 @@ public abstract class CommandGroup implements Command {
     @Override
     public void execute() {
         // makes true if command just finished
-        commandMap.replaceAll((command, bool) ->
-            (countCancel ? command.justFinished() : command.justFinishedNoCancel()) || bool
+        commandMap.replaceAll(
+            (command, bool) -> (countCancel ? command.justFinished() : command.justFinishedNoCancel()) || bool
         );
         anyCancelled = commandMap.keySet().stream().anyMatch(Command::isCancelled) || anyCancelled;
     }
