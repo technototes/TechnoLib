@@ -60,6 +60,10 @@ public final class CommandScheduler {
      * Reset the scheduler...
      */
     public static void resetScheduler() {
+        commandMap.clear();
+        requirementMap.clear();
+        defaultMap.clear();
+        registered.clear();
         Command.clear();
     }
 
