@@ -161,7 +161,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * @return The gyro heading (in preferred units, from -180/pi to +180/pi
      */
     private double gyroHeadingInRadians() {
-        return getAngularOrientation().firstAngle;
+        return getAngularOrientation(AngleUnit.RADIANS).firstAngle;
     }
 
     @Override
