@@ -25,6 +25,7 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigurationType;
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.hardware.motor.EncodedMotor;
+import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.subsystem.Subsystem;
 import com.technototes.path.subsystem.MecanumConstants.GearRatio;
@@ -91,7 +92,7 @@ public class PathingMecanumDrivebaseSubsystem extends MecanumDrive implements Su
 
     protected DcMotorEx leftFront, leftRear, rightRear, rightFront;
     protected List<DcMotorEx> motors;
-    protected IMU imu;
+    protected IGyro gyro;
 
     protected VoltageSensor batteryVoltageSensor;
 
@@ -100,10 +101,10 @@ public class PathingMecanumDrivebaseSubsystem extends MecanumDrive implements Su
         EncodedMotor<DcMotorEx> fr,
         EncodedMotor<DcMotorEx> rl,
         EncodedMotor<DcMotorEx> rr,
-        IMU i,
+        IGyro g,
         MecanumConstants c
     ) {
-        this(fl, fr, rl, rr, i, c, null);
+        this(fl, fr, rl, rr, g, c, null);
     }
 
     public PathingMecanumDrivebaseSubsystem(
@@ -111,7 +112,7 @@ public class PathingMecanumDrivebaseSubsystem extends MecanumDrive implements Su
         EncodedMotor<DcMotorEx> fr,
         EncodedMotor<DcMotorEx> rl,
         EncodedMotor<DcMotorEx> rr,
-        IMU i,
+        IGyro g,
         MecanumConstants c,
         Localizer localizer
     ) {
@@ -179,7 +180,7 @@ public class PathingMecanumDrivebaseSubsystem extends MecanumDrive implements Su
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
 
-        imu = i;
+        gyro = g;
 
         for (DcMotorEx motor : motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
@@ -367,7 +368,8 @@ public class PathingMecanumDrivebaseSubsystem extends MecanumDrive implements Su
 
     @Override
     public double getRawExternalHeading() {
-        return imu.getAngularOrientation(AngleUnit.RADIANS).firstAngle;
+        return gyro.getHeadingInRadians();
+        // return gyro.getAngularOrientation(AngleUnit.RADIANS).firstAngle;
     }
 
     @Override
@@ -393,7 +395,8 @@ public class PathingMecanumDrivebaseSubsystem extends MecanumDrive implements Su
         // Rotate about the z axis is the default assuming your REV Hub/Control Hub is laying
         // flat on a surface
 
-        return (double) imu.getAngularVelocity(AngleUnit.RADIANS).zRotationRate;
+        // return (double) gyro.getAngularVelocity(AngleUnit.RADIANS).zRotationRate;
+        return gyro.getVelocityInRadians();
     }
 
     public static TrajectoryVelocityConstraint getVelocityConstraint(

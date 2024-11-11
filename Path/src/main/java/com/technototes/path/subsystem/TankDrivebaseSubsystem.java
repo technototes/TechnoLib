@@ -326,7 +326,7 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
         // Rotate about the z axis is the default assuming your REV Hub/Control Hub is laying
         // flat on a surface
 
-        return (double) imu.getAngularVelocity(AngleUnit.RADIANS).zRotationRate;
+        return (double) imu.getVelocity(AngleUnit.RADIANS);
     }
 
     public static TrajectoryVelocityConstraint getVelocityConstraint(
