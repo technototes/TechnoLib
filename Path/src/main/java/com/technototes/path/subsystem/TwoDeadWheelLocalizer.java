@@ -49,7 +49,7 @@ public class TwoDeadWheelLocalizer extends TwoTrackingWheelLocalizer implements 
         );
         leftrightEncoder = lr;
         frontbackEncoder = fb;
-        headingSupplier = () -> imu.gyroHeading();
+        headingSupplier = () -> imu.getHeading();
 
         lateralDistance = constants.getDouble(LateralDistance.class);
         forwardOffset = constants.getDouble(ForwardOffset.class);

@@ -80,9 +80,10 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
     }
 
     // This is the preferred units (Degrees/radians)
-    private AngleUnit preferred = AngleUnit.DEGREES;
+    private AngleUnit units = AngleUnit.DEGREES;
     // This is an offset from 0 so we can zero the IMU without needing to be facing forward
-    private double angleOffset;
+    private double radianOffset;
+
     private AxesOrder axesOrder;
     private AxesSigns axesSigns;
 
@@ -93,7 +94,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      */
     protected IMU(com.qualcomm.robotcore.hardware.IMU device, com.qualcomm.robotcore.hardware.IMU.Parameters params) {
         super(device, "imu");
-        angleOffset = 0.0;
+        radianOffset = 0.0;
 
         axesSigns = AxesSigns.PPP;
         axesOrder = AxesOrder.ZXY;
@@ -109,7 +110,7 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      */
     protected IMU(String deviceName, com.qualcomm.robotcore.hardware.IMU.Parameters params) {
         super(deviceName);
-        angleOffset = 0.0;
+        radianOffset = 0.0;
 
         axesSigns = AxesSigns.PPP;
         axesOrder = AxesOrder.ZXY;
@@ -145,30 +146,6 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
     }
 
     /**
-     * Set angle format to degrees
-     *
-     * @return this
-     */
-    public IMU degrees() {
-        // Convert the angle offset!
-        angleOffset = AngleUnit.DEGREES.fromUnit(preferred, angleOffset);
-        preferred = AngleUnit.DEGREES;
-        return this;
-    }
-
-    /**
-     * Set angle format to radians
-     *
-     * @return this (for chaining)
-     */
-    public IMU radians() {
-        // Convert the angle offset!
-        angleOffset = AngleUnit.RADIANS.fromUnit(preferred, angleOffset);
-        preferred = AngleUnit.RADIANS;
-        return this;
-    }
-
-    /**
      * Initialize the IMU
      *
      * @return the IMU (for chaining)
@@ -183,9 +160,18 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      *
      * @return The gyro heading (in preferred units, from -180/pi to +180/pi
      */
+    private double gyroHeadingInRadians() {
+        return getAngularOrientation(AngleUnit.RADIANS).firstAngle;
+    }
+
     @Override
-    public double gyroHeading() {
-        return getAngularOrientation().firstAngle;
+    public void setUnits(AngleUnit u) {
+        units = u;
+    }
+
+    @Override
+    public AngleUnit getUnits() {
+        return units;
     }
 
     /**
@@ -194,28 +180,9 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * @param unit the unit desired
      * @return The heading in 'unit' units from -180/pi to +180/pi
      */
-    public double gyroHeading(AngleUnit unit) {
-        return unit.fromUnit(preferred, gyroHeading() - angleOffset);
-    }
-
-    /**
-     * Gets the gyro heading in degrees
-     *
-     * @return the heading
-     */
     @Override
-    public double gyroHeadingInDegrees() {
-        return gyroHeading(AngleUnit.DEGREES);
-    }
-
-    /**
-     * Gets the gyro heading in radians
-     *
-     * @return the heading
-     */
-    @Override
-    public double gyroHeadingInRadians() {
-        return gyroHeading(AngleUnit.RADIANS);
+    public double getHeading(AngleUnit unit) {
+        return unit.fromUnit(AngleUnit.RADIANS, gyroHeadingInRadians() - radianOffset);
     }
 
     /**
@@ -224,8 +191,8 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      * @param newHeading The new heading (in default units)
      */
     @Override
-    public void setHeading(double newHeading) {
-        angleOffset = gyroHeading() - newHeading;
+    public void setHeading(double newHeading, AngleUnit u) {
+        radianOffset = getHeadingInRadians() - AngleUnit.RADIANS.fromUnit(u, newHeading);
     }
 
     /**
@@ -316,13 +283,14 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
      *
      * @return The Angular Velocity
      */
-    public AngularVelocity getAngularVelocity(AngleUnit units) {
+    public AngularVelocity readVelocity(AngleUnit units) {
         angularVelocity = getRawDevice().getRobotAngularVelocity(units);
         return angularVelocity;
     }
 
-    public AngularVelocity getAngularVelocity() {
-        return getAngularVelocity(preferred);
+    public double getVelocity(AngleUnit units) {
+        // TODO: Make sure this works properly
+        return (double) readVelocity(this.units).zRotationRate;
     }
 
     /**
@@ -345,6 +313,6 @@ public class IMU extends Sensor<com.qualcomm.robotcore.hardware.IMU> implements 
     }
 
     public Orientation getAngularOrientation() {
-        return getAngularOrientation(preferred);
+        return getAngularOrientation(units);
     }
 }

@@ -106,6 +106,6 @@ public class DistanceSensorLocalizer implements Localizer, Subsystem {
     }
 
     public double getHeading() {
-        return Angle.norm(gyro.gyroHeadingInRadians() - gyroOffset);
+        return Angle.norm(gyro.getHeadingInRadians() - gyroOffset);
     }
 }
