@@ -26,24 +26,18 @@ public class AdafruitIMU extends Sensor<AdafruitBNO055IMU> implements IGyro, Dou
 
     public AdafruitIMU(String deviceName, Orientation o) {
         super(deviceName);
-        BNO055IMU.Parameters p = new BNO055IMU.Parameters();
-        p.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        p.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        this.getRawDevice().initialize(p);
         imuDirection = o;
         units = AngleUnit.DEGREES;
-        resetRadians = 0.0;
+        this.getRawDevice().initialize(new BNO055IMU.Parameters());
+        resetRadians = getHeadingInRadians();
     }
 
     public AdafruitIMU(AdafruitBNO055IMU device, String deviceName, Orientation o) {
         super(device, deviceName);
-        BNO055IMU.Parameters p = new BNO055IMU.Parameters();
-        p.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-        p.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        this.getRawDevice().initialize(p);
         imuDirection = o;
         units = AngleUnit.DEGREES;
-        resetRadians = 0.0;
+        this.getRawDevice().initialize(new BNO055IMU.Parameters());
+        resetRadians = getHeadingInRadians();
     }
 
     public AngleUnit getUnits() {
@@ -66,17 +60,17 @@ public class AdafruitIMU extends Sensor<AdafruitBNO055IMU> implements IGyro, Dou
         AngularVelocity av = this.getRawDevice().getAngularVelocity(u);
         switch (imuDirection) {
             case Yaw:
-                return av.zRotationRate;
+                return av.yRotationRate;
             case ZYaw:
-                return -av.zRotationRate;
+                return -av.yRotationRate;
             case Pitch:
                 return av.xRotationRate;
             case ZPitch:
                 return -av.xRotationRate;
             case Roll:
-                return av.yRotationRate;
+                return av.zRotationRate;
             case ZRoll:
-                return -av.yRotationRate;
+                return -av.zRotationRate;
         }
         return 0.0;
     }
@@ -86,13 +80,13 @@ public class AdafruitIMU extends Sensor<AdafruitBNO055IMU> implements IGyro, Dou
             this.getRawDevice().getAngularOrientation();
         switch (imuDirection) {
             case Yaw:
-                return u.fromUnit(AngleUnit.RADIANS, ypr.firstAngle);
-            case ZYaw:
-                return u.fromUnit(AngleUnit.RADIANS, -ypr.firstAngle);
-            case Pitch:
                 return u.fromUnit(AngleUnit.RADIANS, ypr.secondAngle);
-            case ZPitch:
+            case ZYaw:
                 return u.fromUnit(AngleUnit.RADIANS, -ypr.secondAngle);
+            case Pitch:
+                return u.fromUnit(AngleUnit.RADIANS, ypr.firstAngle);
+            case ZPitch:
+                return u.fromUnit(AngleUnit.RADIANS, -ypr.firstAngle);
             case Roll:
                 return u.fromUnit(AngleUnit.RADIANS, ypr.thirdAngle);
             case ZRoll:
