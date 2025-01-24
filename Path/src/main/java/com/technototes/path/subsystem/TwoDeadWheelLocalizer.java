@@ -9,9 +9,8 @@ import static com.technototes.path.subsystem.DeadWheelConstants.WheelRadius;
 
 import androidx.annotation.NonNull;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.localization.ThreeTrackingWheelLocalizer;
 import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
-import com.technototes.library.hardware.sensor.IMU;
+import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
 import com.technototes.library.subsystem.Subsystem;
 import java.util.Arrays;
@@ -40,7 +39,7 @@ public class TwoDeadWheelLocalizer extends TwoTrackingWheelLocalizer implements 
 
     protected boolean encoderOverflow;
 
-    public TwoDeadWheelLocalizer(IMU imu, MotorEncoder lr, MotorEncoder fb, DeadWheelConstants constants) {
+    public TwoDeadWheelLocalizer(IGyro imu, MotorEncoder lr, MotorEncoder fb, DeadWheelConstants constants) {
         super(
             Arrays.asList(
                 new Pose2d(0, constants.getDouble(LateralDistance.class), 0), // left

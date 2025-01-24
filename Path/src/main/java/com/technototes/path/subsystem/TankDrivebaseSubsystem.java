@@ -23,7 +23,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.hardware.motor.EncodedMotor;
-import com.technototes.library.hardware.sensor.IMU;
+import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.subsystem.Subsystem;
 import com.technototes.path.subsystem.TankConstants.*;
 import com.technototes.path.trajectorysequence.TrajectorySequence;
@@ -59,14 +59,14 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
     private TrajectoryFollower follower;
 
     private List<EncodedMotor<DcMotorEx>> motors, leftMotors, rightMotors;
-    private IMU imu;
+    private IGyro imu;
 
     private VoltageSensor batteryVoltageSensor;
 
     public TankDrivebaseSubsystem(
         List<EncodedMotor<DcMotorEx>> left,
         List<EncodedMotor<DcMotorEx>> right,
-        IMU i,
+        IGyro i,
         TankConstants c,
         Localizer localizer
     ) {
@@ -300,7 +300,7 @@ public class TankDrivebaseSubsystem extends TankDrive implements Subsystem {
 
     @Override
     public double getRawExternalHeading() {
-        return imu.getAngularOrientation(AngleUnit.RADIANS).firstAngle;
+        return imu.getHeading();
     }
 
     @Override
