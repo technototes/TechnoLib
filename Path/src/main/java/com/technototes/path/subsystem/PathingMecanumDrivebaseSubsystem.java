@@ -26,7 +26,6 @@ import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigu
 import com.technototes.library.hardware.HardwareDevice;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.IGyro;
-import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.subsystem.Subsystem;
 import com.technototes.path.subsystem.MecanumConstants.GearRatio;
 import com.technototes.path.subsystem.MecanumConstants.HeadPID;
